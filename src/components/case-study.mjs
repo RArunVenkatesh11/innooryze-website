@@ -1,0 +1,13 @@
+import {caseStudies} from '../content/case-studies.mjs';
+import {services} from '../site.mjs';
+import {pageHero,link,esc} from './layout.mjs';
+export function detailedCase(w){
+ const data=caseStudies[w.slug];if(!data)return null;
+ const capability=services[w.related];
+ return pageHero({eyebrow:`OUR WORK / ${w.name}${w.status?' / IN PROGRESS':''}`,title:w.title,description:w.description,className:'case-page-hero',media:{...w.campaign,label:w.name.toUpperCase()+' / '+data.status.toUpperCase()}})+
+ `<section class="case-overview section-pad"><dl><div><dt>Client</dt><dd>${w.name}</dd></div><div><dt>Sector</dt><dd>${w.industry}</dd></div><div><dt>Primary capability</dt><dd><a href="/growth-systems/${capability.slug}">${capability.name} ↗</a></dd></div><div><dt>Status</dt><dd>${data.status}</dd></div></dl><div><p class="eyebrow">PROJECT CONTEXT</p><h2>${data.lead}</h2><p>${data.context}</p>${data.visualNote?`<p class="case-visual-note">${data.visualNote}</p>`:''}</div></section>`+
+ `<section class="case-narrative section-pad">${data.chapters.map(([label,title,body],i)=>`<article class="case-narrative-chapter reveal"><p class="eyebrow">0${i+1} / ${label}</p><div><h2>${title}</h2><p>${body}</p></div></article>`).join('')}${w.image?`<figure class="case-interface"><img src="${w.image}" alt="${esc(w.alt)}" width="1440" height="900" loading="lazy"><figcaption>${w.status?'Max-Seal current build. In Progress.':'The live Dynalektric digital experience.'}</figcaption></figure>`:''}</section>`+
+ `<section class="case-capabilities section-pad"><div><p class="eyebrow">CAPABILITY MAPPING</p><h2>Thinking, connected<br>to delivery.</h2><a class="text-link" href="/growth-systems/${capability.slug}">${capability.name} <span>↗</span></a></div><div>${data.capabilities.map(([title,body],i)=>`<article><span>0${i+1}</span><div><h3>${title}</h3><p>${body}</p></div></article>`).join('')}</div></section>`+
+ `<section class="case-technology section-pad"><p class="eyebrow">TECHNOLOGY &amp; CAPABILITIES</p><div><h2>A foundation with a purpose.</h2><p>${data.technology}</p></div></section>`+
+ `${data.outcome?`<section class="case-outcome section-pad"><p class="eyebrow">PUBLISHED OUTCOME</p><h2>${data.outcome[0]}</h2><p>${data.outcome[1]}</p></section>`:''}<section class="case-next section-pad">${w.url?`<a class="text-link" href="${esc(w.url)}" target="_blank" rel="noopener noreferrer">${w.status?'Explore the current build':'Explore the live website'} <span>↗</span></a>`:''}${link('/work','Back to our work')}${link('/contact?interest='+encodeURIComponent(capability.name),'Discuss a related project')}</section>`;
+}

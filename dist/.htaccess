@@ -1,0 +1,106 @@
+# Generated static multi-page deployment for Apache 2.4.16+ at document root.
+# Every route has its own HTML. Do not add a blanket SPA index.html fallback.
+Options -Indexes -MultiViews
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteOptions AllowNoSlash
+  RewriteRule ^work/max-seal(?:/index\.html|/)?$ /work/maxseal [R=301,END]
+  RewriteCond %{THE_REQUEST} "\s/+index\.html(?:[?\s])" [NC]
+  RewriteRule ^index\.html$ / [R=301,END]
+  RewriteCond %{THE_REQUEST} "\s/+growth-systems(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /growth-systems [R=301,END]
+  RewriteRule ^growth-systems/?$ growth-systems/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+growth-systems/experience-design-enablement(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /growth-systems/experience-design-enablement [R=301,END]
+  RewriteRule ^growth-systems/experience-design-enablement/?$ growth-systems/experience-design-enablement/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+growth-systems/martech-consulting-enablement(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /growth-systems/martech-consulting-enablement [R=301,END]
+  RewriteRule ^growth-systems/martech-consulting-enablement/?$ growth-systems/martech-consulting-enablement/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+growth-systems/data-intelligence-activation(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /growth-systems/data-intelligence-activation [R=301,END]
+  RewriteRule ^growth-systems/data-intelligence-activation/?$ growth-systems/data-intelligence-activation/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+ai-agents(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /ai-agents [R=301,END]
+  RewriteRule ^ai-agents/?$ ai-agents/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+products(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /products [R=301,END]
+  RewriteRule ^products/?$ products/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+products/leadryze-ai(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /products/leadryze-ai [R=301,END]
+  RewriteRule ^products/leadryze-ai/?$ products/leadryze-ai/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+products/imma(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /products/imma [R=301,END]
+  RewriteRule ^products/imma/?$ products/imma/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+work(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /work [R=301,END]
+  RewriteRule ^work/?$ work/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+work/dynalektric(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /work/dynalektric [R=301,END]
+  RewriteRule ^work/dynalektric/?$ work/dynalektric/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+work/treffer-technologies(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /work/treffer-technologies [R=301,END]
+  RewriteRule ^work/treffer-technologies/?$ work/treffer-technologies/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+work/maxseal(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /work/maxseal [R=301,END]
+  RewriteRule ^work/maxseal/?$ work/maxseal/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+work/imma(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /work/imma [R=301,END]
+  RewriteRule ^work/imma/?$ work/imma/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+ideas-hub(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /ideas-hub [R=301,END]
+  RewriteRule ^ideas-hub/?$ ideas-hub/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+ideas-hub/choosing-the-right-cdp-for-your-growth-stage(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /ideas-hub/choosing-the-right-cdp-for-your-growth-stage [R=301,END]
+  RewriteRule ^ideas-hub/choosing-the-right-cdp-for-your-growth-stage/?$ ideas-hub/choosing-the-right-cdp-for-your-growth-stage/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+ideas-hub/why-ai-needs-human-centered-strategy(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /ideas-hub/why-ai-needs-human-centered-strategy [R=301,END]
+  RewriteRule ^ideas-hub/why-ai-needs-human-centered-strategy/?$ ideas-hub/why-ai-needs-human-centered-strategy/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+ideas-hub/3-common-mistakes-in-martech-implementation(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /ideas-hub/3-common-mistakes-in-martech-implementation [R=301,END]
+  RewriteRule ^ideas-hub/3-common-mistakes-in-martech-implementation/?$ ideas-hub/3-common-mistakes-in-martech-implementation/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+about(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /about [R=301,END]
+  RewriteRule ^about/?$ about/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+contact(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /contact [R=301,END]
+  RewriteRule ^contact/?$ contact/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+platforms(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /platforms [R=301,END]
+  RewriteRule ^platforms/?$ platforms/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+platforms/salesforce(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /platforms/salesforce [R=301,END]
+  RewriteRule ^platforms/salesforce/?$ platforms/salesforce/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+platforms/adobe(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /platforms/adobe [R=301,END]
+  RewriteRule ^platforms/adobe/?$ platforms/adobe/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+platforms/braze(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /platforms/braze [R=301,END]
+  RewriteRule ^platforms/braze/?$ platforms/braze/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+platforms/segment(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /platforms/segment [R=301,END]
+  RewriteRule ^platforms/segment/?$ platforms/segment/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+credits(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /credits [R=301,END]
+  RewriteRule ^credits/?$ credits/index.html [END]
+</IfModule>
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self' ; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'self'"
+  <FilesMatch "\.(html|xml|txt)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(js|css)$">
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(woff2|jpg|jpeg|png|svg|webp|avif|mp4|webm|mp3)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>

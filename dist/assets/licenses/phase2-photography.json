@@ -1,0 +1,589 @@
+[
+  {
+    "name": "automation-laboratory",
+    "id": "9xHsWmh3m_4",
+    "sourcePage": "https://unsplash.com/photos/industrial-robotic-arm-in-blue-lit-factory-9xHsWmh3m_4",
+    "photographer": "Testalize.me",
+    "license": "https://unsplash.com/license",
+    "width": 8101,
+    "height": 5401,
+    "description": "industrial robotic arm in blue lit factory",
+    "caption": "Samples processing in lab. Transport to analyzer. ",
+    "contentUrl": "https://images.unsplash.com/photo-1606206873764-fd15e242df52?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjQ5ODU4fA&ixlib=rb-4.1.0",
+    "downloadPage": "https://unsplash.com/photos/9xHsWmh3m_4/download?force=true",
+    "downloadedImageUrl": "https://images.unsplash.com/photo-1606206873764-fd15e242df52?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=testalize-me-9xHsWmh3m_4-unsplash.jpg",
+    "bytes": 5164430,
+    "checkedAt": "2026-09-13T01:57:43.563Z",
+    "sourceMetadata": {
+      "@context": "https://schema.org",
+      "@type": "ImageObject",
+      "creator": {
+        "@type": "Person",
+        "name": "Testalize.me"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Testalize.me"
+      },
+      "creditText": "Testalize.me",
+      "copyrightNotice": "Testalize.me",
+      "license": "https://unsplash.com/license",
+      "acquireLicensePage": "https://unsplash.com/photos/industrial-robotic-arm-in-blue-lit-factory-9xHsWmh3m_4",
+      "contentLocation": {
+        "@type": "Place",
+        "name": "Eindhoven, Nederland"
+      },
+      "contentUrl": "https://images.unsplash.com/photo-1606206873764-fd15e242df52?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjQ5ODU4fA&ixlib=rb-4.1.0",
+      "thumbnail": {
+        "@type": "ImageObject",
+        "url": "https://images.unsplash.com/photo-1606206873764-fd15e242df52?auto=format&fit=crop&q=60&crop=entropy&cs=tinysrgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjQ5ODU4fA&ixlib=rb-4.1.0&w=200"
+      },
+      "datePublished": "2020-11-24T09:45:10.000Z",
+      "description": "industrial robotic arm in blue lit factory",
+      "name": "industrial robotic arm in blue lit factory",
+      "width": "8101px",
+      "height": "5401px",
+      "isAccessibleForFree": true,
+      "isFamilyFriendly": true,
+      "caption": "Samples processing in lab. Transport to analyzer. ",
+      "representativeOfPage": true
+    },
+    "editorial": {
+      "placement": "AI / automation service hero; landscape",
+      "story": "A working laboratory sample-transport mechanism viewed through glass.",
+      "visual": "Cyan illumination, deep charcoal left edge, physical detail and genuine optical reflections.",
+      "crop": "Strong 16:9 / 3:2 hero. Keep mechanism slightly right of center; dark left edge can support short text.",
+      "alt": "Automated laboratory equipment transporting samples behind glass."
+    },
+    "visualInspection": {
+      "status": "passed",
+      "method": "All nine inspected together in contact-sheet.jpg; growth and automation also viewed individually at larger size.",
+      "findings": "Real photographic scene; no generated content or watermarks observed."
+    },
+    "sha256": "f50381fef2e5bf5a2ec576b6064c6f29d6d56973449023b7722fe996fe4de260",
+    "licenseSummary": "The source page identifies the free Unsplash License. It permits download, copying, modification and commercial use without permission; attribution is appreciated. No paid Unsplash+ sources selected.",
+    "originalMeaning": "Unedited, full-resolution JPEG returned by the source-page Download free link (Unsplash rendition q=85); not claimed to be the photographer’s camera RAW.",
+    "originalFilename": "automation-laboratory-9xHsWmh3m_4.jpg"
+  },
+  {
+    "name": "growth-connection",
+    "id": "BvCjKEtzdkk",
+    "sourcePage": "https://unsplash.com/photos/people-walk-across-a-metal-bridge-in-sunlight-BvCjKEtzdkk",
+    "photographer": "Kevin Grieve",
+    "license": "https://unsplash.com/license",
+    "width": 4640,
+    "height": 6960,
+    "description": "People walk across a metal bridge in sunlight",
+    "caption": "People walk across a metal bridge in sunlight",
+    "contentUrl": "https://images.unsplash.com/photo-1754543578375-f947102f3860?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjY0NjYwfA&ixlib=rb-4.1.0",
+    "downloadPage": "https://unsplash.com/photos/BvCjKEtzdkk/download?force=true",
+    "downloadedImageUrl": "https://images.unsplash.com/photo-1754543578375-f947102f3860?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=kevin-grieve-BvCjKEtzdkk-unsplash.jpg",
+    "bytes": 5213011,
+    "checkedAt": "2026-09-13T01:57:47.919Z",
+    "sourceMetadata": {
+      "@context": "https://schema.org",
+      "@type": "ImageObject",
+      "creator": {
+        "@type": "Person",
+        "name": "Kevin Grieve"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Kevin Grieve"
+      },
+      "creditText": "Kevin Grieve",
+      "copyrightNotice": "Kevin Grieve",
+      "license": "https://unsplash.com/license",
+      "acquireLicensePage": "https://unsplash.com/photos/people-walk-across-a-metal-bridge-in-sunlight-BvCjKEtzdkk",
+      "contentLocation": {
+        "@type": "Place",
+        "name": "Star Lane DLR Station, London, UK"
+      },
+      "contentUrl": "https://images.unsplash.com/photo-1754543578375-f947102f3860?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjY0NjYwfA&ixlib=rb-4.1.0",
+      "thumbnail": {
+        "@type": "ImageObject",
+        "url": "https://images.unsplash.com/photo-1754543578375-f947102f3860?auto=format&fit=crop&q=60&crop=entropy&cs=tinysrgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjY0NjYwfA&ixlib=rb-4.1.0&w=200"
+      },
+      "datePublished": "2025-08-07T05:13:44.000Z",
+      "description": "People walk across a metal bridge in sunlight",
+      "name": "People walk across a metal bridge in sunlight",
+      "width": "4640px",
+      "height": "6960px",
+      "isAccessibleForFree": true,
+      "isFamilyFriendly": true,
+      "caption": "People walk across a metal bridge in sunlight",
+      "representativeOfPage": true
+    },
+    "editorial": {
+      "placement": "Growth Systems hero; tall split layout",
+      "story": "People move through a metal transit bridge toward golden sunlight.",
+      "visual": "Warm central light, dark steel, long converging lines, real people at small scale.",
+      "crop": "Portrait works best. For a landscape crop use lower-middle around people and sun at 50% 48%; avoid a center crop that leaves only ceiling.",
+      "alt": "People walking through a steel footbridge lit by low sunlight."
+    },
+    "visualInspection": {
+      "status": "passed",
+      "method": "All nine inspected together in contact-sheet.jpg; growth and automation also viewed individually at larger size.",
+      "findings": "Real photographic scene; no generated content or watermarks observed."
+    },
+    "sha256": "d1b8ae19f22a147277bf3a376758fdcf22fd4ab4918348d6dac385a427d0ce19",
+    "licenseSummary": "The source page identifies the free Unsplash License. It permits download, copying, modification and commercial use without permission; attribution is appreciated. No paid Unsplash+ sources selected.",
+    "originalMeaning": "Unedited, full-resolution JPEG returned by the source-page Download free link (Unsplash rendition q=85); not claimed to be the photographer’s camera RAW.",
+    "originalFilename": "growth-connection-BvCjKEtzdkk.jpg"
+  },
+  {
+    "name": "digital-mobile",
+    "id": "qQ0nknwjXic",
+    "sourcePage": "https://unsplash.com/photos/woman-on-city-street-at-night-looking-at-phone-qQ0nknwjXic",
+    "photographer": "Georgi Kalaydzhiev",
+    "license": "https://unsplash.com/license",
+    "width": 4348,
+    "height": 6522,
+    "description": "Woman on city street at night, looking at phone",
+    "caption": "Woman on city street at night, looking at phone",
+    "contentUrl": "https://images.unsplash.com/photo-1779365340849-d0857be17e74?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjY0NjYxfA&ixlib=rb-4.1.0",
+    "downloadPage": "https://unsplash.com/photos/qQ0nknwjXic/download?force=true",
+    "downloadedImageUrl": "https://images.unsplash.com/photo-1779365340849-d0857be17e74?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=georgi-kalaydzhiev-qQ0nknwjXic-unsplash.jpg",
+    "bytes": 7281438,
+    "checkedAt": "2026-09-13T01:57:48.110Z",
+    "sourceMetadata": {
+      "@context": "https://schema.org",
+      "@type": "ImageObject",
+      "creator": {
+        "@type": "Person",
+        "name": "Georgi Kalaydzhiev"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Georgi Kalaydzhiev"
+      },
+      "creditText": "Georgi Kalaydzhiev",
+      "copyrightNotice": "Georgi Kalaydzhiev",
+      "license": "https://unsplash.com/license",
+      "acquireLicensePage": "https://unsplash.com/photos/woman-on-city-street-at-night-looking-at-phone-qQ0nknwjXic",
+      "contentLocation": {
+        "@type": "Place",
+        "name": "New York, NY, USA"
+      },
+      "contentUrl": "https://images.unsplash.com/photo-1779365340849-d0857be17e74?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjY0NjYxfA&ixlib=rb-4.1.0",
+      "thumbnail": {
+        "@type": "ImageObject",
+        "url": "https://images.unsplash.com/photo-1779365340849-d0857be17e74?auto=format&fit=crop&q=60&crop=entropy&cs=tinysrgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjY0NjYxfA&ixlib=rb-4.1.0&w=200"
+      },
+      "datePublished": "2026-05-21T12:10:45.000Z",
+      "description": "Woman on city street at night, looking at phone",
+      "name": "Woman on city street at night, looking at phone",
+      "width": "4348px",
+      "height": "6522px",
+      "isAccessibleForFree": true,
+      "isFamilyFriendly": true,
+      "caption": "Woman on city street at night, looking at phone",
+      "representativeOfPage": true
+    },
+    "editorial": {
+      "placement": "Digital experience service hero; tall split layout",
+      "story": "A woman checks her phone on a New York street at night.",
+      "visual": "Warm yellow taxi, dark clothing, muted teal shadows and natural city bokeh.",
+      "crop": "Keep full portrait or use 4:5. At a wide ratio, focus 50% 39% to retain face and hands; subject should remain recognisable.",
+      "alt": "A woman using her phone beside a city street at night."
+    },
+    "visualInspection": {
+      "status": "passed",
+      "method": "All nine inspected together in contact-sheet.jpg; growth and automation also viewed individually at larger size.",
+      "findings": "Real photographic scene; no generated content or watermarks observed."
+    },
+    "sha256": "e2ce0b63eb566e6cbd0f239d0c610948800b2e7435941fe92de12a34b332d0f4",
+    "licenseSummary": "The source page identifies the free Unsplash License. It permits download, copying, modification and commercial use without permission; attribution is appreciated. No paid Unsplash+ sources selected.",
+    "originalMeaning": "Unedited, full-resolution JPEG returned by the source-page Download free link (Unsplash rendition q=85); not claimed to be the photographer’s camera RAW.",
+    "originalFilename": "digital-mobile-qQ0nknwjXic.jpg"
+  },
+  {
+    "name": "signals-research",
+    "id": "7wWRXewYCH4",
+    "sourcePage": "https://unsplash.com/photos/person-holding-black-and-white-microscope-7wWRXewYCH4",
+    "photographer": "Jaron Nix",
+    "license": "https://unsplash.com/license",
+    "width": 2832,
+    "height": 3965,
+    "description": "person holding black and white microscope",
+    "caption": "A gloved hand preparing a stem cell culture for analysis.",
+    "contentUrl": "https://images.unsplash.com/photo-1524683745036-b46f52b8505a?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MTczMDY3fA&ixlib=rb-4.1.0",
+    "downloadPage": "https://unsplash.com/photos/7wWRXewYCH4/download?force=true",
+    "downloadedImageUrl": "https://images.unsplash.com/photo-1524683745036-b46f52b8505a?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=jaron-nix-7wWRXewYCH4-unsplash.jpg",
+    "bytes": 3700236,
+    "checkedAt": "2026-09-13T01:57:47.261Z",
+    "sourceMetadata": {
+      "@context": "https://schema.org",
+      "@type": "ImageObject",
+      "creator": {
+        "@type": "Person",
+        "name": "Jaron Nix"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Jaron Nix"
+      },
+      "creditText": "Jaron Nix",
+      "copyrightNotice": "Jaron Nix",
+      "license": "https://unsplash.com/license",
+      "acquireLicensePage": "https://unsplash.com/photos/person-holding-black-and-white-microscope-7wWRXewYCH4",
+      "contentLocation": {
+        "@type": "Place",
+        "name": "The University of Alabama, Tuscaloosa, United States"
+      },
+      "contentUrl": "https://images.unsplash.com/photo-1524683745036-b46f52b8505a?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MTczMDY3fA&ixlib=rb-4.1.0",
+      "thumbnail": {
+        "@type": "ImageObject",
+        "url": "https://images.unsplash.com/photo-1524683745036-b46f52b8505a?auto=format&fit=crop&q=60&crop=entropy&cs=tinysrgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MTczMDY3fA&ixlib=rb-4.1.0&w=200"
+      },
+      "datePublished": "2018-04-25T19:19:19.000Z",
+      "description": "person holding black and white microscope",
+      "name": "person holding black and white microscope",
+      "width": "2832px",
+      "height": "3965px",
+      "isAccessibleForFree": true,
+      "isFamilyFriendly": true,
+      "caption": "A gloved hand preparing a stem cell culture for analysis.",
+      "representativeOfPage": true
+    },
+    "editorial": {
+      "placement": "Signals / intelligence service hero; tall split layout",
+      "story": "A gloved hand prepares a stem-cell culture for microscope analysis.",
+      "visual": "Physical measurement with human context; controlled ivory, black and muted cyan.",
+      "crop": "Portrait or 4:5 preserves the hand and instrument. Wide crop needs the lower-middle area (50% 58%).",
+      "alt": "A gloved hand positioning a culture vessel beneath a microscope."
+    },
+    "visualInspection": {
+      "status": "passed",
+      "method": "All nine inspected together in contact-sheet.jpg; growth and automation also viewed individually at larger size.",
+      "findings": "Real photographic scene; no generated content or watermarks observed."
+    },
+    "sha256": "99a8f3470ff21a0c4be4b6ab6bd97ac67eb2fba881e0bb9b0d1316890bce4a66",
+    "licenseSummary": "The source page identifies the free Unsplash License. It permits download, copying, modification and commercial use without permission; attribution is appreciated. No paid Unsplash+ sources selected.",
+    "originalMeaning": "Unedited, full-resolution JPEG returned by the source-page Download free link (Unsplash rendition q=85); not claimed to be the photographer’s camera RAW.",
+    "originalFilename": "signals-research-7wWRXewYCH4.jpg"
+  },
+  {
+    "name": "creative-craft",
+    "id": "Tq4YjCa2BSc",
+    "sourcePage": "https://unsplash.com/photos/a-clay-stained-hand-of-a-potter-engaging-in-a-craft-work-of-pottery-or-molding-Tq4YjCa2BSc",
+    "photographer": "Alex Jones",
+    "license": "https://unsplash.com/license",
+    "width": 5184,
+    "height": 3456,
+    "description": "A clay stained hand of a potter engaging in a craft work of pottery or molding",
+    "caption": "pottery and craft",
+    "contentUrl": "https://images.unsplash.com/photo-1422246358533-95dcd3d48961?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjI0MDQyfA&ixlib=rb-4.1.0",
+    "downloadPage": "https://unsplash.com/photos/Tq4YjCa2BSc/download?force=true",
+    "downloadedImageUrl": "https://images.unsplash.com/photo-1422246358533-95dcd3d48961?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=alex-jones-Tq4YjCa2BSc-unsplash.jpg",
+    "bytes": 3830502,
+    "checkedAt": "2026-09-13T01:57:47.350Z",
+    "sourceMetadata": {
+      "@context": "https://schema.org",
+      "@type": "ImageObject",
+      "creator": {
+        "@type": "Person",
+        "name": "Alex Jones"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Alex Jones"
+      },
+      "creditText": "Alex Jones",
+      "copyrightNotice": "Alex Jones",
+      "license": "https://unsplash.com/license",
+      "acquireLicensePage": "https://unsplash.com/photos/a-clay-stained-hand-of-a-potter-engaging-in-a-craft-work-of-pottery-or-molding-Tq4YjCa2BSc",
+      "contentUrl": "https://images.unsplash.com/photo-1422246358533-95dcd3d48961?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjI0MDQyfA&ixlib=rb-4.1.0",
+      "thumbnail": {
+        "@type": "ImageObject",
+        "url": "https://images.unsplash.com/photo-1422246358533-95dcd3d48961?auto=format&fit=crop&q=60&crop=entropy&cs=tinysrgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjI0MDQyfA&ixlib=rb-4.1.0&w=200"
+      },
+      "datePublished": "2015-01-26T04:15:28.000Z",
+      "description": "A clay stained hand of a potter engaging in a craft work of pottery or molding",
+      "name": "A clay stained hand of a potter engaging in a craft work of pottery or molding",
+      "width": "5184px",
+      "height": "3456px",
+      "isAccessibleForFree": true,
+      "isFamilyFriendly": true,
+      "caption": "pottery and craft",
+      "representativeOfPage": true
+    },
+    "editorial": {
+      "placement": "Creative / product craft service hero; landscape",
+      "story": "Clay-covered hands shaping a ceramic form.",
+      "visual": "Warm natural light, tactile detail and cream worktop; distinct from digital imagery.",
+      "crop": "Strong 3:2 and 16:9. Keep hands centered, with some worktop for breathing room.",
+      "alt": "Clay-covered hands shaping a ceramic object on a workbench."
+    },
+    "visualInspection": {
+      "status": "passed",
+      "method": "All nine inspected together in contact-sheet.jpg; growth and automation also viewed individually at larger size.",
+      "findings": "Real photographic scene; no generated content or watermarks observed."
+    },
+    "sha256": "bcfbba9d1948bfa33ac47f2603c1d2d41532590606f4f056345cb3717aaf6ca4",
+    "licenseSummary": "The source page identifies the free Unsplash License. It permits download, copying, modification and commercial use without permission; attribution is appreciated. No paid Unsplash+ sources selected.",
+    "originalMeaning": "Unedited, full-resolution JPEG returned by the source-page Download free link (Unsplash rendition q=85); not claimed to be the photographer’s camera RAW.",
+    "originalFilename": "creative-craft-Tq4YjCa2BSc.jpg"
+  },
+  {
+    "name": "connected-experience",
+    "id": "aA_l42E8To0",
+    "sourcePage": "https://unsplash.com/photos/people-working-at-a-control-desk-with-screens-aA_l42E8To0",
+    "photographer": "ANGIE BAONGOC",
+    "license": "https://unsplash.com/license",
+    "width": 3456,
+    "height": 5184,
+    "description": "People working at a control desk with screens",
+    "caption": "A night of music and lights at Burna Boy live in concert. 📷 shot by angie_baongoc",
+    "contentUrl": "https://images.unsplash.com/photo-1766019463451-04e0b1269f37?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjA1ODg1fA&ixlib=rb-4.1.0",
+    "downloadPage": "https://unsplash.com/photos/aA_l42E8To0/download?force=true",
+    "downloadedImageUrl": "https://images.unsplash.com/photo-1766019463451-04e0b1269f37?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=angie-baongoc-aA_l42E8To0-unsplash.jpg",
+    "bytes": 4633157,
+    "checkedAt": "2026-09-13T01:57:47.180Z",
+    "sourceMetadata": {
+      "@context": "https://schema.org",
+      "@type": "ImageObject",
+      "creator": {
+        "@type": "Person",
+        "name": "ANGIE BAONGOC"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "ANGIE BAONGOC"
+      },
+      "creditText": "ANGIE BAONGOC",
+      "copyrightNotice": "ANGIE BAONGOC",
+      "license": "https://unsplash.com/license",
+      "acquireLicensePage": "https://unsplash.com/photos/people-working-at-a-control-desk-with-screens-aA_l42E8To0",
+      "contentLocation": {
+        "@type": "Place",
+        "name": "Qudos Bank Arena, Edwin Flack Avenue, Sydney Olympic Park NSW, Australia"
+      },
+      "contentUrl": "https://images.unsplash.com/photo-1766019463451-04e0b1269f37?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjA1ODg1fA&ixlib=rb-4.1.0",
+      "thumbnail": {
+        "@type": "ImageObject",
+        "url": "https://images.unsplash.com/photo-1766019463451-04e0b1269f37?auto=format&fit=crop&q=60&crop=entropy&cs=tinysrgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjA1ODg1fA&ixlib=rb-4.1.0&w=200"
+      },
+      "datePublished": "2025-12-18T01:03:13.000Z",
+      "description": "People working at a control desk with screens",
+      "name": "People working at a control desk with screens",
+      "width": "3456px",
+      "height": "5184px",
+      "isAccessibleForFree": true,
+      "isFamilyFriendly": true,
+      "caption": "A night of music and lights at Burna Boy live in concert. 📷 shot by angie_baongoc",
+      "representativeOfPage": true
+    },
+    "editorial": {
+      "placement": "Marketing technology / connected systems hero or article tile; tall split layout",
+      "story": "An authentic concert production environment with people, displays and control desks.",
+      "visual": "Deep blacks, warm stage light and green display accents. Real coordinated technology in an event business context.",
+      "crop": "Use portrait or 4:5 to retain control room and people. Landscape crop is less forgiving; 50% 59% retains consoles and silhouettes.",
+      "alt": "People and control desks behind the scenes at a live concert.",
+      "scope": "This is concert production, not a documented marketing-technology platform. Use as an editorial metaphor for coordinated systems."
+    },
+    "visualInspection": {
+      "status": "passed",
+      "method": "All nine inspected together in contact-sheet.jpg; growth and automation also viewed individually at larger size.",
+      "findings": "Real photographic scene; no generated content or watermarks observed."
+    },
+    "sha256": "0bd17d76aa71d1c63999e72e43f8438f54c7bb505aa0a86bc35230106bac92b1",
+    "licenseSummary": "The source page identifies the free Unsplash License. It permits download, copying, modification and commercial use without permission; attribution is appreciated. No paid Unsplash+ sources selected.",
+    "originalMeaning": "Unedited, full-resolution JPEG returned by the source-page Download free link (Unsplash rendition q=85); not claimed to be the photographer’s camera RAW.",
+    "originalFilename": "connected-experience-aA_l42E8To0.jpg"
+  },
+  {
+    "name": "article-craft",
+    "id": "pTKhYoQhJD4",
+    "sourcePage": "https://unsplash.com/photos/hands-working-on-a-craft-project-with-art-supplies-pTKhYoQhJD4",
+    "photographer": "Darien Attridge",
+    "license": "https://unsplash.com/license",
+    "width": 6960,
+    "height": 4640,
+    "description": "Hands working on a craft project with art supplies",
+    "caption": "Hands working on a craft project with art supplies",
+    "contentUrl": "https://images.unsplash.com/photo-1771440047710-0cecac3c9df2?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MTI1NDcwfA&ixlib=rb-4.1.0",
+    "downloadPage": "https://unsplash.com/photos/pTKhYoQhJD4/download?force=true",
+    "downloadedImageUrl": "https://images.unsplash.com/photo-1771440047710-0cecac3c9df2?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=darien-attridge-pTKhYoQhJD4-unsplash.jpg",
+    "bytes": 3924338,
+    "checkedAt": "2026-09-13T01:57:50.353Z",
+    "sourceMetadata": {
+      "@context": "https://schema.org",
+      "@type": "ImageObject",
+      "creator": {
+        "@type": "Person",
+        "name": "Darien Attridge"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Darien Attridge"
+      },
+      "creditText": "Darien Attridge",
+      "copyrightNotice": "Darien Attridge",
+      "license": "https://unsplash.com/license",
+      "acquireLicensePage": "https://unsplash.com/photos/hands-working-on-a-craft-project-with-art-supplies-pTKhYoQhJD4",
+      "contentUrl": "https://images.unsplash.com/photo-1771440047710-0cecac3c9df2?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MTI1NDcwfA&ixlib=rb-4.1.0",
+      "thumbnail": {
+        "@type": "ImageObject",
+        "url": "https://images.unsplash.com/photo-1771440047710-0cecac3c9df2?auto=format&fit=crop&q=60&crop=entropy&cs=tinysrgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MTI1NDcwfA&ixlib=rb-4.1.0&w=200"
+      },
+      "datePublished": "2026-02-18T18:44:09.000Z",
+      "description": "Hands working on a craft project with art supplies",
+      "name": "Hands working on a craft project with art supplies",
+      "width": "6960px",
+      "height": "4640px",
+      "isAccessibleForFree": true,
+      "isFamilyFriendly": true,
+      "caption": "Hands working on a craft project with art supplies",
+      "representativeOfPage": true
+    },
+    "editorial": {
+      "placement": "Article tile 1; creative process / making",
+      "story": "An artisan working with paper, tools and a cutting mat.",
+      "visual": "Warm directional light with a deep dark background and a muted green mat.",
+      "crop": "Strong 3:2 and 16:9; focal area near 42% 48%.",
+      "alt": "Hands working on a craft project with a cutting mat and tools."
+    },
+    "visualInspection": {
+      "status": "passed",
+      "method": "All nine inspected together in contact-sheet.jpg; growth and automation also viewed individually at larger size.",
+      "findings": "Real photographic scene; no generated content or watermarks observed."
+    },
+    "sha256": "d0c1a40c912b30c63f0b074070986c364882b30f4339b0af38f2d80f5bcd8713",
+    "licenseSummary": "The source page identifies the free Unsplash License. It permits download, copying, modification and commercial use without permission; attribution is appreciated. No paid Unsplash+ sources selected.",
+    "originalMeaning": "Unedited, full-resolution JPEG returned by the source-page Download free link (Unsplash rendition q=85); not claimed to be the photographer’s camera RAW.",
+    "originalFilename": "article-craft-pTKhYoQhJD4.jpg"
+  },
+  {
+    "name": "article-experiment",
+    "id": "pwcKF7L4-no",
+    "sourcePage": "https://unsplash.com/photos/refill-of-liquid-on-tubes-pwcKF7L4-no",
+    "photographer": "Louis Reed",
+    "license": "https://unsplash.com/license",
+    "width": 5184,
+    "height": 3456,
+    "description": "refill of liquid on tubes",
+    "caption": "Purple Pipette",
+    "contentUrl": "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjYyNTg3fA&ixlib=rb-4.1.0",
+    "downloadPage": "https://unsplash.com/photos/pwcKF7L4-no/download?force=true",
+    "downloadedImageUrl": "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=louis-reed-pwcKF7L4-no-unsplash.jpg",
+    "bytes": 3842177,
+    "checkedAt": "2026-09-13T01:57:50.363Z",
+    "sourceMetadata": {
+      "@context": "https://schema.org",
+      "@type": "ImageObject",
+      "creator": {
+        "@type": "Person",
+        "name": "Louis Reed"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Louis Reed"
+      },
+      "creditText": "Louis Reed",
+      "copyrightNotice": "Louis Reed",
+      "license": "https://unsplash.com/license",
+      "acquireLicensePage": "https://unsplash.com/photos/refill-of-liquid-on-tubes-pwcKF7L4-no",
+      "contentLocation": {
+        "@type": "Place",
+        "name": "Bristol Robotics Laboratory, Stoke Gifford, United Kingdom"
+      },
+      "contentUrl": "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjYyNTg3fA&ixlib=rb-4.1.0",
+      "thumbnail": {
+        "@type": "ImageObject",
+        "url": "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&q=60&crop=entropy&cs=tinysrgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjYyNTg3fA&ixlib=rb-4.1.0&w=200"
+      },
+      "datePublished": "2018-07-21T15:47:40.000Z",
+      "description": "refill of liquid on tubes",
+      "name": "refill of liquid on tubes",
+      "width": "5184px",
+      "height": "3456px",
+      "isAccessibleForFree": true,
+      "isFamilyFriendly": true,
+      "caption": "Purple Pipette",
+      "representativeOfPage": true
+    },
+    "editorial": {
+      "placement": "Article tile 2; experimentation / measurement",
+      "story": "A purple pipette dispensing into a regular field of laboratory tubes.",
+      "visual": "Ordered physical repetition with a bright purple signal and dark background.",
+      "crop": "Strong 3:2 and 16:9; retain pipette and central tubes near 50% 45%.",
+      "alt": "A pipette dispensing liquid into an array of laboratory tubes."
+    },
+    "visualInspection": {
+      "status": "passed",
+      "method": "All nine inspected together in contact-sheet.jpg; growth and automation also viewed individually at larger size.",
+      "findings": "Real photographic scene; no generated content or watermarks observed."
+    },
+    "sha256": "75108054ca9c6cf8874beac284fbe924348a1ab715bbf911939943622f85cd8a",
+    "licenseSummary": "The source page identifies the free Unsplash License. It permits download, copying, modification and commercial use without permission; attribution is appreciated. No paid Unsplash+ sources selected.",
+    "originalMeaning": "Unedited, full-resolution JPEG returned by the source-page Download free link (Unsplash rendition q=85); not claimed to be the photographer’s camera RAW.",
+    "originalFilename": "article-experiment-pwcKF7L4-no.jpg"
+  },
+  {
+    "name": "about-global",
+    "id": "PuW_TjHZwdY",
+    "sourcePage": "https://unsplash.com/photos/silhouette-of-man-holding-bag-in-inside-of-airport-station-during-daytime-PuW_TjHZwdY",
+    "photographer": "Grahame Jenkins",
+    "license": "https://unsplash.com/license",
+    "width": 2848,
+    "height": 4272,
+    "description": "silhouette of man holding bag in inside of airport station during daytime",
+    "caption": "silhouette of man holding bag in inside of airport station during daytime",
+    "contentUrl": "https://images.unsplash.com/photo-1513855077295-c76bb78f2ed3?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjY0NjY4fA&ixlib=rb-4.1.0",
+    "downloadPage": "https://unsplash.com/photos/PuW_TjHZwdY/download?force=true",
+    "downloadedImageUrl": "https://images.unsplash.com/photo-1513855077295-c76bb78f2ed3?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=grahame-jenkins-PuW_TjHZwdY-unsplash.jpg",
+    "bytes": 2306460,
+    "checkedAt": "2026-09-13T01:57:51.371Z",
+    "sourceMetadata": {
+      "@context": "https://schema.org",
+      "@type": "ImageObject",
+      "creator": {
+        "@type": "Person",
+        "name": "Grahame Jenkins"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Grahame Jenkins"
+      },
+      "creditText": "Grahame Jenkins",
+      "copyrightNotice": "Grahame Jenkins",
+      "license": "https://unsplash.com/license",
+      "acquireLicensePage": "https://unsplash.com/photos/silhouette-of-man-holding-bag-in-inside-of-airport-station-during-daytime-PuW_TjHZwdY",
+      "contentLocation": {
+        "@type": "Place",
+        "name": "Changi Airport Singapore, Singapore"
+      },
+      "contentUrl": "https://images.unsplash.com/photo-1513855077295-c76bb78f2ed3?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjY0NjY4fA&ixlib=rb-4.1.0",
+      "thumbnail": {
+        "@type": "ImageObject",
+        "url": "https://images.unsplash.com/photo-1513855077295-c76bb78f2ed3?auto=format&fit=crop&q=60&crop=entropy&cs=tinysrgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjY0NjY4fA&ixlib=rb-4.1.0&w=200"
+      },
+      "datePublished": "2017-12-21T11:19:01.000Z",
+      "description": "silhouette of man holding bag in inside of airport station during daytime",
+      "name": "silhouette of man holding bag in inside of airport station during daytime",
+      "width": "2848px",
+      "height": "4272px",
+      "isAccessibleForFree": true,
+      "isFamilyFriendly": true,
+      "caption": "silhouette of man holding bag in inside of airport station during daytime",
+      "representativeOfPage": true
+    },
+    "editorial": {
+      "placement": "About / global connections hero; tall split layout, or article tile 3",
+      "story": "A traveller within the monumental glass architecture of Changi Airport, Singapore.",
+      "visual": "Icy cyan glass, geometric shadows and reflective charcoal floor. Strong regional / global connection story.",
+      "crop": "Portrait ideal. A 16:9 center crop around 50% 48% retains traveller and repeated architecture, so viable as third article tile.",
+      "alt": "A traveller silhouetted inside Changi Airport’s glass architecture."
+    },
+    "visualInspection": {
+      "status": "passed",
+      "method": "All nine inspected together in contact-sheet.jpg; growth and automation also viewed individually at larger size.",
+      "findings": "Real photographic scene; no generated content or watermarks observed."
+    },
+    "sha256": "813364d67347d6b806ce3147a5e1068b19b24960e41ef6d90bc38402a8507de4",
+    "licenseSummary": "The source page identifies the free Unsplash License. It permits download, copying, modification and commercial use without permission; attribution is appreciated. No paid Unsplash+ sources selected.",
+    "originalMeaning": "Unedited, full-resolution JPEG returned by the source-page Download free link (Unsplash rendition q=85); not claimed to be the photographer’s camera RAW.",
+    "originalFilename": "about-global-PuW_TjHZwdY.jpg"
+  }
+]

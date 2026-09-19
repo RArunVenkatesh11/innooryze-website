@@ -1,0 +1,203 @@
+[
+  {
+    "name": "immersive-projection",
+    "id": "0_sMYmRHpro",
+    "role": "Immersive digital experience",
+    "crop": "50% 46%",
+    "alt": "Visitors exploring cascading light and flower projections at TeamLab Borderless.",
+    "note": "Real installation, rich violet, cyan and magenta. Wide original; keep a large image area because the scene includes several visitors.",
+    "sourcePage": "https://unsplash.com/photos/group-of-people-inside-room-0_sMYmRHpro",
+    "photographer": "Karsten Gohm",
+    "license": "https://unsplash.com/license",
+    "download": "https://unsplash.com/photos/0_sMYmRHpro/download?force=true",
+    "exactObservedImageUrl": "https://images.unsplash.com/photo-1556173251-cab2c1e8abe2?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=karsten-gohm-0_sMYmRHpro-unsplash.jpg",
+    "bytes": 4207033,
+    "sha256": "565bc615f2d8e3f20fc4ae28982a7d228ce8dd801655b1844f8c0ecee9533b1a",
+    "checkedAt": "2026-09-13T06:46:18.584Z",
+    "visualReview": "Reviewed at 1100–1200px before selection; final crop review recorded in final-wide-review.jpg.",
+    "sourceMetadata": {
+      "@context": "https://schema.org",
+      "@type": "ImageObject",
+      "creator": {
+        "@type": "Person",
+        "name": "Karsten Gohm"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Karsten Gohm"
+      },
+      "creditText": "Karsten Gohm",
+      "copyrightNotice": "Karsten Gohm",
+      "license": "https://unsplash.com/license",
+      "acquireLicensePage": "https://unsplash.com/photos/group-of-people-inside-room-0_sMYmRHpro",
+      "contentLocation": {
+        "@type": "Place",
+        "name": "TeamLab Borderless, Tokyo"
+      },
+      "contentUrl": "https://images.unsplash.com/photo-1556173251-cab2c1e8abe2?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg4Nzc3MjE4fA&ixlib=rb-4.1.0",
+      "thumbnail": {
+        "@type": "ImageObject",
+        "url": "https://images.unsplash.com/photo-1556173251-cab2c1e8abe2?auto=format&fit=crop&q=60&crop=entropy&cs=tinysrgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg4Nzc3MjE4fA&ixlib=rb-4.1.0&w=200"
+      },
+      "datePublished": "2019-04-25T06:27:46Z",
+      "description": "group of people inside room",
+      "name": "group of people inside room",
+      "width": "5616px",
+      "height": "3744px",
+      "isAccessibleForFree": true,
+      "isFamilyFriendly": true,
+      "caption": "group of people inside room",
+      "representativeOfPage": true,
+      "download": "https://unsplash.com/photos/0_sMYmRHpro/download?force=true"
+    },
+    "width": 5616,
+    "height": 3744,
+    "originalFilename": "immersive-projection-0_sMYmRHpro.jpg"
+  },
+  {
+    "name": "optical-patterns",
+    "id": "Dq0ngkOhtko",
+    "role": "Tangible signals / optical patterns",
+    "crop": "50% 44%",
+    "alt": "A transparent measuring triangle illuminated with colourful optical patterns against black.",
+    "note": "Real photographed optical patterns across a tangible measuring instrument. Broad black negative space and vivid colour. Avoid describing it as a chip, dashboard or data visualization.",
+    "sourcePage": "https://unsplash.com/photos/triangular-ruler-with-colorful-light-patterns-Dq0ngkOhtko",
+    "photographer": "Rohit Choudhari",
+    "license": "https://unsplash.com/license",
+    "download": "https://unsplash.com/photos/Dq0ngkOhtko/download?force=true",
+    "exactObservedImageUrl": "https://images.unsplash.com/photo-1774731475743-2ae8cdc27055?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=rohit-choudhari-Dq0ngkOhtko-unsplash.jpg",
+    "bytes": 818463,
+    "sha256": "db09fadd87002d1ea70389840756b8aeb147099c70a5a8e225b4b898dfca35f3",
+    "checkedAt": "2026-09-13T06:46:17.656Z",
+    "visualReview": "Reviewed at 1100–1200px before selection; final crop review recorded in final-wide-review.jpg.",
+    "sourceMetadata": {
+      "@context": "https://schema.org",
+      "@type": "ImageObject",
+      "creator": {
+        "@type": "Person",
+        "name": "Rohit Choudhari"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Rohit Choudhari"
+      },
+      "creditText": "Rohit Choudhari",
+      "copyrightNotice": "Rohit Choudhari",
+      "license": "https://unsplash.com/license",
+      "acquireLicensePage": "https://unsplash.com/photos/triangular-ruler-with-colorful-light-patterns-Dq0ngkOhtko",
+      "contentUrl": "https://images.unsplash.com/photo-1774731475743-2ae8cdc27055?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjgxNjc0fA&ixlib=rb-4.1.0",
+      "thumbnail": {
+        "@type": "ImageObject",
+        "url": "https://images.unsplash.com/photo-1774731475743-2ae8cdc27055?auto=format&fit=crop&q=60&crop=entropy&cs=tinysrgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjgxNjc0fA&ixlib=rb-4.1.0&w=200"
+      },
+      "datePublished": "2026-03-28T21:02:44Z",
+      "description": "Triangular ruler with colorful light patterns",
+      "name": "Triangular ruler with colorful light patterns",
+      "width": "3635px",
+      "height": "1721px",
+      "isAccessibleForFree": true,
+      "isFamilyFriendly": true,
+      "caption": "Triangular ruler with colorful light patterns",
+      "representativeOfPage": true,
+      "download": "https://unsplash.com/photos/Dq0ngkOhtko/download?force=true"
+    },
+    "width": 3635,
+    "height": 1721,
+    "originalFilename": "optical-patterns-Dq0ngkOhtko.jpg"
+  },
+  {
+    "name": "product-in-use",
+    "id": "A2BIY-TUjuA",
+    "role": "Human using a compelling digital product",
+    "crop": "50% 43%",
+    "alt": "A woman wearing a virtual reality headset inside an LED art installation.",
+    "note": "Real Vive headset and LED installation, as identified by photographer. Rich red fabric against blue and violet points of light. Use the actual photograph without adding floating interface graphics.",
+    "sourcePage": "https://unsplash.com/photos/a-woman-in-a-red-dress-wearing-a-virtual-reality-headset-A2BIY-TUjuA",
+    "photographer": "Sara Kurig",
+    "license": "https://unsplash.com/license",
+    "download": "https://unsplash.com/photos/A2BIY-TUjuA/download?force=true",
+    "exactObservedImageUrl": "https://images.unsplash.com/photo-1639174326326-6e2ef8d8ae39?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=sara-kurig-A2BIY-TUjuA-unsplash.jpg",
+    "bytes": 3256145,
+    "sha256": "76ccbd617a9be82849d6c08615e7ae83273378d18557c12f0d2c10a2aa5f8e5d",
+    "checkedAt": "2026-09-13T06:46:17.76Z",
+    "visualReview": "Reviewed at 1100–1200px before selection; final crop review recorded in final-wide-review.jpg.",
+    "sourceMetadata": {
+      "@context": "https://schema.org",
+      "@type": "ImageObject",
+      "creator": {
+        "@type": "Person",
+        "name": "Sara Kurig"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Sara Kurig"
+      },
+      "creditText": "Sara Kurig",
+      "copyrightNotice": "Sara Kurig",
+      "license": "https://unsplash.com/license",
+      "acquireLicensePage": "https://unsplash.com/photos/a-woman-in-a-red-dress-wearing-a-virtual-reality-headset-A2BIY-TUjuA",
+      "contentLocation": {
+        "@type": "Place",
+        "name": "Munich, Deutschland"
+      },
+      "contentUrl": "https://images.unsplash.com/photo-1639174326326-6e2ef8d8ae39?auto=format&fit=crop&q=60&crop=entropy&cs=srgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjA3OTUwfA&ixlib=rb-4.1.0",
+      "thumbnail": {
+        "@type": "ImageObject",
+        "url": "https://images.unsplash.com/photo-1639174326326-6e2ef8d8ae39?auto=format&fit=crop&q=60&crop=entropy&cs=tinysrgb&fm=jpg&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzg5MjA3OTUwfA&ixlib=rb-4.1.0&w=200"
+      },
+      "datePublished": "2021-12-10T22:12:43Z",
+      "description": "a woman in a red dress wearing a virtual reality headset",
+      "name": "a woman in a red dress wearing a virtual reality headset",
+      "width": "6000px",
+      "height": "4000px",
+      "isAccessibleForFree": true,
+      "isFamilyFriendly": true,
+      "caption": "WE ARE VIDEO LICHTINSTALLATION LED Black Hole Cosmic Hive ",
+      "representativeOfPage": true,
+      "download": "https://unsplash.com/photos/A2BIY-TUjuA/download?force=true"
+    },
+    "width": 6000,
+    "height": 4000,
+    "originalFilename": "product-in-use-A2BIY-TUjuA.jpg"
+  },
+  {
+    "name": "human-screen-portrait",
+    "id": "10975134",
+    "role": "Close human / screen portrait",
+    "sourcePage": "https://www.pexels.com/photo/woman-working-with-computer-10975134/",
+    "photographer": "Mustafa Enes Ardıç",
+    "license": "https://www.pexels.com/license/",
+    "download": "https://images.pexels.com/photos/10975134/pexels-photo-10975134.jpeg?cs=srgb&dl=pexels-mustafa-enes-ardic-159591241-10975134.jpg&fm=jpg",
+    "crop": "50% 30%",
+    "alt": "A person concentrating on a screen, seen through glass with warm and cyan reflections.",
+    "note": "Portrait original; the approved wide crop is a close face-and-screen composition around the upper third. Real glass reflections, not invented floating UI. Source supports laptop use, not a verified profession.",
+    "exactObservedImageUrl": "https://images.pexels.com/photos/10975134/pexels-photo-10975134.jpeg?cs=srgb&dl=pexels-mustafa-enes-ardic-159591241-10975134.jpg&fm=jpg",
+    "bytes": 1795759,
+    "sha256": "29ed03a0c241365647be0c54110c84d41df32c695a87b1c0abdbf2f6ccaf28a2",
+    "checkedAt": "2026-09-13T06:46:19.566Z",
+    "visualReview": "Reviewed at 1100–1200px before selection; final crop review recorded in final-wide-review.jpg.",
+    "width": 4160,
+    "height": 6240,
+    "originalFilename": "human-screen-portrait-10975134.jpg"
+  },
+  {
+    "name": "design-prototype-collaboration",
+    "id": "7181109",
+    "role": "Design / build collaboration",
+    "sourcePage": "https://www.pexels.com/photo/men-standing-at-the-table-in-a-workshop-and-looking-at-a-laptop-screen-7181109/",
+    "photographer": "Thirdman",
+    "license": "https://www.pexels.com/license/",
+    "download": "https://images.pexels.com/photos/7181109/pexels-photo-7181109.jpeg?cs=srgb&dl=pexels-thirdman-7181109.jpg&fm=jpg",
+    "crop": "50% 48%",
+    "alt": "Three designers reviewing a product beside physical models and silicone moulds in a workshop.",
+    "note": "Wide original, direct physical product-development context. Faces, hands, moulds and prototypes are visible. Natural working poses, with red and green accents; brighter than the other four images.",
+    "exactObservedImageUrl": "https://images.pexels.com/photos/7181109/pexels-photo-7181109.jpeg?cs=srgb&dl=pexels-thirdman-7181109.jpg&fm=jpg",
+    "bytes": 4026750,
+    "sha256": "08b3c27cee05fb16c87a4779ea10ffb85e680d1d17c3848ab1f0f826b105e099",
+    "checkedAt": "2026-09-13T06:46:19.589Z",
+    "visualReview": "Reviewed at 1100–1200px before selection; final crop review recorded in final-wide-review.jpg.",
+    "width": 6558,
+    "height": 4372,
+    "originalFilename": "design-prototype-collaboration-7181109.jpg"
+  }
+]

@@ -1,0 +1,185 @@
+[
+  {
+    "key": "adobe-analytics",
+    "file": "/assets/platforms/adobe-analytics-logo.png",
+    "suppliedName": "adobe-analytics-logo.svg",
+    "dimensions": [
+      580,
+      242
+    ],
+    "source": "Owner-supplied platform logo; original bytes preserved"
+  },
+  {
+    "key": "adobe-campaign",
+    "file": "/assets/platforms/adobe-campaign-logo.png",
+    "suppliedName": "adobe-campaign-logo.svg",
+    "dimensions": [
+      350,
+      150
+    ],
+    "source": "Owner-supplied platform logo; original bytes preserved"
+  },
+  {
+    "key": "adobe-experience-manager",
+    "file": "/assets/platforms/adobe-experience-manager-logo.png",
+    "suppliedName": "adobe-experience-manager-logo.svg",
+    "dimensions": [
+      580,
+      242
+    ],
+    "source": "Owner-supplied platform logo; original bytes preserved"
+  },
+  {
+    "key": "adobe-experience-platform",
+    "file": "/assets/platforms/adobe-experience-platform-logo.png",
+    "suppliedName": "adobe-experience-platform-logo.svg",
+    "dimensions": [
+      225,
+      225
+    ],
+    "source": "Owner-supplied platform logo; original bytes preserved"
+  },
+  {
+    "key": "adobe-marketo-engage",
+    "file": "/assets/platforms/adobe-marketo-engage-logo.webp",
+    "suppliedName": "adobe-marketo-engage-logo.svg",
+    "dimensions": [
+      3840,
+      1074
+    ],
+    "source": "Owner-supplied platform logo; original bytes preserved"
+  },
+  {
+    "key": "drupal",
+    "file": "/assets/platforms/drupal-logo.png",
+    "suppliedName": "drupal-logo.svg",
+    "dimensions": [
+      492,
+      376
+    ],
+    "source": "Owner-supplied platform logo; original bytes preserved"
+  },
+  {
+    "key": "google-analytics",
+    "file": "/assets/platforms/google-analytics-logo.webp",
+    "suppliedName": "google-analytics-logo.svg",
+    "dimensions": [
+      1280,
+      441
+    ],
+    "source": "Owner-supplied platform logo; original bytes preserved"
+  },
+  {
+    "key": "hubspot",
+    "file": "/assets/platforms/hubspot-logo.webp",
+    "suppliedName": "hubspot-logo.svg.webp",
+    "dimensions": [
+      3840,
+      1124
+    ],
+    "source": "Owner-supplied platform logo; original bytes preserved"
+  },
+  {
+    "key": "mailchimp",
+    "file": "/assets/platforms/mailchimp-logo.svg",
+    "suppliedName": "mailchimp-logo.svg",
+    "dimensions": null,
+    "source": "Owner-supplied platform logo; original bytes preserved"
+  },
+  {
+    "key": "oracle-eloqua",
+    "file": "/assets/platforms/oracle-eloqua-logo.png",
+    "suppliedName": "oracle-eloqua-logo.svg",
+    "dimensions": [
+      1168,
+      434
+    ],
+    "source": "Owner-supplied platform logo; original bytes preserved"
+  },
+  {
+    "key": "power-bi",
+    "file": "/assets/platforms/power-bi-logo.png",
+    "suppliedName": "power-bi-logo.svg",
+    "dimensions": [
+      400,
+      200
+    ],
+    "source": "Owner-supplied platform logo; original bytes preserved"
+  },
+  {
+    "key": "salesforce-marketing-cloud",
+    "file": "/assets/platforms/salesforce-marketing-cloud-logo.png",
+    "suppliedName": "salesforce-marketing-cloud-logo.svg",
+    "dimensions": [
+      800,
+      470
+    ],
+    "source": "Owner-supplied platform logo; original bytes preserved"
+  },
+  {
+    "key": "segment",
+    "file": "/assets/platforms/segment-logo.svg",
+    "suppliedName": "segment-logo.svg",
+    "dimensions": null,
+    "source": "Owner-supplied platform logo; original bytes preserved"
+  },
+  {
+    "key": "tableau",
+    "file": "/assets/platforms/tableau-logo.webp",
+    "suppliedName": "tableau-logo.svg",
+    "dimensions": [
+      1200,
+      325
+    ],
+    "source": "Owner-supplied platform logo; original bytes preserved"
+  },
+  {
+    "key": "tealium",
+    "file": "/assets/platforms/tealium-logo.webp",
+    "suppliedName": "tealium-logo.svg",
+    "dimensions": [
+      3840,
+      902
+    ],
+    "source": "Owner-supplied platform logo; original bytes preserved"
+  },
+  {
+    "key": "wordpress",
+    "file": "/assets/platforms/wordpress-logo.webp",
+    "suppliedName": "wordpress-logo.svg",
+    "dimensions": [
+      960,
+      218
+    ],
+    "source": "Owner-supplied platform logo; original bytes preserved"
+  },
+  {
+    "key": "zoho",
+    "file": "/assets/platforms/zoho-logo.webp",
+    "suppliedName": "zoho-logo.svg.webp",
+    "dimensions": [
+      3840,
+      1688
+    ],
+    "source": "Owner-supplied platform logo; original bytes preserved"
+  },
+  {
+    "key": "salesforce",
+    "file": "/assets/platforms/salesforce-logo.svg",
+    "source": "Official Salesforce website header",
+    "sourcePage": "https://www.salesforce.com/",
+    "download": "https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/11/logo-salesforce.svg?w=1024"
+  },
+  {
+    "key": "braze",
+    "file": "/assets/platforms/braze-logo.svg",
+    "source": "Official Braze media kit; original purple SVG",
+    "sourcePage": "https://www.braze.com/company/news",
+    "download": "https://cdn.sanity.io/files/b7pblshe/marketing-prod/5199a210b6365464e43ff58f9a54d0e9307f702c.zip"
+  },
+  {
+    "key": "adobe",
+    "file": "/assets/platforms/adobe-logo.png",
+    "source": "Existing approved local brand asset; original bytes preserved"
+  }
+]

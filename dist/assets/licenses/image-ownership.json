@@ -1,0 +1,1377 @@
+[
+  {
+    "route": "/",
+    "role": "hero-video-poster",
+    "file": "/assets/images/home/home-hero-video-poster.jpg",
+    "originalAsset": "/assets/film-digital-connection-poster.jpg",
+    "dimensions": [
+      2520,
+      1418
+    ],
+    "sha256": "644fab0af7288119292b10da18504478a92ca07a73acda352b0c87b7842ecaf3"
+  },
+  {
+    "route": "/",
+    "role": "selected-work-dynalektric",
+    "file": "/assets/images/home/home-selected-work-dynalektric.webp",
+    "originalAsset": "/assets/dynalektric-project.webp",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "sha256": "9cb7794a86790da2719dd5e37deecc25736d79b609fa5df001f66a2dd5777a96"
+  },
+  {
+    "route": "/",
+    "role": "selected-work-treffer-technologies",
+    "file": "/assets/images/home/home-selected-work-treffer-technologies.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-1600.webp",
+    "dimensions": [
+      1600,
+      758
+    ],
+    "sha256": "6146e1d2a83dea78365f49921c96c651c130d01cd991e7e8438f77cbc61bdfdf"
+  },
+  {
+    "route": "/",
+    "role": "selected-work-treffer-technologies 800w",
+    "file": "/assets/images/home/home-selected-work-treffer-technologies-800.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-800.webp",
+    "dimensions": [
+      800,
+      378
+    ],
+    "sha256": "89acdef389ee29cd88abb71109039c07998ceab578c776fe699e0784aaa02faf"
+  },
+  {
+    "route": "/",
+    "role": "selected-work-maxseal",
+    "file": "/assets/images/home/home-selected-work-maxseal.webp",
+    "originalAsset": "/assets/max-seal-project.webp",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "sha256": "e24ae05d3e8d76664d221d0d2b3c15936fa5cbb53a235c45d41899ae78d9af0a"
+  },
+  {
+    "route": "/",
+    "role": "ideas-choosing-the-right-cdp-for-your-growth-stage",
+    "file": "/assets/images/home/home-ideas-choosing-the-right-cdp-for-your-growth-stage.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-1600.webp",
+    "dimensions": [
+      1600,
+      758
+    ],
+    "sha256": "6146e1d2a83dea78365f49921c96c651c130d01cd991e7e8438f77cbc61bdfdf"
+  },
+  {
+    "route": "/",
+    "role": "ideas-choosing-the-right-cdp-for-your-growth-stage 800w",
+    "file": "/assets/images/home/home-ideas-choosing-the-right-cdp-for-your-growth-stage-800.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-800.webp",
+    "dimensions": [
+      800,
+      378
+    ],
+    "sha256": "89acdef389ee29cd88abb71109039c07998ceab578c776fe699e0784aaa02faf"
+  },
+  {
+    "route": "/",
+    "role": "ideas-why-ai-needs-human-centered-strategy",
+    "file": "/assets/images/home/home-ideas-why-ai-needs-human-centered-strategy.webp",
+    "originalAsset": "/assets/editorial/human-screen-portrait-1600.webp",
+    "dimensions": [
+      1600,
+      2400
+    ],
+    "sha256": "65e9a97c582e9ec39abed8f2e8f68a8e0fb061287bc14ff00afe898286215c87"
+  },
+  {
+    "route": "/",
+    "role": "ideas-why-ai-needs-human-centered-strategy 800w",
+    "file": "/assets/images/home/home-ideas-why-ai-needs-human-centered-strategy-800.webp",
+    "originalAsset": "/assets/editorial/human-screen-portrait-800.webp",
+    "dimensions": [
+      800,
+      1200
+    ],
+    "sha256": "64f1777ae607fa9b022fac46ea195d97ee129cce33b24c36b0660255bc6d4543"
+  },
+  {
+    "route": "/",
+    "role": "ideas-3-common-mistakes-in-martech-implementation",
+    "file": "/assets/images/home/home-ideas-3-common-mistakes-in-martech-implementation.webp",
+    "originalAsset": "/assets/editorial/design-prototype-collaboration-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "ebfdc711a0f9fb81a24af7dbca6fabb13ab577a773f3014698dae9efbc4f7d0d"
+  },
+  {
+    "route": "/",
+    "role": "ideas-3-common-mistakes-in-martech-implementation 800w",
+    "file": "/assets/images/home/home-ideas-3-common-mistakes-in-martech-implementation-800.webp",
+    "originalAsset": "/assets/editorial/design-prototype-collaboration-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "29aef899c381655583aac87ec3f33dcad8239a603b4910624f66a3e4206240a4"
+  },
+  {
+    "route": "/",
+    "role": "social",
+    "file": "/assets/images/home/home-social.jpg",
+    "originalAsset": "/assets/film-global-city-poster.jpg",
+    "dimensions": [
+      2520,
+      1418
+    ],
+    "sha256": "8f083b3e690c944bb05c9f24a36f54b8c3eb572b1a5924d6c016b0fe324cb95a"
+  },
+  {
+    "route": "/growth-systems",
+    "role": "hero",
+    "file": "/assets/images/growth-systems/growth-systems-hero.webp",
+    "originalAsset": "/assets/editorial/immersive-projection-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "3e0e0318708e8848941c74ed671335aa2ee04102b31e910666419679a4a96545"
+  },
+  {
+    "route": "/growth-systems",
+    "role": "hero 800w",
+    "file": "/assets/images/growth-systems/growth-systems-hero-800.webp",
+    "originalAsset": "/assets/editorial/immersive-projection-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "9a029103e1ec213c0959fae418d3d32e7969713f5aa40ef73983fab42ac6a194"
+  },
+  {
+    "route": "/growth-systems",
+    "role": "capability-experience",
+    "file": "/assets/images/growth-systems/growth-systems-capability-experience.webp",
+    "originalAsset": "/assets/editorial/product-in-use-1600.webp",
+    "dimensions": [
+      1448,
+      1086
+    ],
+    "sha256": "04da94976690f2bcdb3eefc40ea5d304fabed59460dcffeb87343ef555b6b9a8"
+  },
+  {
+    "route": "/growth-systems",
+    "role": "capability-martech",
+    "file": "/assets/images/growth-systems/growth-systems-capability-martech.webp",
+    "originalAsset": "/assets/editorial/human-screen-portrait-1600.webp",
+    "dimensions": [
+      1448,
+      1086
+    ],
+    "sha256": "34801b85cea0df43f3680893f625877062c29e8f800d43469fe64f14efae7f42"
+  },
+  {
+    "route": "/growth-systems",
+    "role": "capability-data",
+    "file": "/assets/images/growth-systems/growth-systems-capability-data.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-1600.webp",
+    "dimensions": [
+      1448,
+      1086
+    ],
+    "sha256": "4ccc4d7e4f4074f6a8bd6511e8ae55365a267a7643c1151b94e1d47f613e524a"
+  },
+  {
+    "route": "/growth-systems/experience-design-enablement",
+    "role": "hero",
+    "file": "/assets/images/experience/experience-hero.webp",
+    "originalAsset": "/assets/editorial/digital-mobile-1600.webp",
+    "dimensions": [
+      1600,
+      2400
+    ],
+    "sha256": "b3dad47e9e4ee523323818773caa1ca22c5dcda43da0cde61910b0f6f356a5ac"
+  },
+  {
+    "route": "/growth-systems/experience-design-enablement",
+    "role": "hero 800w",
+    "file": "/assets/images/experience/experience-hero-800.webp",
+    "originalAsset": "/assets/editorial/digital-mobile-800.webp",
+    "dimensions": [
+      800,
+      1200
+    ],
+    "sha256": "b83d5eb43010edcb725b36cc92c18e6fee9e60004565d38e0234e392754ee63d"
+  },
+  {
+    "route": "/growth-systems/experience-design-enablement",
+    "role": "discover",
+    "file": "/assets/images/experience/experience-discover.webp",
+    "originalAsset": "generated-illustrative/experience-discover.webp",
+    "dimensions": [
+      1600,
+      2000
+    ],
+    "sha256": "2c8c748460e490923fbcfddd8b401ea33842f5d9d24fa2c51ea8852d4cd41646"
+  },
+  {
+    "route": "/growth-systems/experience-design-enablement",
+    "role": "discover 800w",
+    "file": "/assets/images/experience/experience-discover-800.webp",
+    "originalAsset": "/assets/images/experience/experience-discover.webp",
+    "dimensions": [
+      800,
+      1000
+    ],
+    "sha256": "793d936135dc36de91e35c5ee5c066c5cf7c331404cad6aa0617598d29ba209f"
+  },
+  {
+    "route": "/growth-systems/experience-design-enablement",
+    "role": "explore",
+    "file": "/assets/images/experience/experience-explore.webp",
+    "originalAsset": "generated-illustrative/experience-explore.webp",
+    "dimensions": [
+      1600,
+      2000
+    ],
+    "sha256": "09c9626b36d4dc114f0c7184105e029138fc8b65f600959fd8fc74aec437530c"
+  },
+  {
+    "route": "/growth-systems/experience-design-enablement",
+    "role": "explore 800w",
+    "file": "/assets/images/experience/experience-explore-800.webp",
+    "originalAsset": "/assets/images/experience/experience-explore.webp",
+    "dimensions": [
+      800,
+      1000
+    ],
+    "sha256": "ce71b01e9ce0b4ad1b47e5fa5d0d82ee708d48da12f3bc5b4e7a0d3770c7300c"
+  },
+  {
+    "route": "/growth-systems/experience-design-enablement",
+    "role": "engage",
+    "file": "/assets/images/experience/experience-engage.webp",
+    "originalAsset": "generated-illustrative/experience-engage.webp",
+    "dimensions": [
+      1600,
+      2000
+    ],
+    "sha256": "890176f7d7acb4f0572b94c7a388a47e7cf6d60a5103b549765def00a916f0e9"
+  },
+  {
+    "route": "/growth-systems/experience-design-enablement",
+    "role": "engage 800w",
+    "file": "/assets/images/experience/experience-engage-800.webp",
+    "originalAsset": "/assets/images/experience/experience-engage.webp",
+    "dimensions": [
+      800,
+      1000
+    ],
+    "sha256": "9d715d208107ade06aeb27a183418e2a3beb7534ef562ca92f4826393408c408"
+  },
+  {
+    "route": "/growth-systems/experience-design-enablement",
+    "role": "convert",
+    "file": "/assets/images/experience/experience-convert.webp",
+    "originalAsset": "generated-illustrative/experience-convert.webp",
+    "dimensions": [
+      1600,
+      2000
+    ],
+    "sha256": "84550c13497af51d9802fb76b09b031638c41a408a370262d79c0d4845658f7c"
+  },
+  {
+    "route": "/growth-systems/experience-design-enablement",
+    "role": "return",
+    "file": "/assets/images/experience/experience-return.webp",
+    "originalAsset": "generated-illustrative/experience-return.webp",
+    "dimensions": [
+      1600,
+      2000
+    ],
+    "sha256": "0f713ca57761fca91f840a154d969f36a6851c193aa685d2dea5ec2d3cb80d01"
+  },
+  {
+    "route": "/growth-systems/experience-design-enablement",
+    "role": "return 800w",
+    "file": "/assets/images/experience/experience-return-800.webp",
+    "originalAsset": "/assets/images/experience/experience-return.webp",
+    "dimensions": [
+      800,
+      1000
+    ],
+    "sha256": "764d20be30bc9d57e1225814d80273b908380aa25bf01b5eb86630ec06c0c597"
+  },
+  {
+    "route": "/growth-systems/martech-consulting-enablement",
+    "role": "hero",
+    "file": "/assets/images/martech/martech-hero.webp",
+    "originalAsset": "/assets/editorial/human-screen-portrait-1600.webp",
+    "dimensions": [
+      1600,
+      2400
+    ],
+    "sha256": "65e9a97c582e9ec39abed8f2e8f68a8e0fb061287bc14ff00afe898286215c87"
+  },
+  {
+    "route": "/growth-systems/martech-consulting-enablement",
+    "role": "hero 800w",
+    "file": "/assets/images/martech/martech-hero-800.webp",
+    "originalAsset": "/assets/editorial/human-screen-portrait-800.webp",
+    "dimensions": [
+      800,
+      1200
+    ],
+    "sha256": "64f1777ae607fa9b022fac46ea195d97ee129cce33b24c36b0660255bc6d4543"
+  },
+  {
+    "route": "/growth-systems/martech-consulting-enablement",
+    "role": "crm",
+    "file": "/assets/images/martech/martech-crm.webp",
+    "originalAsset": "generated-illustrative/martech-crm.webp",
+    "dimensions": [
+      1600,
+      2000
+    ],
+    "sha256": "f468c504a16e8c3fec373103fd1b9fa645d312adff5807874da3a85bd6821d25"
+  },
+  {
+    "route": "/growth-systems/martech-consulting-enablement",
+    "role": "crm 800w",
+    "file": "/assets/images/martech/martech-crm-800.webp",
+    "originalAsset": "/assets/images/martech/martech-crm.webp",
+    "dimensions": [
+      800,
+      1000
+    ],
+    "sha256": "a47e94afe35c032556a29b7e3734bb13cba148106f8b2c2b332db8c88ea560c6"
+  },
+  {
+    "route": "/growth-systems/martech-consulting-enablement",
+    "role": "marketing-automation",
+    "file": "/assets/images/martech/martech-marketing-automation.webp",
+    "originalAsset": "generated-illustrative/martech-marketing-automation.webp",
+    "dimensions": [
+      1600,
+      2000
+    ],
+    "sha256": "1c85207e28361bcbe75b1d4036e59c830b750ec443f1226bd170e41894277bcc"
+  },
+  {
+    "route": "/growth-systems/martech-consulting-enablement",
+    "role": "cms",
+    "file": "/assets/images/martech/martech-cms.webp",
+    "originalAsset": "generated-illustrative/martech-cms.webp",
+    "dimensions": [
+      1600,
+      2000
+    ],
+    "sha256": "faae8d47ec15d7e3e3b44517ea7470e71e5156d05575243e0ed6f9168050bb80"
+  },
+  {
+    "route": "/growth-systems/martech-consulting-enablement",
+    "role": "cms 800w",
+    "file": "/assets/images/martech/martech-cms-800.webp",
+    "originalAsset": "/assets/images/martech/martech-cms.webp",
+    "dimensions": [
+      800,
+      1000
+    ],
+    "sha256": "2e48956cfd2fb736cefea4a61e0127cc8b374171ca53223dcc8055a097d12ac5"
+  },
+  {
+    "route": "/growth-systems/martech-consulting-enablement",
+    "role": "cdp",
+    "file": "/assets/images/martech/martech-cdp.webp",
+    "originalAsset": "generated-illustrative/martech-cdp.webp",
+    "dimensions": [
+      1600,
+      2000
+    ],
+    "sha256": "4445f7bb25575e05a6086b1eb88d4728cb08e3136fe5f4daad634200d7683705"
+  },
+  {
+    "route": "/growth-systems/martech-consulting-enablement",
+    "role": "cdp 800w",
+    "file": "/assets/images/martech/martech-cdp-800.webp",
+    "originalAsset": "/assets/images/martech/martech-cdp.webp",
+    "dimensions": [
+      800,
+      1000
+    ],
+    "sha256": "23e0f68e1e7250fb0da3962f401db29c262a52d0e59cdc203326d725ac1e52a2"
+  },
+  {
+    "route": "/growth-systems/martech-consulting-enablement",
+    "role": "analytics",
+    "file": "/assets/images/martech/martech-analytics.webp",
+    "originalAsset": "generated-illustrative/martech-analytics.webp",
+    "dimensions": [
+      1600,
+      2000
+    ],
+    "sha256": "95147ed7e1738f4824d281db551ac3a106dfc9abd125e3d55553ab5ff2682f7e"
+  },
+  {
+    "route": "/growth-systems/martech-consulting-enablement",
+    "role": "analytics 800w",
+    "file": "/assets/images/martech/martech-analytics-800.webp",
+    "originalAsset": "/assets/images/martech/martech-analytics.webp",
+    "dimensions": [
+      800,
+      1000
+    ],
+    "sha256": "6be703723d1e6a74d159019a4344e75a059c03d5fd07a2db9b932f339be7b404"
+  },
+  {
+    "route": "/growth-systems/martech-consulting-enablement",
+    "role": "channels",
+    "file": "/assets/images/martech/martech-channels.webp",
+    "originalAsset": "generated-illustrative/martech-channels.webp",
+    "dimensions": [
+      1600,
+      2000
+    ],
+    "sha256": "bb20e8ed780cf6307e7d82b1a21376bf21160667e30fae4da150f81c7d7bbc4d"
+  },
+  {
+    "route": "/growth-systems/martech-consulting-enablement",
+    "role": "channels 800w",
+    "file": "/assets/images/martech/martech-channels-800.webp",
+    "originalAsset": "/assets/images/martech/martech-channels.webp",
+    "dimensions": [
+      800,
+      1000
+    ],
+    "sha256": "2031b8203bb34d313f2ea4931b1dbdac1f45bdc9f4f35f962958a1762ef8e13c"
+  },
+  {
+    "route": "/growth-systems/data-intelligence-activation",
+    "role": "hero",
+    "file": "/assets/images/data/data-intelligence-hero.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-1600.webp",
+    "dimensions": [
+      1600,
+      758
+    ],
+    "sha256": "6146e1d2a83dea78365f49921c96c651c130d01cd991e7e8438f77cbc61bdfdf"
+  },
+  {
+    "route": "/growth-systems/data-intelligence-activation",
+    "role": "hero 800w",
+    "file": "/assets/images/data/data-intelligence-hero-800.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-800.webp",
+    "dimensions": [
+      800,
+      378
+    ],
+    "sha256": "89acdef389ee29cd88abb71109039c07998ceab578c776fe699e0784aaa02faf"
+  },
+  {
+    "route": "/growth-systems/data-intelligence-activation",
+    "role": "signals",
+    "file": "/assets/images/data/data-intelligence-signals.webp",
+    "originalAsset": "/assets/editorial/immersive-projection-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "3e0e0318708e8848941c74ed671335aa2ee04102b31e910666419679a4a96545"
+  },
+  {
+    "route": "/growth-systems/data-intelligence-activation",
+    "role": "signals 800w",
+    "file": "/assets/images/data/data-intelligence-signals-800.webp",
+    "originalAsset": "/assets/editorial/immersive-projection-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "9a029103e1ec213c0959fae418d3d32e7969713f5aa40ef73983fab42ac6a194"
+  },
+  {
+    "route": "/growth-systems/data-intelligence-activation",
+    "role": "unified-customer",
+    "file": "/assets/images/data/data-intelligence-unified-customer.webp",
+    "originalAsset": "/assets/editorial/human-screen-portrait-1600.webp",
+    "dimensions": [
+      1600,
+      2400
+    ],
+    "sha256": "65e9a97c582e9ec39abed8f2e8f68a8e0fb061287bc14ff00afe898286215c87"
+  },
+  {
+    "route": "/growth-systems/data-intelligence-activation",
+    "role": "unified-customer 800w",
+    "file": "/assets/images/data/data-intelligence-unified-customer-800.webp",
+    "originalAsset": "/assets/editorial/human-screen-portrait-800.webp",
+    "dimensions": [
+      800,
+      1200
+    ],
+    "sha256": "64f1777ae607fa9b022fac46ea195d97ee129cce33b24c36b0660255bc6d4543"
+  },
+  {
+    "route": "/growth-systems/data-intelligence-activation",
+    "role": "understanding",
+    "file": "/assets/images/data/data-intelligence-understanding.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-1600.webp",
+    "dimensions": [
+      1600,
+      758
+    ],
+    "sha256": "6146e1d2a83dea78365f49921c96c651c130d01cd991e7e8438f77cbc61bdfdf"
+  },
+  {
+    "route": "/growth-systems/data-intelligence-activation",
+    "role": "understanding 800w",
+    "file": "/assets/images/data/data-intelligence-understanding-800.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-800.webp",
+    "dimensions": [
+      800,
+      378
+    ],
+    "sha256": "89acdef389ee29cd88abb71109039c07998ceab578c776fe699e0784aaa02faf"
+  },
+  {
+    "route": "/growth-systems/data-intelligence-activation",
+    "role": "audience",
+    "file": "/assets/images/data/data-intelligence-audience.webp",
+    "originalAsset": "/assets/editorial/design-prototype-collaboration-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "ebfdc711a0f9fb81a24af7dbca6fabb13ab577a773f3014698dae9efbc4f7d0d"
+  },
+  {
+    "route": "/growth-systems/data-intelligence-activation",
+    "role": "audience 800w",
+    "file": "/assets/images/data/data-intelligence-audience-800.webp",
+    "originalAsset": "/assets/editorial/design-prototype-collaboration-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "29aef899c381655583aac87ec3f33dcad8239a603b4910624f66a3e4206240a4"
+  },
+  {
+    "route": "/growth-systems/data-intelligence-activation",
+    "role": "action",
+    "file": "/assets/images/data/data-intelligence-action.jpg",
+    "originalAsset": "/assets/film-digital-connection-poster.jpg",
+    "dimensions": [
+      2520,
+      1418
+    ],
+    "sha256": "644fab0af7288119292b10da18504478a92ca07a73acda352b0c87b7842ecaf3"
+  },
+  {
+    "route": "/growth-systems/data-intelligence-activation",
+    "role": "measurement",
+    "file": "/assets/images/data/data-intelligence-measurement.webp",
+    "originalAsset": "/assets/editorial/product-in-use-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "49102fd220fa480d8366b62ce4a21bb0694eb82341ed7675d67ad826527eec03"
+  },
+  {
+    "route": "/growth-systems/data-intelligence-activation",
+    "role": "measurement 800w",
+    "file": "/assets/images/data/data-intelligence-measurement-800.webp",
+    "originalAsset": "/assets/editorial/product-in-use-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "c85806009448ce70e4b2a844926bcfe36c11eaacb8058cef9a740e75199451ca"
+  },
+  {
+    "route": "/ai-agents",
+    "role": "hero",
+    "file": "/assets/images/ai-agents/ai-agents-hero.webp",
+    "originalAsset": "/assets/film-human-machine-poster.webp",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "sha256": "1a46bc7bfb761beb22415808388f0b2521f32acbd52e551f8f0697b627472307"
+  },
+  {
+    "route": "/ai-agents",
+    "role": "understand",
+    "file": "/assets/images/ai-agents/ai-agents-understand.webp",
+    "originalAsset": "/assets/editorial/human-screen-portrait-1600.webp",
+    "dimensions": [
+      1600,
+      2400
+    ],
+    "sha256": "65e9a97c582e9ec39abed8f2e8f68a8e0fb061287bc14ff00afe898286215c87"
+  },
+  {
+    "route": "/ai-agents",
+    "role": "understand 800w",
+    "file": "/assets/images/ai-agents/ai-agents-understand-800.webp",
+    "originalAsset": "/assets/editorial/human-screen-portrait-800.webp",
+    "dimensions": [
+      800,
+      1200
+    ],
+    "sha256": "64f1777ae607fa9b022fac46ea195d97ee129cce33b24c36b0660255bc6d4543"
+  },
+  {
+    "route": "/ai-agents",
+    "role": "reason",
+    "file": "/assets/images/ai-agents/ai-agents-reason.webp",
+    "originalAsset": "/assets/editorial/design-prototype-collaboration-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "ebfdc711a0f9fb81a24af7dbca6fabb13ab577a773f3014698dae9efbc4f7d0d"
+  },
+  {
+    "route": "/ai-agents",
+    "role": "reason 800w",
+    "file": "/assets/images/ai-agents/ai-agents-reason-800.webp",
+    "originalAsset": "/assets/editorial/design-prototype-collaboration-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "29aef899c381655583aac87ec3f33dcad8239a603b4910624f66a3e4206240a4"
+  },
+  {
+    "route": "/ai-agents",
+    "role": "act",
+    "file": "/assets/images/ai-agents/ai-agents-act.webp",
+    "originalAsset": "/assets/editorial/automation-laboratory-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "a309b8cad778380f5da7899c65bab83103338adb206edd9e144e603e58351495"
+  },
+  {
+    "route": "/ai-agents",
+    "role": "act 800w",
+    "file": "/assets/images/ai-agents/ai-agents-act-800.webp",
+    "originalAsset": "/assets/editorial/automation-laboratory-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "4fda6e31622b85f3bf688b31317e660d4e1ecef5cd99de3300267c827d463b9a"
+  },
+  {
+    "route": "/ai-agents",
+    "role": "human-control",
+    "file": "/assets/images/ai-agents/ai-agents-human-control.webp",
+    "originalAsset": "/assets/film-human-machine-poster.webp",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "sha256": "1a46bc7bfb761beb22415808388f0b2521f32acbd52e551f8f0697b627472307"
+  },
+  {
+    "route": "/ai-agents",
+    "role": "improve",
+    "file": "/assets/images/ai-agents/ai-agents-improve.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-1600.webp",
+    "dimensions": [
+      1600,
+      758
+    ],
+    "sha256": "6146e1d2a83dea78365f49921c96c651c130d01cd991e7e8438f77cbc61bdfdf"
+  },
+  {
+    "route": "/ai-agents",
+    "role": "improve 800w",
+    "file": "/assets/images/ai-agents/ai-agents-improve-800.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-800.webp",
+    "dimensions": [
+      800,
+      378
+    ],
+    "sha256": "89acdef389ee29cd88abb71109039c07998ceab578c776fe699e0784aaa02faf"
+  },
+  {
+    "route": "/products",
+    "role": "hero",
+    "file": "/assets/images/products/products-hero.webp",
+    "originalAsset": "/assets/editorial/product-in-use-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "49102fd220fa480d8366b62ce4a21bb0694eb82341ed7675d67ad826527eec03"
+  },
+  {
+    "route": "/products",
+    "role": "hero 800w",
+    "file": "/assets/images/products/products-hero-800.webp",
+    "originalAsset": "/assets/editorial/product-in-use-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "c85806009448ce70e4b2a844926bcfe36c11eaacb8058cef9a740e75199451ca"
+  },
+  {
+    "route": "/products",
+    "role": "imma",
+    "file": "/assets/images/products/products-imma.png",
+    "originalAsset": "/assets/imma-screen.png",
+    "dimensions": [
+      1265,
+      712
+    ],
+    "sha256": "5f307feaed5e12c0f195e22cb8a0a9c2fd4566ecf073c9509751daff7f558231"
+  },
+  {
+    "route": "/products/leadryze-ai",
+    "role": "hero",
+    "file": "/assets/images/products/leadryze-ai/leadryze-ai-hero.webp",
+    "originalAsset": "/assets/film-business-collaboration-poster.webp",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "sha256": "113544050bed2cbf38b96daa8f0f5295da833ccf83122146ea75430d4350702a"
+  },
+  {
+    "route": "/products/imma",
+    "role": "hero",
+    "file": "/assets/images/products/imma/imma-hero.png",
+    "originalAsset": "/assets/imma-screen.png",
+    "dimensions": [
+      1265,
+      712
+    ],
+    "sha256": "5f307feaed5e12c0f195e22cb8a0a9c2fd4566ecf073c9509751daff7f558231"
+  },
+  {
+    "route": "/products/imma",
+    "role": "imma",
+    "file": "/assets/images/products/imma/imma-imma.png",
+    "originalAsset": "/assets/imma-screen.png",
+    "dimensions": [
+      1265,
+      712
+    ],
+    "sha256": "5f307feaed5e12c0f195e22cb8a0a9c2fd4566ecf073c9509751daff7f558231"
+  },
+  {
+    "route": "/work",
+    "role": "hero",
+    "file": "/assets/images/work/work-hero.webp",
+    "originalAsset": "/assets/editorial/article-craft-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "f8103b612eabc4e7cab1403701d060943b1178ac0e84643a15d0ceb69a27c98a"
+  },
+  {
+    "route": "/work",
+    "role": "hero 800w",
+    "file": "/assets/images/work/work-hero-800.webp",
+    "originalAsset": "/assets/editorial/article-craft-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "facb9103a0f9d6a03c0af5b4dcf28da732c70e514db34fe36d88e78ef8216430"
+  },
+  {
+    "route": "/work",
+    "role": "project-dynalektric",
+    "file": "/assets/images/work/work-project-dynalektric.webp",
+    "originalAsset": "/assets/dynalektric-project.webp",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "sha256": "9cb7794a86790da2719dd5e37deecc25736d79b609fa5df001f66a2dd5777a96"
+  },
+  {
+    "route": "/work",
+    "role": "project-treffer-technologies",
+    "file": "/assets/images/work/work-project-treffer-technologies.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-1600.webp",
+    "dimensions": [
+      1600,
+      758
+    ],
+    "sha256": "6146e1d2a83dea78365f49921c96c651c130d01cd991e7e8438f77cbc61bdfdf"
+  },
+  {
+    "route": "/work",
+    "role": "project-treffer-technologies 800w",
+    "file": "/assets/images/work/work-project-treffer-technologies-800.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-800.webp",
+    "dimensions": [
+      800,
+      378
+    ],
+    "sha256": "89acdef389ee29cd88abb71109039c07998ceab578c776fe699e0784aaa02faf"
+  },
+  {
+    "route": "/work",
+    "role": "project-maxseal",
+    "file": "/assets/images/work/work-project-maxseal.webp",
+    "originalAsset": "/assets/max-seal-project.webp",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "sha256": "e24ae05d3e8d76664d221d0d2b3c15936fa5cbb53a235c45d41899ae78d9af0a"
+  },
+  {
+    "route": "/work",
+    "role": "project-imma",
+    "file": "/assets/images/work/work-project-imma.png",
+    "originalAsset": "/assets/imma-screen.png",
+    "dimensions": [
+      1265,
+      712
+    ],
+    "sha256": "5f307feaed5e12c0f195e22cb8a0a9c2fd4566ecf073c9509751daff7f558231"
+  },
+  {
+    "route": "/work/dynalektric",
+    "role": "hero",
+    "file": "/assets/images/work/dynalektric/dynalektric-hero.webp",
+    "originalAsset": "/assets/dynalektric-project.webp",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "sha256": "9cb7794a86790da2719dd5e37deecc25736d79b609fa5df001f66a2dd5777a96"
+  },
+  {
+    "route": "/work/dynalektric",
+    "role": "website-interface",
+    "file": "/assets/images/work/dynalektric/dynalektric-website-interface.webp",
+    "originalAsset": "/assets/dynalektric-screen.webp",
+    "dimensions": [
+      1425,
+      891
+    ],
+    "sha256": "5b399c7288aca7626f9a3a1276c3d45f194169cab9ca8af82442ab2a2fa158df"
+  },
+  {
+    "route": "/work/treffer-technologies",
+    "role": "hero",
+    "file": "/assets/images/work/treffer-technologies/treffer-technologies-hero.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-1600.webp",
+    "dimensions": [
+      1600,
+      758
+    ],
+    "sha256": "6146e1d2a83dea78365f49921c96c651c130d01cd991e7e8438f77cbc61bdfdf"
+  },
+  {
+    "route": "/work/treffer-technologies",
+    "role": "hero 800w",
+    "file": "/assets/images/work/treffer-technologies/treffer-technologies-hero-800.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-800.webp",
+    "dimensions": [
+      800,
+      378
+    ],
+    "sha256": "89acdef389ee29cd88abb71109039c07998ceab578c776fe699e0784aaa02faf"
+  },
+  {
+    "route": "/work/maxseal",
+    "role": "hero",
+    "file": "/assets/images/work/maxseal/maxseal-hero.webp",
+    "originalAsset": "/assets/max-seal-project.webp",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "sha256": "e24ae05d3e8d76664d221d0d2b3c15936fa5cbb53a235c45d41899ae78d9af0a"
+  },
+  {
+    "route": "/work/maxseal",
+    "role": "website-interface",
+    "file": "/assets/images/work/maxseal/maxseal-website-interface.webp",
+    "originalAsset": "/assets/max-seal-screen.webp",
+    "dimensions": [
+      1425,
+      891
+    ],
+    "sha256": "7af458639539628751ee1baf31a16d562598193eb255dcc5eb1a1655c244326c"
+  },
+  {
+    "route": "/work/imma",
+    "role": "project-imma",
+    "file": "/assets/images/work/imma/imma-project-imma.png",
+    "originalAsset": "/assets/imma-screen.png",
+    "dimensions": [
+      1265,
+      712
+    ],
+    "sha256": "5f307feaed5e12c0f195e22cb8a0a9c2fd4566ecf073c9509751daff7f558231"
+  },
+  {
+    "route": "/ideas-hub",
+    "role": "hero",
+    "file": "/assets/images/ideas-hub/ideas-hub-hero.jpg",
+    "originalAsset": "/assets/experience.jpg",
+    "dimensions": [
+      1800,
+      1013
+    ],
+    "sha256": "3f72fc964c5e8f9d87f7359c21acff04bcc727edade610717d8548dc66cdb1bf"
+  },
+  {
+    "route": "/ideas-hub",
+    "role": "ideas-choosing-the-right-cdp-for-your-growth-stage",
+    "file": "/assets/images/ideas-hub/ideas-hub-ideas-choosing-the-right-cdp-for-your-growth-stage.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-1600.webp",
+    "dimensions": [
+      1600,
+      758
+    ],
+    "sha256": "6146e1d2a83dea78365f49921c96c651c130d01cd991e7e8438f77cbc61bdfdf"
+  },
+  {
+    "route": "/ideas-hub",
+    "role": "ideas-choosing-the-right-cdp-for-your-growth-stage 800w",
+    "file": "/assets/images/ideas-hub/ideas-hub-ideas-choosing-the-right-cdp-for-your-growth-stage-800.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-800.webp",
+    "dimensions": [
+      800,
+      378
+    ],
+    "sha256": "89acdef389ee29cd88abb71109039c07998ceab578c776fe699e0784aaa02faf"
+  },
+  {
+    "route": "/ideas-hub",
+    "role": "ideas-why-ai-needs-human-centered-strategy",
+    "file": "/assets/images/ideas-hub/ideas-hub-ideas-why-ai-needs-human-centered-strategy.webp",
+    "originalAsset": "/assets/editorial/human-screen-portrait-1600.webp",
+    "dimensions": [
+      1600,
+      2400
+    ],
+    "sha256": "65e9a97c582e9ec39abed8f2e8f68a8e0fb061287bc14ff00afe898286215c87"
+  },
+  {
+    "route": "/ideas-hub",
+    "role": "ideas-why-ai-needs-human-centered-strategy 800w",
+    "file": "/assets/images/ideas-hub/ideas-hub-ideas-why-ai-needs-human-centered-strategy-800.webp",
+    "originalAsset": "/assets/editorial/human-screen-portrait-800.webp",
+    "dimensions": [
+      800,
+      1200
+    ],
+    "sha256": "64f1777ae607fa9b022fac46ea195d97ee129cce33b24c36b0660255bc6d4543"
+  },
+  {
+    "route": "/ideas-hub",
+    "role": "ideas-3-common-mistakes-in-martech-implementation",
+    "file": "/assets/images/ideas-hub/ideas-hub-ideas-3-common-mistakes-in-martech-implementation.webp",
+    "originalAsset": "/assets/editorial/design-prototype-collaboration-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "ebfdc711a0f9fb81a24af7dbca6fabb13ab577a773f3014698dae9efbc4f7d0d"
+  },
+  {
+    "route": "/ideas-hub",
+    "role": "ideas-3-common-mistakes-in-martech-implementation 800w",
+    "file": "/assets/images/ideas-hub/ideas-hub-ideas-3-common-mistakes-in-martech-implementation-800.webp",
+    "originalAsset": "/assets/editorial/design-prototype-collaboration-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "29aef899c381655583aac87ec3f33dcad8239a603b4910624f66a3e4206240a4"
+  },
+  {
+    "route": "/ideas-hub/choosing-the-right-cdp-for-your-growth-stage",
+    "role": "hero",
+    "file": "/assets/images/ideas-hub/articles/choosing-a-cdp/article-hero.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-1600.webp",
+    "dimensions": [
+      1600,
+      758
+    ],
+    "sha256": "6146e1d2a83dea78365f49921c96c651c130d01cd991e7e8438f77cbc61bdfdf"
+  },
+  {
+    "route": "/ideas-hub/choosing-the-right-cdp-for-your-growth-stage",
+    "role": "hero 800w",
+    "file": "/assets/images/ideas-hub/articles/choosing-a-cdp/article-hero-800.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-800.webp",
+    "dimensions": [
+      800,
+      378
+    ],
+    "sha256": "89acdef389ee29cd88abb71109039c07998ceab578c776fe699e0784aaa02faf"
+  },
+  {
+    "route": "/ideas-hub/choosing-the-right-cdp-for-your-growth-stage",
+    "role": "ideas-why-ai-needs-human-centered-strategy",
+    "file": "/assets/images/ideas-hub/articles/choosing-a-cdp/article-ideas-human-centered-ai.webp",
+    "originalAsset": "/assets/editorial/human-screen-portrait-1600.webp",
+    "dimensions": [
+      1600,
+      2400
+    ],
+    "sha256": "65e9a97c582e9ec39abed8f2e8f68a8e0fb061287bc14ff00afe898286215c87"
+  },
+  {
+    "route": "/ideas-hub/choosing-the-right-cdp-for-your-growth-stage",
+    "role": "ideas-why-ai-needs-human-centered-strategy 800w",
+    "file": "/assets/images/ideas-hub/articles/choosing-a-cdp/article-ideas-human-centered-ai-800.webp",
+    "originalAsset": "/assets/editorial/human-screen-portrait-800.webp",
+    "dimensions": [
+      800,
+      1200
+    ],
+    "sha256": "64f1777ae607fa9b022fac46ea195d97ee129cce33b24c36b0660255bc6d4543"
+  },
+  {
+    "route": "/ideas-hub/choosing-the-right-cdp-for-your-growth-stage",
+    "role": "ideas-3-common-mistakes-in-martech-implementation",
+    "file": "/assets/images/ideas-hub/articles/choosing-a-cdp/article-ideas-martech-mistakes.webp",
+    "originalAsset": "/assets/editorial/design-prototype-collaboration-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "ebfdc711a0f9fb81a24af7dbca6fabb13ab577a773f3014698dae9efbc4f7d0d"
+  },
+  {
+    "route": "/ideas-hub/choosing-the-right-cdp-for-your-growth-stage",
+    "role": "ideas-3-common-mistakes-in-martech-implementation 800w",
+    "file": "/assets/images/ideas-hub/articles/choosing-a-cdp/article-ideas-martech-mistakes-800.webp",
+    "originalAsset": "/assets/editorial/design-prototype-collaboration-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "29aef899c381655583aac87ec3f33dcad8239a603b4910624f66a3e4206240a4"
+  },
+  {
+    "route": "/ideas-hub/why-ai-needs-human-centered-strategy",
+    "role": "hero",
+    "file": "/assets/images/ideas-hub/articles/human-centered-ai/article-hero.webp",
+    "originalAsset": "/assets/editorial/human-screen-portrait-1600.webp",
+    "dimensions": [
+      1600,
+      2400
+    ],
+    "sha256": "65e9a97c582e9ec39abed8f2e8f68a8e0fb061287bc14ff00afe898286215c87"
+  },
+  {
+    "route": "/ideas-hub/why-ai-needs-human-centered-strategy",
+    "role": "hero 800w",
+    "file": "/assets/images/ideas-hub/articles/human-centered-ai/article-hero-800.webp",
+    "originalAsset": "/assets/editorial/human-screen-portrait-800.webp",
+    "dimensions": [
+      800,
+      1200
+    ],
+    "sha256": "64f1777ae607fa9b022fac46ea195d97ee129cce33b24c36b0660255bc6d4543"
+  },
+  {
+    "route": "/ideas-hub/why-ai-needs-human-centered-strategy",
+    "role": "ideas-choosing-the-right-cdp-for-your-growth-stage",
+    "file": "/assets/images/ideas-hub/articles/human-centered-ai/article-ideas-choosing-a-cdp.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-1600.webp",
+    "dimensions": [
+      1600,
+      758
+    ],
+    "sha256": "6146e1d2a83dea78365f49921c96c651c130d01cd991e7e8438f77cbc61bdfdf"
+  },
+  {
+    "route": "/ideas-hub/why-ai-needs-human-centered-strategy",
+    "role": "ideas-choosing-the-right-cdp-for-your-growth-stage 800w",
+    "file": "/assets/images/ideas-hub/articles/human-centered-ai/article-ideas-choosing-a-cdp-800.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-800.webp",
+    "dimensions": [
+      800,
+      378
+    ],
+    "sha256": "89acdef389ee29cd88abb71109039c07998ceab578c776fe699e0784aaa02faf"
+  },
+  {
+    "route": "/ideas-hub/why-ai-needs-human-centered-strategy",
+    "role": "ideas-3-common-mistakes-in-martech-implementation",
+    "file": "/assets/images/ideas-hub/articles/human-centered-ai/article-ideas-martech-mistakes.webp",
+    "originalAsset": "/assets/editorial/design-prototype-collaboration-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "ebfdc711a0f9fb81a24af7dbca6fabb13ab577a773f3014698dae9efbc4f7d0d"
+  },
+  {
+    "route": "/ideas-hub/why-ai-needs-human-centered-strategy",
+    "role": "ideas-3-common-mistakes-in-martech-implementation 800w",
+    "file": "/assets/images/ideas-hub/articles/human-centered-ai/article-ideas-martech-mistakes-800.webp",
+    "originalAsset": "/assets/editorial/design-prototype-collaboration-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "29aef899c381655583aac87ec3f33dcad8239a603b4910624f66a3e4206240a4"
+  },
+  {
+    "route": "/ideas-hub/3-common-mistakes-in-martech-implementation",
+    "role": "hero",
+    "file": "/assets/images/ideas-hub/articles/martech-mistakes/article-hero.webp",
+    "originalAsset": "/assets/editorial/design-prototype-collaboration-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "ebfdc711a0f9fb81a24af7dbca6fabb13ab577a773f3014698dae9efbc4f7d0d"
+  },
+  {
+    "route": "/ideas-hub/3-common-mistakes-in-martech-implementation",
+    "role": "hero 800w",
+    "file": "/assets/images/ideas-hub/articles/martech-mistakes/article-hero-800.webp",
+    "originalAsset": "/assets/editorial/design-prototype-collaboration-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "29aef899c381655583aac87ec3f33dcad8239a603b4910624f66a3e4206240a4"
+  },
+  {
+    "route": "/ideas-hub/3-common-mistakes-in-martech-implementation",
+    "role": "ideas-choosing-the-right-cdp-for-your-growth-stage",
+    "file": "/assets/images/ideas-hub/articles/martech-mistakes/article-ideas-choosing-a-cdp.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-1600.webp",
+    "dimensions": [
+      1600,
+      758
+    ],
+    "sha256": "6146e1d2a83dea78365f49921c96c651c130d01cd991e7e8438f77cbc61bdfdf"
+  },
+  {
+    "route": "/ideas-hub/3-common-mistakes-in-martech-implementation",
+    "role": "ideas-choosing-the-right-cdp-for-your-growth-stage 800w",
+    "file": "/assets/images/ideas-hub/articles/martech-mistakes/article-ideas-choosing-a-cdp-800.webp",
+    "originalAsset": "/assets/editorial/optical-patterns-800.webp",
+    "dimensions": [
+      800,
+      378
+    ],
+    "sha256": "89acdef389ee29cd88abb71109039c07998ceab578c776fe699e0784aaa02faf"
+  },
+  {
+    "route": "/ideas-hub/3-common-mistakes-in-martech-implementation",
+    "role": "ideas-why-ai-needs-human-centered-strategy",
+    "file": "/assets/images/ideas-hub/articles/martech-mistakes/article-ideas-human-centered-ai.webp",
+    "originalAsset": "/assets/editorial/human-screen-portrait-1600.webp",
+    "dimensions": [
+      1600,
+      2400
+    ],
+    "sha256": "65e9a97c582e9ec39abed8f2e8f68a8e0fb061287bc14ff00afe898286215c87"
+  },
+  {
+    "route": "/ideas-hub/3-common-mistakes-in-martech-implementation",
+    "role": "ideas-why-ai-needs-human-centered-strategy 800w",
+    "file": "/assets/images/ideas-hub/articles/martech-mistakes/article-ideas-human-centered-ai-800.webp",
+    "originalAsset": "/assets/editorial/human-screen-portrait-800.webp",
+    "dimensions": [
+      800,
+      1200
+    ],
+    "sha256": "64f1777ae607fa9b022fac46ea195d97ee129cce33b24c36b0660255bc6d4543"
+  },
+  {
+    "route": "/about",
+    "role": "hero",
+    "file": "/assets/images/about/about-hero.webp",
+    "originalAsset": "/assets/editorial/design-prototype-collaboration-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "ebfdc711a0f9fb81a24af7dbca6fabb13ab577a773f3014698dae9efbc4f7d0d"
+  },
+  {
+    "route": "/about",
+    "role": "hero 800w",
+    "file": "/assets/images/about/about-hero-800.webp",
+    "originalAsset": "/assets/editorial/design-prototype-collaboration-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "29aef899c381655583aac87ec3f33dcad8239a603b4910624f66a3e4206240a4"
+  },
+  {
+    "route": "/about",
+    "role": "human-connection",
+    "file": "/assets/images/about/about-human-connection.webp",
+    "originalAsset": "/assets/film-business-collaboration-poster.webp",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "sha256": "113544050bed2cbf38b96daa8f0f5295da833ccf83122146ea75430d4350702a"
+  },
+  {
+    "route": "/contact",
+    "role": "social",
+    "file": "/assets/images/contact/contact-social.webp",
+    "originalAsset": "/assets/film-human-machine-poster.webp",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "sha256": "1a46bc7bfb761beb22415808388f0b2521f32acbd52e551f8f0697b627472307"
+  },
+  {
+    "route": "/platforms",
+    "role": "hero",
+    "file": "/assets/images/platforms/platforms-hero.webp",
+    "originalAsset": "/assets/editorial/article-craft-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "f8103b612eabc4e7cab1403701d060943b1178ac0e84643a15d0ceb69a27c98a"
+  },
+  {
+    "route": "/platforms",
+    "role": "hero 800w",
+    "file": "/assets/images/platforms/platforms-hero-800.webp",
+    "originalAsset": "/assets/editorial/article-craft-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "facb9103a0f9d6a03c0af5b4dcf28da732c70e514db34fe36d88e78ef8216430"
+  },
+  {
+    "route": "/platforms/salesforce",
+    "role": "hero",
+    "file": "/assets/images/platforms/salesforce/salesforce-hero.webp",
+    "originalAsset": "/assets/editorial/article-craft-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "f8103b612eabc4e7cab1403701d060943b1178ac0e84643a15d0ceb69a27c98a"
+  },
+  {
+    "route": "/platforms/salesforce",
+    "role": "hero 800w",
+    "file": "/assets/images/platforms/salesforce/salesforce-hero-800.webp",
+    "originalAsset": "/assets/editorial/article-craft-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "facb9103a0f9d6a03c0af5b4dcf28da732c70e514db34fe36d88e78ef8216430"
+  },
+  {
+    "route": "/platforms/adobe",
+    "role": "hero",
+    "file": "/assets/images/platforms/adobe/adobe-hero.webp",
+    "originalAsset": "/assets/editorial/article-craft-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "f8103b612eabc4e7cab1403701d060943b1178ac0e84643a15d0ceb69a27c98a"
+  },
+  {
+    "route": "/platforms/adobe",
+    "role": "hero 800w",
+    "file": "/assets/images/platforms/adobe/adobe-hero-800.webp",
+    "originalAsset": "/assets/editorial/article-craft-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "facb9103a0f9d6a03c0af5b4dcf28da732c70e514db34fe36d88e78ef8216430"
+  },
+  {
+    "route": "/platforms/braze",
+    "role": "hero",
+    "file": "/assets/images/platforms/braze/braze-hero.webp",
+    "originalAsset": "/assets/editorial/article-craft-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "f8103b612eabc4e7cab1403701d060943b1178ac0e84643a15d0ceb69a27c98a"
+  },
+  {
+    "route": "/platforms/braze",
+    "role": "hero 800w",
+    "file": "/assets/images/platforms/braze/braze-hero-800.webp",
+    "originalAsset": "/assets/editorial/article-craft-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "facb9103a0f9d6a03c0af5b4dcf28da732c70e514db34fe36d88e78ef8216430"
+  },
+  {
+    "route": "/platforms/segment",
+    "role": "hero",
+    "file": "/assets/images/platforms/segment/segment-hero.webp",
+    "originalAsset": "/assets/editorial/article-craft-1600.webp",
+    "dimensions": [
+      1600,
+      1066
+    ],
+    "sha256": "f8103b612eabc4e7cab1403701d060943b1178ac0e84643a15d0ceb69a27c98a"
+  },
+  {
+    "route": "/platforms/segment",
+    "role": "hero 800w",
+    "file": "/assets/images/platforms/segment/segment-hero-800.webp",
+    "originalAsset": "/assets/editorial/article-craft-800.webp",
+    "dimensions": [
+      800,
+      534
+    ],
+    "sha256": "facb9103a0f9d6a03c0af5b4dcf28da732c70e514db34fe36d88e78ef8216430"
+  },
+  {
+    "route": "/credits",
+    "role": "social",
+    "file": "/assets/images/credits/credits-social.webp",
+    "originalAsset": "/assets/film-human-machine-poster.webp",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "sha256": "1a46bc7bfb761beb22415808388f0b2521f32acbd52e551f8f0697b627472307"
+  },
+  {
+    "route": "/404",
+    "role": "social",
+    "file": "/assets/images/system/not-found-social.webp",
+    "originalAsset": "/assets/film-human-machine-poster.webp",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "sha256": "1a46bc7bfb761beb22415808388f0b2521f32acbd52e551f8f0697b627472307"
+  }
+]
