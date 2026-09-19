@@ -45,14 +45,19 @@ Desktop, laptop, tablet and mobile keep the same storytelling, animation and int
 
 Growth navigation has full-height triggers, generous links, delayed hover dismissal, click pinning, ArrowDown entry and Escape closing. Mobile navigation opens and closes with a short fade/slide (about 0.2s), contains focus and makes background content inert. Compact controls (film pause, Sound, footer socials) keep their look but have invisible 44px hit areas. The hero film uses the compact encodes on phone-sized screens and switches from the next scene after a rotation. With Save-Data the poster drifts slowly instead of loading the film; hero content, CTAs and Sound stay usable. The carousel supports arrows, keyboard and native scroll/pointer interaction. Product demos and filters expose content without requiring hover.
 
-Experience, MarTech, Data and AI journeys decode the selected photo before updating photo, text, nodes and counter together. Stale image loads cannot override a newer selection. Keep manual controls, pause, offscreen suspension and reduced-motion support. About's belief is normal readable HTML; scroll adds emphasis only.
+Experience, MarTech, Data Intelligence and AI Agents journeys decode the selected photo before updating photo, text and counter together. Stale image loads cannot override a newer selection. Keep manual controls, pause, offscreen suspension and reduced-motion support. About's belief is normal readable HTML; scroll adds emphasis only.
 
-The MarTech journey card stays compact so the 4:5 photography remains visible (phase3.css):
-- **Desktop:** lower-left at 30px, `width:min(62%,520px)`, bottom 76px, 22px padding, a 84% dark fill with an 8px blur, and a lighter image gradient. It carries no system badges; the connected-tools row below the journey already shows that progression.
-- **≤1000px:** 20px insets, bottom 88px, and the supporting sentence is hidden.
-- **≤760px:** 16px insets, bottom 128px so the card clears the wrapped counter and caption, and a 520px-tall photo.
+### The image-story treatment
 
-Each stage sets its own focal point with `focus` in stage-visuals.mjs; do not reintroduce nth-child `object-position` rules for MarTech.
+One treatment carries every journey image and every Growth Systems overview panel: `stageStory()` in components/stage-visuals.mjs, styled as `.stage-story` in phase3.css. The photograph stays dominant and there is no content card.
+
+- **Structure:** a small label chip top-left (`LABEL / 0n`), then a lower block of at most two micro-flow chips and one statement. The overview uses the same block with `sequence` chips, which draw a connecting arrow between them.
+- **Contrast:** a two-part gradient on the image (`.stage-visual:after` / `.capability-visual:after`) carries readability — a soft top band for the label and a stronger bottom band for the statement. The label and chips add their own translucent fill. If a new photograph is too bright, strengthen the gradient; never add an opaque card.
+- **Clearance:** `--story-foot` keeps the copy above the counter/caption (84px, 128px at ≤760px; 22px on the overview, which has no caption).
+- **Budget:** painted text and chips cover 6–20% of the image across the supported viewports. Treat 25% as the ceiling.
+- **Split of duties:** the image carries the label, flow and statement; the right-hand panel carries the eyebrow, headline and body. Do not repeat a sentence on both sides.
+
+Each stage sets its own focal point with `focus` in stage-visuals.mjs, emitted as `--focus` and read by `object-position`. Do not reintroduce nth-child `object-position` rules.
 
 ## Buttons, forms and interaction principles
 

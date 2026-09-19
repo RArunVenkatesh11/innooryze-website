@@ -52,6 +52,18 @@ Owner-approved "Same experience. Responsive execution." See QA_REPORT.md. Supers
 - [x] Film encode selection follows rotation; Save-Data poster motion
 - [x] Chrome, Edge, Firefox and WebKit verification; CLAUDE/README/DESIGN_SYSTEM/SITE_ARCHITECTURE/HANDOFF/QA updates
 
+## Growth Systems and AI Agents story standardization — 19 September 2026
+
+Owner-approved after a full content and UI hierarchy audit. See QA_REPORT.md and DESIGN_SYSTEM.md. No images were regenerated, no routes changed, and release ZIPs were not regenerated.
+
+- [x] One shared image-story treatment (`stageStory()` + `.stage-story`) for Experience, MarTech, Data Intelligence, AI Agents and the three overview panels; the dark `.stage-interface` card, both overview overlay systems and 92 retired CSS rules are gone
+- [x] Growth Systems overview moved from the static `src/fragments/growth.html` into `growthJourney()`, so all four journeys and the overview share one visual language
+- [x] Terminology: `Data Intelligence` replaces standalone `Intelligence` in the journey tab, capability tag, overview eyebrow, hero equation, hero figcaption and mega menu; capability chapter heading is now `Data intelligence.`
+- [x] Numbering: service heroes use `GROWTH SYSTEMS / 001–003`; image labels use `EXPERIENCE / 001`, `MARTECH / 002`, `DATA INTELLIGENCE / 003`; AI Agents stays the second pillar (`02 / AI AGENTS & AUTOMATION`)
+- [x] New Growth Systems hero, per-stage image stories for all 22 journey states, MarTech connected-tools row removed, Data Intelligence reduced to one stage vocabulary, AI Agents stage 05 relabelled `OUTCOME / 05` with a matching journey intro
+- [x] Focal points moved from nth-child CSS to semantic `focus` configuration, with the same values
+- [x] 225 state checks across 9 viewports, measured AA contrast, behaviour and pinned-mode regression, build/test/validation, docs updated
+
 ## MarTech journey image visibility — 17 September 2026
 
 Owner-approved. The work was resumed after an interrupted session; unfinished parts were audited, then completed without repeating finished edits. See QA_REPORT.md and ASSET_REGISTER.md. Release ZIPs were not regenerated.

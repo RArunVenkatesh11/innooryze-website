@@ -98,7 +98,7 @@ On 17 September 2026 the owner approved replacement images for the Experience jo
 - **Derivatives:** 800×1000 WebP at quality 0.80 for experience-discover/explore/engage/return and martech-crm/cms/cdp/analytics/channels.
 - **Method:** a centred cover crop to exactly 4:5 with high-quality resampling, using the local Chrome canvas encoder. There is no stretching, no retouching and no project dependency. Derivatives were rendered from the supplied images, not from re-encoded masters.
 - **On-screen text:** some images contain incidental screen text and figures, for example the Analytics dashboard. Those values are part of the illustration. They are not InnooRyze or client performance data, so do not quote them or describe them in alt text as results.
-- **Focal points:** MarTech focal points are set per stage in src/components/stage-visuals.mjs (`focus`, applied as `--focus` → `object-position`). Intrinsic `width`/`height` come from the dimensions in siteAssets, via scripts/page-assets.mjs.
+- **Focal points:** every journey stage sets its own focal point in src/components/stage-visuals.mjs (`focus`, applied as `--focus` → `object-position`), and the Growth Systems overview panels set theirs in `growthJourney()`. Intrinsic `width`/`height` come from the dimensions in siteAssets, via scripts/page-assets.mjs.
 
 ## Platform identities
 

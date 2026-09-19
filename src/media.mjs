@@ -1,5 +1,5 @@
 export const editorial = {
- growth:{name:'immersive-projection',alt:'Visitors exploring cascading light and flower projections at an immersive digital installation',label:'EXPERIENCE + TECHNOLOGY + INTELLIGENCE'},
+ growth:{name:'immersive-projection',alt:'Visitors exploring cascading light and flower projections at an immersive digital installation',label:'EXPERIENCE + TECHNOLOGY + DATA INTELLIGENCE'},
  experience:{name:'digital-mobile',alt:'A person using a mobile phone on a vivid city street',label:'REAL PEOPLE. CONNECTED EXPERIENCES.'},
  martech:{name:'human-screen-portrait',alt:'A person concentrating on a screen through glass with warm and cyan reflections',label:'MANY MOVING PARTS. ONE EXPERIENCE.'},
  data:{name:'optical-patterns',alt:'Colourful optical patterns across a transparent measuring instrument against black',label:'CUSTOMER SIGNALS. BUSINESS CONTEXT.'},

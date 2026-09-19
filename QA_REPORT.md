@@ -1,3 +1,20 @@
+# Growth Systems and AI Agents story standardization QA — 19 September 2026
+
+Scope: the owner-approved content and UI standardization across /growth-systems, the three capability pages and /ai-agents. One image-story treatment replaces the dark `.stage-interface` card and the three different overview overlays; terminology, numbering and the Data Intelligence vocabulary were unified. No images were regenerated or replaced, no routes changed, and no unrelated section was redesigned. All results come from headless Chrome 153 on Windows with viewport and touch emulation, not native Safari/iOS, Android or physical devices.
+
+- **Build and validation:** `npm run build:production`, `npm test` (7/7), `npm run check:production` (125 page-owned image variants, 26 routes, 1,195 links/assets, 25 sitemap URLs) and `validate.mjs --production --http` passed. The hover guard reported no unguarded `:hover`.
+- **State matrix:** 225 checks — 9 viewports (1920×1080, 1440×900, 1366×768, 1280×720, 1024×768, 834×1112, 430×932, 390×844, 360×800) × 25 states (Experience 5, MarTech 6, Data Intelligence 6, AI Agents 5, overview 3). All passed, with no JavaScript errors.
+  - No `.stage-interface`, `.journey-overlay`, `.growth-editorial-overlay`, `.stage-data-path` or `.image-index` element remains in any state.
+  - Painted story content (label, chips, statement) covers **5.8–19.3%** of the image, against 25–65% for the cards it replaces. No state overlaps the counter/caption, leaves the image box or causes horizontal overflow.
+- **Measured contrast** (worst single pixel behind each text block, text hidden and its own chip fill retained, sampled at 1440×900, 834×1112 and 390×844):
+  - statement **6.74:1 minimum** (median 10.69) against the 3:1 AA threshold for large text;
+  - label **9.58:1 minimum** (median 11.11) and chips **11.88:1 minimum** (median 14.21) against the 4.5:1 AA threshold.
+  - Two fixes came out of this pass: the label needed its own translucent chip plus a soft top gradient band, and the mobile chip `gap` override had let the sequence arrow overlap the preceding chip.
+- **Behaviour (1440×900 and 390×844, all four journeys):** autoplay advanced 01→02→03 with the next image decoded; Pause held the state for 6 seconds and Resume continued; ArrowRight moved the step, focus and counter together with exactly one `aria-current`; panels stayed in sync. Under reduced motion there was no autoplay, Play was disabled, and manual step selection still loaded its image.
+- **Pinned Growth Systems overview:** panels still advance 01→02→03 by scroll at both sizes with the stage pinned, the tab row reads `Experience → MarTech → Data Intelligence`, and the third tab activates `DATA INTELLIGENCE / 003`.
+- **Tap targets:** the overview tab row is now at least 44px up to 1000px wide, which also covers the reduced-motion static mode where the pinned-mode rule does not apply.
+- **Known, outside scope:** the homepage still shows `Experience + Technology + Intelligence = Growth` in its story equation; the overview list rows still number `01/02/03` while the heroes and image labels use `001/002/003`; the overview counter still reads `01 — 03` where journeys read `01 / 06`.
+
 # MarTech journey image visibility QA — 17 September 2026
 
 Scope: the owner-approved MarTech card and focal-point changes; normalising the Experience and MarTech stage images (1600×2000 masters, 800×1000 `-800` variants, two JPG→WebP); truthful asset metadata; and alt text. No copy, SEO content, other journeys or page design changed. All results come from headless Chrome 153 on Windows with viewport and touch emulation, not native Safari/iOS, Android, Firefox or physical devices.
