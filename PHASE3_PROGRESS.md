@@ -52,6 +52,18 @@ Owner-approved "Same experience. Responsive execution." See QA_REPORT.md. Supers
 - [x] Film encode selection follows rotation; Save-Data poster motion
 - [x] Chrome, Edge, Firefox and WebKit verification; CLAUDE/README/DESIGN_SYSTEM/SITE_ARCHITECTURE/HANDOFF/QA updates
 
+## Final UI/UX consistency pass — 19 September 2026
+
+Owner-approved: three targeted fixes plus a controlled whole-site responsive QA sweep. No images regenerated or replaced, no routes changed, no release ZIPs.
+
+- [x] One mobile hero language for the media-led family (`media-hero`): `/ai-agents` no longer renders copy-then-image at ≤760px, and its approved desktop hero is untouched
+- [x] Homepage story mobile breathing room: connector rail, node dots, the rail gutter and the repeated row rules removed; one hairline between capability rows; row padding 20–23px and a 32px equation gap; still pinned at `--fit:1.000`
+- [x] User-initiated journey step selection brings the story into view below the fixed header (`bringIntoView` in motion.js, shared by journeys.js and pinned.js); autoplay, scroll progression and initialisation never move the viewport; reduced motion positions instantly
+- [x] Growth Systems overview tabs use the same rule in stacked mode; pinned progression untouched
+- [x] `--header-h` exposes the live header height to JS and to every `scroll-margin-top`, replacing nine hard-coded offsets
+- [x] Touch targets raised to 44px across navigation, journey/demo controls and footer links; homepage equation now reads `Experience + Technology + Data Intelligence`
+- [x] 75 hero checks, 130 journey-tap checks, 25 routes × 5 viewports swept, Chrome/Edge/Firefox/WebKit, build/test/validation, docs updated
+
 ## Growth Systems and AI Agents story standardization — 19 September 2026
 
 Owner-approved after a full content and UI hierarchy audit. See QA_REPORT.md and DESIGN_SYSTEM.md. No images were regenerated, no routes changed, and release ZIPs were not regenerated.

@@ -563,13 +563,13 @@
   {
     "route": "/growth-systems/data-intelligence-activation",
     "role": "action",
-    "file": "/assets/images/data/data-intelligence-action.jpg",
-    "originalAsset": "/assets/film-digital-connection-poster.jpg",
+    "file": "/assets/images/data/data-intelligence-action.webp",
+    "originalAsset": "generated-illustrative/data-intelligence-action.webp",
     "dimensions": [
-      2520,
-      1418
+      1122,
+      1402
     ],
-    "sha256": "644fab0af7288119292b10da18504478a92ca07a73acda352b0c87b7842ecaf3"
+    "sha256": "b4df7eaeb46e600897f49f4678c2261d5d3ce85b78291fd07bb56008b9735933"
   },
   {
     "route": "/growth-systems/data-intelligence-activation",

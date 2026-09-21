@@ -28,6 +28,11 @@ Example future task: “Update MarTech content in src/site.mjs and src/component
   - Hover is build-guarded, the mobile menu transitions, and compact controls have 44px hit areas.
   - The film selects encodes by screen and follows rotation; Save-Data shows poster motion.
   - The LeadRyze desk was not tilted anywhere (`.lead-desk` CSS targets no element), so no tilt was added.
+- UI/UX consistency pass (19 September 2026, owner-approved):
+  - Every media-led hero shares one mobile composition through `media-hero`; the AI hero joins it at ≤760px and keeps its approved desktop treatment.
+  - User-initiated journey and overview selection brings the story into view below the fixed header (`bringIntoView` in motion.js). Autoplay, scroll progression and initialisation never move the viewport. Reduced motion positions instantly.
+  - `--header-h` exposes the live fixed-header height to both JS and CSS `scroll-margin-top`; never hard-code a header offset again.
+  - The homepage story drops its connector rail, node dots and repeated row rules at mobile, keeping one hairline between capability rows.
 - Production URLs use https://innooryze.com. Review builds explicitly disable indexing. No catch-all SPA fallback.
 - /work/maxseal is canonical; old /work/max-seal is a permanent alias with static HTML fallback.
 - No fabricated leadership, offices, legal copy, testimonials, metrics or client stack.

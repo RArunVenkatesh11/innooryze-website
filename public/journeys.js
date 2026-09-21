@@ -1,6 +1,11 @@
+import {bringIntoView} from './motion.js';
 export function initJourneys({motionStopped}){
  document.querySelectorAll('[data-signature]').forEach(root=>{
   const buttons=[...root.querySelectorAll('[data-signature-step]')],panels=[...root.querySelectorAll('.signature-panel')],nodes=[...root.querySelectorAll('.connected-tools>span')],visuals=[...root.querySelectorAll('[data-stage-visual]')],play=root.querySelector('.signature-play');
+  // Only a deliberate step selection moves the viewport; autoplay and scrolling never do. The step list rides
+  // along as the companion so the control the visitor just used stays visible on stacked layouts.
+  const story=root.querySelector('.signature-photo'),steps=root.querySelector('.signature-steps');
+  const reveal=()=>bringIntoView(story,{companion:steps});
   let index=0,timer,visible=false,paused=false;
   function loadVisual(i){const img=visuals[i]?.querySelector('img');if(!img)return Promise.resolve();img.loading='eager';if(img.dataset.src){if(img.dataset.srcset){img.srcset=img.dataset.srcset;delete img.dataset.srcset;}img.src=img.dataset.src;delete img.dataset.src;}return img.decode?.().catch(()=>{})||Promise.resolve();}
   function show(i){
@@ -15,7 +20,7 @@ export function initJourneys({motionStopped}){
    });
   }
   function sync(){clearInterval(timer);const stopped=paused||motionStopped();play.textContent=stopped?'Play journey':'Pause journey';play.setAttribute('aria-label',play.textContent);play.disabled=motionStopped();if(visible){loadVisual(index);loadVisual((index+1)%buttons.length);}if(visible&&!stopped&&!document.hidden)timer=setInterval(()=>show((index+1)%buttons.length),5000);}
-  buttons.forEach((b,i)=>{b.addEventListener('click',()=>{show(i);paused=true;sync();});b.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();const next=e.key==='Home'?0:e.key==='End'?buttons.length-1:(i+(e.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length;show(next);paused=true;sync();buttons[next].focus();}});});
+  buttons.forEach((b,i)=>{b.addEventListener('click',()=>{show(i);paused=true;sync();reveal();});b.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();const next=e.key==='Home'?0:e.key==='End'?buttons.length-1:(i+(e.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length;show(next);paused=true;sync();buttons[next].focus({preventScroll:true});reveal();}});});
   play.addEventListener('click',()=>{paused=!paused;sync();});root.addEventListener('focusin',()=>clearInterval(timer));root.addEventListener('focusout',e=>{if(!root.contains(e.relatedTarget))sync();});
   new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();},{threshold:.2}).observe(root);
   ['motionchange','visibilitychange'].forEach(e=>document.addEventListener(e,sync));sync();

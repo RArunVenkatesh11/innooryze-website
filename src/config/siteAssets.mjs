@@ -338,10 +338,10 @@ export const siteAssets = {
         "key": "data-intelligence-action",
         "source": "asset:film-digital-connection-poster.jpg",
         "occurrence": 1,
-        "src": "/assets/images/data/data-intelligence-action.jpg",
+        "src": "/assets/images/data/data-intelligence-action.webp",
         "dimensions": [
-          2520,
-          1418
+          1122,
+          1402
         ]
       },
       {

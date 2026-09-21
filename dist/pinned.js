@@ -3,7 +3,7 @@
 //         stable viewport is short, panel content is zoomed down to fit (never below minFit).
 // flow:   when even minFit cannot fit, panels stay in normal flow and reveal progressively as they enter view.
 // static: reduced motion or explicit pause; every panel is readable with no motion.
-import {motion,stableViewport,onStableResize} from './motion.js';
+import {motion,stableViewport,onStableResize,bringIntoView} from './motion.js';
 const zoomSupported=globalThis.CSS?.supports?.('zoom','0.5')??false;
 
 export function createPinnedStory(section,options){
@@ -54,7 +54,7 @@ export function createPinnedStory(section,options){
  function goTo(target){
   const behavior=motion.stopped()?'instant':'smooth';
   if(mode==='pinned')scrollTo({top:scrollY+section.getBoundingClientRect().top+travel()*((target+.2)/total),behavior});
-  else panels[target].scrollIntoView({behavior,block:'start'});
+  else bringIntoView(panels[target]);// stacked: clear the fixed header instead of hiding the panel behind it
  }
  buttons.forEach((item,i)=>item.addEventListener('click',()=>goTo(i)));
  new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible)update(true);},{rootMargin:'50% 0px'}).observe(section);
