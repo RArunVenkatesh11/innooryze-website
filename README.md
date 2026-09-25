@@ -27,7 +27,7 @@ The server prints its local URL, normally http://127.0.0.1:4173. Rebuild after e
 `.env.example` lists public build-time settings. Set environment variables in your host’s build settings or shell before `npm run build`. With Node 20.6+, a local `.env` can be loaded explicitly using `node --env-file=.env scripts/build.mjs`. `.env` and provider credentials must never be committed or exported.
 
 - `SITE_URL`: approved canonical production origin, defaults to https://innooryze.com.
-- `SITE_INDEXABLE`: defaults to true. Set false explicitly for review builds; build:production pins the indexable production target.
+- `SITE_INDEXABLE`: the only way to make a build indexable; unset means noindex. build:production sets it to `true` for the self-hosted release. It has no effect on Vercel, which is always noindex.
 - `ANALYTICS_ID`: optional public identifier passed to the separate integrations adapter. This is **not** the Google tag; that is configured in src/config/analytics.mjs.
 - `SOCIAL_*_URL`: confirmed LinkedIn, X and Instagram URLs. Facebook is intentionally omitted.
 - `PRIVACY_POLICY_URL`, `COOKIE_POLICY_URL`, `TERMS_URL`: optional approved policy pages; empty links are omitted.
@@ -48,10 +48,12 @@ generated `.htaccess`; compatible static hosts use `_headers` and `_redirects`; 
 `src/config/headers.mjs`, and `check:production` asserts parity, so a change for one host cannot leave
 another unprotected.
 
-Indexing is decided by `src/config/environment.mjs` and is fail-safe: a build is indexable only when it
-can prove it is production. `SITE_INDEXABLE=true` (which `build:production` sets) is sufficient on any
-host, with or without Vercel. `VERCEL_ENV` is only an extra safety signal — on Vercel it can force a
-preview to noindex, but it is never required to produce a valid production build. See docs/VERCEL.md.
+Indexing is decided by `src/config/environment.mjs` and is fail-safe: a build is indexable only with the
+explicit release signal `SITE_INDEXABLE=true`, which `npm run build:production` sets for the self-hosted
+production release (`index,follow`, `Allow: /` plus the sitemap). Vercel is staging only: every Vercel
+deployment, including innooryze-website.vercel.app, builds as `noindex,nofollow` with `robots.txt`
+`Disallow: /`, whatever `SITE_INDEXABLE` says, and every Vercel response carries
+`X-Robots-Tag: noindex, nofollow` from `vercel.json`. See docs/VERCEL.md.
 
 ## Legal pages
 

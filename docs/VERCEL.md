@@ -1,8 +1,10 @@
 # Vercel adapter
 
-> **Status: Vercel is a temporary preview/testing environment only.**
-> The final production hosting platform for innooryze.com is **To Be Confirmed**. This document describes
-> the Vercel *adapter*; it does not describe a permanent production architecture.
+> **Status: Vercel is staging only, and permanently non-indexable.**
+> Every Vercel deployment, including Vercel's own "production" deployment at innooryze-website.vercel.app,
+> builds as `noindex,nofollow` with `robots.txt` `Disallow: /`, and every Vercel response carries
+> `X-Robots-Tag: noindex, nofollow`. innooryze.com is not planned to run on Vercel; production is
+> self-hosted from `npm run build:production`. This document describes the Vercel *adapter* only.
 >
 > Nothing here is required to ship the site elsewhere. `dist/` is host-agnostic, `npm run build:production`
 > works with no Vercel signal present, and the Apache and static-host adapters are generated alongside it.
@@ -17,54 +19,59 @@ Vercel reads **none** of `_headers` (Netlify/Cloudflare Pages), `.htaccess` (Apa
 but on Vercel every header and redirect comes from **`vercel.json`**. Treat that file as the source of
 truth for Vercel and the other three as the source of truth for the cPanel upload.
 
-## Indexing: production vs preview
+## Indexing: Vercel is staging, always
 
-The old rule was `process.env.SITE_INDEXABLE !== 'false'`, which defaults to *indexable*. Vercel runs
-`npm run build` with no variables set, so every preview deployment published itself as indexable, carrying
-production canonicals, the production sitemap and the Search Console token. `src/config/environment.mjs`
-replaces that with a fail-safe rule:
+`src/config/environment.mjs` decides indexability with two rules:
 
 ```
-if (VERCEL_ENV && VERCEL_ENV !== 'production')  -> NOT indexable   (platform signal wins, cannot be overridden)
-else if (SITE_INDEXABLE === 'true')             -> indexable       (explicit release override)
-else if (SITE_INDEXABLE === 'false')            -> NOT indexable
-else if (VERCEL_ENV === 'production')           -> indexable
-else                                            -> NOT indexable   (fail safe)
+if (building on Vercel: VERCEL or VERCEL_ENV set) -> NOT indexable   (any environment, cannot be overridden)
+else if (SITE_INDEXABLE === 'true')               -> indexable       (the explicit release signal)
+else                                              -> NOT indexable   (fail safe)
 ```
 
-Two properties matter:
+* **Vercel is never indexable.** That includes Vercel's own "production" deployment
+  (innooryze-website.vercel.app) as well as previews and branch deploys. Neither `SITE_INDEXABLE=true` in
+  the Vercel dashboard nor running `npm run build:production` on Vercel changes this.
+* **Indexing needs an explicit signal.** No platform variable makes a build indexable. The self-hosted
+  production release uses `npm run build:production`, which sets `SITE_INDEXABLE=true`.
+* **Fail safe.** A local `npm run build`, a CI build or an unrecognised host without the signal produces a
+  noindex artifact.
 
-* **Fail safe.** A build that cannot prove it is production is not indexable. A local `npm run build`, a
-  CI build, or an unrecognised host all produce a noindex artifact.
-* **The platform signal is not overridable.** On a Vercel preview, neither `SITE_INDEXABLE=true` nor
-  running `npm run build:production` can make the deployment indexable. Nobody has to remember to set a
-  variable, and nobody can defeat it by accident.
+A non-indexable build is `noindex,nofollow` on every page, including the 404 and the legacy-alias
+redirect pages, and its `robots.txt` is exactly `User-agent: *` / `Disallow: /` with no `Sitemap:` line.
+An indexable build keeps `index,follow` on its 28 canonical pages and `noindex,follow` on the utility pages
+(credits, 404, alias redirects).
+
+**Second safety net.** `vercel.json` adds `X-Robots-Tag: noindex, nofollow` to every response Vercel
+serves, as its own header rule. Only Vercel reads `vercel.json`, so the header never reaches a self-hosted
+production server; `_headers` and `.htaccess` never carry it, and `npm run check:production` fails if
+either ever does.
 
 Verified build matrix:
 
 | Build | Summary line | robots.txt | meta robots |
 |---|---|---|---|
-| `VERCEL_ENV=production npm run build` | `INDEXABLE (VERCEL_ENV=production)` | `Allow: /` + sitemap | `index,follow` |
-| `VERCEL_ENV=preview npm run build` | `NOINDEX (forced noindex)` | `Disallow: /`, no sitemap line | `noindex,follow` on all 31 |
-| `VERCEL_ENV=preview SITE_INDEXABLE=true …` | `NOINDEX (forced noindex)` | `Disallow: /` | `noindex,follow` |
-| `VERCEL_ENV=preview npm run build:production` | `NOINDEX (forced noindex)` | `Disallow: /` | `noindex,follow` |
-| `npm run build` (local, no signals) | `NOINDEX (no production signal)` | `Disallow: /` | `noindex,follow` |
-| `npm run build:production` (release) | `INDEXABLE (SITE_INDEXABLE=true)` | `Allow: /` + sitemap | `index,follow` |
+| `VERCEL=1 VERCEL_ENV=production npm run build` (the staging deployment) | `NOINDEX (Vercel staging, VERCEL_ENV=production (forced noindex))` | `Disallow: /`, no sitemap line | `noindex,nofollow` on all 32 |
+| `VERCEL=1 VERCEL_ENV=production SITE_INDEXABLE=true npm run build` | `NOINDEX (Vercel staging … forced noindex)` | `Disallow: /` | `noindex,nofollow` |
+| `VERCEL=1 VERCEL_ENV=production npm run build:production` | `NOINDEX (Vercel staging … forced noindex)` | `Disallow: /` | `noindex,nofollow` |
+| `VERCEL=1 VERCEL_ENV=preview npm run build` | `NOINDEX (Vercel staging, VERCEL_ENV=preview (forced noindex))` | `Disallow: /` | `noindex,nofollow` |
+| `npm run build` (local, no signals) | `NOINDEX (no production signal)` | `Disallow: /` | `noindex,nofollow` |
+| `npm run build:production` (self-hosted release) | `INDEXABLE (SITE_INDEXABLE=true)` | `Allow: /` + sitemap | `index,follow` |
 
 Every build prints its decision and the reason, so a wrong environment is visible in the deploy log.
 
-### Preview: canonicals, sitemap and Search Console
+### Staging: canonicals, sitemap and Search Console
 
 Three deliberate decisions, all reported rather than hidden:
 
-* **Canonicals stay production** on preview. A preview page declares `https://innooryze.com/...` as
+* **Canonicals stay production** on staging. A staging page declares `https://innooryze.com/...` as
   canonical, so anything that does reach it consolidates onto production rather than competing with it.
   `noindex` is the actual control; the canonical is the second line of defence.
-* **`sitemap.xml` is still written** on preview, so the artifact has the same shape and the validator can
-  run against either build — but preview `robots.txt` contains **no `Sitemap:` line**, so nothing
+* **`sitemap.xml` is still written** on staging, so the artifact has the same shape and the validator can
+  run against either build — but staging `robots.txt` contains **no `Sitemap:` line**, so nothing
   advertises it. A crawler that fetched it directly would only find the production URLs it already knows.
-* **The Search Console meta tag stays on preview pages.** Removing it per-environment would add
-  complexity for no benefit: `noindex` plus `Disallow: /` is the search control, and the token only ever
+* **The Search Console meta tag stays on staging pages.** Removing it per-environment would add
+  complexity for no benefit: `noindex` (page and header) plus `Disallow: /` is the search control, and the token only ever
   verifies ownership of the property it is registered against.
 
 ## vercel.json
@@ -147,20 +154,22 @@ a reason.
 
 ## Testing before launch
 
-**Preview**, on the `*.vercel.app` URL:
+**Staging**, on https://innooryze-website.vercel.app (or any other `*.vercel.app` deployment):
 
-1. `curl -sI https://<deployment>.vercel.app/` — expect the six security headers.
+1. `curl -sI https://<deployment>.vercel.app/` — expect the six security headers **and**
+   `X-Robots-Tag: noindex, nofollow`.
 2. `curl -s https://<deployment>.vercel.app/robots.txt` — expect exactly `User-agent: *` / `Disallow: /`
    and **no** `Sitemap:` line.
-3. View source on any page — expect `noindex,follow`.
+3. View source on any page — expect `<meta name="robots" content="noindex,nofollow">`.
 4. `curl -sI https://<deployment>.vercel.app/work/maxseal` — expect `308` straight to the target.
 5. Open DevTools → Network, filter `google`, load a page: **empty before consent, and still empty after
    Accept all**, because the hostname is not on the allowlist.
 
-**Production**, on `https://innooryze.com`:
+**Production** (self-hosted, from `npm run build:production`), on `https://innooryze.com`:
 
 1. `curl -sI https://innooryze.com/` — six headers, including HSTS.
-2. `curl -s https://innooryze.com/robots.txt` — `Allow: /` plus the sitemap line.
+2. `curl -s https://innooryze.com/robots.txt` — `Allow: /` plus the sitemap line; pages are `index,follow` and
+   there is **no** `X-Robots-Tag` header.
 3. `curl -sI https://www.innooryze.com/work` — `308` to `https://innooryze.com/work`.
 4. `curl -sI https://innooryze.com/work/max-seal` — `308`, one hop, to the anonymous route.
 5. `curl -s https://innooryze.com/sitemap.xml` — 28 URLs, no `/credits`, no aliases.
@@ -168,17 +177,13 @@ a reason.
    `gtag/js?id=GT-WF4XRBSQ`.
 7. Submit the sitemap in Search Console.
 
-## Manual steps, only if Vercel becomes the production host
+## Vercel is not a production host
 
-None of these have been done, and none are assumed. They apply only if Vercel is chosen as the final production host. While Vercel is a preview host, steps 2, 3 and 5 do not apply at all: innooryze.com is not attached to Vercel, www is not managed by Vercel, DNS does not point at Vercel, and the production sitemap has not been submitted.
+InnooRyze production is not planned to run on Vercel, and the adapter is built so it cannot: every Vercel
+build is noindex and every Vercel response carries `X-Robots-Tag: noindex, nofollow`. Do not attach
+innooryze.com or www.innooryze.com to the Vercel project and do not point DNS at Vercel; the site would be
+served but excluded from search. `SITE_INDEXABLE` in the Vercel dashboard has no effect.
 
-1. **Project → Settings → Build & Development.** Confirm the build command is `npm run build` and the
-   output directory is `dist`. `vercel.json` declares both, but confirm no dashboard override contradicts
-   it.
-2. **Project → Settings → Domains.** Add `innooryze.com` as the **primary** domain and `www.innooryze.com`
-   redirecting to it. The `vercel.json` host redirect is a second line of defence, not a substitute for
-   the domain configuration.
-3. **DNS.** Point the apex and `www` at Vercel per their instructions. Not configured here.
-4. **Do not set `SITE_INDEXABLE` in the Vercel dashboard.** It is unnecessary — `VERCEL_ENV` drives the
-   decision — and on production it would override the platform signal.
-5. After the first production deploy, run the production checks above, then submit the sitemap.
+Keep the Vercel project settings as they are: build command `npm run build`, output directory `dist`
+(both declared in `vercel.json`). Moving production to Vercel would be a deliberate architecture change:
+the environment rule, the `X-Robots-Tag` rule and this document would all have to change together.

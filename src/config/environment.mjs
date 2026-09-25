@@ -5,34 +5,28 @@
 // itself as indexable, with production canonicals and the production sitemap. This module inverts that.
 //
 // Two principles:
-//   1. Fail safe. If we cannot prove this is production, the build is not indexable.
-//   2. The platform's own signal wins. Vercel sets VERCEL_ENV on every build ('production' | 'preview' |
-//      'development'). A preview deployment is never indexable, even if a script or a stray environment
-//      variable asks for it — that is the failure mode we are removing, so it must not be overridable.
-//
-// SITE_INDEXABLE remains as an explicit override for the self-hosted release path (build:production) and
-// for staging an Apache/cPanel upload, but it can only ever *restrict* on a non-production Vercel build.
+//   1. Fail safe. A build is indexable only on an explicit release signal: SITE_INDEXABLE=true, which
+//      npm run build:production sets. No platform variable can make a build indexable on its own.
+//   2. Vercel is staging only. Anything built on Vercel (VERCEL / VERCEL_ENV set) is never indexable, for
+//      every environment including Vercel's own "production" deployment (innooryze-website.vercel.app), and
+//      even if SITE_INDEXABLE=true is set there. vercel.json adds X-Robots-Tag: noindex as a second net.
 
 export const vercelEnv = process.env.VERCEL_ENV || '';           // '' when not building on Vercel
 export const isVercel = Boolean(process.env.VERCEL || vercelEnv);
 
 export function resolveIndexable() {
- // On Vercel, anything that is not the production deployment is decisively noindex.
- if (vercelEnv && vercelEnv !== 'production') return false;
- const explicit = process.env.SITE_INDEXABLE;
- if (explicit === 'true') return true;
- if (explicit === 'false') return false;
- if (vercelEnv === 'production') return true;
- // Local `npm run build`, CI, or an unknown host: not provably production, so not indexable.
- return false;
+ // Vercel is staging, always.
+ if (isVercel) return false;
+ // Only the explicit release signal makes a build indexable. Local `npm run build`, CI or an unknown host
+ // without it is not provably production, so not indexable.
+ return process.env.SITE_INDEXABLE === 'true';
 }
 
 export function describeEnvironment() {
  const indexable = resolveIndexable();
- const source = vercelEnv && vercelEnv !== 'production' ? `VERCEL_ENV=${vercelEnv} (forced noindex)`
+ const source = isVercel ? `Vercel staging, VERCEL_ENV=${vercelEnv || 'unset'} (forced noindex)`
   : process.env.SITE_INDEXABLE === 'true' ? 'SITE_INDEXABLE=true'
   : process.env.SITE_INDEXABLE === 'false' ? 'SITE_INDEXABLE=false'
-  : vercelEnv === 'production' ? 'VERCEL_ENV=production'
   : 'no production signal (default noindex)';
  return {vercelEnv: vercelEnv || 'none', isVercel, indexable, source};
 }

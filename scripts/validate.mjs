@@ -59,8 +59,8 @@ const sitemap=read(path.join(dist,'sitemap.xml'));
 const urls=[...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>m[1]);
 assert.equal(urls.length,routes.length-1);assert.equal(urls.length,new Set(urls).size);
 if(production){assert.deepEqual(urls,routes.filter(r=>r.path!=='/credits').map(r=>new URL(r.path,origin).href));assert.equal(read(path.join(dist,'robots.txt')),`User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`);}
-assert.match(read(path.join(dist,'404.html')),/name="robots" content="noindex,follow"/);
-for(const [from,to] of Object.entries(redirects)){const html=read(pageFile(from));assert.ok(html.includes('noindex,follow'));assert.ok(html.includes(`href="${new URL(to,origin).href}"`));assert.ok(fs.existsSync(pageFile(to)));}
+assert.match(read(path.join(dist,'404.html')),/name="robots" content="noindex,(no)?follow"/);
+for(const [from,to] of Object.entries(redirects)){const html=read(pageFile(from));assert.ok(/noindex,(no)?follow/.test(html));assert.ok(html.includes(`href="${new URL(to,origin).href}"`));assert.ok(fs.existsSync(pageFile(to)));}
 assert.ok(read(path.join(dist,'.htaccess')).includes('ErrorDocument 404 /404.html'));
 for(const scene of ['global-city','digital-connection','business-collaboration','data-intelligence','human-machine','human-craft'])for(const size of ['','-mobile'])assert.ok(fs.existsSync(localFile(`${homeFilm.base}${scene}${size}.mp4`)));
 assert.ok(fs.existsSync(localFile(homeFilm.audio)));
@@ -109,6 +109,9 @@ console.log(`Validated ${routes.length} canonical routes, ${linkCount} internal 
   }
  }
  assert.ok(cfg.redirects.some(r=>r.has?.some(h=>h.type==='host'&&h.value.startsWith('www.'))),'vercel.json missing the www canonical redirect');
+ // Vercel is staging only: every Vercel response carries X-Robots-Tag noindex, and the self-hosted adapters never do.
+ assert.ok(cfg.headers.some(rule=>rule.source==='/(.*)'&&rule.headers.some(h=>h.key==='X-Robots-Tag'&&h.value==='noindex, nofollow')),'vercel.json must send X-Robots-Tag: noindex, nofollow');
+ for(const file of ['_headers','.htaccess'])assert.ok(!/X-Robots-Tag/i.test(read(path.join(dist,file))),file+' must not carry X-Robots-Tag (self-hosted production stays indexable)');
 }
 
 // --- deployment adapter parity ---------------------------------------------------------------------
@@ -174,7 +177,7 @@ for(const {path:p} of distExclusions)assert.ok(!fs.existsSync(localFile(p)),'Exc
  }else{
   assert.equal(robots,'User-agent: *'+String.fromCharCode(10)+'Disallow: /'+String.fromCharCode(10),'non-indexable build must disallow everything');
   assert.ok(!/Sitemap:/i.test(robots),'a non-indexable build must not advertise a sitemap');
-  for(const route of routes)assert.match(read(pageFile(route.path)),/content="noindex/,'every page must be noindex in a non-indexable build: '+route.path);
+  for(const route of routes)assert.match(read(pageFile(route.path)),/name="robots" content="noindex,nofollow"/,'every page must be noindex,nofollow in a non-indexable build: '+route.path);
  }
  for(const loc of urls){
   const p=new URL(loc).pathname;

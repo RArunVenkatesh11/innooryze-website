@@ -73,7 +73,7 @@ fs.writeFileSync(path.join(out,'sitemap.xml'),`<?xml version="1.0" encoding="UTF
   ...section('Products',p=>p.startsWith('/products')),...section('Client work and case studies',p=>p.startsWith('/work')),
   ...section('Ideas Hub',p=>p.startsWith('/ideas-hub')),...section('Platforms',p=>p.startsWith('/platforms')),
   ...section('Company',p=>['/','/about','/contact','/privacy-policy','/terms-and-conditions'].includes(p))].join(NL));}
-for(const [from,to] of Object.entries(redirects)){const file=path.join(out,from.slice(1),'index.html');fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,redirectPage(from,to,site.url));}
+for(const [from,to] of Object.entries(redirects)){const file=path.join(out,from.slice(1),'index.html');fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,redirectPage(from,to,site.url,site.indexable));}
 fs.writeFileSync(path.join(out,'_redirects'),Object.entries(redirects).map(([from,to])=>from+' '+to+' 301!\n'+from+'/ '+to+' 301!').join('\n')+'\n');
 fs.writeFileSync(path.join(out,'_headers'),'/*'+String.fromCharCode(10)+securityHeaders().map(([k,v])=>'  '+k+': '+v).join(String.fromCharCode(10))+String.fromCharCode(10));
 fs.writeFileSync(path.join(out,'.htaccess'),apacheConfig(pages.map(p=>p.path),securityHeaders()));

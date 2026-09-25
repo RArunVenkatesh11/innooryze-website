@@ -39,6 +39,11 @@ export function vercelConfig() {
   headers: [{
    source: '/(.*)',
    headers: securityHeaders().map(([key, value]) => ({key, value}))
+  }, {
+   // Vercel is staging only (see src/config/environment.mjs). Only Vercel reads this file, so the header can
+   // never reach the self-hosted production domain.
+   source: '/(.*)',
+   headers: [{key: 'X-Robots-Tag', value: 'noindex, nofollow'}]
   }]
  };
 }
