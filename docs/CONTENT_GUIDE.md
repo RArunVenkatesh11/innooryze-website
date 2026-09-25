@@ -1,5 +1,9 @@
 # Content guide
 
+## Legal pages
+
+/privacy-policy and /terms-and-conditions carry approved legal wording transferred verbatim from the live InnooRyze pages. Treat src/content/policies.mjs as a transcript, not copy to edit: never reword, condense, reorder or "tidy" a clause, and never add a compliance statement, jurisdiction, retention period or liability term that is not on the approved source. Change the approved source first, then re-transfer. Only structure is ours — the live pages mark section headings up as `<h5>`, which becomes `<h2>` here, and loose list items become real lists. tests/policies.test.mjs fails if sections, numbering, dates, the registered entity or the contents anchors are lost.
+
 ## Voice
 
 Write with clear thinking and useful specifics. Explain what InnooRyze designs, builds, connects and improves, for whom and with what next step. Keep headlines direct. Avoid inflated claims, generic transformation language, endless lists and keyword stuffing. Exact pillar/capability names and approved expressions are in CLAUDE.md.
@@ -15,7 +19,7 @@ Growth Systems connects Experience Design & Enablement, MarTech Consulting & Ena
 | Roadmap | Campaign automation, brand/social content and performance intelligence are In development | Commercial availability or thin detail pages |
 | Dynalektric | Live website; strategy, UX/IA, design, development, responsive/enquiry experience | Revenue/conversion uplift or invented stack |
 | Treffer Technologies | Real CRM/MarTech enablement client | Specific stack, deliverables, outcomes, quotes or approved client logo |
-| Max-Seal | Website experience build In Progress | Completion or results |
+| US Industrial Valve Manufacturer (anonymised) | Website experience build In Progress | Completion, results, or any identifying detail |
 | LeadRyze CRM | Built by InnooRyze; first CRM platform entry; text wordmark approved | Availability, pricing, features or equivalence with LeadRyze AI |
 | Platforms | Five-category owner-approved taxonomy in CLAUDE.md and platform-catalog.mjs | Certification, partnership, client stacks or additional expertise beyond this approval |
 | About | Two pillars, strategy through delivery, product mindset and international relevance | Staff names, headcount, founding dates or offices not supplied |

@@ -41,15 +41,19 @@
   },
   {
     "path": "/work/dynalektric",
-    "title": "Dynalektric — Engineering expertise. A clearer digital experience. | InnooRyze"
+    "title": "Dynalektric — Industrial Website & RFQ Journey | InnooRyze"
+  },
+  {
+    "path": "/work/qualtura",
+    "title": "Qualtura — Website Experience & Zoho Integration | InnooRyze"
   },
   {
     "path": "/work/treffer-technologies",
-    "title": "Treffer Technologies — Connecting the platforms behind customer engagement. | InnooRyze"
+    "title": "Treffer Technologies — CRM & MarTech Enablement | InnooRyze"
   },
   {
-    "path": "/work/maxseal",
-    "title": "Max-Seal — A digital experience for industrial flow control. | InnooRyze"
+    "path": "/work/industrial-valve-digital-experience",
+    "title": "US Industrial Valve Manufacturer — Digital Experience | InnooRyze"
   },
   {
     "path": "/work/imma",
@@ -102,5 +106,13 @@
   {
     "path": "/credits",
     "title": "Visual Credits | InnooRyze"
+  },
+  {
+    "path": "/privacy-policy",
+    "title": "Privacy Policy | InnooRyze"
+  },
+  {
+    "path": "/terms-and-conditions",
+    "title": "Terms & Conditions | InnooRyze"
   }
 ]

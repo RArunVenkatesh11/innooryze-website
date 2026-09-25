@@ -45,17 +45,6 @@
   },
   {
     "route": "/",
-    "role": "selected-work-maxseal",
-    "file": "/assets/images/home/home-selected-work-maxseal.webp",
-    "originalAsset": "/assets/max-seal-project.webp",
-    "dimensions": [
-      1600,
-      900
-    ],
-    "sha256": "e24ae05d3e8d76664d221d0d2b3c15936fa5cbb53a235c45d41899ae78d9af0a"
-  },
-  {
-    "route": "/",
     "role": "ideas-choosing-the-right-cdp-for-your-growth-stage",
     "file": "/assets/images/home/home-ideas-choosing-the-right-cdp-for-your-growth-stage.webp",
     "originalAsset": "/assets/editorial/optical-patterns-1600.webp",
@@ -826,17 +815,6 @@
   },
   {
     "route": "/work",
-    "role": "project-maxseal",
-    "file": "/assets/images/work/work-project-maxseal.webp",
-    "originalAsset": "/assets/max-seal-project.webp",
-    "dimensions": [
-      1600,
-      900
-    ],
-    "sha256": "e24ae05d3e8d76664d221d0d2b3c15936fa5cbb53a235c45d41899ae78d9af0a"
-  },
-  {
-    "route": "/work",
     "role": "project-imma",
     "file": "/assets/images/work/work-project-imma.png",
     "originalAsset": "/assets/imma-screen.png",
@@ -889,28 +867,6 @@
       378
     ],
     "sha256": "89acdef389ee29cd88abb71109039c07998ceab578c776fe699e0784aaa02faf"
-  },
-  {
-    "route": "/work/maxseal",
-    "role": "hero",
-    "file": "/assets/images/work/maxseal/maxseal-hero.webp",
-    "originalAsset": "/assets/max-seal-project.webp",
-    "dimensions": [
-      1600,
-      900
-    ],
-    "sha256": "e24ae05d3e8d76664d221d0d2b3c15936fa5cbb53a235c45d41899ae78d9af0a"
-  },
-  {
-    "route": "/work/maxseal",
-    "role": "website-interface",
-    "file": "/assets/images/work/maxseal/maxseal-website-interface.webp",
-    "originalAsset": "/assets/max-seal-screen.webp",
-    "dimensions": [
-      1425,
-      891
-    ],
-    "sha256": "7af458639539628751ee1baf31a16d562598193eb255dcc5eb1a1655c244326c"
   },
   {
     "route": "/work/imma",
@@ -1373,5 +1329,170 @@
       900
     ],
     "sha256": "1a46bc7bfb761beb22415808388f0b2521f32acbd52e551f8f0697b627472307"
+  },
+  {
+    "route": "/",
+    "role": "selected-work-qualtura",
+    "file": "/assets/images/home/home-selected-work-qualtura.webp",
+    "originalAsset": "Owner-supplied Qualtura homepage capture",
+    "dimensions": [
+      1600,
+      850
+    ],
+    "sha256": "6a186a9e17ba9e036f9c298012b1ac4a186f912e265a3bf4977b9546302189cd"
+  },
+  {
+    "route": "/",
+    "role": "selected-work-qualtura 800w",
+    "file": "/assets/images/home/home-selected-work-qualtura-800.webp",
+    "originalAsset": "Owner-supplied Qualtura homepage capture",
+    "dimensions": [
+      800,
+      425
+    ],
+    "sha256": "d8e7dfe32c68bdaae6ce6ff2a3970b4c97e3eaf787ebe909c56d726d4f15eb12"
+  },
+  {
+    "route": "/work",
+    "role": "project-qualtura",
+    "file": "/assets/images/work/work-project-qualtura.webp",
+    "originalAsset": "Owner-supplied Qualtura homepage capture",
+    "dimensions": [
+      1600,
+      850
+    ],
+    "sha256": "6a186a9e17ba9e036f9c298012b1ac4a186f912e265a3bf4977b9546302189cd"
+  },
+  {
+    "route": "/work",
+    "role": "project-qualtura 800w",
+    "file": "/assets/images/work/work-project-qualtura-800.webp",
+    "originalAsset": "Owner-supplied Qualtura homepage capture",
+    "dimensions": [
+      800,
+      425
+    ],
+    "sha256": "d8e7dfe32c68bdaae6ce6ff2a3970b4c97e3eaf787ebe909c56d726d4f15eb12"
+  },
+  {
+    "route": "/work",
+    "role": "project-industrial-valve",
+    "file": "/assets/images/work/work-project-industrial-valve.webp",
+    "originalAsset": "Approved anonymous industrial valve visual",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "sha256": "a42dbe8d56b6e850038e1b84197cd293eac50b984a80facaede014a611daee20"
+  },
+  {
+    "route": "/work",
+    "role": "project-industrial-valve 800w",
+    "file": "/assets/images/work/work-project-industrial-valve-800.webp",
+    "originalAsset": "Approved anonymous industrial valve visual",
+    "dimensions": [
+      800,
+      450
+    ],
+    "sha256": "1c13b3b31d69a78d6a26e55c332de5d21819b1020707a65306b6c785763d804c"
+  },
+  {
+    "route": "/work/qualtura",
+    "role": "website-interface",
+    "file": "/assets/images/work/qualtura/qualtura-homepage.webp",
+    "originalAsset": "Owner-supplied Qualtura homepage capture",
+    "dimensions": [
+      1600,
+      850
+    ],
+    "sha256": "6a186a9e17ba9e036f9c298012b1ac4a186f912e265a3bf4977b9546302189cd"
+  },
+  {
+    "route": "/work/qualtura",
+    "role": "website-interface 800w",
+    "file": "/assets/images/work/qualtura/qualtura-homepage-800.webp",
+    "originalAsset": "Owner-supplied Qualtura homepage capture",
+    "dimensions": [
+      800,
+      425
+    ],
+    "sha256": "d8e7dfe32c68bdaae6ce6ff2a3970b4c97e3eaf787ebe909c56d726d4f15eb12"
+  },
+  {
+    "route": "/work/industrial-valve-digital-experience",
+    "role": "hero",
+    "file": "/assets/images/work/industrial-valve/industrial-valve-hero.webp",
+    "originalAsset": "Approved anonymous industrial valve visual",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "sha256": "a42dbe8d56b6e850038e1b84197cd293eac50b984a80facaede014a611daee20"
+  },
+  {
+    "route": "/work/industrial-valve-digital-experience",
+    "role": "hero 800w",
+    "file": "/assets/images/work/industrial-valve/industrial-valve-hero-800.webp",
+    "originalAsset": "Approved anonymous industrial valve visual",
+    "dimensions": [
+      800,
+      450
+    ],
+    "sha256": "1c13b3b31d69a78d6a26e55c332de5d21819b1020707a65306b6c785763d804c"
+  },
+  {
+    "route": "/work/industrial-valve-digital-experience",
+    "role": "interface",
+    "file": "/assets/images/work/industrial-valve/industrial-valve-interface.webp",
+    "originalAsset": "Approved anonymous digital-experience concept",
+    "dimensions": [
+      1600,
+      900
+    ],
+    "sha256": "89a3b6865fd3ce935edac46c743ac070963823a5d0d853fa19857b8c2e6cfae3"
+  },
+  {
+    "route": "/work/industrial-valve-digital-experience",
+    "role": "interface 800w",
+    "file": "/assets/images/work/industrial-valve/industrial-valve-interface-800.webp",
+    "originalAsset": "Approved anonymous digital-experience concept",
+    "dimensions": [
+      800,
+      450
+    ],
+    "sha256": "52b9d112f5eef10f113858deed8cab8d10ea7884875ab9a2b08d9ac75e266cc6"
+  },
+  {
+    "route": "shared",
+    "role": "client logo — Dynalektric",
+    "file": "/assets/images/work/logos/dynalektric-logo-trimmed.png",
+    "originalAsset": "Owner-supplied Dynalektric logo, trimmed to its ink box; colours and proportions unchanged",
+    "dimensions": [
+      441,
+      120
+    ],
+    "sha256": "c7313086e4f431bd2e8ca7dd5a7746e0912d0348bac0f048f51a7bd1f8913206"
+  },
+  {
+    "route": "shared",
+    "role": "client logo — Qualtura",
+    "file": "/assets/images/work/logos/qualtura-logo-trimmed.png",
+    "originalAsset": "Owner-supplied Qualtura logo, trimmed to its ink box; colours and proportions unchanged",
+    "dimensions": [
+      636,
+      120
+    ],
+    "sha256": "6d35c73282d1c81f2f6748616a9b5a6b136e00eaeec47edcd4b49c330723004a"
+  },
+  {
+    "route": "shared",
+    "role": "client logo — Treffer Technologies",
+    "file": "/assets/images/work/logos/treffer-technologies-logo-transparent.png",
+    "originalAsset": "Owner-supplied Treffer logo; white background removed by un-multiplying from white (round-trip error 0), then trimmed. Artwork, colours and proportions unchanged",
+    "dimensions": [
+      342,
+      120
+    ],
+    "sha256": "f3ee84fe792c8ffc195e7feac3a5c5539f0dd20e12772b97d193a269283d6610"
   }
 ]

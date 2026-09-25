@@ -3,16 +3,19 @@ import {scopePageAssets} from './page-assets.mjs';
 import {guardHover} from './hover-guard.mjs';
 import fs from 'node:fs';import path from 'node:path';import {fileURLToPath} from 'node:url';
 import {site,services,articles,work,platforms} from '../src/site.mjs';
+import {analytics,analyticsCsp} from '../src/config/analytics.mjs';
 import {redirects} from '../src/redirects.mjs';
 import {policies,policyPaths} from '../src/content/policies.mjs';
 import {apacheConfig,redirectPage} from './deployment.mjs';
-import {layout,esc,pageHero} from '../src/components/layout.mjs';import {home} from '../src/pages/home.mjs';import * as inner from '../src/pages/inner.mjs';
+import {layout,esc,pageHero} from '../src/components/layout.mjs';
+import {policyPage} from '../src/components/policy.mjs';import {home} from '../src/pages/home.mjs';import * as inner from '../src/pages/inner.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const out=path.resolve(root,'dist');
 if(path.relative(root,out)!=='dist'||fs.realpathSync(root)!==root)throw Error('Unexpected build directory');
 fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});
 fs.cpSync(path.join(root,'public'),out,{recursive:true,filter:src=>!['singapore.mp4','singapore.jpg'].includes(path.basename(src))});
 fs.writeFileSync(path.join(out,'media-config.js'),'export const homeFilm = '+JSON.stringify(homeFilm)+';\n');
+fs.writeFileSync(path.join(out,'analytics-config.js'),'export const analyticsConfig = '+JSON.stringify({googleTagId:analytics.googleTagId,measuredHosts:analytics.measuredHosts,consentVersion:analytics.consentVersion,storageKey:analytics.storageKey,debugKey:analytics.debugKey})+';\n');
 let base=fs.readFileSync(path.join(root,'src/styles/base.css'),'utf8');
 for(const [from,to] of Object.entries({'#e1fa42':'#00d4df','#eef1e8':'#edf4f4','#f8f9f4':'#f7f7f3','#151714':'#11191b','#1e211b':'#142326','#2c3126':'#213438','#525b45':'#3f6267','#c9d2c1':'#c4dcdf','#d9ded2':'#d4e2e3','#b8beb2':'#b7c9cb','#434a3b':'#2e494e','#a2ae97':'#91b3b7','#4a4d46':'#415a5d','#464a40':'#38545a','#f9fbf6':'#f7fbfb','#e8eddf':'#e3eef0','#dce1d4':'#d2e2e4','#d2ddc4':'#c0dade','#f5f6eff5':'#f3f8f8f5'}))base=base.split(from).join(to);
 fs.writeFileSync(path.join(out,'style.css'),guardHover(`:root{--home-hero-backdrop:url("${siteAssets['/'].background}");--home-film-poster:url("${siteAssets['/'].images[0].src}")}\n`+base+'\n'+fs.readFileSync(path.join(root,'src/styles/phase1.css'),'utf8')+'\n'+fs.readFileSync(path.join(root,'src/styles/phase2.css'),'utf8')+'\n'+fs.readFileSync(path.join(root,'src/styles/refinements.css'),'utf8')+'\n'+fs.readFileSync(path.join(root,'src/styles/phase3.css'),'utf8')));
@@ -26,7 +29,7 @@ add('/products','AI Products & Growth Accelerators','Explore LeadRyze AI, IMMA a
 add('/products/leadryze-ai','LeadRyze AI — Intelligent AI Lead Desk','LeadRyze AI answers buyers, qualifies enquiries, captures leads, helps book meetings and connects with CRM.',inner.leadPage());
 add('/products/imma','IMMA — Marketing Maturity Assessment','Identify gaps across your marketing technology, data, customer journeys and capabilities with IMMA.',inner.immaPage());
 add('/work','Our Work','Explore InnooRyze products and digital experiences with clear context, real work and substantiated outcomes.',inner.workPage());
-for(const w of work)add('/work/'+(w.route||w.slug),w.name+' — '+w.title,w.description,inner.casePage(w));
+for(const w of work)add('/work/'+(w.route||w.slug),w.metaTitle||w.name+' — '+w.title,w.description,inner.casePage(w));
 add('/ideas-hub','Ideas Hub — Experience, MarTech, Data & AI','Perspectives, articles and guides on customer experience, marketing technology, data intelligence and practical AI.',inner.ideasPage());
 for(const a of articles)add('/ideas-hub/'+a.slug,a.title,a.summary,inner.articlePage(a),{type:'article',schema:[{'@type':'Article',headline:a.title,description:a.summary,datePublished:a.published,dateModified:a.updated,image:new URL(a.image.src||'asset:editorial/'+a.image.name+'-1600.webp',site.url).href,author:{'@type':'Organization',name:site.name},publisher:{'@id':`${site.url}/#organization`},articleSection:a.category,mainEntityOfPage:new URL('/ideas-hub/'+a.slug,site.url).href}]});
 add('/about','About — Strategy That Gets Built','InnooRyze connects clear strategy with hands-on delivery across Growth Systems and AI Agents & Automation.',inner.aboutPage());
@@ -35,8 +38,9 @@ add('/platforms','Platform Expertise','Platform-agnostic consulting and implemen
 for(const p of platforms)add('/platforms/'+p.slug,p.name+' — Platform Expertise',`Connect ${p.name} with the experience, technology and intelligence behind your growth system.`,inner.platformsPage(p));
 add('/credits','Visual Credits','Sources for the original imagery, film, sound and brand assets used by InnooRyze.',inner.creditsPage(),{closingCta:false,indexable:false});
 for(const policy of policies){
- if(!policyPaths[policy.key]||!/^\d{4}-\d{2}-\d{2}$/.test(policy.approvedOn)||!policy.sections?.length)throw Error('Policy requires a valid key, approval date and approved sections');
- add(policyPaths[policy.key],policy.title,policy.description,pageHero({eyebrow:'INNOORYZE',title:esc(policy.title),description:'Effective '+esc(policy.approvedOn),className:'policy-page-hero'})+'<section class="article-body section-pad">'+policy.sections.map(s=>'<section><h2>'+esc(s.heading)+'</h2>'+s.paragraphs.map(p=>'<p>'+esc(p)+'</p>').join('')+'</section>').join('')+'</section>',{closingCta:false});
+ if(!policyPaths[policy.key]||!new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}$').test(policy.approvedOn)||!new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}$').test(policy.effectiveIso)||!policy.sections?.length)throw Error('Policy requires a valid key, both dates and approved sections');
+ if(policy.sections.some(s=>!s.heading||!s.blocks?.length))throw Error('Every policy section needs a heading and approved content');
+ add(policyPaths[policy.key],policy.title,policy.description,policyPage(policy),{closingCta:false});
 }
 for(const page of pages){const filename=path.join(out,page.path==='/'?'index.html':page.path.slice(1)+'/index.html');fs.mkdirSync(path.dirname(filename),{recursive:true});fs.writeFileSync(filename,layout(scopePageAssets(page,site.url)));}
 fs.writeFileSync(path.join(out,'404.html'),layout(scopePageAssets({path:'/404',title:'Page not found | InnooRyze',description:'Explore the InnooRyze website.',body:inner.notFound(),closingCta:false,indexable:false},site.url)));
@@ -45,7 +49,7 @@ fs.writeFileSync(path.join(out,'sitemap.xml'),`<?xml version="1.0" encoding="UTF
 for(const [from,to] of Object.entries(redirects)){const file=path.join(out,from.slice(1),'index.html');fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,redirectPage(from,to,site.url));}
 fs.writeFileSync(path.join(out,'_redirects'),Object.entries(redirects).map(([from,to])=>from+' '+to+' 301!\n'+from+'/ '+to+' 301!').join('\n')+'\n');
 const endpointOrigin=site.enquiryEndpoint?new URL(site.enquiryEndpoint,site.url).origin:'';
-const csp="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self' "+endpointOrigin+"; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'self'";
+const csp="default-src 'self'; script-src 'self' "+analyticsCsp.script.join(' ')+"; style-src 'self' 'unsafe-inline'; img-src 'self' data: "+analyticsCsp.img.join(' ')+"; media-src 'self' blob:; connect-src 'self' "+[endpointOrigin,...analyticsCsp.connect].filter(Boolean).join(' ')+"; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'self'";
 fs.writeFileSync(path.join(out,'_headers'),"/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  X-Frame-Options: SAMEORIGIN\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  Content-Security-Policy: "+csp+"\n");
 fs.writeFileSync(path.join(out,'.htaccess'),apacheConfig(pages.map(p=>p.path),csp));
 fs.writeFileSync(path.join(root,'scripts/routes.json'),JSON.stringify(pages.map(({path,title})=>({path,title})),null,2));

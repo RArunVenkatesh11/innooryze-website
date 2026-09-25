@@ -23,6 +23,17 @@ export const siteAssets = {
         ]
       },
       {
+        "key": "home-selected-work-qualtura",
+        "source": "asset:qualtura-project.webp",
+        "occurrence": 1,
+        "src": "/assets/images/home/home-selected-work-qualtura.webp",
+        "dimensions": [
+          1600,
+          850
+        ],
+        "srcset": "/assets/images/home/home-selected-work-qualtura-800.webp 800w, /assets/images/home/home-selected-work-qualtura.webp 1600w"
+      },
+      {
         "key": "home-selected-work-treffer-technologies",
         "source": "asset:editorial/optical-patterns-1600.webp",
         "occurrence": 1,
@@ -32,16 +43,6 @@ export const siteAssets = {
           758
         ],
         "srcset": "/assets/images/home/home-selected-work-treffer-technologies-800.webp 800w, /assets/images/home/home-selected-work-treffer-technologies.webp 1600w"
-      },
-      {
-        "key": "home-selected-work-maxseal",
-        "source": "asset:max-seal-project.webp",
-        "occurrence": 1,
-        "src": "/assets/images/home/home-selected-work-maxseal.webp",
-        "dimensions": [
-          1600,
-          900
-        ]
       },
       {
         "key": "home-ideas-choosing-the-right-cdp-for-your-growth-stage",
@@ -528,14 +529,26 @@ export const siteAssets = {
         "srcset": "/assets/images/work/work-project-treffer-technologies-800.webp 800w, /assets/images/work/work-project-treffer-technologies.webp 1600w"
       },
       {
-        "key": "work-project-maxseal",
-        "source": "asset:max-seal-project.webp",
+        "key": "work-project-qualtura",
+        "source": "asset:qualtura-project.webp",
         "occurrence": 1,
-        "src": "/assets/images/work/work-project-maxseal.webp",
+        "src": "/assets/images/work/work-project-qualtura.webp",
+        "dimensions": [
+          1600,
+          850
+        ],
+        "srcset": "/assets/images/work/work-project-qualtura-800.webp 800w, /assets/images/work/work-project-qualtura.webp 1600w"
+      },
+      {
+        "key": "work-project-industrial-valve",
+        "source": "asset:industrial-valve-project.webp",
+        "occurrence": 1,
+        "src": "/assets/images/work/work-project-industrial-valve.webp",
         "dimensions": [
           1600,
           900
-        ]
+        ],
+        "srcset": "/assets/images/work/work-project-industrial-valve-800.webp 800w, /assets/images/work/work-project-industrial-valve.webp 1600w"
       },
       {
         "key": "work-project-imma",
@@ -575,6 +588,22 @@ export const siteAssets = {
     ],
     "social": "/assets/images/work/dynalektric/dynalektric-hero.webp"
   },
+  "/work/qualtura": {
+    "images": [
+      {
+        "key": "qualtura-website-interface",
+        "source": "asset:qualtura-screen.webp",
+        "occurrence": 1,
+        "src": "/assets/images/work/qualtura/qualtura-homepage.webp",
+        "dimensions": [
+          1600,
+          850
+        ],
+        "srcset": "/assets/images/work/qualtura/qualtura-homepage-800.webp 800w, /assets/images/work/qualtura/qualtura-homepage.webp 1600w"
+      }
+    ],
+    "social": "/assets/images/work/qualtura/qualtura-homepage.webp"
+  },
   "/work/treffer-technologies": {
     "images": [
       {
@@ -591,30 +620,32 @@ export const siteAssets = {
     ],
     "social": "/assets/images/work/treffer-technologies/treffer-technologies-hero.webp"
   },
-  "/work/maxseal": {
+  "/work/industrial-valve-digital-experience": {
     "images": [
       {
-        "key": "maxseal-hero",
-        "source": "asset:max-seal-project.webp",
+        "key": "industrial-valve-hero",
+        "source": "asset:industrial-valve-project.webp",
         "occurrence": 1,
-        "src": "/assets/images/work/maxseal/maxseal-hero.webp",
+        "src": "/assets/images/work/industrial-valve/industrial-valve-hero.webp",
         "dimensions": [
           1600,
           900
-        ]
+        ],
+        "srcset": "/assets/images/work/industrial-valve/industrial-valve-hero-800.webp 800w, /assets/images/work/industrial-valve/industrial-valve-hero.webp 1600w"
       },
       {
-        "key": "maxseal-website-interface",
-        "source": "asset:max-seal-screen.webp",
+        "key": "industrial-valve-interface",
+        "source": "asset:industrial-valve-screen.webp",
         "occurrence": 1,
-        "src": "/assets/images/work/maxseal/maxseal-website-interface.webp",
+        "src": "/assets/images/work/industrial-valve/industrial-valve-interface.webp",
         "dimensions": [
-          1425,
-          891
-        ]
+          1600,
+          900
+        ],
+        "srcset": "/assets/images/work/industrial-valve/industrial-valve-interface-800.webp 800w, /assets/images/work/industrial-valve/industrial-valve-interface.webp 1600w"
       }
     ],
-    "social": "/assets/images/work/maxseal/maxseal-hero.webp"
+    "social": "/assets/images/work/industrial-valve/industrial-valve-hero.webp"
   },
   "/work/imma": {
     "images": [

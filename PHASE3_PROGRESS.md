@@ -52,6 +52,17 @@ Owner-approved "Same experience. Responsive execution." See QA_REPORT.md. Supers
 - [x] Film encode selection follows rotation; Save-Data poster motion
 - [x] Chrome, Edge, Firefox and WebKit verification; CLAUDE/README/DESIGN_SYSTEM/SITE_ARCHITECTURE/HANDOFF/QA updates
 
+## Launch Phase 1 — brand and UI consistency — 25 September 2026
+
+Owner-approved. Brand artwork, CTA icon, verified contact details and contact schema only. No copy, routes, indexing, case studies or SEO content changed; no release ZIPs.
+
+- [x] Approved trademark wordmark used for header and footer with truthful intrinsic dimensions; favicon and apple-touch-icon moved to the approved OO symbol (the old `brand-symbol.svg` reference would have 404'd)
+- [x] One shared inline SVG north-east arrow (`arrowUpRight()` / `.cta-arrow`) replacing all 41 Unicode arrows across components, fragments and client-built markup; other arrow meanings untouched
+- [x] Verified office address, phone and email on the Contact page; compact location and phone in the footer
+- [x] OO watermark limited to the Contact page and the Ready to Ryze CTA, subtle, decorative and clear of text and controls
+- [x] Organization schema gains PostalAddress, telephone and a customer-enquiries ContactPoint; no invented offices and no LocalBusiness
+- [x] 10-viewport QA, accessibility checks, build/test/production validation and documentation
+
 ## Final UI/UX consistency pass — 19 September 2026
 
 Owner-approved: three targeted fixes plus a controlled whole-site responsive QA sweep. No images regenerated or replaced, no routes changed, no release ZIPs.
@@ -87,3 +98,46 @@ Owner-approved. The work was resumed after an interrupted session; unfinished pa
 - [x] Alt text for R09–R14 and the Experience stages describes the new images without presenting on-screen figures as results
 - [x] Build, tests, production/HTTP validation and Chrome verification; ASSET_REGISTER/DESIGN_SYSTEM/QA updates
 
+
+## Launch: cookie consent + migrated Google Analytics
+
+- [x] Google tag `GT-WF4XRBSQ` migrated from the previous site and centralised in `src/config/analytics.mjs`; the build emits the browser subset to `dist/analytics-config.js` and derives the CSP allowlist from the same file
+- [x] `GTM-NJPT6DRQ` recorded with `gtmEnabled:false` and **not loaded**, pending an audit of whether the container also fires GA4 (0 occurrences in dist)
+- [x] Search Console token on all 26 routes, exactly once per page
+- [x] Consent gate: analytics needs granted consent **and** the `innooryze.com` / `www.innooryze.com` allowlist, so localhost and every preview origin are excluded by omission; `?analytics-debug=1` is the documented per-device override
+- [x] Consent bar and `<dialog>` preferences panel built from the existing dark surface, cyan primary and 44px touch floor; footer "Cookie settings" reopens the panel
+- [x] Google Consent Mode v2 denied-by-default; withdrawal disables the tag and clears `_ga*` cookies; re-granting in the same page re-enables it
+- [x] 43 functional + 414 responsive/accessibility checks in Chromium, 60 in Firefox, 54 in WebKit; brand and watermark regressions re-run clean
+- [ ] Privacy and Terms pages — next task; the inline Privacy Policy link appears automatically once `site.policies.privacy` is set
+- [ ] Audit `GTM-NJPT6DRQ` and decide between the container and the direct tag
+
+## Launch: Privacy Policy + Terms & Conditions
+
+- [x] `/privacy-policy` and `/terms-and-conditions` published from the approved live pages; 28 canonical routes, 27 sitemap URLs
+- [x] src/content/policies.mjs generated from the retrieved markup rather than retyped — 0 omissions, 0 additions, 0 reorderings against the live source
+- [x] Structure corrected only: `<h5>` section headings → `<h2>`, `2.1`-style → `<h3>`, loose `<li>` → real lists, email linked; dates and registered identity preserved verbatim
+- [x] src/components/policy.mjs renders on the Ideas Hub reading layout: LEGAL eyebrow, document H1, Effective/Last Updated row, contents rail above 1280px, ~770–820px measure
+- [x] Footer legal row: Privacy · Terms · Cookie settings · Visual credits, with the existing consent control reused rather than duplicated
+- [x] Cookie bar Privacy Policy link now resolves and navigates; consent architecture and Analytics gating untouched
+- [x] 461 accessibility/responsive checks across ten viewports; 7 new offline policy guards in npm test
+- [ ] Ideas Hub contents rail still uses the 3.76:1 link colour on article pages — pre-existing, worth fixing with those pages
+- [ ] No cookie policy approved, so /cookie-policy stays unpublished
+
+## Phase 2: case studies, verified proof and the work visual system
+
+- [x] /work/qualtura published; /work/industrial-valve-digital-experience replaces the named client case, with both legacy URLs redirecting permanently
+- [x] Treffer transparent derivative produced losslessly (round-trip error 0); neutral-plaque fallback NOT required
+- [x] One shared client-logo plaque, area-normalised; measured rendered ink areas within 1.0%
+- [x] Dynalektric proof block (20% / 5% / Global) and verbatim testimonial; optional blocks render only when approved
+- [x] Homepage trio Dynalektric / Qualtura / Treffer; Work hub ordered with the anonymous case fourth and IMMA last
+- [x] Anonymisation complete: only the two mandated alias URLs remain; identifying assets archived outside public/
+- [x] 700 responsive/integrity checks across ten viewports; build, tests and production validation pass
+- [ ] 5.09 MB of unreferenced owner-supplied sources still ship to production — excluding them needs approval
+- [ ] Ideas Hub contents rail still uses the 3.76:1 link colour (carried over from the legal-pages task)
+
+## Phase 2 refinement pass
+
+- [x] Client logo appears once per page, in the project facts CLIENT field; removed from homepage cards, work cards and all case heroes
+- [x] Qualtura opens with the dark intro hero then a full-width screenshot stage; no headline over live UI
+- [x] Verified Outcomes divider clearance fixed structurally (54px at 1920, 49px at 1440), outer values flush with the container
+- [x] 492 checks across ten viewports pass; build, tests and production validation clean

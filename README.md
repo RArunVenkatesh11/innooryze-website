@@ -29,11 +29,23 @@ The server prints its local URL, normally http://127.0.0.1:4173. Rebuild after e
 - `SITE_URL`: approved canonical production origin, defaults to https://innooryze.com.
 - `SITE_INDEXABLE`: defaults to true. Set false explicitly for review builds; build:production pins the indexable production target.
 - `ENQUIRY_ENDPOINT`: an HTTPS URL or same-origin API path. Empty uses the explicit email-draft flow.
-- `ANALYTICS_ID`: optional public identifier passed to the consent-aware analytics adapter.
+- `ANALYTICS_ID`: optional public identifier passed to the separate integrations adapter. This is **not** the Google tag; that is configured in src/config/analytics.mjs.
 - `SOCIAL_*_URL`: confirmed LinkedIn, X and Instagram URLs. Facebook is intentionally omitted.
 - `PRIVACY_POLICY_URL`, `COOKIE_POLICY_URL`, `TERMS_URL`: optional approved policy pages; empty links are omitted.
 
 Rebuild after changing public configuration. Provider secrets belong on the server. `_headers` contains recommended security headers; confirm your hosting platform applies them or copy them into its configuration. Add only approved provider origins if activating external integrations.
+
+## Case studies
+
+Client-confirmed figures and approved quotations live in src/content/case-studies.mjs as optional `proof` and `testimonial` blocks; both render only when present, and a quotation is reproduced exactly as approved. One engagement is published anonymously as "US Industrial Valve Manufacturer" — see docs/CASE_STUDY_GUIDE.md before touching it.
+
+## Legal pages
+
+/privacy-policy and /terms-and-conditions publish approved wording transferred verbatim from the live InnooRyze pages. src/content/policies.mjs is a transcript: change the approved source first, then re-transfer. Publishing a policy automatically enables its footer link and, for privacy, the inline link in the cookie bar. No cookie policy has been approved, so /cookie-policy stays unpublished.
+
+## Analytics and cookie consent
+
+Google Analytics (`GT-WF4XRBSQ`) is migrated from the previous site and gated: it loads only after a visitor grants analytics consent and only on the production hostnames. Every other origin, including local development and preview deployments, is excluded by an allowlist. A first-visit bottom bar offers Reject non-essential / Manage preferences / Accept all, and **Cookie settings** in the footer reopens the preferences panel at any time. Google Tag Manager (`GTM-NJPT6DRQ`) is recorded but not loaded. See docs/ANALYTICS.md.
 
 ## Enquiry integration
 

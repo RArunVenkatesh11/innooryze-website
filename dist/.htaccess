@@ -6,7 +6,8 @@ ErrorDocument 404 /404.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteOptions AllowNoSlash
-  RewriteRule ^work/max-seal(?:/index\.html|/)?$ /work/maxseal [R=301,END]
+  RewriteRule ^work/maxseal(?:/index\.html|/)?$ /work/industrial-valve-digital-experience [R=301,END]
+  RewriteRule ^work/max-seal(?:/index\.html|/)?$ /work/industrial-valve-digital-experience [R=301,END]
   RewriteCond %{THE_REQUEST} "\s/+index\.html(?:[?\s])" [NC]
   RewriteRule ^index\.html$ / [R=301,END]
   RewriteCond %{THE_REQUEST} "\s/+growth-systems(?:/index\.html|/)(?:[?\s])" [NC]
@@ -39,12 +40,15 @@ ErrorDocument 404 /404.html
   RewriteCond %{THE_REQUEST} "\s/+work/dynalektric(?:/index\.html|/)(?:[?\s])" [NC]
   RewriteRule ^ /work/dynalektric [R=301,END]
   RewriteRule ^work/dynalektric/?$ work/dynalektric/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+work/qualtura(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /work/qualtura [R=301,END]
+  RewriteRule ^work/qualtura/?$ work/qualtura/index.html [END]
   RewriteCond %{THE_REQUEST} "\s/+work/treffer-technologies(?:/index\.html|/)(?:[?\s])" [NC]
   RewriteRule ^ /work/treffer-technologies [R=301,END]
   RewriteRule ^work/treffer-technologies/?$ work/treffer-technologies/index.html [END]
-  RewriteCond %{THE_REQUEST} "\s/+work/maxseal(?:/index\.html|/)(?:[?\s])" [NC]
-  RewriteRule ^ /work/maxseal [R=301,END]
-  RewriteRule ^work/maxseal/?$ work/maxseal/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+work/industrial-valve-digital-experience(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /work/industrial-valve-digital-experience [R=301,END]
+  RewriteRule ^work/industrial-valve-digital-experience/?$ work/industrial-valve-digital-experience/index.html [END]
   RewriteCond %{THE_REQUEST} "\s/+work/imma(?:/index\.html|/)(?:[?\s])" [NC]
   RewriteRule ^ /work/imma [R=301,END]
   RewriteRule ^work/imma/?$ work/imma/index.html [END]
@@ -84,13 +88,19 @@ ErrorDocument 404 /404.html
   RewriteCond %{THE_REQUEST} "\s/+credits(?:/index\.html|/)(?:[?\s])" [NC]
   RewriteRule ^ /credits [R=301,END]
   RewriteRule ^credits/?$ credits/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+privacy-policy(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /privacy-policy [R=301,END]
+  RewriteRule ^privacy-policy/?$ privacy-policy/index.html [END]
+  RewriteCond %{THE_REQUEST} "\s/+terms-and-conditions(?:/index\.html|/)(?:[?\s])" [NC]
+  RewriteRule ^ /terms-and-conditions [R=301,END]
+  RewriteRule ^terms-and-conditions/?$ terms-and-conditions/index.html [END]
 </IfModule>
 <IfModule mod_headers.c>
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self' ; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'self'"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; media-src 'self' blob:; connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'self'"
   <FilesMatch "\.(html|xml|txt)$">
     Header set Cache-Control "public, max-age=0, must-revalidate"
   </FilesMatch>

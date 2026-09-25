@@ -39,12 +39,12 @@ Homepage film paths live in the same configuration and become `dist/media-config
 
 | Asset | Source / use | Status and rule |
 |---|---|---|
-| public/assets/brand/brand-logo.png; public/assets/brand/brand-symbol.svg | Original InnooRyze identity obtained from innooryze.com | Approved brand assets; retain without redesign |
+| public/assets/brand/brand-logo.png; public/assets/brand/brand-symbol.png | Approved InnooRyze trademark artwork supplied by the owner (20 September 2026 replacement) | brand-logo.png is the trademark wordmark including the TM (3290x719); brand-symbol.png is the standalone OO symbol (4500x4500), used for the favicon/app icon and the masked OO watermark. Retain without redesign, renaming or recolouring. Superseded copies brand-logo1.png and brand-symbol1.svg remain on disk, unreferenced. |
 | public/assets/fonts/dm-sans-*.woff2; manrope-*.woff2 | Manrope / DM Sans, SIL Open Font License | Bundled local typography; licenses in assets/licenses |
 | public/assets/platforms/* | Respective platform marks, used to identify confirmed experience | Trademarks belong to owners; no partnership/certification implied |
 | Page-owned *imma*.png files under assets/images/products and assets/images/work | Actual InnooRyze assessment interface at assessment.innooryze.com | Real product capture; review when product changes |
 | Page-owned Dynalektric visuals under assets/images/home and assets/images/work | Actual website and selected frame from Dynalektric_Hero.mp4 | Owner-supplied portfolio context; actual project material, no invented result |
-| Page-owned Max-Seal visuals under assets/images/home and assets/images/work | Current Max-Seal website and product-film frame | In Progress; replace/update after approved final launch |
+| Page-owned anonymous industrial visuals under assets/images/work/industrial-valve | Approved anonymous industrial valve photography and digital-experience concept | In Progress; replace/update after approved final launch |
 | Treffer project visual | Page-owned Treffer photographs; optical-patterns provenance | Conceptual licensed image; no approved client screenshot/logo supplied |
 | public/assets/images/ideas-hub/ideas-hub-hero.jpg | Maximus Beaumont, Unsplash photo 6lGG-GCm1Z4 | Illustrative light installation; used for Ideas hero |
 | public/assets/audio/progress-pulse.mp3 | Original code-composed Progress Pulse, 128 BPM / 30-second loop | Accepted energetic score; no commercial samples; retain |

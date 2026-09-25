@@ -5,8 +5,23 @@ export const site = {
   url: process.env.SITE_URL || 'https://innooryze.com',
   indexable: process.env.SITE_INDEXABLE !== 'false',
   email: 'enquiry@innooryze.com',
+  // brand-logo.png is the approved trademark wordmark; brand-symbol.png is the approved standalone OO symbol.
   logo: '/assets/brand/brand-logo.png',
-  symbol: '/assets/brand/brand-symbol.svg',
+  logoSize: [3290,719],
+  symbol: '/assets/brand/brand-symbol.png',
+  // Verified public contact details. Nothing here is inferred; there is no second office or phone number.
+  contact: {
+    street: '11/1, Krishnarayapuram, Thoatta Saalaigal, Chettipalayam',
+    streetLines: ['11/1, Krishnarayapuram,','Thoatta Saalaigal,','Chettipalayam,'],
+    locality: 'Coimbatore',
+    region: 'Tamil Nadu',
+    postalCode: '641201',
+    country: 'India',
+    countryCode: 'IN',
+    phone: '+91 80156 20896',
+    phoneUri: 'tel:+918015620896',
+    shortLocation: 'Coimbatore, Tamil Nadu, India'
+  },
   enquiryEndpoint: process.env.ENQUIRY_ENDPOINT || '',
   assessmentUrl: 'https://assessment.innooryze.com/',
   tagline: 'Innovate. Integrate. Elevate.',
@@ -49,12 +64,60 @@ export const articles = [
   ]}
 ];
 articles.forEach((a,i)=>{a.published='2026-09-12';a.updated='2026-09-13';a.readTime=Math.max(1,Math.ceil(a.sections.map(x=>x.join(' ')).join(' ').split(/\s+/).length/200))+' min read';a.image=[editorial.data,editorial.martech,editorial.about][i];});
+// Client logos are trimmed to their own ink box, so one display box gives all three equal optical scale.
+// `scale` normalises by area rather than height: these lockups run from 2.85:1 to 5.30:1, and matching
+// heights alone would let the widest mark dominate the row. See docs/ASSET_REGISTER.md.
+const clientLogo = (file, width, scale, name) => ({src:'/assets/images/work/logos/' + file, width, height:120, scale, alt:name + ' logo'});
+
 export const work = [
- {slug:'dynalektric',name:'Dynalektric',title:'Engineering expertise. A clearer digital experience.',type:'Experience Design & Enablement',categories:['Website Experience'],image:'asset:dynalektric-screen.webp',alt:'The live Dynalektric website with its industrial engineering and manufacturing homepage',industry:'Industrial electrical manufacturing',description:'Website strategy, UX, design and development for an industrial electrical manufacturer.',challenge:'Present industrial engineering capabilities through a clear, useful digital experience.',approach:'Website strategy, user experience, design and development.',built:'A company website connecting manufacturing capabilities, products, applications and enquiry journeys.',technology:'Experience strategy, information architecture, UX, interface design and web development.',outcome:'The website is live.',url:'https://dynalektric.com/',related:0},
- {slug:'treffer-technologies',name:'Treffer Technologies',title:'Connecting the platforms behind customer engagement.',type:'MarTech / CRM Enablement',categories:['MarTech','CRM'],industry:'Technology',description:'CRM and marketing technology enablement.',approach:'CRM and MarTech enablement for Treffer Technologies.',technology:'CRM and marketing technology enablement.',related:1},
- {slug:'max-seal',route:'maxseal',name:'Max-Seal',title:'A digital experience for industrial flow control.',type:'Experience Design & Enablement',categories:['Website Experience'],status:'In Progress',image:'asset:max-seal-screen.webp',alt:'The current Max-Seal website showing its industrial valve application explorer, with the build in progress',industry:'Industrial valves and flow control',description:'A new digital experience for Max-Seal. The build is currently in progress.',approach:'Experience design and development for the current website build.',built:'A digital experience in development, presenting industrial valve products and applications.',technology:'Experience Design & Enablement.',url:'https://max-seal.vercel.app/',related:0},
-{slug:'imma',title:'A clearer starting point for marketing growth.',name:'IMMA',type:'InnooRyze product',categories:['Website Experience','Data','AI'],image:'asset:imma-screen.png',alt:'The live IMMA assessment showing business-model selection for B2B and B2C organizations',description:'An intelligent marketing maturity assessment that helps businesses explore the strength of their marketing foundations.',challenge:'Make it easier for decision-makers to identify where their marketing foundations need attention.',approach:'Organize the assessment around business context, marketing capabilities, customer journeys and data.',built:'A guided web assessment with distinct B2B and B2C starting points and a structured progression through marketing maturity.',technology:'A browser-based assessment experience. It can be explored directly through the live IMMA product.',outcome:'A live, accessible starting point for understanding marketing maturity. Quantified business outcomes have not been published.'}];
-work.forEach(w=>{w.campaign=w.slug==='dynalektric'?{src:'asset:dynalektric-project.webp',alt:'A technician assembling electrical components in the Dynalektric film'}:w.slug==='max-seal'?{src:'asset:max-seal-project.webp',alt:'An industrial valve assembly from the Max-Seal product film'}:w.slug==='treffer-technologies'?{name:'optical-patterns',alt:'Illustrative optical patterns across a measuring instrument, representing connected intelligence'}:null;});
+ {slug:'dynalektric',name:'Dynalektric',title:'Engineering expertise. A clearer digital experience.',
+  metaTitle:'Dynalektric — Industrial Website & RFQ Journey',
+  type:'Experience Design & Enablement',categories:['Website Experience'],featured:true,
+  logo:clientLogo('dynalektric-logo-trimmed.png',441,.88,'Dynalektric'),
+  image:'asset:dynalektric-screen.webp',alt:'The live Dynalektric website with its industrial engineering and manufacturing homepage',
+  industry:'Industrial electrical manufacturing',
+  description:'Website strategy, UX, design, development and SEO improvement for an industrial electrical manufacturer, with a product architecture and RFQ enquiry journey.',
+  url:'https://dynalektric.com/',related:0},
+
+ {slug:'qualtura',name:'Qualtura',title:'A clearer presence. Connected to the enquiry.',
+  metaTitle:'Qualtura — Website Experience & Zoho Integration',
+  type:'Experience Design & Enablement',categories:['Website Experience','MarTech'],featured:true,
+  logo:clientLogo('qualtura-logo-trimmed.png',636,.73,'Qualtura'),
+  // The homepage capture is the work itself, so it is shown complete in the case body rather than
+  // cropped behind a hero. This case intentionally uses a text hero.
+  heroMedia:false,mediaStage:true,stageLabel:'QUALTURA / WEBSITE EXPERIENCE',
+  image:'asset:qualtura-screen.webp',alt:'The live Qualtura website homepage, introducing the business and its services',
+  industry:'Digital marketing and growth',
+  description:'Website experience, design and responsive development across approximately six pages, with the enquiry journey connected to Zoho.',
+  url:'https://qualtura.com/',related:0,relatedAlso:1},
+
+ {slug:'treffer-technologies',name:'Treffer Technologies',title:'Connecting the platforms behind customer engagement.',
+  metaTitle:'Treffer Technologies — CRM & MarTech Enablement',
+  type:'MarTech / CRM Enablement',categories:['MarTech','CRM'],featured:true,
+  logo:clientLogo('treffer-technologies-logo-transparent.png',342,1,'Treffer Technologies'),
+  industry:'Technology',
+  description:'CRM strategy, MarTech strategy and enablement, shaping a connected operating direction for customer engagement.',
+  related:1},
+
+ // Published anonymously at the owner's instruction. No client name, logo, screenshot or outbound URL.
+ {slug:'industrial-valve',route:'industrial-valve-digital-experience',name:'US Industrial Valve Manufacturer',
+  title:'A digital experience for industrial flow control.',
+  metaTitle:'US Industrial Valve Manufacturer — Digital Experience',
+  type:'Industrial Digital Experience',categories:['Website Experience'],status:'In Progress',
+  image:'asset:industrial-valve-screen.webp',alt:'A digital-experience concept for an industrial valve portfolio, with industry pathways beside a product-led homepage',
+  industry:'Industrial valves and flow control',
+  description:'A clearer, more credible digital experience for a specialist industrial valve portfolio, built around technical buyers and the applications the products serve.',
+  related:0},
+
+ {slug:'imma',title:'A clearer starting point for marketing growth.',name:'IMMA',type:'InnooRyze product',categories:['Website Experience','Data','AI'],image:'asset:imma-screen.png',alt:'The live IMMA assessment showing business-model selection for B2B and B2C organizations',description:'An intelligent marketing maturity assessment that helps businesses explore the strength of their marketing foundations.',challenge:'Make it easier for decision-makers to identify where their marketing foundations need attention.',approach:'Organize the assessment around business context, marketing capabilities, customer journeys and data.',built:'A guided web assessment with distinct B2B and B2C starting points and a structured progression through marketing maturity.',technology:'A browser-based assessment experience. It can be explored directly through the live IMMA product.',outcome:'A live, accessible starting point for understanding marketing maturity. Quantified business outcomes have not been published.'}];
+
+work.forEach(w=>{w.campaign={
+ 'dynalektric':{src:'asset:dynalektric-project.webp',alt:'A technician assembling electrical components in the Dynalektric film'},
+ 'qualtura':{src:'asset:qualtura-project.webp',alt:'The Qualtura website homepage as delivered'},
+ 'treffer-technologies':{name:'optical-patterns',alt:'Illustrative optical patterns across a measuring instrument, representing connected intelligence'},
+ 'industrial-valve':{src:'asset:industrial-valve-project.webp',alt:'A precision-machined flanged industrial valve assembly, lit in a studio'}
+}[w.slug]||null;});
+
 export const platforms = [
   {name:'Salesforce',slug:'salesforce',image:'/assets/platforms/salesforce-logo.svg',group:'CRM & customer engagement'},
   {name:'Adobe',slug:'adobe',image:'/assets/platforms/adobe-logo.png',group:'Digital experience & marketing'},

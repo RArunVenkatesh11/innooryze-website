@@ -24,7 +24,7 @@ Approved expressions:
 
 ## Facts and boundaries
 
-LeadRyze AI and IMMA are available. Other product concepts remain in development and have no thin standalone SEO routes. Dynalektric has a live website; no quantified results are supplied. Max-Seal is **In Progress**. Treffer Technologies is a confirmed CRM/MarTech client; specific platforms, deliverables, results, screenshots and quotes are not approved. The final owner-approved platform taxonomy is recorded below. LeadRyze CRM is a distinct InnooRyze product; no availability, pricing or feature claims have been supplied for it. Do not confuse it with LeadRyze AI. Do not invent metrics, testimonials, staff, offices, certifications, partnerships, client stacks or legal policies. Concept photos do not depict actual staff or client teams.
+LeadRyze AI and IMMA are available. Other product concepts remain in development and have no thin standalone SEO routes. Dynalektric has a live website, with client-confirmed figures (20% increase in website visits, 5% net-new RFQs, improved global traffic) and one approved testimonial reproduced verbatim — including the client’s own spelling of "InnoRyze". Qualtura is a live website engagement: experience, design, responsive development across approximately six pages, a Zoho enquiry integration, delivered in approximately one month; no traffic, lead or conversion figures exist. The former Max-Seal engagement is published anonymously as **US Industrial Valve Manufacturer** at /work/industrial-valve-digital-experience and remains **In Progress**; never reintroduce that client’s name, logo, screenshots or development URL. Treffer Technologies is a confirmed CRM/MarTech client; specific platforms, deliverables, results, screenshots and quotes are not approved. The final owner-approved platform taxonomy is recorded below. LeadRyze CRM is a distinct InnooRyze product; no availability, pricing or feature claims have been supplied for it. Do not confuse it with LeadRyze AI. Do not invent metrics, testimonials, staff, offices, certifications, partnerships, client stacks or legal policies. Concept photos do not depict actual staff or client teams.
 
 ## Stack and commands
 
@@ -54,7 +54,9 @@ There is no separate linter. Check changed JS with node --check, run build/test/
 | src/content/platforms.mjs | Existing Salesforce, Adobe, Braze and Segment detail-page guidance |
 | src/content/platform-catalog.mjs; components/platforms.mjs | Full approved taxonomy, logos, category grid and five-brand homepage teaser |
 | src/config/siteAssets.mjs; scripts/page-assets.mjs | Independent page/section images, responsive variants, social images and film paths |
-| src/content/policies.mjs | Approved-only local policies; currently empty |
+| src/content/policies.mjs; components/policy.mjs | Approved legal content transferred verbatim from the live pages, and the legal page layout |
+| src/config/analytics.mjs | Google tag, deferred GTM container, Search Console token, measured-host allowlist and CSP origins |
+| src/components/consent.mjs; public/consent.js | Consent bar and preferences dialog markup; the consent gate and the only Google tag loader |
 | src/media.mjs | Logical hero/editorial tokens and image helper; physical paths resolve through siteAssets |
 | src/styles/ | base → phase1 → phase2 → refinements → phase3 cascade |
 | public/ | Browser modules, original identity, local fonts and media |
@@ -99,7 +101,9 @@ All canonical routes are listed in SITE_ARCHITECTURE.md. Each has rendered index
 
 Each indexable page needs one H1, useful H2/H3 content, unique metadata, production canonical/OG URLs, appropriate schema, internal links and descriptive alt text. No fake local pages, thin vendor pages, stuffing or invented schema claims. Main copy must exist in HTML. Credits, 404 and aliases are noindex and outside the sitemap. Staging uses SITE_INDEXABLE=false explicitly; releases use build:production.
 
-Secrets never belong in frontend code, .env.example or exports. No live enquiry endpoint exists: the working fallback prepares an unsent email draft. Server credentials remain on the service. Policy links are omitted until approved. Follow DEPLOYMENT.md for upload, DNS/SSL, routing, headers, integration and rollback.
+Google Analytics (GT-WF4XRBSQ) loads only after analytics consent and only on innooryze.com / www.innooryze.com. GTM-NJPT6DRQ is recorded but not loaded until audited. Keep every identifier in src/config/analytics.mjs; see docs/ANALYTICS.md.
+
+Secrets never belong in frontend code, .env.example or exports. No live enquiry endpoint exists: the working fallback prepares an unsent email draft. Server credentials remain on the service. Privacy Policy and Terms & Conditions are published at /privacy-policy and /terms-and-conditions from approved wording; no cookie policy has been approved, so /cookie-policy stays unpublished and its link stays omitted. Never reword approved legal text: change the approved source, then re-transfer. Follow DEPLOYMENT.md for upload, DNS/SSL, routing, headers, integration and rollback.
 
 ## Documentation
 

@@ -43,5 +43,5 @@ ${routeRules}
 
 export function redirectPage(from,to,origin) {
  const canonical=new URL(to,origin).href;
- return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page moved | InnooRyze</title><meta name="robots" content="noindex,follow"><link rel="canonical" href="${canonical}"><meta http-equiv="refresh" content="0;url=${to}"></head><body><main><h1>This project has moved</h1><p><a href="${to}">Explore the Max-Seal project</a></p></main></body></html>`;
+ return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page moved | InnooRyze</title><meta name="robots" content="noindex,follow"><link rel="canonical" href="${canonical}"><meta http-equiv="refresh" content="0;url=${to}"></head><body><main><h1>This project has moved</h1><p><a href="${to}">Continue to the project</a></p></main></body></html>`;
 }

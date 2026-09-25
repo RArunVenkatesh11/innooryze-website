@@ -49,7 +49,7 @@ for(const f of files.filter(f=>/\.(html|css|js|json|xml|txt|md)$/.test(f)||['.ht
  if(f.endsWith('.css'))for(const m of text.matchAll(/url\(['"]?(\/assets\/[^)'" ]+)/g))assert.ok(fs.existsSync(localFile(m[1])),'Missing CSS asset '+m[1]);
  if(f.endsWith('.js'))for(const m of text.matchAll(/(?:from\s*|import\s*)['"](\.\.?\/[^'"]+)['"]/g))assert.ok(fs.existsSync(path.resolve(dist,path.dirname(f),m[1])),'Missing JS import '+m[1]);
 }
-assert.equal(routes.length,26+policies.length);
+assert.equal(routes.length,27+policies.length);
 const sitemap=read(path.join(dist,'sitemap.xml'));
 const urls=[...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>m[1]);
 assert.equal(urls.length,routes.length-1);assert.equal(urls.length,new Set(urls).size);

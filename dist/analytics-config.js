@@ -1,0 +1,1 @@
+export const analyticsConfig = {"googleTagId":"GT-WF4XRBSQ","measuredHosts":["innooryze.com","www.innooryze.com"],"consentVersion":1,"storageKey":"innooryze.consent","debugKey":"innooryze.analytics-debug"};

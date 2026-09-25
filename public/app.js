@@ -8,6 +8,9 @@ import {initFilm} from './film.js';
 import {initShowcases} from './showcases.js';
 import {initAgents} from './agents.js';
 import {initContactForm} from './forms.js';
+import {initConsent} from './consent.js';
+import {analyticsConfig} from './analytics-config.js';
+initConsent(analyticsConfig);
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)],root=document.documentElement;
 const motionStopped=motion.stopped;
 function reflectMotionControl(){const button=$('.motion-toggle');if(!button)return;const reduced=motion.reduced();button.disabled=reduced;button.setAttribute('aria-pressed',String(motionStopped()));button.setAttribute('aria-label',reduced?'Reduced motion enabled':motionStopped()?'Play motion':'Pause motion');$('.pause-icon',button).textContent=reduced?'—':motionStopped()?'▶':'Ⅱ';}

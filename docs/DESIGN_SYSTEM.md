@@ -4,7 +4,7 @@ The approved direction is premium, modern, cinematic, editorial and clean, with 
 
 ## Identity and composition
 
-Preserve public/assets/brand/brand-logo.png and brand-symbol.svg unchanged. Core colours: cyan #00d4df, charcoal #11191b, deep teal #142326/#102a31 and pale #edf4f4/#f7f7f3. Manrope is the display face; DM Sans supports body/UI. WOFF2 and SIL licenses are local. Inspect actual tokens/computed styles: the build maps historical base values into the approved palette.
+Preserve public/assets/brand/brand-logo.png and brand-symbol.png unchanged. brand-logo.png is the approved trademark wordmark (3290x719, TM included) and is the only wordmark used in the header, the footer and any primary corporate placement; brand-symbol.png is the approved standalone OO symbol, used for the favicon/app icon and for the OO watermark. Never redraw, recolour, re-proportion or rebuild either mark in SVG or text. Core colours: cyan #00d4df, charcoal #11191b, deep teal #142326/#102a31 and pale #edf4f4/#f7f7f3. Manrope is the display face; DM Sans supports body/UI. WOFF2 and SIL licenses are local. Inspect actual tokens/computed styles: the build maps historical base values into the approved palette.
 
 Generous section spacing, purposeful large headings, strong image crops, thin rules and small tracked eyebrow labels define the system. --pad supplies responsive horizontal spacing. Preserve the homepage sequence, two-pillar story, product panels, Selected Work, Platform Expertise, Ideas teaser, closing CTA and shared footer.
 
@@ -75,6 +75,22 @@ Contact uses visible labels, native inputs/selects, required-field guidance, use
 
 Navigation, filters, product demos, journey steps and the carousel must give the same information through keyboard and touch. Keep selected states visible, make controls reachable, retain normal vertical scrolling and provide static/reduced-motion fallbacks. Preserve existing behavior for a content update; do not add a new interaction concept as incidental polish.
 
+## Legal pages
+
+/privacy-policy and /terms-and-conditions reuse the Ideas Hub reading layout rather than adding a second one: the same sticky contents rail, the same measure, the same header-aware anchor offset and the same touch targets. The hero is the standard text-only `.page-hero` with a LEGAL eyebrow, the document name as H1, a short description and a dates row (Effective Date / Last Updated) opposite it, stacking beneath on phones. No hero imagery, illustration, gradient or per-section card.
+
+Section headings keep the source's own numbering and capitals, so they are set at 17–19px with positive tracking rather than at editorial display size, where set caps would shout. Sections are separated by a hairline rule; list items use a short teal dash instead of a bullet. The contents rail shows above 1280px; below that it steps aside so the document keeps a comfortable measure instead of being squeezed beside a sidebar, and every section keeps its id for deep links. The rail's link colour is darkened to 4.9:1 for legal reading — the Ideas Hub rail still uses the lighter shared value.
+
+## Cookie consent surfaces
+
+Built from the existing system, not a parallel one. The bar uses the dark surface and hairline border of the inner header and mega-menu, `.button-cyan` cyan for the primary action, the eyebrow letterspacing for "Always active" and the site's 44px touch floor. No cookie iconography, illustration, rounded card or heavy shadow.
+
+- **Bar:** fixed to the viewport bottom, full width, aligned to `--pad`. Desktop puts the message left and the three actions right; from 760px down the actions become a two-column grid — Reject and Accept side by side at equal width, Manage preferences beneath. Grid placement, not flex `order`, so the pairing is deliberate. Bottom padding adds `env(safe-area-inset-bottom)`. `z-index:28` keeps it under the mobile navigation overlay (29), and navigation.js marks it `inert` while that menu is open.
+- **Panel:** a native `<dialog>` opened with `showModal`, which supplies the focus trap, Escape and backdrop. Centred and 520px on desktop, a bottom sheet below 760px. Only the category list scrolls, so the three decision buttons are always in view.
+- **Hierarchy:** Accept all is the only filled button; Reject non-essential carries the same outline treatment and equal width, so neither is visually weighted against the other.
+- **Motion:** a short fade and 14px rise, removed under `prefers-reduced-motion`.
+- **Contrast:** measured against the pixels rendered behind the translucent bar, not a computed colour. Message 9.2:1, primary label 9.0:1, outlined-button boundaries at or above the 3:1 UI-component floor.
+
 ## Accessibility and responsive checks
 
 Preserve skip link, landmarks, one H1, visible focus, real buttons, labelled fields and actionable errors. Status cannot depend only on colour. Keep meaningful alt text and readable semantic copy; use normal links for navigation. Respect prefers-reduced-motion and global pause. No-JavaScript content must remain readable.
@@ -84,3 +100,9 @@ Check large desktop 1920×1080, laptop 1366×768, tablet landscape 1180×820, ta
 ## Stylesheet ownership
 
 Cascade: base.css → phase1.css → phase2.css → refinements.css → phase3.css. Final Phase 3 rules cover navigation, canvas heroes, carousel, journeys, cases, Ideas and About. Reuse existing components and inspect computed styles before adding overrides. Keep changes scoped; do not undo another page through a broad selector. A material design change requires deliberate review across page families.
+
+### CTA arrow and the OO watermark
+
+North-east action arrows are one shared inline SVG, `arrowUpRight()` in src/components/icons.mjs, rendered through `.cta-arrow`. Never use the Unicode glyph U+2197: iOS Safari substitutes a boxed colour emoji for it. The icon draws in `currentColor`, sizes itself from the container font-size (`.72em`, about 16.5px on a standard CTA) and is always `aria-hidden`. Keep it for primary and secondary CTAs, "Explore" links, case links and other north-east action or external indicators. Do not use it for menu chevrons, carousel or previous/next controls, the back-to-top arrow, the scroll-down cue or the agent replay control, whose meanings differ.
+
+The OO symbol doubles as a watermark in exactly two places: the Contact page and the "Ready to Ryze" closing CTA. `.brand-watermark` **paints the approved artwork as a background image**, so the two-colour mark survives: darker teal ring, brighter cyan ring and the lighter blend where they overlap. Never mask-and-tint it — a CSS mask keeps only the alpha channel and flattens the mark to one colour. Opacity alone holds it back: .10 desktop, .09 tablet, .08 mobile. It is `pointer-events:none`, unselectable, `aria-hidden`, on a `z-index:-1` layer (both sections set `isolation:isolate` so that layer paints above the section background and below content). The artwork file carries transparent padding — its ink spans 7.7-92.0% horizontally and 15.7-84.3% vertically — so crops are tuned against the ink, not the box, and cut across a ring rather than through the inner hole. About 65-68% of the mark stays visible at every breakpoint, anchored bottom-right in the CTA and bottom-left on Contact (upper-left on phones, where the opaque form card fills the lower section). It is present on every screen size. Do not scatter it elsewhere.

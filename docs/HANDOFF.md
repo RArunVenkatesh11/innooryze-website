@@ -6,6 +6,8 @@ Phase 1 multi-page structure and Phase 2 media/content work were complete before
 
 The final continuation completes production SEO/indexing/routing, the Max-Seal canonical alias, factual platform guidance, approved-only legal-page architecture, production validation, Claude Code documentation and two release ZIPs. The additional final feedback then improved AI contrast, expanded the platform directory with supplied/official logos, and assigned independent semantic images to every page/major section. src/config/siteAssets.mjs is the replacement map; the asset register explains same-name updates. See PHASE3_PROGRESS.md and QA_REPORT.md for status and exact verification scope.
 
+Launch Phase 1 added the approved trademark wordmark, the shared CTA arrow, verified contact details and the OO watermark. The following task migrated Google Analytics from the old site behind a consent gate: see docs/ANALYTICS.md for the identifiers, the production-hostname allowlist, the deferred Tag Manager container and the debug override. Privacy and Terms pages, SEO/GEO work and the Google Sheets integration are not started.
+
 ## Start here
 
 Read CLAUDE.md, README and SITE_ARCHITECTURE.md. Inspect the actual files before editing. Run npm ci, build:production, test and check:production; serve dist with preview. Edit the owning source file, inspect affected desktop/tablet/mobile pages, then rebuild. Do not fix only generated dist or repeat completed visual work.
@@ -28,6 +30,11 @@ Example future task: “Update MarTech content in src/site.mjs and src/component
   - Hover is build-guarded, the mobile menu transitions, and compact controls have 44px hit areas.
   - The film selects encodes by screen and follows rotation; Save-Data shows poster motion.
   - The LeadRyze desk was not tilted anywhere (`.lead-desk` CSS targets no element), so no tilt was added.
+- Launch Phase 1, brand and UI consistency (25 September 2026, owner-approved):
+  - `brand-logo.png` is the approved trademark wordmark and the only wordmark in the header and footer; `brand-symbol.png` is the approved OO symbol, used for the favicon/app icon and the watermark. Never redraw or rename either.
+  - All north-east CTA arrows come from `arrowUpRight()` in `src/components/icons.mjs`; the Unicode glyph is banned because iOS renders it as a colour emoji.
+  - Verified contact details live in `site.contact` (Coimbatore office, +91 80156 20896, enquiry@innooryze.com) and feed the Contact page, the footer and the Organization schema. There is no second office or phone number.
+  - The OO watermark appears only on the Contact page and the Ready to Ryze CTA.
 - UI/UX consistency pass (19 September 2026, owner-approved):
   - Every media-led hero shares one mobile composition through `media-hero`; the AI hero joins it at ≤760px and keeps its approved desktop treatment.
   - User-initiated journey and overview selection brings the story into view below the fixed header (`bringIntoView` in motion.js). Autoplay, scroll progression and initialisation never move the viewport. Reduced motion positions instantly.
