@@ -20,6 +20,12 @@ export function isLiveHost(hostname, config) {
  return Array.isArray(config?.liveHosts) && config.liveHosts.includes(hostname);
 }
 
+// The ?interest= preselection: an exact option label, or nothing (the form keeps "Select an area").
+export function interestFromQuery(search, options) {
+ const selected = new URLSearchParams(search || '').get('interest');
+ return selected && options.includes(selected) ? selected : '';
+}
+
 // What the interface does with a verified backend result (or with none at all). The confirmation line
 // ("will be sent shortly") appears only when the backend has queued the acknowledgement email.
 export function outcomeFor(result) {
@@ -80,9 +86,9 @@ export function initContactForm({config, motionStopped = () => false, win = wind
  // The form is usable from here. The backend compares this with the submit time to refuse instant bots.
  setField('formstartedat', String(Date.now()));
 
- const selected = new URLSearchParams(win.location.search).get('interest');
  const interest = field('whatcanwehelp');
- if (interest && [...interest.options].some(o => o.value === selected)) interest.value = selected;
+ const selected = interest ? interestFromQuery(win.location.search, [...interest.options].map(o => o.value).filter(Boolean)) : '';
+ if (selected) interest.value = selected;
 
  const turnstile = live ? createTurnstile({container: form.querySelector('[data-turnstile]'), siteKey: config.turnstileSiteKey,
   action: config.turnstileAction, scriptUrl: config.turnstileScript, timeoutMs: config.turnstileTimeoutMs, win, doc}) : null;

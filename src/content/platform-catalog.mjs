@@ -127,9 +127,14 @@ export const platformCatalog = {
     "href": "/platforms/adobe"
   }
 };
+// Each category's "interest" is the Contact form enquiry area its cards preselect (/contact?interest=<label>).
+// It must be one of the form's option labels (interests in src/site.mjs); tests/platforms.test.mjs enforces it.
+// The section decides, not the platform: HubSpot under CRM and HubSpot under Marketing Automation differ.
+// LeadRyze CRM (owned) keeps its dedicated product enquiry.
 export const platformCategories = [
   {
     "id": "crm",
+    "interest": "Growth Systems",
     "name": "CRM",
     "context": "Customer relationships, shared context and the next useful handoff.",
     "items": [
@@ -141,6 +146,7 @@ export const platformCategories = [
   },
   {
     "id": "marketing-automation",
+    "interest": "MarTech Consulting & Enablement",
     "name": "Marketing Automation",
     "context": "Connected campaign and lifecycle workflows, built around the people operating them.",
     "items": [
@@ -156,6 +162,7 @@ export const platformCategories = [
   },
   {
     "id": "customer-data",
+    "interest": "Data Intelligence & Activation",
     "name": "Customer Data / CDP",
     "context": "A useful foundation for customer context, segmentation and activation.",
     "items": [
@@ -166,6 +173,7 @@ export const platformCategories = [
   },
   {
     "id": "digital-experience",
+    "interest": "Experience Design & Enablement",
     "name": "Digital Experience / CMS",
     "context": "Content and digital experiences with a clear path from creation to delivery.",
     "items": [
@@ -176,6 +184,7 @@ export const platformCategories = [
   },
   {
     "id": "analytics",
+    "interest": "Data Intelligence & Activation",
     "name": "Analytics & Business Intelligence",
     "context": "Shared measurement and reporting that help teams understand what happens next.",
     "items": [
