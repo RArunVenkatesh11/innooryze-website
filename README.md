@@ -39,6 +39,21 @@ Rebuild after changing public configuration. Provider secrets belong on the serv
 
 Client-confirmed figures and approved quotations live in src/content/case-studies.mjs as optional `proof` and `testimonial` blocks; both render only when present, and a quotation is reproduced exactly as approved. One engagement is published anonymously as "US Industrial Valve Manufacturer" — see docs/CASE_STUDY_GUIDE.md before touching it.
 
+## Deployment targets
+
+**Vercel is a temporary preview/testing host. The final production platform is To Be Confirmed.**
+
+The build produces a host-agnostic `dist/`; each host reads its own adapter. Apache/cPanel uses the
+generated `.htaccess`; compatible static hosts use `_headers` and `_redirects`; Vercel uses the committed
+`vercel.json` (repo root, never shipped inside `dist`). All three render the same headers from
+`src/config/headers.mjs`, and `check:production` asserts parity, so a change for one host cannot leave
+another unprotected.
+
+Indexing is decided by `src/config/environment.mjs` and is fail-safe: a build is indexable only when it
+can prove it is production. `SITE_INDEXABLE=true` (which `build:production` sets) is sufficient on any
+host, with or without Vercel. `VERCEL_ENV` is only an extra safety signal — on Vercel it can force a
+preview to noindex, but it is never required to produce a valid production build. See docs/VERCEL.md.
+
 ## Legal pages
 
 /privacy-policy and /terms-and-conditions publish approved wording transferred verbatim from the live InnooRyze pages. src/content/policies.mjs is a transcript: change the approved source first, then re-transfer. Publishing a policy automatically enables its footer link and, for privacy, the inline link in the cookie bar. No cookie policy has been approved, so /cookie-policy stays unpublished.

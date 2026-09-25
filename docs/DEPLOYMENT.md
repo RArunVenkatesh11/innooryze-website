@@ -1,5 +1,24 @@
 # Production deployment
 
+> **Hosting status.** Vercel is currently a **temporary preview/testing environment only**. The final
+> production hosting platform for innooryze.com is **To Be Confirmed**. Nothing in this repository assumes
+> Vercel is permanent, and `dist/` is host-agnostic.
+>
+> **Deployment adapter model:**
+>
+> ```
+> core site + build  ->  host-independent dist/  ->  hosting adapter
+>
+>   Vercel                   -> vercel.json          (repo root, not in dist)
+>   Apache / cPanel          -> .htaccess            (generated into dist)
+>   compatible static hosts  -> _headers, _redirects (generated into dist)
+> ```
+>
+> All three adapters render the same security headers from `src/config/headers.mjs`, and
+> `check:production` asserts they stay in parity. Keep all of them: each is the adapter for a host that is
+> still a candidate. The canonical production origin is `https://innooryze.com` regardless of provider.
+> See docs/VERCEL.md for the Vercel adapter specifics.
+
 ## Packages
 
 Target: **https://innooryze.com**, at the domain document root. Extract innooryze-live-deploy.zip directly into public_html (or the configured root). index.html, .htaccess, style.css, JS modules, assets/, route directories, sitemap.xml, robots.txt, _headers and _redirects are at the ZIP root. **No Node/npm is needed on the production server.**

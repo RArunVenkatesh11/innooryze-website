@@ -5,6 +5,9 @@ import fs from 'node:fs';import path from 'node:path';import {fileURLToPath} fro
 import {site,services,articles,work,platforms} from '../src/site.mjs';
 import {analytics,analyticsCsp} from '../src/config/analytics.mjs';
 import {redirects} from '../src/redirects.mjs';
+import {distExclusions,excludedPaths} from '../src/config/distExclusions.mjs';
+import {securityHeaders,contentSecurityPolicy} from '../src/config/headers.mjs';
+import {describeEnvironment} from '../src/config/environment.mjs';
 import {policies,policyPaths} from '../src/content/policies.mjs';
 import {apacheConfig,redirectPage} from './deployment.mjs';
 import {layout,esc,pageHero} from '../src/components/layout.mjs';
@@ -13,7 +16,17 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const out=path.resolve(root,'dist');
 if(path.relative(root,out)!=='dist'||fs.realpathSync(root)!==root)throw Error('Unexpected build directory');
 fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});
-fs.cpSync(path.join(root,'public'),out,{recursive:true,filter:src=>!['singapore.mp4','singapore.jpg'].includes(path.basename(src))});
+// Source masters and superseded iterations stay in public/ but never reach the release. Every entry is
+// verified below, after rendering, so nothing can be dropped while something still references it.
+const publicRoot=path.join(root,'public');
+for(const {path:p} of distExclusions)if(!fs.existsSync(path.join(publicRoot,p.slice(1))))throw Error('distExclusions lists a file that no longer exists: '+p+' — remove the entry');
+const excludedFromDist=[];
+fs.cpSync(publicRoot,out,{recursive:true,filter:src=>{
+ if(['singapore.mp4','singapore.jpg'].includes(path.basename(src)))return false;
+ const web='/'+path.relative(publicRoot,src).split(path.sep).join('/');
+ if(excludedPaths.has(web)){excludedFromDist.push(web);return false;}
+ return true;
+}});
 fs.writeFileSync(path.join(out,'media-config.js'),'export const homeFilm = '+JSON.stringify(homeFilm)+';\n');
 fs.writeFileSync(path.join(out,'analytics-config.js'),'export const analyticsConfig = '+JSON.stringify({googleTagId:analytics.googleTagId,measuredHosts:analytics.measuredHosts,consentVersion:analytics.consentVersion,storageKey:analytics.storageKey,debugKey:analytics.debugKey})+';\n');
 let base=fs.readFileSync(path.join(root,'src/styles/base.css'),'utf8');
@@ -44,13 +57,34 @@ for(const policy of policies){
 }
 for(const page of pages){const filename=path.join(out,page.path==='/'?'index.html':page.path.slice(1)+'/index.html');fs.mkdirSync(path.dirname(filename),{recursive:true});fs.writeFileSync(filename,layout(scopePageAssets(page,site.url)));}
 fs.writeFileSync(path.join(out,'404.html'),layout(scopePageAssets({path:'/404',title:'Page not found | InnooRyze',description:'Explore the InnooRyze website.',body:inner.notFound(),closingCta:false,indexable:false},site.url)));
-fs.writeFileSync(path.join(out,'robots.txt'),`User-agent: *\n${site.indexable?'Allow: /':'Disallow: /'}\nSitemap: ${site.url}/sitemap.xml\n`);
+// A preview build disallows everything and deliberately advertises no sitemap; sitemap.xml is still
+// written so the artifact keeps the same shape, but nothing points a crawler at it.
+fs.writeFileSync(path.join(out,'robots.txt'),site.indexable?`User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`:'User-agent: *\nDisallow: /\n');
 fs.writeFileSync(path.join(out,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.filter(p=>p.indexable!==false).map(p=>`<url><loc>${new URL(p.path,site.url).href}</loc></url>`).join('')}</urlset>`);
 for(const [from,to] of Object.entries(redirects)){const file=path.join(out,from.slice(1),'index.html');fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,redirectPage(from,to,site.url));}
 fs.writeFileSync(path.join(out,'_redirects'),Object.entries(redirects).map(([from,to])=>from+' '+to+' 301!\n'+from+'/ '+to+' 301!').join('\n')+'\n');
 const endpointOrigin=site.enquiryEndpoint?new URL(site.enquiryEndpoint,site.url).origin:'';
-const csp="default-src 'self'; script-src 'self' "+analyticsCsp.script.join(' ')+"; style-src 'self' 'unsafe-inline'; img-src 'self' data: "+analyticsCsp.img.join(' ')+"; media-src 'self' blob:; connect-src 'self' "+[endpointOrigin,...analyticsCsp.connect].filter(Boolean).join(' ')+"; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'self'";
-fs.writeFileSync(path.join(out,'_headers'),"/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  X-Frame-Options: SAMEORIGIN\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  Content-Security-Policy: "+csp+"\n");
-fs.writeFileSync(path.join(out,'.htaccess'),apacheConfig(pages.map(p=>p.path),csp));
+const csp=contentSecurityPolicy(endpointOrigin);
+fs.writeFileSync(path.join(out,'_headers'),'/*'+String.fromCharCode(10)+securityHeaders(endpointOrigin).map(([k,v])=>'  '+k+': '+v).join(String.fromCharCode(10))+String.fromCharCode(10));
+fs.writeFileSync(path.join(out,'.htaccess'),apacheConfig(pages.map(p=>p.path),securityHeaders(endpointOrigin)));
 fs.writeFileSync(path.join(root,'scripts/routes.json'),JSON.stringify(pages.map(({path,title})=>({path,title})),null,2));
-console.log(`Built ${pages.length} complete, statically rendered routes.`);
+// An excluded asset must be genuinely unused. Scan everything the release actually serves — rendered
+// pages, the stylesheet, browser modules, licence records and the routing files — and fail loudly if any
+// of them still names a file we just withheld. This is what stops the exclusion list going stale and
+// silently breaking a page later.
+{
+ const served=[];
+ const collect=dir=>{for(const entry of fs.readdirSync(dir,{withFileTypes:true})){
+  const full=path.join(dir,entry.name);
+  if(entry.isDirectory())collect(full);
+  else if(/\.(html|css|js|json|xml|txt)$/i.test(entry.name)||['_headers','_redirects','.htaccess'].includes(entry.name))served.push(full);
+ }};
+ collect(out);
+ let haystack='';for(const file of served)haystack+=fs.readFileSync(file,'utf8')+'\n';
+ const leaked=[...new Set(excludedFromDist)].filter(web=>haystack.includes(web));
+ if(leaked.length)throw Error('Excluded asset is still referenced by the build: '+leaked.join(', ')+' — remove it from src/config/distExclusions.mjs');
+ const missing=distExclusions.filter(x=>!excludedFromDist.includes(x.path));
+ if(missing.length)throw Error('distExclusions entries never matched a file: '+missing.map(x=>x.path).join(', '));
+}
+const env=describeEnvironment();
+console.log(`${env.indexable?'INDEXABLE':'NOINDEX'} (${env.source}) · withheld ${excludedFromDist.length} unreferenced source/iteration files · Built ${pages.length} complete, statically rendered routes.`);

@@ -2,6 +2,8 @@
 
 ## Rendering model
 
+dist/ is host-agnostic and carries no host-specific configuration. Each host reads its own adapter: .htaccess (Apache/cPanel), _headers and _redirects (compatible static hosts), vercel.json (Vercel, repo root only). Vercel is currently a temporary preview host and the final production platform is To Be Confirmed. All adapters render the same headers from src/config/headers.mjs; check:production asserts parity. Indexability is environment-aware and fail-safe (src/config/environment.mjs), and src/config/distExclusions.mjs keeps unreferenced source masters out of the release. See docs/DEPLOYMENT.md and docs/VERCEL.md.
+
 A static multi-page website: Node templates render complete HTML into dist/<route>/index.html. Navigation uses normal links and document loads. Browser modules enhance film, scrolling, menus, demonstrations, filters, carousels and forms; they do not supply the route content. Output has no preview-environment dependency.
 
 scripts/build.mjs assembles the pages, shared layout and SEO. Five CSS layers concatenate into style.css; browser modules and media copy from public. scripts/routes.json is generated. src/config/siteAssets.mjs owns physical images by route and section; scripts/page-assets.mjs resolves logical tokens before layout, including schema and social images. dist/media-config.js contains only public film paths. Missing mappings fail the build. There are 29 canonical pages, two legacy redirect documents and 404.html. The source ZIP includes a generated dist release snapshot as well as editable sources.

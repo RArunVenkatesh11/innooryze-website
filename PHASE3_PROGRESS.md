@@ -141,3 +141,22 @@ Owner-approved. The work was resumed after an interrupted session; unfinished pa
 - [x] Qualtura opens with the dark intro hero then a full-width screenshot stage; no headline over live UI
 - [x] Verified Outcomes divider clearance fixed structurally (54px at 1920, 49px at 1440), outer values flush with the container
 - [x] 492 checks across ten viewports pass; build, tests and production validation clean
+
+## Phase 3A: technical launch foundation
+
+- [x] Fail-safe environment-aware indexing; Vercel preview can no longer be made indexable
+- [x] vercel.json generated from source and drift-checked by check:production
+- [x] Security headers now actually delivered on Vercel, including HSTS (1 year, no includeSubDomains/preload)
+- [x] Real permanent redirects: www -> apex, both aliases in both slash forms, one hop each
+- [x] 10.74 MB of unreferenced masters/iterations withheld from dist (30.80 -> 20.06 MB media)
+- [x] Consent 43/43, GTM still disabled, CSP unchanged in substance
+- [ ] Live Vercel confirmation of 308 statuses, header delivery, www redirect and trailingSlash interaction
+- [ ] Vercel dashboard: set innooryze.com primary, www redirecting; do not set SITE_INDEXABLE
+
+## Phase 3A addendum: host-agnostic confirmation
+
+- [x] Confirmed no hard Vercel dependency: zero deps/APIs/middleware, vercel.json never enters dist, build:production works with no Vercel signal
+- [x] Fixed adapter parity — .htaccess was missing HSTS; all three adapters now render one shared definition
+- [x] check:production asserts adapter parity and that dist carries no host-specific config
+- [x] Docs state Vercel = temporary preview, final production host = To Be Confirmed
+- [ ] Final hosting platform selection (owner)

@@ -1,9 +1,11 @@
 import {policies,policyPaths} from './content/policies.mjs';
 import {editorial} from './media.mjs';
+import {resolveIndexable} from './config/environment.mjs';
 export const site = {
   name: 'InnooRyze',
   url: process.env.SITE_URL || 'https://innooryze.com',
-  indexable: process.env.SITE_INDEXABLE !== 'false',
+  // Fail-safe: indexable only when the build can prove it is production. See src/config/environment.mjs.
+  indexable: resolveIndexable(),
   email: 'enquiry@innooryze.com',
   // brand-logo.png is the approved trademark wordmark; brand-symbol.png is the approved standalone OO symbol.
   logo: '/assets/brand/brand-logo.png',

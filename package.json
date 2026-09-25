@@ -10,7 +10,8 @@
     "check": "node scripts/validate.mjs",
     "build:production": "node scripts/build-production.mjs",
     "preview": "node scripts/serve.mjs",
-    "check:production": "node scripts/validate.mjs --production"
+    "check:production": "node scripts/validate.mjs --production",
+    "sync:vercel": "node scripts/sync-vercel.mjs"
   },
   "engines": {
     "node": ">=20"

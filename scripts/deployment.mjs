@@ -1,7 +1,13 @@
 import {redirects} from '../src/redirects.mjs';
 const regex = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
 
-export function apacheConfig(routes, csp) {
+export function apacheConfig(routes, headers) {
+  // One shared definition drives every adapter. HSTS is emitted with env=HTTPS so Apache only sends it
+  // over a secure connection, which is the one place the Apache syntax differs from the others.
+  const headerRules = headers.map(([key, value]) =>
+    key === 'Strict-Transport-Security'
+      ? `  Header always set ${key} "${value}" env=HTTPS`
+      : `  Header always set ${key} "${value}"`).join(String.fromCharCode(10));
  const routeRules = routes.filter(p=>p!=='/').map(p=>{
   const pattern=regex(p.slice(1));
   return `  RewriteCond %{THE_REQUEST} "\\s/+${pattern}(?:/index\\.html|/)(?:[?\\s])" [NC]\n  RewriteRule ^ ${p} [R=301,END]\n  RewriteRule ^${pattern}/?$ ${p.slice(1)}/index.html [END]`;
@@ -20,11 +26,7 @@ ${Object.entries(redirects).map(([from,to])=>`  RewriteRule ^${regex(from.slice(
 ${routeRules}
 </IfModule>
 <IfModule mod_headers.c>
-  Header always set X-Content-Type-Options "nosniff"
-  Header always set Referrer-Policy "strict-origin-when-cross-origin"
-  Header always set X-Frame-Options "SAMEORIGIN"
-  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
-  Header always set Content-Security-Policy "${csp}"
+${headerRules}
   <FilesMatch "\\.(html|xml|txt)$">
     Header set Cache-Control "public, max-age=0, must-revalidate"
   </FilesMatch>

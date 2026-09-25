@@ -6,6 +6,8 @@ import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
 import {redirects} from '../src/redirects.mjs';
 import {policies} from '../src/content/policies.mjs';
+import {excludedPaths,distExclusions} from '../src/config/distExclusions.mjs';
+import {vercelJson} from './vercel-config.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const dist=path.join(root,'dist'), origin='https://innooryze.com';
 const routes=JSON.parse(fs.readFileSync(path.join(root,'scripts/routes.json'),'utf8'));
@@ -80,6 +82,73 @@ for(const group of platformCategories){assert.ok(directory.includes('id="'+group
 assert.ok(directory.indexOf('data-platform="leadryze-crm"')<directory.indexOf('data-platform="salesforce"'));
 console.log(owned.size+' page-owned image variants and five homepage platforms verified.');
 console.log(`Validated ${routes.length} canonical routes, ${linkCount} internal links/assets, ${urls.length} sitemap URLs, schema, headings, media and production portability.`);
+// --- deployment configuration -------------------------------------------------------------------
+// vercel.json is generated from src/config + src/redirects. If it has drifted, the deployed headers and
+// redirects no longer match the release, so the build is not shippable.
+{
+ const committed=path.join(root,'vercel.json');
+ assert.ok(fs.existsSync(committed),'vercel.json is missing; run npm run sync:vercel');
+ assert.equal(read(committed),vercelJson(),'vercel.json is out of sync; run npm run sync:vercel');
+ const cfg=JSON.parse(read(committed));
+ for(const key of ['X-Content-Type-Options','Referrer-Policy','X-Frame-Options','Permissions-Policy','Strict-Transport-Security','Content-Security-Policy'])
+  assert.ok(cfg.headers[0].headers.some(h=>h.key===key),'vercel.json missing header '+key);
+ const csp=cfg.headers[0].headers.find(h=>h.key==='Content-Security-Policy').value;
+ assert.ok(!/unsafe-inline/.test(csp.split('script-src')[1].split(';')[0]),'script-src must not allow unsafe-inline');
+ assert.ok(!/unsafe-eval/.test(csp),'CSP must not allow unsafe-eval');
+ // every alias redirects permanently, in one hop, and never to itself
+ for(const [from,to] of Object.entries(redirects)){
+  for(const source of [from,from+'/']){
+   const rule=cfg.redirects.find(r=>r.source===source);
+   assert.ok(rule,'vercel.json missing redirect for '+source);
+   assert.equal(rule.permanent,true,'redirect must be permanent: '+source);
+   assert.equal(rule.destination,to);
+   assert.ok(!Object.keys(redirects).includes(rule.destination),'redirect chain via '+rule.destination);
+  }
+ }
+ assert.ok(cfg.redirects.some(r=>r.has?.some(h=>h.type==='host'&&h.value.startsWith('www.'))),'vercel.json missing the www canonical redirect');
+}
+
+// --- deployment adapter parity ---------------------------------------------------------------------
+// dist/ is host-agnostic; each host reads its own adapter. All three must carry the same security
+// headers, or a change made for one host silently leaves another unprotected.
+{
+ const headers=fs.existsSync(path.join(root,'vercel.json'))?JSON.parse(read(path.join(root,'vercel.json'))).headers[0].headers.map(h=>h.key):[];
+ const netlify=read(path.join(dist,'_headers'));
+ const apache=read(path.join(dist,'.htaccess'));
+ for(const key of headers){
+  assert.ok(netlify.includes(key),'_headers is missing '+key+' (adapter parity)');
+  assert.ok(apache.includes(key),'.htaccess is missing '+key+' (adapter parity)');
+ }
+ // the build output itself must stay free of host-specific configuration
+ assert.ok(!fs.existsSync(path.join(dist,'vercel.json')),'vercel.json must not ship inside dist; dist stays host-agnostic');
+}
+
+// --- withheld assets ------------------------------------------------------------------------------
+for(const {path:p} of distExclusions)assert.ok(!fs.existsSync(localFile(p)),'Excluded asset shipped: '+p);
+
+// --- robots + sitemap match the environment --------------------------------------------------------
+// Expectation is derived from the build output itself, not from the environment this validator happens
+// to run in: whatever the pages say about indexing, robots.txt must agree.
+{
+ const robots=read(path.join(dist,('robots.txt')));
+ const homeIndexable=/name="robots" content="index,follow"/.test(read(pageFile('/')));
+ if(homeIndexable){
+  assert.ok(robots.startsWith('User-agent: *'+String.fromCharCode(10)+'Allow: /'),'indexable build must allow crawling');
+  assert.ok(robots.includes('Sitemap: '+origin+'/sitemap.xml'),'indexable build must advertise the sitemap');
+ }else{
+  assert.equal(robots,'User-agent: *'+String.fromCharCode(10)+'Disallow: /'+String.fromCharCode(10),'non-indexable build must disallow everything');
+  assert.ok(!/Sitemap:/i.test(robots),'a non-indexable build must not advertise a sitemap');
+  for(const route of routes)assert.match(read(pageFile(route.path)),/content="noindex/,'every page must be noindex in a non-indexable build: '+route.path);
+ }
+ for(const loc of urls){
+  const p=new URL(loc).pathname;
+  assert.ok(routes.some(r=>r.path===p),'sitemap lists a non-canonical route '+p);
+  assert.ok(!Object.keys(redirects).includes(p),'sitemap lists a redirect alias '+p);
+  assert.notEqual(p,'/credits','sitemap must exclude /credits');
+  assert.ok(!new RegExp('localhost|127[.]0[.]0[.]1|vercel[.]app').test(loc),'non-production origin in sitemap '+loc);
+ }
+}
+
 if(process.argv.includes('--http')){
  const base=process.env.QA_ORIGIN||'http://127.0.0.1:4173';
  for(const route of routes)for(const suffix of ['',...(route.path==='/'?[]:['/','/index.html'])]){const response=await fetch(base+route.path+suffix);assert.equal(response.status,200,route.path+suffix);assert.ok((await response.text()).includes(route.title));}
