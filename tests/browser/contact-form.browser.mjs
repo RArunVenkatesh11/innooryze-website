@@ -33,16 +33,17 @@ let scenario = {};
 const received = [];
 const mails = [];
 const verifications = [];
+const props = new Map();
 function backend() {
  const sheet = {getLastColumn: () => grid[0].length, getLastRow: () => grid.length,
-  getRange(row, col, rows = 1, cols = 1) { return {getValues: () => [grid[row - 1].slice(col - 1, col - 1 + cols)],
+  getRange(row, col, rows = 1, cols = 1) { return {getValues: () => Array.from({length: rows}, (_, r) => Array.from({length: cols}, (_, c) => grid[row - 1 + r]?.[col - 1 + c] ?? '')),
    setValues(v) { if (scenario.sheetBroken) throw new Error('Sheet unavailable'); grid[row - 1] ??= []; v[0].forEach((x, c) => grid[row - 1][col - 1 + c] = x); return this; },
    setValue(x) { grid[row - 1][col - 1] = x; return this; }, setNumberFormat() { return this; }}; }};
  const res = (code, body) => ({getResponseCode: () => code, getContentText: () => typeof body === 'string' ? body : JSON.stringify(body)});
  const ctx = {console: {log() {}, warn: m => process.env.GASLOG && console.log('GAS', m), error: m => process.env.GASLOG && console.log('GAS', m)}, JSON, Math, Date, Number, String, Array, Object, RegExp, Error, isFinite, encodeURIComponent,
-  PropertiesService: {getScriptProperties: () => ({getProperty: n => n === 'MS365_SENDER_EMAIL' ? 'enquiry@innooryze.com' : n === 'CONTACT_NOTIFICATION_TO' ? 'kavyasri@innooryze.com' : /^(TURNSTILE_SECRET_KEY|MS365_)/.test(n) ? 'qa-' + n : null})},
+  PropertiesService: {getScriptProperties: () => ({setProperty: (k, v) => props.set(k, String(v)), deleteProperty: k => props.delete(k), getProperty: n => props.has(n) ? props.get(n) : n === 'MS365_SENDER_EMAIL' ? 'enquiry@innooryze.com' : n === 'CONTACT_NOTIFICATION_TO' ? 'kavyasri@innooryze.com' : /^(TURNSTILE_SECRET_KEY|MS365_)/.test(n) ? 'qa-' + n : null})},
   CacheService: {getScriptCache: () => ({get: k => cache.get(k) ?? null, put: (k, v) => cache.set(k, v)})},
-  LockService: {getScriptLock: () => ({waitLock() {}, releaseLock() {}})},
+  LockService: {getScriptLock: () => ({waitLock() {}, tryLock() { return true; }, releaseLock() {}})},
   SpreadsheetApp: {getActiveSpreadsheet: () => ({getSheets: () => [sheet]}), flush() {}},
   Utilities: {formatDate: (d, tz, f) => f === 'yyyyMMdd' ? d.toISOString().slice(0, 10).replace(/-/g, '') : d.toISOString(), getUuid: () => crypto.randomUUID(),
    computeDigest: (a, t) => [...crypto.createHash('sha256').update(t, 'utf8').digest()].map(b => b > 127 ? b - 256 : b), DigestAlgorithm: {SHA_256: 1}, Charset: {UTF_8: 1}},
@@ -173,7 +174,7 @@ const fill = tag => ev(`(()=>{const f=document.querySelector('.contact-form');co
  const s=f.elements.namedItem('whatcanwehelp');s.value=s.options[2].value;s.dispatchEvent(new Event('input',{bubbles:true}));return 1})()`);
 const clickSubmit = () => ev(`document.querySelector('.form-submit').click(),1`);
 const state = () => ev(`(()=>{const f=document.querySelector('.contact-form');const fb=f&&f.querySelector('.form-feedback');const s=document.querySelector('.contact-success');
- return {form:!!f,state:f?.dataset.state,busy:f?.getAttribute('aria-busy'),disabled:f?.querySelector('.form-submit').disabled,label:f?.querySelector('.form-submit').textContent.trim(),
+ return {form:!!f,state:f?.dataset.state,busy:f?.getAttribute('aria-busy'),disabled:f?.querySelector('.form-submit').disabled,label:f?.querySelector('.form-submit').textContent.trim(),spinner:!!f?.querySelector('.form-submit .form-spinner')&&f.querySelector('.form-spinner').getBoundingClientRect().width>0,
   status:f?.querySelector('[data-form-status]').textContent,feedback:fb&&!fb.hidden?fb.textContent:'',feedbackError:fb?.classList.contains('is-error'),
   active:document.activeElement?.className||document.activeElement?.id||document.activeElement?.tagName,success:!!s,note:!!s?.querySelector('[data-confirmation]'),
   successText:s?.innerText.replace(/\\s+/g,' ').trim(),successBox:s?(()=>{const b=s.querySelector('.contact-success-inner').getBoundingClientRect();return {top:Math.round(b.top),bottom:Math.round(b.bottom),vh:innerHeight}})():null,
@@ -214,7 +215,7 @@ if (!ONLY.length || ONLY.includes('sweep')) for (const [w, h, mobile] of VIEWPOR
  const ss = await waitFor(s => s.state === 'submitting', 5000);
  const submittingMetrics = await metrics();
  await shot(tag + '-3-submitting');
- check(tag + ' submitting: disabled, busy, announced, layout kept', ss.disabled && ss.busy === 'true' && ss.label === 'Sending…' && ss.status.includes('Sending') && submittingMetrics.button.h === before.button.h && submittingMetrics.button.w === before.button.w && submittingMetrics.wrap.h === before.wrap.h , {ss, b: before.button, a: submittingMetrics.button});
+ check(tag + ' submitting: disabled, busy, announced, layout kept', ss.disabled && ss.busy === 'true' && ss.label === 'Sending your enquiry…' && ss.spinner && ss.status.includes('Sending') && submittingMetrics.button.h === before.button.h && submittingMetrics.button.w === before.button.w && submittingMetrics.wrap.h === before.wrap.h , {ss, b: before.button, a: submittingMetrics.button});
  const se = await waitFor(s => s.state === 'error', 20000);
  check(tag + ' backend error: form kept, concise message, focus moved', se.form && se.feedbackError && se.feedback === 'We couldn’t send your message right now. Please try again or email enquiry@innooryze.com.' && se.active.includes('form-feedback') && !se.token, se);
  await shot(tag + '-4-error');
@@ -228,7 +229,7 @@ if (!ONLY.length || ONLY.includes('sweep')) for (const [w, h, mobile] of VIEWPOR
  const sfinal = await state();
  await shot(tag + '-5-success');
  const twoCol = w > 760;
- check(tag + ' success: form replaced by thank-you with confirmation', !sfinal.form && sfinal.success && sfinal.note && /THANK YOU\. Your message is with us\. We’ll review your enquiry and get back to you shortly\. A confirmation has been sent to your email\./.test(sfinal.successText), sfinal);
+ check(tag + ' success: form replaced by thank-you with confirmation', !sfinal.form && sfinal.success && sfinal.note && /THANK YOU\. Your message is with us\. We’ll review your enquiry and get back to you shortly\. A confirmation will be sent to your email shortly\./.test(sfinal.successText), sfinal);
  check(tag + ' success: left side identical', JSON.stringify(after.intro) === JSON.stringify(idle.intro) && after.introHtml === idle.introHtml, {idle: idle.intro, after: after.intro, sy: [idle.scrollY, after.scrollY]});
  if (twoCol) check(tag + ' success: section, frame and watermark do not move', JSON.stringify(after.watermark) === JSON.stringify(idle.watermark) && after.section.h === idle.section.h && after.wrap.y === idle.wrap.y && after.wrap.h === idle.wrap.h, {idleWrap: idle.wrap, afterWrap: after.wrap, beforeWrap: beforeSuccess.wrap, wm: [idle.watermark, after.watermark], sec: [idle.section.h, after.section.h]});
  check(tag + ' success: focus on the thank-you panel and panel in view', sfinal.active.includes('contact-success') && sfinal.successBox.top >= 0 && sfinal.successBox.bottom <= sfinal.successBox.vh, sfinal);
@@ -251,11 +252,28 @@ async function submitted(sc, tag, {vp = [1440, 900, false]} = {}) {
  return {s, posts: received.slice(n)};
 }
 if (!ONLY.length || ONLY.includes('scenarios')) {
- // capture success + acknowledgement failure
- let r = await submitted({ackFails: true}, 'ackfail');
- check('ack failure: captured, no confirmation implied', r.s.success && !r.s.note && !/confirmation/i.test(r.s.successText), r.s);
+ // Loading appears immediately; the thank-you arrives from captured=true with no email sent yet.
+ await viewport(1440, 900, false); scenario = {ackFails: true};
+ await open('https://innooryze.com/contact'); await fill('async'); await sleep(3300);
+ const mailsBefore = mails.length, nAsync = received.length;
+ const clickedAt = Date.now();
+ await clickSubmit();
+ const immediate = await state();
+ check('loading state appears immediately on click', immediate.state === 'submitting' && immediate.label === 'Sending your enquiry…' && immediate.spinner && immediate.disabled && immediate.status === 'Sending your enquiry…', immediate);
+ const done = await waitFor(x => x.success || x.state === 'error', 30000);
+ const elapsedMs = Date.now() - clickedAt;
+ check('thank-you from captured=true, before any email is sent', done.success && done.note && mails.length === mailsBefore, {done, mailsBefore, mails: mails.length});
  const row = rows().at(-1);
- check('sheet row: server fields', /^IR-\d{8}-[A-F0-9]{8}$/.test(row.submissionid) && row.createddate instanceof Date && row.submittedfrom === 'website_contact' && row.status === 'New' && row.internalemailstatus === 'sent' && row.ackemailstatus === 'failed' && row.leadryzeid === '', row);
+ check('sheet row: server fields, both emails pending, LeadRyze blank', /^IR-\d{8}-[A-F0-9]{8}$/.test(row.submissionid) && row.createddate instanceof Date && row.submittedfrom === 'website_contact' && row.status === 'New' && row.internalemailstatus === 'pending' && row.ackemailstatus === 'pending' && row.leadryzeid === '', row);
+ const rowsBefore = rows().length;
+ // Drain the queue the way the one-minute trigger would: repeated runs, oldest rows first.
+ let summary = {rows: 0}, runs = 0;
+ for (let last; runs < 20 && (last = gas.processPendingContactEmails()).rows; runs++) summary.rows += last.rows;
+ const after = rows().at(-1);
+ check('worker afterwards: internal sent, failed acknowledgement isolated, no new row', after.internalemailstatus === 'sent' && after.ackemailstatus === 'failed' && after.leadryzeid === '' && rows().length === rowsBefore && summary.rows >= 1, {after, summary});
+ results.asyncTiming = {clickToThankYouMs: elapsedMs};
+ console.log('click → thank-you (local, simulated backend, Turnstile test key):', elapsedMs + 'ms');
+ let r = {posts: received.slice(nAsync)};
  // the actual POST the browser sent
  const p = r.posts[0];
  check('POST is urlencoded with every mapped field', p && /application\/x-www-form-urlencoded/.test(p.contentType) && ['firstname','lastname','workemail','company','role','countryregion','whatcanwehelp','message','submittedfrom','referrer','utmsource','utmmedium','utmcampaign','utmcontent','utmterm','website','formstartedat','formsubmittedat','turnstiletoken','submissionnonce','parentorigin'].every(k => k in p.params), p);
@@ -355,7 +373,7 @@ if (!ONLY.length || ONLY.includes('scenarios')) {
  const tree = nodeId ? await send('Accessibility.getPartialAXTree', {nodeId, fetchRelatives: false}) : {nodes: [{}]};
  const node = tree.nodes[0];
  const name = node.name?.value, desc = node.description?.value;
- check('success panel announces its heading and message on focus', name === 'THANK YOU. Your message is with us.' && /We’ll review your enquiry/.test(desc) && /confirmation has been sent/.test(desc), {name, desc});
+ check('success panel announces its heading and message on focus', name === 'THANK YOU. Your message is with us.' && /We’ll review your enquiry/.test(desc) && /confirmation will be sent to your email shortly/.test(desc), {name, desc});
 
  // Reduced motion: no entrance animation
  await send('Emulation.setEmulatedMedia', {features: [{name: 'prefers-reduced-motion', value: 'reduce'}]});

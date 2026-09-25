@@ -55,6 +55,7 @@ export function readResult(event, {nonce, frameWindow, config}) {
   captured,
   submissionId: captured && typeof data.submissionId === 'string' && /^[A-Za-z0-9-]{1,40}$/.test(data.submissionId) ? data.submissionId : '',
   acknowledgementEmailSent: captured && data.acknowledgementEmailSent === true,
+  acknowledgementQueued: captured && data.acknowledgementQueued === true,
   internalEmailSent: captured && data.internalEmailSent === true,
   code: typeof data.code === 'string' && /^[a-z_]{1,40}$/.test(data.code) ? data.code : (captured ? 'captured' : 'server_error')
  };

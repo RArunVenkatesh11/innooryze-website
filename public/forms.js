@@ -6,12 +6,13 @@ import {announceLeadCaptured} from './integrations.js';
 
 // Contact form controller: IDLE → SUBMITTING → SUCCESS | ERROR.
 // The form posts natively (urlencoded) into a hidden iframe; see contact-transport.js for why and how the
-// result is verified. An enquiry counts as received when the backend reports captured:true — the enquiry
-// record is the durable copy, so a failed notification or acknowledgement email never turns a captured
-// enquiry into an error.
+// result is verified. An enquiry counts as received when the backend reports captured:true. The backend
+// answers as soon as the enquiry is recorded and sends both emails afterwards from a background worker, so
+// the visitor never waits for email, and an email problem never turns a captured enquiry into an error.
 
 export const FAILURE_EMAIL = 'enquiry@innooryze.com';
 export const FAILURE_MESSAGE = 'We couldn’t send your message right now. Please try again or email ';
+export const BUSY_LABEL = 'Sending your enquiry…';
 export const PREVIEW_MESSAGE = 'Development preview: enquiries are sent only from innooryze.com, so nothing was sent from this copy of the site. Please email ';
 
 // Real submissions happen only on the production hostnames (allowlist; everything else is excluded).
@@ -19,9 +20,10 @@ export function isLiveHost(hostname, config) {
  return Array.isArray(config?.liveHosts) && config.liveHosts.includes(hostname);
 }
 
-// What the interface does with a verified backend result (or with none at all).
+// What the interface does with a verified backend result (or with none at all). The confirmation line
+// ("will be sent shortly") appears only when the backend has queued the acknowledgement email.
 export function outcomeFor(result) {
- if (result && result.captured === true) return {state: 'success', confirmation: result.acknowledgementEmailSent === true};
+ if (result && result.captured === true) return {state: 'success', confirmation: result.acknowledgementQueued === true || result.acknowledgementEmailSent === true};
  return {state: 'error'};
 }
 
@@ -64,7 +66,13 @@ export function initContactForm({config, motionStopped = () => false, win = wind
   form.setAttribute('aria-busy', String(busy));
   submit.disabled = busy;
   // The label loses its arrow while sending; the height is held so nothing below the button moves.
-  if (busy) { submit.style.minHeight = submit.getBoundingClientRect().height + 'px'; submit.textContent = 'Sending…'; }
+  if (busy) {
+   submit.style.minHeight = submit.getBoundingClientRect().height + 'px';
+   const spinner = doc.createElement('span');
+   spinner.className = 'form-spinner';
+   spinner.setAttribute('aria-hidden', 'true');
+   submit.replaceChildren(BUSY_LABEL, spinner);
+  }
   else { submit.innerHTML = initialLabel; submit.style.minHeight = ''; }
  };
  setState('idle');
@@ -153,7 +161,7 @@ export function initContactForm({config, motionStopped = () => false, win = wind
 
   setState('submitting');
   feedback.hidden = true;
-  announce('Sending your enquiry…');
+  announce(BUSY_LABEL);
 
   let result = null;
   try {

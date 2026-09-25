@@ -18,6 +18,7 @@ function backend({headers = COLUMNS, turnstile = {success: true, action: 'contac
  const cache = new Map();
  const fetches = [];
  const logs = [];
+ const props = new Map(Object.entries(SECRETS));
  const sheet = {
   getLastColumn: () => grid[0].length,
   getLastRow: () => grid.length,
@@ -34,9 +35,9 @@ function backend({headers = COLUMNS, turnstile = {success: true, action: 'contac
  const context = {
   console: {log: m => logs.push(m), warn: m => logs.push(m), error: m => logs.push(m)},
   JSON, Math, Date, Number, String, Array, Object, RegExp, Error, isFinite, encodeURIComponent,
-  PropertiesService: {getScriptProperties: () => ({getProperty: name => SECRETS[name] || null})},
+  PropertiesService: {getScriptProperties: () => ({getProperty: name => props.has(name) ? props.get(name) : null, setProperty: (k, v) => props.set(k, String(v)), deleteProperty: k => props.delete(k)})},
   CacheService: {getScriptCache: () => ({get: k => cache.get(k) ?? null, put: (k, v) => cache.set(k, v)})},
-  LockService: {getScriptLock: () => ({waitLock() {}, releaseLock() {}})},
+  LockService: {getScriptLock: () => ({waitLock() {}, tryLock() { return true; }, releaseLock() {}})},
   SpreadsheetApp: {getActiveSpreadsheet: () => ({getSheets: () => [sheet], getSheetByName: () => sheet}), openById: () => null, flush() {}},
   Utilities: {
    formatDate: (d, tz, fmt) => fmt === 'yyyyMMdd' ? d.toISOString().slice(0, 10).replace(/-/g, '') : d.toISOString(),
@@ -66,7 +67,10 @@ function backend({headers = COLUMNS, turnstile = {success: true, action: 'contac
  vm.runInContext(source, context);
  const rows = () => grid.slice(1).map(line => Object.fromEntries(headers.map((h, i) => [h, line[i]])));
  const mails = () => fetches.filter(f => f.url.includes('graph.microsoft.com')).map(f => ({url: f.url, ...JSON.parse(f.options.payload).message}));
- return {context, rows, mails, fetches, logs, formats, cache};
+ const worker = () => context.processPendingContactEmails();
+ // Simulates someone sorting the Sheet (newest first).
+ const reverseRows = () => { const body = grid.splice(1); grid.push(...body.reverse()); };
+ return {context, rows, mails, fetches, logs, formats, cache, props, worker, reverseRows, grid};
 }
 
 let counter = 0;
@@ -92,22 +96,24 @@ test('doGet keeps the live health response', () => {
  assert.deepEqual(JSON.parse(out.text), {ok: true, service: 'innooryze-contact-form', status: 'available'});
 });
 
-test('captured enquiry: one row, server-side fields, both emails, safe postMessage to the exact origin', () => {
+test('submission returns captured before any email work: row pending, no Microsoft call, safe postMessage', () => {
  const b = backend();
  const p = params();
  const out = post(b, p);
  assert.equal(out.xfo, 'ALLOWALL', 'the response must be frameable by the website');
+ assert.equal(b.fetches.filter(f => /microsoftonline|graph\.microsoft/.test(f.url)).length, 0, 'no token request or sendMail during submission');
  const {message, target} = posted(out);
  assert.equal(target, 'https://innooryze.com');
  assert.ok(!out.html.includes("'*'") && !out.html.includes('"*"'), 'never posts to *');
- assert.deepEqual(Object.keys(message).sort(), ['acknowledgementEmailSent', 'captured', 'code', 'internalEmailSent', 'ok', 'submissionId', 'submissionNonce', 'type', 'version']);
+ assert.deepEqual(Object.keys(message).sort(), ['acknowledgementEmailSent', 'acknowledgementQueued', 'captured', 'code', 'internalEmailSent', 'ok', 'submissionId', 'submissionNonce', 'type', 'version']);
  assert.equal(message.type, 'innooryze:contact-result');
  assert.equal(message.captured, true);
- assert.equal(message.acknowledgementEmailSent, true);
- assert.equal(message.internalEmailSent, true);
+ assert.equal(message.acknowledgementQueued, true);
+ assert.equal(message.acknowledgementEmailSent, false, 'nothing has been sent yet');
+ assert.equal(message.internalEmailSent, false);
  assert.equal(message.submissionNonce, p.submissionnonce);
  assert.match(message.submissionId, /^IR-\d{8}-[A-F0-9]{8}$/);
- for (const secretOrPersonal of [p.workemail, p.firstname, p.company, p.message, p.turnstiletoken, ...Object.values(SECRETS), 'graph-access-token'])
+ for (const secretOrPersonal of [p.workemail, p.firstname, p.company, p.message, p.turnstiletoken, ...Object.values(SECRETS)])
   assert.ok(!out.html.includes(secretOrPersonal), 'response leaks ' + secretOrPersonal);
 
  const rows = b.rows();
@@ -117,46 +123,123 @@ test('captured enquiry: one row, server-side fields, both emails, safe postMessa
  assert.ok(row.createddate instanceof Date && Math.abs(row.createddate - Date.now()) < 5000, 'createddate is set by the server');
  assert.equal(row.submittedfrom, 'website_contact');
  assert.equal(row.status, 'New');
- assert.equal(row.internalemailstatus, 'sent');
- assert.equal(row.ackemailstatus, 'sent');
+ assert.equal(row.internalemailstatus, 'pending');
+ assert.equal(row.ackemailstatus, 'pending');
  assert.equal(row.leadryzeid, '');
  assert.equal(row.workemail, p.workemail);
- assert.equal(row.whatcanwehelp, 'LeadRyze AI');
  assert.equal(row.referrer, 'https://www.google.com/');
  assert.equal(row.utmcampaign, 'launch');
-
- const [internal, ack] = b.mails();
- assert.match(internal.url, /users\/enquiry%40innooryze\.com\/sendMail$/, 'sent from enquiry@innooryze.com');
- assert.deepEqual(internal.toRecipients, [{emailAddress: {address: 'kavyasri@innooryze.com'}}]);
- assert.equal(internal.replyTo[0].emailAddress.address, p.workemail, 'internal Reply-To is the visitor');
- assert.ok(internal.body.content.includes(message.submissionId));
- assert.match(ack.url, /users\/enquiry%40innooryze\.com\/sendMail$/);
- assert.deepEqual(ack.toRecipients, [{emailAddress: {address: p.workemail}}]);
- assert.ok(!ack.body.content.includes(p.message), 'the acknowledgement never repeats the visitor message');
  const verify = b.fetches.find(f => f.url.includes('siteverify'));
  assert.equal(verify.options.payload.secret, SECRETS.TURNSTILE_SECRET_KEY);
- assert.equal(verify.options.payload.response, 'turnstile-token');
 });
 
-test('acknowledgement failure still captures, and says no confirmation was sent', () => {
- const b = backend({mail: m => m.toRecipients[0].emailAddress.address === 'kavyasri@innooryze.com' ? 202 : 403});
- const {message} = posted(post(b, params()));
- assert.equal(message.captured, true);
- assert.equal(message.internalEmailSent, true);
- assert.equal(message.acknowledgementEmailSent, false);
- assert.equal(b.rows()[0].ackemailstatus, 'failed');
- assert.equal(b.rows()[0].internalemailstatus, 'sent');
- assert.ok(!b.logs.join(' ').includes('visitor@example.com'), 'provider error text is not logged');
+test('worker sends the internal notification and the acknowledgement, then marks both sent', () => {
+ const b = backend();
+ const p = params();
+ const {message} = posted(post(b, p));
+ const summary = b.worker();
+ assert.deepEqual({rows: summary.rows, sent: summary.sent, failed: summary.failed}, {rows: 1, sent: 2, failed: 0});
+ const [internal, ack] = b.mails();
+ assert.match(internal.url, /users\/enquiry%40innooryze\.com\/sendMail$/, 'sent from the configured sender');
+ assert.deepEqual(internal.toRecipients, [{emailAddress: {address: 'kavyasri@innooryze.com'}}]);
+ assert.equal(internal.replyTo[0].emailAddress.address, p.workemail, 'internal Reply-To is the visitor');
+ assert.ok(internal.body.content.includes(message.submissionId) && internal.body.content.includes('Singapore'));
+ assert.deepEqual(ack.toRecipients, [{emailAddress: {address: p.workemail}}]);
+ assert.equal(ack.replyTo[0].emailAddress.address, 'enquiry@innooryze.com');
+ assert.ok(ack.body.content.includes(message.submissionId));
+ assert.ok(!ack.body.content.includes(p.message), 'the acknowledgement never repeats the visitor message');
+ const row = b.rows()[0];
+ assert.deepEqual([row.internalemailstatus, row.ackemailstatus], ['sent', 'sent']);
+ assert.equal(row.leadryzeid, '', 'LeadRyze stays untouched');
+ assert.equal(b.rows().length, 1, 'the worker never creates rows');
 });
 
-test('Microsoft Graph unavailable: the enquiry is still captured with both email statuses failed', () => {
+test('one email failing does not affect the other; failed stays failed and is not retried', () => {
+ const ackFails = backend({mail: m => m.toRecipients[0].emailAddress.address === 'kavyasri@innooryze.com' ? 202 : 403});
+ post(ackFails, params());
+ ackFails.worker();
+ assert.deepEqual([ackFails.rows()[0].internalemailstatus, ackFails.rows()[0].ackemailstatus], ['sent', 'failed']);
+ assert.ok(!ackFails.logs.join(' ').includes('visitor@example.com'), 'provider error text is not logged');
+ const before = ackFails.mails().length;
+ ackFails.worker();
+ assert.equal(ackFails.mails().length, before, 'neither a sent nor a failed email is sent again');
+
+ const internalFails = backend({mail: m => m.toRecipients[0].emailAddress.address === 'kavyasri@innooryze.com' ? 500 : 202});
+ post(internalFails, params());
+ internalFails.worker();
+ assert.deepEqual([internalFails.rows()[0].internalemailstatus, internalFails.rows()[0].ackemailstatus], ['failed', 'sent']);
+});
+
+test('Microsoft Graph unavailable: statuses become failed, the lead stays captured and single', () => {
  const b = backend({graphToken: 401});
  const {message} = posted(post(b, params()));
  assert.equal(message.captured, true);
- assert.equal(message.internalEmailSent, false);
- assert.equal(message.acknowledgementEmailSent, false);
+ b.worker();
  assert.deepEqual([b.rows()[0].internalemailstatus, b.rows()[0].ackemailstatus], ['failed', 'failed']);
+ assert.equal(b.rows().length, 1);
 });
+
+test('rerunning the worker never resends; resetting a status to pending retries just that email', () => {
+ const b = backend();
+ post(b, params());
+ b.worker();
+ b.worker();
+ assert.equal(b.mails().length, 2);
+ b.grid[1][COLUMNS.indexOf('ackemailstatus')] = 'Pending';   // an operator asks for a resend
+ b.worker();
+ assert.equal(b.mails().length, 3);
+ assert.equal(b.mails()[2].toRecipients[0].emailAddress.address, b.rows()[0].workemail);
+ assert.equal(b.rows()[0].ackemailstatus, 'sent');
+});
+
+test('concurrent workers: an active lease makes a second run skip; the lease is released afterwards', () => {
+ const b = backend();
+ post(b, params());
+ b.props.set('CONTACT_EMAIL_WORKER_LEASE', String(Date.now() + 60000));
+ assert.equal(b.worker().skipped, true);
+ assert.equal(b.mails().length, 0);
+ assert.equal(b.rows()[0].internalemailstatus, 'pending');
+ b.props.set('CONTACT_EMAIL_WORKER_LEASE', String(Date.now() - 1));   // an expired lease from a crashed run
+ assert.equal(b.worker().skipped, false);
+ assert.equal(b.mails().length, 2);
+ assert.equal(b.props.has('CONTACT_EMAIL_WORKER_LEASE'), false, 'lease released');
+});
+
+test('worker processes a bounded batch, oldest first', () => {
+ const b = backend();
+ for (let i = 0; i < 12; i++) post(b, params());
+ assert.equal(b.worker().rows, 10);
+ assert.equal(b.rows().filter(r => r.internalemailstatus === 'sent').length, 10);
+ assert.deepEqual(b.rows().slice(10).map(r => r.internalemailstatus), ['pending', 'pending']);
+ b.worker();
+ assert.equal(b.rows().filter(r => r.internalemailstatus === 'sent').length, 12);
+});
+
+test('a status is written to the right enquiry even if the Sheet was sorted meanwhile', () => {
+ const b = backend();
+ post(b, params()); post(b, params());
+ const ids = b.rows().map(r => r.submissionid);
+ // Sort between the worker's status read and its write: the first sendMail triggers the reorder.
+ let sorted = false;
+ const original = b.context.sendMail_;
+ b.context.sendMail_ = m => { if (!sorted) { sorted = true; b.reverseRows(); } return original(m); };
+ b.worker();
+ b.worker();   // anything the sort moved out of reach is picked up by the next run
+ for (const row of b.rows()) assert.deepEqual([row.internalemailstatus, row.ackemailstatus], ['sent', 'sent'], row.submissionid);
+ assert.deepEqual(b.rows().map(r => r.submissionid).sort(), ids.sort());
+ assert.equal(b.mails().length, 4, 'exactly two emails per enquiry: nothing was sent twice');
+ for (const id of ids) assert.equal(b.mails().filter(m => m.body.content.includes(id)).length, 2, id);
+});
+
+test('formula-protected values are restored for the emails', () => {
+ const b = backend();
+ post(b, params({company: '=Acme', role: '+Partner'}));
+ b.worker();
+ const [internal] = b.mails();
+ assert.ok(internal.subject.endsWith('| =Acme'), internal.subject);
+ assert.ok(!internal.body.content.includes("'=Acme"));
+});
+
 
 test('honeypot: rejected before Turnstile, nothing written', () => {
  const b = backend();
@@ -227,7 +310,7 @@ test('replaying the same submission returns the original result without a second
  const second = posted(post(b, p)).message;
  assert.equal(second.submissionId, first.submissionId);
  assert.equal(b.rows().length, 1);
- assert.equal(b.mails().length, 2);
+ assert.equal(b.mails().length, 0, 'no email is sent during submission');
 });
 
 test('the same enquiry resubmitted with a new nonce is a duplicate, not a second row', () => {

@@ -15,12 +15,16 @@
  * Optional:
  *   SHEET_ID               Spreadsheet ID. Omit when the script is bound to the enquiry spreadsheet.
  *   SHEET_NAME             Tab name. Omit to use the first tab whose header row contains "submissionid".
+ * Written by the script itself (do not edit):
+ *   CONTACT_EMAIL_WORKER_LEASE  Expiry time of the running email worker, so two runs never overlap.
  *
- * Browser flow: the website's form posts application/x-www-form-urlencoded into a hidden iframe. doPost()
- * validates, records the enquiry in the Sheet, sends the two Microsoft Graph emails, and returns a tiny
- * HTML page that posts a non-sensitive result to the validated parent origin with window.postMessage.
- * The Sheet row is the durable record: an enquiry counts as captured once its row is written, whether or
- * not the emails succeed.
+ * CAPTURE FIRST, INTEGRATE SECOND.
+ *   doPost()  validate → Turnstile → duplicate/rate checks → Sheet row (emails "pending") → respond.
+ *             The visitor's wait ends here. Nothing in this path talks to Microsoft.
+ *   processPendingContactEmails()  runs from a time-driven trigger (every minute), picks up "pending"
+ *             email statuses and sends them through Microsoft Graph, marking each "sent" or "failed".
+ * The Sheet row is the durable record: an enquiry is captured once its row is written, whatever happens to
+ * the emails or to any later integration.
  */
 
 var CONFIG = {
@@ -36,7 +40,8 @@ var CONFIG = {
     'www.innooryze.com',
     'innooryze-website.vercel.app'
   ],
-  // submittedfrom values this endpoint accepts. Future channels (e.g. a website chatbot) are added here.
+  // submittedfrom values this endpoint accepts. Future channels (website_chatbot, campaign_landing_page,
+  // event_lead) get their own ingestion path; see docs/CONTACT_INTEGRATION.md.
   SOURCES: ['website_contact'],
   DEFAULT_SOURCE: 'website_contact',
   INITIAL_STATUS: 'New',
@@ -50,6 +55,16 @@ var CONFIG = {
   THROTTLE_WINDOW_S: 3600,
   RESULT_TYPE: 'innooryze:contact-result'
 };
+
+// Background email worker.
+var WORKER = {
+  BATCH_SIZE: 10,                    // rows per run; the trigger runs every minute
+  MAX_RUNTIME_MS: 3.5 * 60 * 1000,   // stop starting new rows after this; Apps Script's own limit is 6 minutes
+  LEASE_MS: 7 * 60 * 1000,           // longer than any possible run, so a live run's lease never expires under it
+  LEASE_PROPERTY: 'CONTACT_EMAIL_WORKER_LEASE'
+};
+
+var STATUS = {PENDING: 'pending', SENT: 'sent', FAILED: 'failed'};
 
 var FIELDS = {
   firstname:     {required: true,  max: 120},
@@ -95,7 +110,7 @@ function doPost(e) {
 }
 
 // ---------------------------------------------------------------------------------------------------------
-// Submission pipeline
+// Submission pipeline (synchronous: the visitor waits for exactly this, and nothing else)
 // ---------------------------------------------------------------------------------------------------------
 
 function handleSubmission_(params, origin, nonce) {
@@ -125,8 +140,8 @@ function handleSubmission_(params, origin, nonce) {
     return remember(failure_('rejected'));
   }
 
-  var lead = validateLead_(params);
-  if (!lead) return remember(failure_('invalid'));
+  var normalized = normalizeLead_(params);
+  if (!normalized) return remember(failure_('invalid'));
 
   var verification = verifyTurnstile_(params.turnstiletoken, hostOf_(origin));
   if (!verification.ok) {
@@ -135,19 +150,10 @@ function handleSubmission_(params, origin, nonce) {
     return failure_('verification_failed');
   }
 
-  var meta = {
-    submittedfrom: CONFIG.SOURCES.indexOf(clean_(params.submittedfrom, 60)) > -1 ? clean_(params.submittedfrom, 60) : CONFIG.DEFAULT_SOURCE,
-    referrer: safeUrl_(params.referrer),
-    utmsource: clean_(params.utmsource, 150),
-    utmmedium: clean_(params.utmmedium, 150),
-    utmcampaign: clean_(params.utmcampaign, 150),
-    utmcontent: clean_(params.utmcontent, 150),
-    utmterm: clean_(params.utmterm, 150)
-  };
-
+  var lead = normalized.lead;
   var fingerprint = digest_(lead.workemail.toLowerCase() + '|' + lead.message.replace(/\s+/g, ' ').toLowerCase());
   var throttleKey = 'rate:' + digest_(lead.workemail.toLowerCase());
-  var record;
+  var result;
 
   var lock = LockService.getScriptLock();
   lock.waitLock(20000);
@@ -162,31 +168,28 @@ function handleSubmission_(params, origin, nonce) {
     var count = Number(cache.get(throttleKey) || 0);
     if (count >= CONFIG.THROTTLE_PER_EMAIL) { console.warn('contact: throttled'); return remember(failure_('rate_limited')); }
 
-    record = appendLead_(lead, meta);
+    var saved = saveLead_(normalized);
+    result = capturedResult_(saved.submissionId);
     cache.put(throttleKey, String(count + 1), CONFIG.THROTTLE_WINDOW_S);
-    // Held as pending until the emails finish, so a retry in the meantime cannot create a second row.
-    cache.put('dup:' + fingerprint, JSON.stringify(capturedResult_(record.submissionId, false, false)), CONFIG.DUPLICATE_WINDOW_S);
+    cache.put('dup:' + fingerprint, JSON.stringify(result), CONFIG.DUPLICATE_WINDOW_S);
   } finally {
     lock.releaseLock();
   }
 
-  var internalSent = sendSafely_('internal', function () { sendInternalEmail_(lead, meta, record); });
-  var ackSent = sendSafely_('acknowledgement', function () { sendAcknowledgementEmail_(lead, record); });
-  record.setEmailStatus(internalSent ? 'sent' : 'failed', ackSent ? 'sent' : 'failed');
-
-  var result = capturedResult_(record.submissionId, internalSent, ackSent);
-  cache.put('dup:' + fingerprint, JSON.stringify(result), CONFIG.DUPLICATE_WINDOW_S);
-  console.log('contact: captured ' + record.submissionId + ' internal=' + internalSent + ' ack=' + ackSent);
+  console.log('contact: captured ' + result.submissionId + ' (emails queued)');
   return remember(result);
 }
 
-function capturedResult_(submissionId, internalSent, ackSent) {
-  return {ok: true, captured: true, submissionId: submissionId, internalEmailSent: internalSent,
-    acknowledgementEmailSent: ackSent, code: 'captured'};
+// Captured means the row exists. Both emails are queued ("pending") for the background worker; nothing has
+// been sent yet, so the *Sent flags are false and the website must not claim that an email was delivered.
+function capturedResult_(submissionId) {
+  return {ok: true, captured: true, submissionId: submissionId, internalEmailSent: false,
+    acknowledgementEmailSent: false, acknowledgementQueued: true, code: 'captured'};
 }
 
 function failure_(code) {
-  return {ok: false, captured: false, submissionId: '', internalEmailSent: false, acknowledgementEmailSent: false, code: code};
+  return {ok: false, captured: false, submissionId: '', internalEmailSent: false, acknowledgementEmailSent: false,
+    acknowledgementQueued: false, code: code};
 }
 
 // Only these keys ever leave the server. No names, emails, message text, tokens or provider errors.
@@ -198,6 +201,7 @@ function resultMessage_(result, nonce) {
     captured: result.captured === true,
     submissionId: result.captured ? String(result.submissionId || '') : '',
     acknowledgementEmailSent: result.acknowledgementEmailSent === true,
+    acknowledgementQueued: result.captured === true && result.acknowledgementQueued === true,
     internalEmailSent: result.internalEmailSent === true,
     code: String(result.code || 'server_error'),
     submissionNonce: nonce || ''
@@ -205,10 +209,18 @@ function resultMessage_(result, nonce) {
 }
 
 // ---------------------------------------------------------------------------------------------------------
-// Validation and sanitising
+// Normalised lead
+//
+// Every channel produces the same shape, independent of where it is stored:
+//   {lead: {firstname, lastname, workemail, company, role, countryregion, whatcanwehelp, message},
+//    source: {submittedfrom},
+//    attribution: {referrer, utmsource, utmmedium, utmcampaign, utmcontent, utmterm}}
+// The system fields (submissionid, createddate, status) are assigned when the lead is saved. The Sheet
+// repository below is the only code that knows about columns; the email processor and any future LeadRyze
+// adapter consume the normalised shape.
 // ---------------------------------------------------------------------------------------------------------
 
-function validateLead_(params) {
+function normalizeLead_(params) {
   var lead = {};
   for (var key in FIELDS) {
     var rule = FIELDS[key];
@@ -220,7 +232,19 @@ function validateLead_(params) {
     lead[key] = value;
   }
   if (!EMAIL_PATTERN.test(lead.workemail)) return null;
-  return lead;
+  var submittedfrom = clean_(params.submittedfrom, 60);
+  return {
+    lead: lead,
+    source: {submittedfrom: CONFIG.SOURCES.indexOf(submittedfrom) > -1 ? submittedfrom : CONFIG.DEFAULT_SOURCE},
+    attribution: {
+      referrer: safeUrl_(params.referrer),
+      utmsource: clean_(params.utmsource, 150),
+      utmmedium: clean_(params.utmmedium, 150),
+      utmcampaign: clean_(params.utmcampaign, 150),
+      utmcontent: clean_(params.utmcontent, 150),
+      utmterm: clean_(params.utmterm, 150)
+    }
+  };
 }
 
 function clean_(value, max) {
@@ -246,12 +270,6 @@ function hostOf_(origin) {
   return origin.replace(/^https:\/\//, '');
 }
 
-// Sheets would evaluate a cell that starts with one of these as a formula. A leading apostrophe forces text.
-function sheetSafe_(value) {
-  var text = String(value == null ? '' : value);
-  return /^[=+\-@\t\r]/.test(text) ? "'" + text : text;
-}
-
 // ---------------------------------------------------------------------------------------------------------
 // Cloudflare Turnstile
 // ---------------------------------------------------------------------------------------------------------
@@ -274,7 +292,7 @@ function verifyTurnstile_(token, expectedHost) {
 }
 
 // ---------------------------------------------------------------------------------------------------------
-// Google Sheet
+// Sheet repository: the only code that knows about spreadsheet columns
 // ---------------------------------------------------------------------------------------------------------
 
 function enquirySheet_() {
@@ -294,7 +312,7 @@ function enquirySheet_() {
   return sheets[0];
 }
 
-// Columns are located by header name, so the Sheet's column order can change without breaking the writer.
+// Columns are located by header name, so the Sheet's column order can change without breaking anything.
 function headerIndex_(sheet) {
   var width = Math.max(sheet.getLastColumn(), 1);
   var headers = sheet.getRange(1, 1, 1, width).getValues()[0];
@@ -303,33 +321,52 @@ function headerIndex_(sheet) {
   return index;
 }
 
-function appendLead_(lead, meta) {
-  var sheet = enquirySheet_();
-  var index = headerIndex_(sheet);
+function requireColumns_(index) {
   var missing = COLUMNS.filter(function (c) { return index[c] === undefined; });
   if (missing.length) throw new Error('Sheet is missing columns: ' + missing.join(', '));
+}
+
+// Sheets would evaluate a cell that starts with one of these as a formula. A leading apostrophe forces text.
+function sheetSafe_(value) {
+  var text = String(value == null ? '' : value);
+  return /^[=+\-@\t\r]/.test(text) ? "'" + text : text;
+}
+
+// The inverse, for values read back from the Sheet.
+function sheetText_(value) {
+  var text = value instanceof Date ? value.toISOString() : String(value == null ? '' : value);
+  return /^'[=+\-@\t\r]/.test(text) ? text.slice(1) : text;
+}
+
+// Called under the script lock. One flush, so the next submission's getLastRow() sees this row; the email
+// statuses start as pending and are the worker's queue.
+function saveLead_(normalized) {
+  var sheet = enquirySheet_();
+  var index = headerIndex_(sheet);
+  requireColumns_(index);
 
   var width = sheet.getLastColumn();
   var created = new Date();
   var submissionId = 'IR-' + Utilities.formatDate(created, 'Etc/UTC', 'yyyyMMdd') + '-' +
     Utilities.getUuid().replace(/-/g, '').slice(0, 8).toUpperCase();
-  var values = {
+  var lead = normalized.lead, attribution = normalized.attribution;
+  var record = {
     submissionid: submissionId,
     firstname: lead.firstname, lastname: lead.lastname, workemail: lead.workemail, company: lead.company,
     role: lead.role, countryregion: lead.countryregion, whatcanwehelp: lead.whatcanwehelp, message: lead.message,
     createddate: created,
-    submittedfrom: meta.submittedfrom, referrer: meta.referrer,
-    utmsource: meta.utmsource, utmmedium: meta.utmmedium, utmcampaign: meta.utmcampaign,
-    utmcontent: meta.utmcontent, utmterm: meta.utmterm,
+    submittedfrom: normalized.source.submittedfrom,
+    referrer: attribution.referrer, utmsource: attribution.utmsource, utmmedium: attribution.utmmedium,
+    utmcampaign: attribution.utmcampaign, utmcontent: attribution.utmcontent, utmterm: attribution.utmterm,
     status: CONFIG.INITIAL_STATUS,
-    internalemailstatus: 'pending',
-    ackemailstatus: 'pending',
-    leadryzeid: ''
+    internalemailstatus: STATUS.PENDING,
+    ackemailstatus: STATUS.PENDING,
+    leadryzeid: ''                    // reserved for the future LeadRyze CRM adapter; never set here
   };
   var row = [];
   for (var i = 0; i < width; i++) row.push('');
   COLUMNS.forEach(function (column) {
-    row[index[column]] = column === 'createddate' ? values[column] : sheetSafe_(values[column]);
+    row[index[column]] = column === 'createddate' ? record[column] : sheetSafe_(record[column]);
   });
 
   var rowNumber = sheet.getLastRow() + 1;
@@ -339,28 +376,130 @@ function appendLead_(lead, meta) {
   sheet.getRange(rowNumber, index.createddate + 1).setNumberFormat('yyyy-mm-dd hh:mm:ss');
   range.setValues([row]);
   SpreadsheetApp.flush();
+  return {submissionId: submissionId, created: created};
+}
 
+// Rebuilds the normalised lead (plus system fields) from a stored row.
+function rowToLead_(values, index) {
+  var get = function (column) { return sheetText_(values[index[column]]); };
+  var lead = {};
+  for (var key in FIELDS) lead[key] = get(key);
   return {
-    submissionId: submissionId,
-    created: created,
-    setEmailStatus: function (internalStatus, ackStatus) {
-      sheet.getRange(rowNumber, index.internalemailstatus + 1).setValue(internalStatus);
-      sheet.getRange(rowNumber, index.ackemailstatus + 1).setValue(ackStatus);
-      SpreadsheetApp.flush();
-    }
+    lead: lead,
+    source: {submittedfrom: get('submittedfrom')},
+    attribution: {referrer: get('referrer'), utmsource: get('utmsource'), utmmedium: get('utmmedium'),
+      utmcampaign: get('utmcampaign'), utmcontent: get('utmcontent'), utmterm: get('utmterm')},
+    system: {submissionid: get('submissionid'),
+      createddate: values[index.createddate] instanceof Date ? values[index.createddate] : new Date(get('createddate')),
+      status: get('status'), leadryzeid: get('leadryzeid')}
   };
 }
 
+// Writes one email status, re-locating the row by submission ID if someone sorted or edited the Sheet since
+// it was read, so a status can never land on another person's enquiry.
+function setEmailStatus_(sheet, index, rowNumber, submissionId, column, value) {
+  var idCell = String(sheet.getRange(rowNumber, index.submissionid + 1).getValues()[0][0]);
+  if (idCell !== submissionId) {
+    var ids = sheet.getRange(2, index.submissionid + 1, Math.max(sheet.getLastRow() - 1, 1), 1).getValues();
+    rowNumber = 0;
+    for (var i = 0; i < ids.length; i++) if (String(ids[i][0]) === submissionId) { rowNumber = i + 2; break; }
+    if (!rowNumber) { console.warn('contact-worker: ' + submissionId + ' no longer in the Sheet'); return; }
+  }
+  sheet.getRange(rowNumber, index[column] + 1).setValue(value);
+}
+
 // ---------------------------------------------------------------------------------------------------------
-// Microsoft Graph (application permission Mail.Send, client-credentials flow)
+// Background email worker (time-driven trigger, every minute)
 // ---------------------------------------------------------------------------------------------------------
 
-function sendSafely_(label, send) {
+function processPendingContactEmails() {
+  var started = Date.now();
+  if (!acquireWorkerLease_()) { console.log('contact-worker: previous run still active, skipping'); return {skipped: true}; }
+  var summary = {skipped: false, rows: 0, sent: 0, failed: 0};
+  try {
+    var sheet = enquirySheet_();
+    var index = headerIndex_(sheet);
+    requireColumns_(index);
+    var lastRow = sheet.getLastRow();
+    if (lastRow < 2) return summary;
+    var count = lastRow - 1;
+    var internal = sheet.getRange(2, index.internalemailstatus + 1, count, 1).getValues();
+    var ack = sheet.getRange(2, index.ackemailstatus + 1, count, 1).getValues();
+    var width = sheet.getLastColumn();
+    var isPending = function (value) { return String(value).trim().toLowerCase() === STATUS.PENDING; };
+    var seen = {};
+
+    for (var i = 0; i < count && summary.rows < WORKER.BATCH_SIZE; i++) {
+      // A cheap first pass over the two status columns, then the row itself is re-read and its own statuses
+      // decide, so a Sheet sorted or edited during the run can never cause an email to be sent twice.
+      if (!isPending(internal[i][0]) && !isPending(ack[i][0])) continue;
+      if (Date.now() - started > WORKER.MAX_RUNTIME_MS) break;
+
+      var rowNumber = i + 2;
+      var values = sheet.getRange(rowNumber, 1, 1, width).getValues()[0];
+      var normalized = rowToLead_(values, index);
+      var id = normalized.system.submissionid;
+      var internalPending = isPending(values[index.internalemailstatus]);
+      var ackPending = isPending(values[index.ackemailstatus]);
+      if (!id || seen[id] || (!internalPending && !ackPending)) continue;
+      seen[id] = true;
+      summary.rows++;
+
+      // Each email is attempted and recorded on its own: one failing never blocks or repeats the other.
+      if (internalPending) {
+        var internalOk = sendSafely_('internal', id, function () { sendInternalEmail_(normalized); });
+        setEmailStatus_(sheet, index, rowNumber, id, 'internalemailstatus', internalOk ? STATUS.SENT : STATUS.FAILED);
+        summary[internalOk ? 'sent' : 'failed']++;
+      }
+      if (ackPending) {
+        var ackOk = sendSafely_('acknowledgement', id, function () { sendAcknowledgementEmail_(normalized); });
+        setEmailStatus_(sheet, index, rowNumber, id, 'ackemailstatus', ackOk ? STATUS.SENT : STATUS.FAILED);
+        summary[ackOk ? 'sent' : 'failed']++;
+      }
+      // Recorded before the next row, so a run cut short never re-sends what it already sent.
+      SpreadsheetApp.flush();
+
+      // FUTURE: syncLeadToLeadRyze(normalized) plugs in here, as its own step with its own status: only for
+      // rows whose leadryzeid is blank, writing the returned ID to leadryzeid, and leaving the row untouched on
+      // failure so the next run retries. A LeadRyze outage must never affect capture or these emails.
+    }
+    console.log('contact-worker: rows=' + summary.rows + ' sent=' + summary.sent + ' failed=' + summary.failed);
+    return summary;
+  } finally {
+    releaseWorkerLease_();
+  }
+}
+
+// A lease in Script Properties rather than holding the script lock for the whole run: the script lock is
+// held only for a moment here, so a submission waiting for it is never delayed by email sending.
+function acquireWorkerLease_() {
+  var lock = LockService.getScriptLock();
+  if (!lock.tryLock(10000)) return false;
+  try {
+    var properties = PropertiesService.getScriptProperties();
+    var until = Number(properties.getProperty(WORKER.LEASE_PROPERTY) || 0);
+    if (until > Date.now()) return false;
+    properties.setProperty(WORKER.LEASE_PROPERTY, String(Date.now() + WORKER.LEASE_MS));
+    return true;
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function releaseWorkerLease_() {
+  PropertiesService.getScriptProperties().deleteProperty(WORKER.LEASE_PROPERTY);
+}
+
+// ---------------------------------------------------------------------------------------------------------
+// Email notification processor (Microsoft Graph, application permission Mail.Send, client credentials)
+// ---------------------------------------------------------------------------------------------------------
+
+function sendSafely_(label, submissionId, send) {
   try {
     send();
     return true;
   } catch (err) {
-    console.error('contact: ' + label + ' email failed ' + describeError_(err));
+    console.error('contact-worker: ' + label + ' email for ' + submissionId + ' failed ' + describeError_(err));
     return false;
   }
 }
@@ -402,19 +541,20 @@ function sendMail_(message) {
   }
 }
 
-function sendInternalEmail_(lead, meta, record) {
+function sendInternalEmail_(normalized) {
+  var lead = normalized.lead, attribution = normalized.attribution, system = normalized.system;
   var rows = [
-    ['Reference', record.submissionId],
-    ['Received', Utilities.formatDate(record.created, 'Asia/Kolkata', "d MMM yyyy, HH:mm 'IST'")],
+    ['Reference', system.submissionid],
+    ['Received', Utilities.formatDate(system.createddate, 'Asia/Kolkata', "d MMM yyyy, HH:mm 'IST'")],
     ['Name', lead.firstname + ' ' + lead.lastname],
     ['Work email', lead.workemail],
     ['Company', lead.company],
     ['Role', lead.role || 'Not provided'],
     ['Country / Region', lead.countryregion],
     ['What can we help with?', lead.whatcanwehelp],
-    ['Source', meta.submittedfrom],
-    ['Referrer', meta.referrer || 'None'],
-    ['UTM', [meta.utmsource, meta.utmmedium, meta.utmcampaign, meta.utmcontent, meta.utmterm].filter(String).join(' / ') || 'None']
+    ['Source', normalized.source.submittedfrom],
+    ['Referrer', attribution.referrer || 'None'],
+    ['UTM', [attribution.utmsource, attribution.utmmedium, attribution.utmcampaign, attribution.utmcontent, attribution.utmterm].filter(String).join(' / ') || 'None']
   ];
   var table = rows.map(function (r) {
     return '<tr><th align="left" style="padding:6px 16px 6px 0;color:#4e7f8d;font-weight:600;vertical-align:top">' + html_(r[0]) +
@@ -426,7 +566,7 @@ function sendInternalEmail_(lead, meta, record) {
     '<p style="margin:20px 0 6px;color:#4e7f8d;font-weight:600">Message</p>' +
     '<div style="white-space:pre-wrap;border-left:3px solid #00d4df;padding:4px 0 4px 14px">' + html_(lead.message) + '</div>' +
     '<p style="margin:20px 0 0;color:#6e8996;font-size:12px">Reply to this email to answer ' + html_(lead.firstname) +
-    ' directly. The enquiry is recorded in the enquiry Sheet under ' + html_(record.submissionId) + '.</p></div>';
+    ' directly. The enquiry is recorded in the enquiry Sheet under ' + html_(system.submissionid) + '.</p></div>';
   sendMail_({
     subject: oneLine_('New website enquiry: ' + lead.whatcanwehelp + ' | ' + lead.company, 200),
     body: {contentType: 'HTML', content: body},
@@ -436,14 +576,15 @@ function sendInternalEmail_(lead, meta, record) {
 }
 
 // Deliberately does not repeat the visitor's message: an acknowledgement must not become a way to send
-// arbitrary text to an arbitrary address from enquiry@innooryze.com.
-function sendAcknowledgementEmail_(lead, record) {
+// arbitrary text to an arbitrary address from the enquiry mailbox.
+function sendAcknowledgementEmail_(normalized) {
+  var lead = normalized.lead;
   var name = oneLine_(lead.firstname, 60);
   var body = '<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.7;color:#11191b;max-width:560px">' +
     '<p style="margin:0 0 16px">Hi ' + html_(name) + ',</p>' +
     '<p style="margin:0 0 16px">Thank you for contacting InnooRyze. Your message is with us.</p>' +
     '<p style="margin:0 0 16px">We’ll review your enquiry and get back to you shortly.</p>' +
-    '<p style="margin:0 0 16px;color:#4e7f8d">Your reference: ' + html_(record.submissionId) + '</p>' +
+    '<p style="margin:0 0 16px;color:#4e7f8d">Your reference: ' + html_(normalized.system.submissionid) + '</p>' +
     '<p style="margin:0 0 24px">If you would like to add anything, simply reply to this email.</p>' +
     '<p style="margin:0">InnooRyze<br><a href="https://innooryze.com" style="color:#008699">innooryze.com</a></p></div>';
   sendMail_({

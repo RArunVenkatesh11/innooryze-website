@@ -69,10 +69,12 @@ test('only the two production hostnames submit for real', () => {
 
 // ---- outcome ---------------------------------------------------------------------------------------
 
-test('captured is success even when the acknowledgement email failed', () => {
- assert.deepEqual(outcomeFor({captured: true, acknowledgementEmailSent: true}), {state: 'success', confirmation: true});
- assert.deepEqual(outcomeFor({captured: true, acknowledgementEmailSent: false}), {state: 'success', confirmation: false});
- assert.deepEqual(outcomeFor({captured: false, acknowledgementEmailSent: true}), {state: 'error'});
+test('captured is success without waiting for email; the confirmation line needs a queued acknowledgement', () => {
+ // The backend answers before any email is sent: captured + acknowledgementQueued, both *Sent flags false.
+ assert.deepEqual(outcomeFor({captured: true, acknowledgementQueued: true, acknowledgementEmailSent: false, internalEmailSent: false}), {state: 'success', confirmation: true});
+ assert.deepEqual(outcomeFor({captured: true, acknowledgementQueued: false, acknowledgementEmailSent: false}), {state: 'success', confirmation: false});
+ assert.deepEqual(outcomeFor({captured: true, acknowledgementEmailSent: true}), {state: 'success', confirmation: true}, 'an older synchronous backend still works');
+ assert.deepEqual(outcomeFor({captured: false, acknowledgementQueued: true, acknowledgementEmailSent: true}), {state: 'error'});
  assert.deepEqual(outcomeFor(null), {state: 'error'});
 });
 
@@ -101,13 +103,13 @@ function frames() {
  const stranger = {parent: top};
  return {top, wrapper, sandbox, stranger};
 }
-const message = (nonce, extra = {}) => ({type: config.resultType, version: 1, ok: true, captured: true, submissionId: 'IR-20260925-ABCD1234', acknowledgementEmailSent: true, internalEmailSent: true, code: 'captured', submissionNonce: nonce, ...extra});
+const message = (nonce, extra = {}) => ({type: config.resultType, version: 1, ok: true, captured: true, submissionId: 'IR-20260925-ABCD1234', acknowledgementEmailSent: false, acknowledgementQueued: true, internalEmailSent: false, code: 'captured', submissionNonce: nonce, ...extra});
 
 test('a message is accepted only from inside our iframe, from a Google origin, with our nonce', () => {
  const {wrapper, sandbox, stranger} = frames();
  const nonce = createNonce();
  const ok = readResult({origin: SANDBOX, source: sandbox, data: message(nonce)}, {nonce, frameWindow: wrapper, config});
- assert.deepEqual(ok, {captured: true, submissionId: 'IR-20260925-ABCD1234', acknowledgementEmailSent: true, internalEmailSent: true, code: 'captured'});
+ assert.deepEqual(ok, {captured: true, submissionId: 'IR-20260925-ABCD1234', acknowledgementEmailSent: false, acknowledgementQueued: true, internalEmailSent: false, code: 'captured'});
  assert.equal(isFromFrame(sandbox, wrapper), true);
  assert.equal(isFromFrame(stranger, wrapper), false);
  assert.equal(readResult({origin: SANDBOX, source: sandbox, data: message('wrong-nonce-value-000000')}, {nonce, frameWindow: wrapper, config}), null, 'wrong nonce');
@@ -120,8 +122,8 @@ test('a message is accepted only from inside our iframe, from a Google origin, w
 test('result fields are sanitised; emails are never reported for an uncaptured enquiry', () => {
  const {wrapper, sandbox} = frames();
  const nonce = createNonce();
- const failed = readResult({origin: SANDBOX, source: sandbox, data: message(nonce, {captured: false, ok: false, acknowledgementEmailSent: true, submissionId: 'IR-1', code: 'verification_failed'})}, {nonce, frameWindow: wrapper, config});
- assert.deepEqual(failed, {captured: false, submissionId: '', acknowledgementEmailSent: false, internalEmailSent: false, code: 'verification_failed'});
+ const failed = readResult({origin: SANDBOX, source: sandbox, data: message(nonce, {captured: false, ok: false, acknowledgementEmailSent: true, acknowledgementQueued: true, submissionId: 'IR-1', code: 'verification_failed'})}, {nonce, frameWindow: wrapper, config});
+ assert.deepEqual(failed, {captured: false, submissionId: '', acknowledgementEmailSent: false, acknowledgementQueued: false, internalEmailSent: false, code: 'verification_failed'});
  const odd = readResult({origin: SANDBOX, source: sandbox, data: message(nonce, {submissionId: '<img src=x>', code: 'DROP TABLE'})}, {nonce, frameWindow: wrapper, config});
  assert.equal(odd.submissionId, '');
  assert.equal(odd.code, 'captured');

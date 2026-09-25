@@ -423,7 +423,12 @@ h2.form-intro{font-family:inherit;font-weight:400;letter-spacing:normal}
    integration adds. The response iframe is visually hidden but still loads and runs, like .sr-only. */
 .contact-submit-target{position:absolute;width:1px;height:1px;margin:-1px;border:0;padding:0;overflow:hidden;clip-path:inset(50%);opacity:0;pointer-events:none}
 .form-turnstile.is-interactive{margin-top:24px}
-.contact-form[aria-busy=true] .form-submit{cursor:progress}
+.contact-form[aria-busy=true] .form-submit,.contact-form[aria-busy=true] .form-submit:disabled{cursor:progress;opacity:1}
+/* Busy indicator in place of the arrow: a thin ring in the button's own ink. Under reduced motion or the
+   pause control it stays as a still ring (the shared motion rules stop the rotation). */
+.form-spinner{flex:none;width:16px;height:16px;border-radius:50%;border:1.6px solid currentColor;border-right-color:transparent;opacity:.8;animation:form-spin .8s linear infinite}
+@keyframes form-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.form-spinner{animation:none;border-right-color:currentColor;opacity:.45}}
 .form-feedback p>a{display:inline;margin:0;color:inherit}
 /* Thank-you state: replaces the form inside the same frame. Side by side, the frame keeps the form's height
    (set from script) so the left column and the section never move, and the message stays in view while

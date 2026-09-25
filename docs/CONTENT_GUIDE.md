@@ -37,7 +37,7 @@ Growth Systems connects Experience Design & Enablement, MarTech Consulting & Ena
 
 CampAIgn Genie, BrandGenie and InsightGenie are concept names in the brief. The current interface uses functional roadmap labels; preserve them unless naming changes are approved.
 
-Contact: enquiry@innooryze.com. Confirmed socials: https://in.linkedin.com/company/innooryze, https://x.com/innooryze and https://www.instagram.com/innooryze. Facebook is omitted by instruction. The Contact form sends enquiries through the Apps Script backend (docs/CONTACT_INTEGRATION.md). Its thank-you copy is "THANK YOU. / Your message is with us. / We’ll review your enquiry and get back to you shortly." The line "A confirmation has been sent to your email." appears only when the backend confirms the acknowledgement was sent. Never claim receipt without `captured: true` from the backend.
+Contact: enquiry@innooryze.com. Confirmed socials: https://in.linkedin.com/company/innooryze, https://x.com/innooryze and https://www.instagram.com/innooryze. Facebook is omitted by instruction. The Contact form sends enquiries through the Apps Script backend (docs/CONTACT_INTEGRATION.md). Its thank-you copy is "THANK YOU. / Your message is with us. / We’ll review your enquiry and get back to you shortly." The line "A confirmation will be sent to your email shortly." appears only when the backend has queued the acknowledgement (emails are sent in the background after capture, so the site never says an email has already been sent). Never claim receipt without `captured: true` from the backend.
 
 ## Articles and conversion
 

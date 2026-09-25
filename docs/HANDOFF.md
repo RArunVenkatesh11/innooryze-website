@@ -48,7 +48,7 @@ Example future task: “Update MarTech content in src/site.mjs and src/component
 
 The owner/provider must configure DNS/SSL/document root and verify .htaccess on the real Apache host. Native Chrome, Safari, Edge, Firefox, actual touchscreen and assistive-technology tests are separate from completed Chromium viewport inspection. No full accessibility certification, Lighthouse score or field Core Web Vitals claim is made.
 
-The Contact form is integrated with the Apps Script backend (Google Sheet, Cloudflare Turnstile, Microsoft Graph emails); see docs/CONTACT_INTEGRATION.md. It is tested against simulated services only. It is not confirmed live until the updated Code.gs is deployed and the live end-to-end test there has passed. Analytics/consent remain unconfigured. Approved legal text/URLs are outstanding. Leadership details/portraits, fuller Treffer proof and any future platform detail content may be supplied later; they are not fabricated placeholders in the release.
+The Contact form is integrated with the Apps Script backend (Google Sheet, Cloudflare Turnstile, queued Microsoft Graph emails sent by a one-minute worker trigger); see docs/CONTACT_INTEGRATION.md. The first, synchronous version passed a real end-to-end test on the Vercel staging host; the capture-first version needs its Code.gs deployed, the worker trigger created and one more staging test, after which the temporary staging host is removed. Analytics/consent remain unconfigured. Approved legal text/URLs are outstanding. Leadership details/portraits, fuller Treffer proof and any future platform detail content may be supplied later; they are not fabricated placeholders in the release.
 
 ## Assets still subject to replacement
 
