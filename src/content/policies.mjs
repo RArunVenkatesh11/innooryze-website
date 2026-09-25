@@ -9,6 +9,11 @@
 //
 // If a clause needs to change, change it on the approved source first and re-transfer it here.
 //
+// Privacy Policy revision, 26 September 2026 (audit item A-2): the website enquiry stack (Google Sheets and
+// Apps Script, Cloudflare Turnstile, Microsoft 365 / Graph), referrer and UTM attribution, browser storage
+// and a purpose-based enquiry retention rule replace wording that no longer matched the live website.
+// Sections 2, 5, 6, 8 and 11 changed; the Terms & Conditions are unchanged.
+//
 // Shape: {key, title, description, documentTitle, effective, effectiveIso, updated, approvedOn, sections[]}
 // Section blocks: ['p', text] | ['h3', text] | ['ul', [items]] | ['lines', [lines]]
 
@@ -19,9 +24,9 @@ export const policies = [
   "description": "How InnooRyze collects, uses, stores and safeguards personal data across our website, enquiry forms and the IMMA assessment.",
   "documentTitle": "INNOORYZE PRIVACY POLICY",
   "effective": "28 April 2025",
-  "updated": "20 March 2026",
+  "updated": "26 September 2026",
   "effectiveIso": "2025-04-28",
-  "approvedOn": "2026-03-20",
+  "approvedOn": "2026-09-26",
   "sections": [
    {
     "heading": "1. INTRODUCTION",
@@ -42,7 +47,7 @@ export const policies = [
       "ul",
       [
        "Visit our website",
-       "Submit forms or inquiries",
+       "Submit forms or enquiries",
        "Complete the InnooRyze Marketing Maturity Assessment (IMMA)",
        "Engage with our services",
        "Interact with our advertisements"
@@ -73,7 +78,7 @@ export const policies = [
        "Phone number",
        "Company name",
        "Job title or designation",
-       "Information provided through inquiry forms",
+       "Information provided through enquiry forms",
        "Responses submitted through the IMMA assessment",
        "Any additional information voluntarily provided"
       ]
@@ -101,7 +106,35 @@ export const policies = [
      ],
      [
       "p",
-      "This data may be collected through cookies, analytics tools, and tracking technologies."
+      "This data may be collected through cookies, analytics tools, and tracking technologies. Security services that protect our website forms may also process technical information, as described in Section 6."
+     ],
+     [
+      "h3",
+      "2.3 Website Contact Form"
+     ],
+     [
+      "p",
+      "When you submit the contact form on our website, we may collect:"
+     ],
+     [
+      "ul",
+      [
+       "First name",
+       "Last name",
+       "Work email address",
+       "Company name",
+       "Role, where provided",
+       "Country or region",
+       "The enquiry area you select",
+       "Your message",
+       "The date and time of your submission",
+       "The referring website (referrer), where available",
+       "Campaign attribution such as UTM parameters (utm_source, utm_medium, utm_campaign, utm_content, utm_term), where available"
+      ]
+     ],
+     [
+      "p",
+      "The referrer and campaign attribution describe how you arrived at our website. They are stored with your enquiry so we can understand how visitors reach our enquiry page."
      ]
     ]
    },
@@ -168,7 +201,10 @@ export const policies = [
       "ul",
       [
        "Deliver IMMA assessment results",
-       "Respond to inquiries",
+       "Respond to enquiries",
+       "Manage business communications and route enquiries internally",
+       "Protect our website forms from spam and automated abuse",
+       "Understand how visitors reached our enquiry page, using referrer and campaign attribution where available",
        "Provide consulting services",
        "Improve website functionality and performance",
        "Analyze marketing and advertising effectiveness",
@@ -193,12 +229,23 @@ export const policies = [
      [
       "ul",
       [
-       "Supabase (data storage and infrastructure)",
-       "Zoho CRM (customer relationship management and future storage of assessment data)",
-       "Google Analytics (analytics and traffic measurement)",
+       "Google Analytics (consent-based website measurement, loaded only after you accept analytics cookies)",
+       "Google Workspace, including Google Sheets (storage of website enquiry records)",
+       "Google Apps Script (processing of website enquiry submissions)",
+       "Cloudflare Turnstile (protection of our website forms against spam and automated abuse)",
+       "Microsoft 365, including Microsoft Graph (transactional enquiry emails: an internal notification of each enquiry and an acknowledgement to the person who submitted the form)",
+       "Zoho CRM (customer relationship management)",
        "Website hosting providers (global infrastructure)",
        "Advertising platforms and tracking technologies (if enabled)"
       ]
+     ],
+     [
+      "p",
+      "Enquiries submitted through our website contact form are currently recorded in Google Sheets through Google Apps Script, and the related emails are sent through Microsoft 365. Website contact form enquiries are not currently sent to Supabase, Zoho CRM or LeadRyze CRM."
+     ],
+     [
+      "p",
+      "Cloudflare Turnstile may process technical and browser information, such as IP address, browser and device characteristics and interaction signals, as required to distinguish genuine visitors from automated traffic."
      ],
      [
       "p",
@@ -233,7 +280,7 @@ export const policies = [
      [
       "ul",
       [
-       "Inquiry data: up to 24 months",
+       "Enquiry and business communication data, including website contact form submissions and related emails: retained only for as long as reasonably necessary to respond to the enquiry, manage any resulting business relationship, maintain appropriate business records, and meet applicable legal, security or compliance requirements. It may be deleted or anonymised when it is no longer reasonably required for those purposes.",
        "IMMA assessment data: retained until business purpose concludes or deletion is requested",
        "Marketing data: retained until consent is withdrawn"
       ]
@@ -328,6 +375,21 @@ export const policies = [
      [
       "p",
       "Non-essential cookies (including analytics and marketing cookies) are activated only after user consent where required by law."
+     ],
+     [
+      "p",
+      "Google Analytics is loaded, and its cookies are set, only after you consent to analytics. Until then, analytics and advertising storage are set to denied by default."
+     ],
+     [
+      "p",
+      "Our website also uses your browser’s storage:"
+     ],
+     [
+      "ul",
+      [
+       "Local storage: records your cookie consent preference so that we can respect it on later visits.",
+       "Session storage: may temporarily hold first-party attribution information, such as the referring website and UTM campaign values of the page you arrived on, so that it can be included with an enquiry you submit during the same browsing session. Session storage is cleared when you close the browser tab."
+      ]
      ],
      [
       "p",

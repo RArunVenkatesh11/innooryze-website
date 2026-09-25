@@ -17,12 +17,24 @@ test('both approved policies are published at their approved routes',()=>{
 });
 
 test('the dates shown are the ones on the approved source',()=>{
+ // Both keep their original effective date. The Privacy Policy was revised on 26 September 2026 (A-2);
+ // the Terms & Conditions were not.
+ const expected={privacy:['26 September 2026','2026-09-26'],terms:['20 March 2026','2026-03-20']};
  for(const p of policies){
   assert.equal(p.effective,'28 April 2025',p.key);
-  assert.equal(p.updated,'20 March 2026',p.key);
   assert.equal(p.effectiveIso,'2025-04-28',p.key);
-  assert.equal(p.approvedOn,'2026-03-20',p.key);
+  assert.equal(p.updated,expected[p.key][0],p.key);
+  assert.equal(p.approvedOn,expected[p.key][1],p.key);
  }
+});
+
+test('the Privacy Policy describes the live website enquiry stack',()=>{
+ const flat=JSON.stringify(byKey('privacy').sections);
+ for(const required of ['Google Sheets','Google Apps Script','Cloudflare Turnstile','Microsoft 365','Microsoft Graph','Google Analytics','UTM','referrer','Local storage','Session storage'])
+  assert.ok(flat.includes(required),'missing disclosure: '+required);
+ assert.ok(!/24 months/.test(flat),'no unenforced fixed retention period');
+ assert.match(flat,/not currently sent to Supabase, Zoho CRM or LeadRyze CRM/);
+ assert.ok(!/vercel/i.test(flat),'hosting stays provider-neutral');
 });
 
 test('every section survives with a heading and content',()=>{
@@ -71,7 +83,7 @@ test('rendered markup is a usable heading hierarchy with real lists',()=>{
  assert.equal((html.match(/<h2\b/g)||[]).length,15);
  // the live page marks section headings up as h5; nothing below h3 should survive the transfer
  assert.equal((html.match(/<h[456]\b/g)||[]).length,0);
- assert.equal((html.match(/<li\b/g)||[]).length,64);
+ assert.equal((html.match(/<li\b/g)||[]).length,83);
  // every list item sits inside a list
  assert.equal((html.match(/<\/ul>/g)||[]).length,(html.match(/<ul>/g)||[]).length);
  assert.ok(!/<li\b(?![\s\S]*?<\/ul>)/.test(html),'list item outside a list');
