@@ -98,10 +98,12 @@ preview deployment runs without this policy; that is pre-existing and unrelated 
 
 ## Relationship to the existing integrations seam
 
-`public/integrations.js` and `ANALYTICS_ID` are a separate, optional adapter for a deployment-supplied
-provider. Nothing is installed, so it does nothing. The `enquiry_submitted` event it dispatches is **not**
-currently sent to the Google tag. Connecting the two is a deliberate later decision and would have to be
-consent-gated the same way.
+`public/integrations.js` announces a captured Contact enquiry as the DOM event `innooryze:lead-captured`.
+`public/consent.js` forwards it to the Google tag as `contact_form_submit` with `{form_id:'contact',
+enquiry_area:<area of interest>}`, **only** when the tag has already been loaded with analytics consent on a
+measured host. The form never loads the tag, and the event never carries a name, email, company or message.
+`ANALYTICS_ID` and `window.innooryzeIntegrations.track` remain an optional adapter for a deployment-supplied
+provider; nothing is installed, so it does nothing.
 
 ## Verifying a release
 

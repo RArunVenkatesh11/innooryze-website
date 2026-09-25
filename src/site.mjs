@@ -3,6 +3,20 @@ import {editorial} from './media.mjs';
 import {resolveIndexable} from './config/environment.mjs';
 export const site = {
   name: 'InnooRyze',
+  // Registered entity, as published on the approved Privacy Policy and Terms & Conditions.
+  legalName: 'INNOVATION MULTIVERSE TECHNOLOGY PRIVATE LIMITED',
+  // Mirrors visible positioning (/about, Growth Systems, Experience, AI Agents). Keep in step with that copy.
+  description: 'InnooRyze is a Growth Systems, MarTech and AI consulting and product company that designs and builds customer experiences, connected customer technology, AI agents and digital products.',
+  // Service coverage, NOT office locations. Must match the visible statement on /about; validate.mjs checks.
+  serviceRegions: [
+   {type: 'Country', name: 'United States', label: 'US'},
+   {type: 'Country', name: 'United Kingdom', label: 'UK'},
+   {type: 'Place', name: 'Asia-Pacific (APAC)', label: 'APAC'},
+   {type: 'Country', name: 'Singapore', label: 'Singapore'},
+   {type: 'Country', name: 'Japan', label: 'Japan'},
+   {type: 'Country', name: 'Malaysia', label: 'Malaysia'},
+   {type: 'Country', name: 'India', label: 'India'}
+  ],
   url: process.env.SITE_URL || 'https://innooryze.com',
   // Fail-safe: indexable only when the build can prove it is production. See src/config/environment.mjs.
   indexable: resolveIndexable(),
@@ -24,7 +38,6 @@ export const site = {
     phoneUri: 'tel:+918015620896',
     shortLocation: 'Coimbatore, Tamil Nadu, India'
   },
-  enquiryEndpoint: process.env.ENQUIRY_ENDPOINT || '',
   assessmentUrl: 'https://assessment.innooryze.com/',
   tagline: 'Innovate. Integrate. Elevate.',
   socials: {linkedin:process.env.SOCIAL_LINKEDIN_URL || 'https://in.linkedin.com/company/innooryze',x:process.env.SOCIAL_X_URL || 'https://x.com/innooryze',instagram:process.env.SOCIAL_INSTAGRAM_URL || 'https://www.instagram.com/innooryze'},
@@ -104,7 +117,7 @@ export const work = [
  // Published anonymously at the owner's instruction. No client name, logo, screenshot or outbound URL.
  {slug:'industrial-valve',route:'industrial-valve-digital-experience',name:'US Industrial Valve Manufacturer',
   title:'A digital experience for industrial flow control.',
-  metaTitle:'US Industrial Valve Manufacturer — Digital Experience',
+  metaTitle:'US Industrial Valve Digital Experience',
   type:'Industrial Digital Experience',categories:['Website Experience'],status:'In Progress',
   image:'asset:industrial-valve-screen.webp',alt:'A digital-experience concept for an industrial valve portfolio, with industry pathways beside a product-led homepage',
   industry:'Industrial valves and flow control',

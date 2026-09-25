@@ -50,7 +50,7 @@ Homepage film paths live in the same configuration and become `dist/media-config
 | public/assets/audio/progress-pulse.mp3 | Original code-composed Progress Pulse, 128 BPM / 30-second loop | Accepted energetic score; no commercial samples; retain |
 | Earlier progress-score.mp3 | Original 96 BPM score | Historical only; excluded from this release |
 
-Project sources and capture dates are in public/assets/licenses/project-captures.md. The owner authorized portfolio use; client-provided material is project-specific, not a general stock license. Confirm rights for any use beyond this website. Real project links: https://dynalektric.com/ and the temporary https://max-seal.vercel.app/ build. Update the latter only when its final domain/status is confirmed.
+Project sources and capture dates are in public/assets/licenses/project-captures.md. The owner authorized portfolio use; client-provided material is project-specific, not a general stock license. Confirm rights for any use beyond this website. Real project links: https://dynalektric.com/ and https://qualtura.com/. The anonymised industrial valve case publishes no client link.
 
 ## Film collection
 
@@ -109,7 +109,7 @@ The Salesforce cloud SVG comes from the [official Salesforce header](https://www
 
 ## Temporary media and release exclusions
 
-Treffer remains conceptual until approved client media is supplied. Max-Seal captures and its external development URL require review at project launch. Stock imagery may later be replaced with commissioned brand imagery; this is optional rather than a broken placeholder. Leadership names/portraits and fuller client proof remain owner inputs and are not fabricated. The accepted original soundtrack needs no replacement.
+Treffer remains conceptual until approved client media is supplied. The anonymised industrial valve case uses approved anonymous visuals only; its former client captures are archived outside public/ and must not be republished. Stock imagery may later be replaced with commissioned brand imagery; this is optional rather than a broken placeholder. Leadership names/portraits and fuller client proof remain owner inputs and are not fabricated. The accepted original soundtrack needs no replacement.
 
 Legacy root/editorial photos, numbered fonts, old logo copies, unused Singapore prototype media and the earlier score were preserved in working history outside the project export. Current files use the organized directories above; no route depends on the old physical paths. Caches, research contact sheets, original downloads, local tools and hosting-account metadata are outside the release.
 

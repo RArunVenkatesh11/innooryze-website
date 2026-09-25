@@ -181,6 +181,14 @@ export function initConsent(config){
   openDialog(trigger);
  });
 
+ // A captured enquiry (public/integrations.js) becomes one GA4 event, but only when the tag is already
+ // running with analytics consent on the measured property. This never loads the tag, and the event carries
+ // only the chosen area of interest: no name, email, company or message.
+ document.addEventListener('innooryze:lead-captured',event=>{
+  if(!tagRequested||!analyticsPermitted({consent,hostname:location.hostname,measuredHosts,debug}))return;
+  gtag('event','contact_form_submit',{form_id:'contact',enquiry_area:String(event.detail?.area||'').slice(0,100)});
+ });
+
  if(consent){
   // A recorded choice is re-applied silently, keeping its original timestamp.
   memory=JSON.stringify(consent);

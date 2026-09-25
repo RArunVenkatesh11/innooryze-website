@@ -11,7 +11,8 @@
     "build:production": "node scripts/build-production.mjs",
     "preview": "node scripts/serve.mjs",
     "check:production": "node scripts/validate.mjs --production",
-    "sync:vercel": "node scripts/sync-vercel.mjs"
+    "sync:vercel": "node scripts/sync-vercel.mjs",
+    "test:contact-browser": "node tests/browser/contact-form.browser.mjs"
   },
   "engines": {
     "node": ">=20"

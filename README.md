@@ -28,7 +28,6 @@ The server prints its local URL, normally http://127.0.0.1:4173. Rebuild after e
 
 - `SITE_URL`: approved canonical production origin, defaults to https://innooryze.com.
 - `SITE_INDEXABLE`: defaults to true. Set false explicitly for review builds; build:production pins the indexable production target.
-- `ENQUIRY_ENDPOINT`: an HTTPS URL or same-origin API path. Empty uses the explicit email-draft flow.
 - `ANALYTICS_ID`: optional public identifier passed to the separate integrations adapter. This is **not** the Google tag; that is configured in src/config/analytics.mjs.
 - `SOCIAL_*_URL`: confirmed LinkedIn, X and Instagram URLs. Facebook is intentionally omitted.
 - `PRIVACY_POLICY_URL`, `COOKIE_POLICY_URL`, `TERMS_URL`: optional approved policy pages; empty links are omitted.
@@ -64,11 +63,13 @@ Google Analytics (`GT-WF4XRBSQ`) is migrated from the previous site and gated: i
 
 ## Enquiry integration
 
-No live endpoint has been supplied. The form validates input and prepares an email draft to enquiry@innooryze.com. The visitor reviews and sends it through their email service. Draft preparation never reports successful delivery and never emits the submission analytics event. Form fields are not persisted in browser storage.
+The Contact form posts to the deployed Google Apps Script web app through a hidden iframe. The script verifies Cloudflare Turnstile, records the enquiry in the enquiry Google Sheet, and sends an internal notification and a customer acknowledgement through Microsoft Graph. It then reports the outcome back with `postMessage`. On a captured enquiry, the form is replaced in the same right-hand frame by a thank-you state; the left column does not move. The website remains static; no server secret is in this repository. The backend source of truth is `integrations/apps-script/contact-form/Code.gs`.
 
-With `ENQUIRY_ENDPOINT` configured, the form POSTs JSON containing firstName, lastName, email, company, role, country, interest, message and source. An optional spamToken is supplied by the adapter. The server must validate input, enforce spam/rate controls and ownership rules, deliver to CRM/email, and return HTTP 2xx with `{"ok":true}` only after acceptance. Cross-origin endpoints need CORS for the production origin. The UI provides loading, a 12-second timeout, error/retry and success feedback. Verify the chosen provider end to end before launch.
+Real submissions happen only on innooryze.com and www.innooryze.com. Local and preview hosts show an explicit development-only state and send nothing. Public configuration lives in `src/config/contact.mjs`. Architecture, field and Sheet mapping, Turnstile, Microsoft Graph, Script Properties, deployment, the live test procedure and troubleshooting are in docs/CONTACT_INTEGRATION.md. The form is not confirmed live until that live test has passed.
 
-`public/integrations.js` is the integration seam. A deployment-specific module may set `window.innooryzeIntegrations.getSpamToken({signal,action})` and `.track(event,{id})`. Connect the spam provider and validate its token on the server. Analytics should respect the chosen consent policy. Successful acknowledged submissions dispatch `innooryze:enquiry-submitted`, containing only event, interest and source; names, emails, company names and messages are excluded. Analytics failures do not change delivery results.
+`npm test` covers the browser modules and runs `Code.gs` against simulated Google services. `npm run test:contact-browser` (needs Chrome) exercises every state at ten viewports with the real Turnstile script (Cloudflare test keys) and the real CSP.
+
+`public/integrations.js` announces a captured enquiry as the DOM event `innooryze:lead-captured` (area of interest and channel only; never names, emails, company names or messages). `public/consent.js` forwards it to GA4 as `contact_form_submit` only when the tag is already running with analytics consent. An optional `window.innooryzeIntegrations.track(event,{id})` adapter receives the same detail. Analytics failures never change the submission result.
 
 ## Content and components
 
@@ -82,7 +83,7 @@ With `ENQUIRY_ENDPOINT` configured, the form POSTs JSON containing firstName, la
 - `public/`: original brand assets, locally licensed media/fonts and browser interactions.
 - `scripts/build.mjs`: static generation, route manifest, metadata, sitemap, robots and headers.
 
-Add approved content to the collections to extend the site. Existing case routes are reusable and omit fields that have not been substantiated. LeadRyze AI and IMMA are available; the three roadmap products stay In development. Max-Seal stays In Progress. Treffer Technologies has no fabricated screenshot, result or quote. Leadership names/portraits and legal policy content still require approved material.
+Add approved content to the collections to extend the site. Existing case routes are reusable and omit fields that have not been substantiated. LeadRyze AI and IMMA are available; the three roadmap products stay In development. The anonymised US Industrial Valve Manufacturer case stays In Progress. Treffer Technologies has no fabricated screenshot, result or quote. Leadership names/portraits and legal policy content still require approved material.
 
 ## Replacing a visual
 
@@ -116,4 +117,4 @@ Before public-domain launch: connect and verify the real enquiry endpoint and se
 
 Start with [CLAUDE.md](CLAUDE.md) for editing without chat history. Read [handoff](docs/HANDOFF.md), [architecture](docs/SITE_ARCHITECTURE.md), [SEO](docs/SEO_STRATEGY.md), [design](docs/DESIGN_SYSTEM.md), [content](docs/CONTENT_GUIDE.md), [case studies](docs/CASE_STUDY_GUIDE.md), [assets](docs/ASSET_REGISTER.md) and [deployment](docs/DEPLOYMENT.md).
 
-The live ZIP is already built: extract its root directly into public_html. It includes .htaccess for static multi-page Apache routing; no Node/npm or SPA fallback is needed on the server. /work/maxseal is canonical and /work/max-seal remains a 301 alias. The source ZIP includes source, docs, scripts and a generated dist snapshot, excluding credentials, caches, hosting-account metadata and unused prototype media. Create a release after production validation with Python 3: `python scripts/package-release.py /path/to/output`.
+The live ZIP is already built: extract its root directly into public_html. It includes .htaccess for static multi-page Apache routing; no Node/npm or SPA fallback is needed on the server. /work/industrial-valve-digital-experience is canonical; the historical /work/maxseal and /work/max-seal URLs are 301 aliases to it. The source ZIP includes source, docs, scripts and a generated dist snapshot, excluding credentials, caches, hosting-account metadata and unused prototype media. Create a release after production validation with Python 3: `python scripts/package-release.py /path/to/output`.

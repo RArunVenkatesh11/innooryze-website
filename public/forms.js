@@ -1,19 +1,177 @@
-import {getSpamToken,recordSuccessfulEnquiry} from './integrations.js';
-// Matches arrowUpRight() in src/components/icons.mjs: an SVG arrow, never a Unicode glyph.
-const ARROW_ICON='<svg class="cta-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.4 11.6 11.6 4.4"/><path d="M5.9 4.4h5.7v5.7"/></svg>';
-export const enquiryFields = ['firstName','lastName','email','company','role','country','interest','message'];
-const names={firstName:'your first name',lastName:'your last name',email:'your work email',company:'your company',country:'your country or region',interest:'an area of interest',message:'a message'};
-export function validateEnquiry(input){const data=Object.fromEntries(enquiryFields.map(k=>[k,String(input[k]||'').trim()]));const errors={};for(const [key,label] of Object.entries(names)){if(!data[key])errors[key]=`Please enter ${label}.`;}
- if(data.email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))errors.email='Please enter a valid email address.';
- for(const key of enquiryFields)if(data[key].length>(key==='message'?4000:key==='email'?254:120))errors[key]='Please shorten this field.';
- if(String(input.website||'').trim())errors.form='We could not prepare this enquiry. Please email us directly.';
- return {data,errors,valid:Object.keys(errors).length===0};}
-export function createEmailDraft(data){const subject=`InnooRyze enquiry: ${data.interest}`;const body=`Hello InnooRyze,\n\n${data.message}\n\nName: ${data.firstName} ${data.lastName}\nWork email: ${data.email}\nCompany: ${data.company}\nRole: ${data.role||'Not provided'}\nCountry / Region: ${data.country}\nInterest: ${data.interest}`;return {subject,body,text:`To: enquiry@innooryze.com\nSubject: ${subject}\n\n${body}`,href:`mailto:enquiry@innooryze.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`};}
-export async function deliverEnquiry(data,{endpoint,fetchImpl=globalThis.fetch,signal,spamToken}={}){if(!endpoint)throw new Error('No enquiry endpoint is configured.');if(!/^https:\/\//.test(endpoint)&&!/^\/(?!\/)/.test(endpoint))throw new Error('The enquiry endpoint must use HTTPS or a local path.');const response=await fetchImpl(endpoint,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({...data,source:'innooryze-website',...(spamToken?{spamToken}:{})}),signal,credentials:'omit'});if(!response.ok)throw new Error('We could not send your enquiry. Please try again or email us directly.');const result=await response.json().catch(()=>null);if(result?.ok!==true)throw new Error('Delivery could not be confirmed. Please try again or email us directly.');return result;}
-export function initContactForm(){const form=document.querySelector('.contact-form');if(!form)return;const feedback=form.querySelector('.form-feedback'),submit=form.querySelector('.form-submit');const initialLabel=submit.innerHTML;let sending=false;const selected=new URLSearchParams(location.search).get('interest');if([...form.elements.interest.options].some(o=>o.value===selected))form.elements.interest.value=selected;
- const show=(message,error=false)=>{feedback.hidden=false;feedback.classList.toggle('is-error',error);feedback.replaceChildren();const p=document.createElement('p');p.textContent=message;feedback.append(p);};
- form.addEventListener('input',e=>{if(!sending)feedback.hidden=true;if(e.target.name){e.target.removeAttribute('aria-invalid');const error=document.getElementById(`${e.target.name}-error`);if(error)error.textContent='';}});
- form.addEventListener('submit',async event=>{event.preventDefault();if(sending)return;const result=validateEnquiry(Object.fromEntries(new FormData(form)));for(const key of enquiryFields){const field=form.elements[key];field.setAttribute('aria-invalid',String(!!result.errors[key]));document.getElementById(`${key}-error`).textContent=result.errors[key]||'';}if(!result.valid){show(result.errors.form||'Please check the highlighted fields.',true);const first=Object.keys(result.errors)[0];(form.elements[first]||feedback).focus();return;}
- if(!form.dataset.endpoint){const draft=createEmailDraft(result.data);show('Your enquiry draft is ready.');const explanation=document.createElement('p');explanation.textContent='Nothing has been sent. Open your email app to review and send your enquiry, or copy the draft into your preferred email service.';const area=document.createElement('textarea');area.readOnly=true;area.rows=9;area.value=draft.text;area.setAttribute('aria-label','Your email draft');const actions=document.createElement('div');actions.className='draft-actions';const open=document.createElement('a');open.href=draft.href;open.className='button button-cyan';open.textContent='Open email app ';open.insertAdjacentHTML('beforeend',ARROW_ICON);const copy=document.createElement('button');copy.type='button';copy.className='draft-copy';copy.textContent='Copy draft';copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(draft.text);copy.textContent='Draft copied';}catch{area.focus();area.select();copy.textContent='Select and copy the draft above';}});actions.append(open,copy);feedback.append(explanation,area,actions);feedback.focus();return;}
- sending=true;submit.disabled=true;submit.textContent='Sending…';show('Sending your enquiry…');const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),12000);try{const spamToken=await getSpamToken({signal:controller.signal});await deliverEnquiry(result.data,{endpoint:form.dataset.endpoint,signal:controller.signal,spamToken});recordSuccessfulEnquiry(result.data.interest);show('Thank you. Your enquiry has been received by InnooRyze.');form.reset();feedback.focus();}catch(error){show(error.name==='AbortError'?'The connection timed out. Your details are still here. Please try again or email us directly.':error.message,true);feedback.focus();}finally{clearTimeout(timeout);sending=false;submit.disabled=false;submit.innerHTML=initialLabel;}});
+import {normalizeLead,leadKeys,leadEnvelope} from './lead.js';
+import {readAttribution} from './attribution.js';
+import {createTurnstile} from './turnstile.js';
+import {createNonce,replaceFrame,submitThroughFrame} from './contact-transport.js';
+import {announceLeadCaptured} from './integrations.js';
+
+// Contact form controller: IDLE → SUBMITTING → SUCCESS | ERROR.
+// The form posts natively (urlencoded) into a hidden iframe; see contact-transport.js for why and how the
+// result is verified. An enquiry counts as received when the backend reports captured:true — the enquiry
+// record is the durable copy, so a failed notification or acknowledgement email never turns a captured
+// enquiry into an error.
+
+export const FAILURE_EMAIL = 'enquiry@innooryze.com';
+export const FAILURE_MESSAGE = 'We couldn’t send your message right now. Please try again or email ';
+export const PREVIEW_MESSAGE = 'Development preview: enquiries are sent only from innooryze.com, so nothing was sent from this copy of the site. Please email ';
+
+// Real submissions happen only on the production hostnames (allowlist; everything else is excluded).
+export function isLiveHost(hostname, config) {
+ return Array.isArray(config?.liveHosts) && config.liveHosts.includes(hostname);
+}
+
+// What the interface does with a verified backend result (or with none at all).
+export function outcomeFor(result) {
+ if (result && result.captured === true) return {state: 'success', confirmation: result.acknowledgementEmailSent === true};
+ return {state: 'error'};
+}
+
+// The hidden transport fields for one submission. Everything the backend receives besides the visible
+// fields is set here, immediately before posting, except formstartedat (set once, when the form became
+// usable) and the honeypot (never touched).
+export function transportFields({lead, config, attribution, token, nonce, origin, now = Date.now()}) {
+ const envelope = leadEnvelope(lead, {source: config.source, attribution});
+ return {
+  submittedfrom: envelope.submittedfrom,
+  referrer: envelope.referrer,
+  utmsource: envelope.utmsource,
+  utmmedium: envelope.utmmedium,
+  utmcampaign: envelope.utmcampaign,
+  utmcontent: envelope.utmcontent,
+  utmterm: envelope.utmterm,
+  turnstiletoken: token,
+  submissionnonce: nonce,
+  parentorigin: origin,
+  formsubmittedat: String(now)
+ };
+}
+
+export function initContactForm({config, motionStopped = () => false, win = window, doc = document} = {}) {
+ const form = doc.querySelector('.contact-form');
+ if (!form || !config) return;
+ const wrap = form.closest('.contact-form-wrap');
+ const feedback = form.querySelector('.form-feedback');
+ const submit = form.querySelector('.form-submit');
+ const status = form.querySelector('[data-form-status]');
+ const initialLabel = submit.innerHTML;
+ const live = isLiveHost(win.location.hostname, config);
+ const field = name => form.elements.namedItem(name);
+ const setField = (name, value) => { const el = field(name); if (el) el.value = value; };
+
+ form.dataset.mode = live ? 'live' : 'preview';
+ const setState = state => {
+  form.dataset.state = state;
+  const busy = state === 'submitting';
+  form.setAttribute('aria-busy', String(busy));
+  submit.disabled = busy;
+  // The label loses its arrow while sending; the height is held so nothing below the button moves.
+  if (busy) { submit.style.minHeight = submit.getBoundingClientRect().height + 'px'; submit.textContent = 'Sending…'; }
+  else { submit.innerHTML = initialLabel; submit.style.minHeight = ''; }
+ };
+ setState('idle');
+
+ // The form is usable from here. The backend compares this with the submit time to refuse instant bots.
+ setField('formstartedat', String(Date.now()));
+
+ const selected = new URLSearchParams(win.location.search).get('interest');
+ const interest = field('whatcanwehelp');
+ if (interest && [...interest.options].some(o => o.value === selected)) interest.value = selected;
+
+ const turnstile = live ? createTurnstile({container: form.querySelector('[data-turnstile]'), siteKey: config.turnstileSiteKey,
+  action: config.turnstileAction, scriptUrl: config.turnstileScript, timeoutMs: config.turnstileTimeoutMs, win, doc}) : null;
+ if (turnstile) for (const type of ['focusin', 'pointerdown']) form.addEventListener(type, () => turnstile.warm(), {once: true});
+
+ function show(message, {error = false, email = false} = {}) {
+  feedback.hidden = false;
+  feedback.classList.toggle('is-error', error);
+  const p = doc.createElement('p');
+  p.append(message);
+  if (email) {
+   const link = doc.createElement('a');
+   link.href = 'mailto:' + FAILURE_EMAIL;
+   link.textContent = FAILURE_EMAIL;
+   p.append(link, '.');
+  }
+  feedback.replaceChildren(p);
+ }
+ const announce = text => { if (status) status.textContent = text; };
+
+ form.addEventListener('input', event => {
+  if (form.dataset.state !== 'submitting') feedback.hidden = true;
+  const target = event.target;
+  if (target.name && leadKeys.includes(target.name)) {
+   target.removeAttribute('aria-invalid');
+   const error = doc.getElementById(target.getAttribute('aria-describedby'));
+   if (error) error.textContent = '';
+  }
+ });
+
+ function fail() {
+  setState('error');
+  announce('');
+  show(FAILURE_MESSAGE, {error: true, email: true});
+  feedback.focus();
+ }
+
+ function succeed(result) {
+  const template = doc.getElementById('contact-success-template');
+  const panel = template.content.firstElementChild.cloneNode(true);
+  if (!outcomeFor(result).confirmation) panel.querySelector('[data-confirmation]')?.remove();
+  // Side by side, the frame keeps the form's height so neither the left column nor the section moves.
+  wrap.style.setProperty('--contact-frame-height', wrap.getBoundingClientRect().height + 'px');
+  wrap.classList.add('is-complete');
+  turnstile?.remove();
+  form.replaceWith(panel);
+  panel.focus({preventScroll: true});
+  const box = panel.querySelector('.contact-success-inner').getBoundingClientRect();
+  if (box.top < 70 || box.bottom > win.innerHeight) panel.scrollIntoView({block: 'start', behavior: motionStopped() ? 'auto' : 'smooth'});
+  announceLeadCaptured({area: result.area, source: config.source});
+ }
+
+ form.addEventListener('submit', async event => {
+  event.preventDefault();
+  if (form.dataset.state === 'submitting') return;
+
+  const {lead, errors, valid} = normalizeLead(Object.fromEntries(new FormData(form)));
+  for (const key of leadKeys) {
+   const control = field(key);
+   control.setAttribute('aria-invalid', String(Boolean(errors[key])));
+   const error = doc.getElementById(control.getAttribute('aria-describedby'));
+   if (error) error.textContent = errors[key] || '';
+  }
+  if (!valid) {
+   show(errors.form || 'Please check the highlighted fields.', {error: true});
+   const first = leadKeys.find(key => errors[key]);
+   (first ? field(first) : feedback).focus();
+   return;
+  }
+
+  if (!live) {
+   show(PREVIEW_MESSAGE, {email: true});
+   feedback.focus();
+   return;
+  }
+
+  setState('submitting');
+  feedback.hidden = true;
+  announce('Sending your enquiry…');
+
+  let result = null;
+  try {
+   const token = await turnstile.getToken();
+   const nonce = createNonce();
+   const values = transportFields({lead, config, attribution: readAttribution(), token, nonce, origin: win.location.origin});
+   for (const [name, value] of Object.entries(values)) setField(name, value);
+   const frame = replaceFrame({doc, name: config.frameName, host: wrap});
+   try { result = await submitThroughFrame({form, frame, nonce, config, win}); }
+   finally { frame.remove(); }
+  } catch { result = null; }
+  finally {
+   // A token is single-use and a nonce belongs to one attempt; neither may be posted twice.
+   setField('turnstiletoken', '');
+   setField('submissionnonce', '');
+  }
+
+  if (outcomeFor(result).state === 'success') succeed({...result, area: lead.whatcanwehelp});
+  else { turnstile.reset(); fail(); }
+ });
 }

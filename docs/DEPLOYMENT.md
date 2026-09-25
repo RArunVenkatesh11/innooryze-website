@@ -47,7 +47,7 @@ For an unindexed review build, set SITE_INDEXABLE=false before `npm run build`. 
 
 1. Back up the current host files/configuration. Confirm the domain document root and SSL certificate.
 2. Upload/extract the live ZIP at that root. Avoid an extra dist/ or project folder. Show hidden files and confirm .htaccess exists. Remove the uploaded ZIP from the public directory after extraction.
-3. Use Apache 2.4.16+ with mod_rewrite and .htaccess overrides. The generated file disables directory listing/MultiViews, sets DirectoryIndex, exact known-route rewrites and a genuine 404. AllowNoSlash enables clean directory paths before trailing-slash redirects. Old /work/max-seal redirects to /work/maxseal. Known index.html and trailing-slash forms normalize to canonical paths.
+3. Use Apache 2.4.16+ with mod_rewrite and .htaccess overrides. The generated file disables directory listing/MultiViews, sets DirectoryIndex, exact known-route rewrites and a genuine 404. AllowNoSlash enables clean directory paths before trailing-slash redirects. The historical /work/maxseal and /work/max-seal URLs redirect to /work/industrial-valve-digital-experience. Known index.html and trailing-slash forms normalize to canonical paths.
 4. Configure HTTPS and preferred non-www host through hosting settings. The package does not force a domain redirect that would break local verification. Confirm HTTP and www resolve to the canonical HTTPS origin.
 5. If the host returns 500 because it disallows Options, RewriteOptions or header overrides, ask the provider to enable them or move equivalent directives into its virtual host. Do not blindly remove routing. Apache was not available in the development environment; smoke-test these rules on the actual host.
 6. Test major routes, nested refreshes, the old alias, a missing URL with status 404, media ranges, navigation and form. Inspect live SEO before submitting the sitemap.
@@ -56,13 +56,13 @@ This is a static multi-page site: **do not add a blanket SPA fallback to /index.
 
 ## Other hosts
 
-Use directory index resolution and a custom 404 with status 404. _redirects preserves Max-Seal aliases on compatible static hosts; _headers sets baseline headers on hosts supporting that format. Translate where ignored. Nginx can use `try_files $uri $uri/index.html =404` and `error_page 404 /404.html`, plus explicit legacy redirects. Root-relative assets require deployment at the domain root.
+Use directory index resolution and a custom 404 with status 404. _redirects preserves the historical case-study aliases on compatible static hosts; _headers sets baseline headers on hosts supporting that format. Translate where ignored. Nginx can use `try_files $uri $uri/index.html =404` and `error_page 404 /404.html`, plus explicit legacy redirects. Root-relative assets require deployment at the domain root.
 
 ## Enquiries, policies and analytics
 
-.env.example lists public settings. ENQUIRY_ENDPOINT is empty: the form validates and creates an **unsent email draft**, which visitors explicitly send through their email service. It never reports server delivery.
+.env.example lists public settings. The Contact form needs no environment variable: its public endpoint and Turnstile site key are in src/config/contact.mjs, and every secret stays in the Apps Script project's Script Properties.
 
-Direct delivery requires an HTTPS/same-origin JSON endpoint with server validation, spam/rate controls, appropriate data handling and CRM/email delivery. Return HTTP 2xx plus {"ok":true} only after acceptance. Cross-origin endpoints need CORS for the production origin. Payload/adapter details are in README and forms.js. Test rejected, timed-out and acknowledged delivery with the real provider. No real service delivery has been tested because no endpoint exists.
+The Contact form posts to the deployed Google Apps Script web app (integrations/apps-script/contact-form/Code.gs), which writes the enquiry Sheet and sends the Microsoft Graph emails. Nothing is hosted for it here, so it works identically on every host. The release's CSP adds exact hosts only: Turnstile (script-src and frame-src) and Apps Script (frame-src and form-action). The hosting adapters must carry that header. A backend change is deployed as a **new version of the existing web-app deployment**, which keeps the /exec URL. Deployment steps, Script Property names, the live end-to-end test and troubleshooting are in docs/CONTACT_INTEGRATION.md. The form is not confirmed live until that test has passed on innooryze.com.
 
 Google Analytics is live behind consent: the Google tag `GT-WF4XRBSQ` loads only after a visitor grants analytics consent **and** only on `innooryze.com` / `www.innooryze.com`. The Tag Manager container `GTM-NJPT6DRQ` from the old site is recorded but deliberately not loaded until its contents are audited. The Search Console token is on every page. All identifiers live in src/config/analytics.mjs; the build emits the browser subset to dist/analytics-config.js and derives the CSP allowlist from the same file. **docs/ANALYTICS.md is the full reference, including the debug override and the release verification table.**
 

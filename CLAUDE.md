@@ -33,7 +33,8 @@ Vanilla JavaScript ES modules, HTML templates, CSS and a Node static generator; 
 - npm ci — install the lockfile state.
 - npm run build:production — clean dist build pinned to the production domain and indexing.
 - npm run preview — serve built dist locally; rebuild after source changes.
-- npm test — enquiry validation/delivery tests.
+- npm test — consent, legal, contact form and Apps Script backend tests (simulated services).
+- npm run test:contact-browser — Contact form in headless Chrome, all states, ten viewports (needs Chrome).
 - npm run check:production — HTML, SEO, links/assets and portability checks.
 - node scripts/validate.mjs --production --http — also exercise the running static server.
 - python scripts/package-release.py /path/to/output — create ZIPs; Python 3 standard library is needed only for packaging.
@@ -54,9 +55,12 @@ There is no separate linter. Check changed JS with node --check, run build/test/
 | src/content/platforms.mjs | Existing Salesforce, Adobe, Braze and Segment detail-page guidance |
 | src/content/platform-catalog.mjs; components/platforms.mjs | Full approved taxonomy, logos, category grid and five-brand homepage teaser |
 | src/config/siteAssets.mjs; scripts/page-assets.mjs | Independent page/section images, responsive variants, social images and film paths |
+| scripts/validate-schema.mjs | Structured-data rules: schema must be supported by visible content; no offers/ratings/reviews/offices |
 | src/content/policies.mjs; components/policy.mjs | Approved legal content transferred verbatim from the live pages, and the legal page layout |
 | src/config/analytics.mjs | Google tag, deferred GTM container, Search Console token, measured-host allowlist and CSP origins |
 | src/components/consent.mjs; public/consent.js | Consent bar and preferences dialog markup; the consent gate and the only Google tag loader |
+| src/config/contact.mjs; public/forms.js, lead.js, contact-transport.js, turnstile.js, attribution.js | Contact form: public config and CSP hosts, form states, normalised lead, iframe/postMessage transport, Turnstile, session attribution |
+| integrations/apps-script/contact-form/Code.gs | Source-controlled Apps Script backend (Sheet, Turnstile Siteverify, Microsoft Graph); paste into the live project and deploy a new version |
 | src/media.mjs | Logical hero/editorial tokens and image helper; physical paths resolve through siteAssets |
 | src/styles/ | base → phase1 → phase2 → refinements → phase3 cascade |
 | public/ | Browser modules, original identity, local fonts and media |
@@ -97,7 +101,7 @@ See DESIGN_SYSTEM.md (Motion).
 
 ## SEO and deployment rules
 
-All canonical routes are listed in SITE_ARCHITECTURE.md. Each has rendered index.html. Missing URLs return a true 404; never add a blanket homepage SPA fallback. /work/maxseal is canonical; /work/max-seal remains a permanent alias. Preserve public URLs when extending the site.
+All canonical routes are listed in SITE_ARCHITECTURE.md. Each has rendered index.html. Missing URLs return a true 404; never add a blanket homepage SPA fallback. /work/industrial-valve-digital-experience is canonical; /work/maxseal and /work/max-seal are historical permanent redirect aliases to it and must never be restored as pages. Preserve public URLs when extending the site.
 
 Each indexable page needs one H1, useful H2/H3 content, unique metadata, production canonical/OG URLs, appropriate schema, internal links and descriptive alt text. No fake local pages, thin vendor pages, stuffing or invented schema claims. Main copy must exist in HTML. Credits, 404 and aliases are noindex and outside the sitemap. Staging uses SITE_INDEXABLE=false explicitly; releases use build:production.
 
@@ -105,7 +109,7 @@ Google Analytics (GT-WF4XRBSQ) loads only after analytics consent and only on in
 
 Vercel is a temporary preview/testing host; the final production platform is To Be Confirmed. Keep dist/ host-agnostic and keep every adapter: .htaccess (Apache/cPanel), _headers and _redirects (compatible static hosts) and vercel.json (Vercel, repo root only). All three render the same headers from src/config/headers.mjs, and check:production asserts parity. Do not add Vercel APIs, serverless functions, middleware or runtime dependencies. Indexability is decided by src/config/environment.mjs and is fail-safe: SITE_INDEXABLE=true alone produces a valid production build on any host, and VERCEL_ENV is only an extra safety signal that can force a Vercel preview to noindex. src/config/distExclusions.mjs withholds unreferenced source masters and historical iterations from dist; the build fails if a withheld file is still referenced. See docs/VERCEL.md.
 
-Secrets never belong in frontend code, .env.example or exports. No live enquiry endpoint exists: the working fallback prepares an unsent email draft. Server credentials remain on the service. Privacy Policy and Terms & Conditions are published at /privacy-policy and /terms-and-conditions from approved wording; no cookie policy has been approved, so /cookie-policy stays unpublished and its link stays omitted. Never reword approved legal text: change the approved source, then re-transfer. Follow DEPLOYMENT.md for upload, DNS/SSL, routing, headers, integration and rollback.
+Secrets never belong in frontend code, .env.example or exports. The Contact form posts to the deployed Google Apps Script web app through a hidden iframe and receives a postMessage result. The script records the enquiry in the Google Sheet, verifies Cloudflare Turnstile and sends Microsoft Graph emails. Its source of truth is integrations/apps-script/contact-form/Code.gs. Its secrets (TURNSTILE_SECRET_KEY, MS365_*) exist only in Script Properties. Public endpoint and Turnstile site key: src/config/contact.mjs. Only innooryze.com/www submit for real; other hosts show a development-only state. Do not add Cloud Run, serverless functions, PHP or another backend. The form is not confirmed live until the live test in docs/CONTACT_INTEGRATION.md passes. Privacy Policy and Terms & Conditions are published at /privacy-policy and /terms-and-conditions from approved wording; no cookie policy has been approved, so /cookie-policy stays unpublished and its link stays omitted. Never reword approved legal text: change the approved source, then re-transfer. Follow DEPLOYMENT.md for upload, DNS/SSL, routing, headers, integration and rollback.
 
 ## Documentation
 

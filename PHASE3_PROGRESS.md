@@ -170,3 +170,14 @@ Owner-approved. The work was resumed after an interrupted session; unfinished pa
 - [x] Regional statement on /about (US, UK, APAC, India); no offices implied
 - [x] Contact H2, /work/imma consolidation, /products/imma compact strengthening, Ideas Hub contrast
 - [ ] Phase 3C (not started)
+
+## Phase 3C: structured data + search presentation
+
+- [x] Organization: legalName, description, areaServed; one Indian address, no office nodes
+- [x] Service schema on 5 routes incl. Growth Systems umbrella and AI Agents
+- [x] SoftwareApplication (LeadRyze AI) and WebApplication (IMMA) from visible facts only
+- [x] Breadcrumb plain names; industrial valve title 65 -> 50
+- [x] llms.txt generated from the page list
+- [x] validate-schema.mjs, proven against 7 broken builds
+- [x] Zero visual change across 140 samples; Phase 3A, consent and portability intact
+- [ ] Decide whether to sanitise internal docs (several active docs are factually stale about /work/maxseal)

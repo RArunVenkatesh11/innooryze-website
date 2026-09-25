@@ -8,6 +8,9 @@ import {redirects} from '../src/redirects.mjs';
 import {policies} from '../src/content/policies.mjs';
 import {excludedPaths,distExclusions} from '../src/config/distExclusions.mjs';
 import {vercelJson} from './vercel-config.mjs';
+import {validateStructuredData} from './validate-schema.mjs';
+import {site} from '../src/site.mjs';
+import {contact,contactCsp} from '../src/config/contact.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const dist=path.join(root,'dist'), origin='https://innooryze.com';
 const routes=JSON.parse(fs.readFileSync(path.join(root,'scripts/routes.json'),'utf8'));
@@ -123,6 +126,39 @@ console.log(`Validated ${routes.length} canonical routes, ${linkCount} internal 
  assert.ok(!fs.existsSync(path.join(dist,'vercel.json')),'vercel.json must not ship inside dist; dist stays host-agnostic');
 }
 
+// --- contact form integration -------------------------------------------------------------------
+// The Contact page posts natively into a hidden iframe (see docs/CONTACT_INTEGRATION.md). Check the wiring
+// the browser depends on, that no server secret ever reaches the release, and that the CSP opens exactly
+// the hosts the integration needs and nothing broader.
+{
+ const page=read(pageFile('/contact'));
+ const form=page.match(/<form class="contact-form"[^>]*>/)?.[0]||'';
+ assert.ok(form.includes('action="'+contact.endpoint+'"'),'contact form must post to the Apps Script endpoint');
+ assert.ok(form.includes('method="post"')&&form.includes('target="'+contact.frameName+'"')&&form.includes('accept-charset="UTF-8"'),'contact form must POST into the hidden response iframe');
+ assert.ok(page.includes('<iframe name="'+contact.frameName+'"'),'contact response iframe missing');
+ for(const name of ['firstname','lastname','workemail','company','role','countryregion','whatcanwehelp','message'])assert.ok(new RegExp('name="'+name+'"').test(page),'contact field '+name+' missing');
+ for(const name of ['submittedfrom','referrer','utmsource','utmmedium','utmcampaign','utmcontent','utmterm','formstartedat','formsubmittedat','turnstiletoken','submissionnonce','parentorigin'])assert.ok(page.includes('<input type="hidden" name="'+name+'"'),'hidden field '+name+' missing');
+ assert.ok(/<div class="form-trap" aria-hidden="true">.*?name="website" tabindex="-1"/.test(page),'honeypot must stay hidden from assistive technology and out of the tab order');
+ assert.ok(page.includes('id="contact-success-template"')&&page.includes('data-turnstile'),'thank-you template or Turnstile container missing');
+ const config=read(path.join(dist,'contact-config.js'));
+ assert.ok(config.includes(contact.turnstileSiteKey)&&config.includes(contact.endpoint),'dist/contact-config.js missing public configuration');
+ // No secret name or value pattern in anything the release serves.
+ const served=[];const walk=dir=>{for(const e of fs.readdirSync(dir,{withFileTypes:true})){const full=path.join(dir,e.name);if(e.isDirectory())walk(full);else if(/.(html|js|css|json|txt|xml)$/i.test(e.name)||['_headers','_redirects','.htaccess'].includes(e.name))served.push(full);}};walk(dist);
+ for(const file of served){const text=read(file);assert.ok(!/TURNSTILE_SECRET_KEY|MS365_(TENANT_ID|CLIENT_ID|CLIENT_SECRET)|client_secret|0x4AAAAAA[A-Za-z0-9_-]*AAAAAAAA/.test(text),'secret material referenced in '+path.relative(dist,file));}
+ assert.ok(!served.some(file=>/.gs$/.test(file))&&!fs.existsSync(path.join(dist,'integrations')),'backend source must not ship in dist');
+ // Turnstile is loaded by script on the Contact page only, never as a static tag on any page.
+ for(const route of routes)assert.ok(!read(pageFile(route.path)).includes('challenges.cloudflare.com'),'static Turnstile reference on '+route.path);
+ // CSP: exact hosts, no wildcards in the directives the integration touches.
+ const policy=read(path.join(dist,'_headers')).match(/Content-Security-Policy: (.*)/)[1];
+ const directive=name=>policy.split('; ').find(d=>d.startsWith(name+' '))?.split(' ').slice(1)||[];
+ assert.deepEqual(directive('frame-src'),["'self'",...contactCsp.frame],'frame-src must list exactly the integration hosts');
+ assert.deepEqual(directive('form-action'),["'self'",'mailto:',...contactCsp.formAction],'form-action must list exactly the integration hosts');
+ for(const host of contactCsp.script)assert.ok(directive('script-src').includes(host),'script-src missing '+host);
+ for(const name of ['script-src','frame-src','form-action'])assert.ok(!directive(name).some(v=>v.includes('*')),name+' must not use wildcards');
+ assert.ok(!/unsafe-eval/.test(policy)&&!directive('script-src').includes("'unsafe-inline'"),'CSP weakened');
+ console.log('Contact integration: form wiring, hidden fields, honeypot, no secrets in dist, exact-host CSP.');
+}
+
 // --- withheld assets ------------------------------------------------------------------------------
 for(const {path:p} of distExclusions)assert.ok(!fs.existsSync(localFile(p)),'Excluded asset shipped: '+p);
 
@@ -149,6 +185,7 @@ for(const {path:p} of distExclusions)assert.ok(!fs.existsSync(localFile(p)),'Exc
  }
 }
 
+{const r=validateStructuredData({routes,read,pageFile,origin,production,site});console.log(`Structured data: ${r.pages} pages, ${r.ids} @id nodes, references resolved, claims supported by visible content.`);}
 if(process.argv.includes('--http')){
  const base=process.env.QA_ORIGIN||'http://127.0.0.1:4173';
  for(const route of routes)for(const suffix of ['',...(route.path==='/'?[]:['/','/index.html'])]){const response=await fetch(base+route.path+suffix);assert.equal(response.status,200,route.path+suffix);assert.ok((await response.text()).includes(route.title));}

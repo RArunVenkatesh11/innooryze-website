@@ -10,7 +10,10 @@ import {initAgents} from './agents.js';
 import {initContactForm} from './forms.js';
 import {initConsent} from './consent.js';
 import {analyticsConfig} from './analytics-config.js';
+import {contactConfig} from './contact-config.js';
+import {captureAttribution} from './attribution.js';
 initConsent(analyticsConfig);
+captureAttribution();
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)],root=document.documentElement;
 const motionStopped=motion.stopped;
 function reflectMotionControl(){const button=$('.motion-toggle');if(!button)return;const reduced=motion.reduced();button.disabled=reduced;button.setAttribute('aria-pressed',String(motionStopped()));button.setAttribute('aria-label',reduced?'Reduced motion enabled':motionStopped()?'Play motion':'Pause motion');$('.pause-icon',button).textContent=reduced?'—':motionStopped()?'▶':'Ⅱ';}
@@ -56,7 +59,7 @@ reflectMotionControl();onScroll();
 
 $$('[data-filter]').forEach(button=>button.addEventListener('click',()=>{$$('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));let visible=0;$$('[data-category]').forEach(item=>{item.hidden=button.dataset.filter!=='All'&&button.dataset.filter!==item.dataset.category;if(!item.hidden){visible++;$$('.reveal',item).forEach(el=>el.classList.add('is-visible','visible'));}});$('.filter-empty').hidden=visible!==0;}));
 $('.filter-empty')?.setAttribute('role','status');
-initAgents();initContactForm();
+initAgents();initContactForm({config:contactConfig,motionStopped});
 initFilm({motionStopped,session});
 initShowcases({motionStopped});
 initJourneys({motionStopped});

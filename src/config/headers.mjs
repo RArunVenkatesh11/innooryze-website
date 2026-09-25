@@ -6,22 +6,25 @@
 // fails if the committed vercel.json has drifted from it, so the two cannot disagree.
 
 import {analyticsCsp} from './analytics.mjs';
+import {contactCsp} from './contact.mjs';
 
 // The Google tag is only ever fetched after consent, but the policy has to permit it in advance.
-// Nothing else is opened up: no 'unsafe-inline' in script-src, no wildcards beyond Google's own
-// regional collection hosts.
-export function contentSecurityPolicy(endpointOrigin = '') {
+// The contact form adds exact hosts only (src/config/contact.mjs): the Turnstile loader and challenge frame,
+// and the Apps Script endpoint the form posts into a hidden iframe. Nothing else is opened up: no
+// 'unsafe-inline' in script-src, no wildcards beyond Google's own regional analytics collection hosts.
+export function contentSecurityPolicy() {
  return [
   "default-src 'self'",
-  "script-src 'self' " + analyticsCsp.script.join(' '),
+  "script-src 'self' " + [...analyticsCsp.script, ...contactCsp.script].join(' '),
   // 'unsafe-inline' remains only for styles: the build inlines a handful of computed custom properties.
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: " + analyticsCsp.img.join(' '),
   "media-src 'self' blob:",
-  'connect-src ' + ["'self'", endpointOrigin, ...analyticsCsp.connect].filter(Boolean).join(' '),
+  'connect-src ' + ["'self'", ...analyticsCsp.connect].join(' '),
+  "frame-src 'self' " + contactCsp.frame.join(' '),
   "object-src 'none'",
   "base-uri 'self'",
-  "form-action 'self' mailto:",
+  "form-action 'self' mailto: " + contactCsp.formAction.join(' '),
   "frame-ancestors 'self'"
  ].join('; ');
 }
@@ -32,7 +35,7 @@ export function contentSecurityPolicy(endpointOrigin = '') {
 // later, once every subdomain is confirmed HTTPS-only; neither is worth risking at launch.
 export const HSTS = 'max-age=31536000';
 
-export function securityHeaders(endpointOrigin = '') {
+export function securityHeaders() {
  return [
   ['X-Content-Type-Options', 'nosniff'],
   ['Referrer-Policy', 'strict-origin-when-cross-origin'],
@@ -40,6 +43,6 @@ export function securityHeaders(endpointOrigin = '') {
   ['X-Frame-Options', 'SAMEORIGIN'],
   ['Permissions-Policy', 'camera=(), microphone=(), geolocation=()'],
   ['Strict-Transport-Security', HSTS],
-  ['Content-Security-Policy', contentSecurityPolicy(endpointOrigin)]
+  ['Content-Security-Policy', contentSecurityPolicy()]
  ];
 }

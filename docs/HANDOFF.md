@@ -4,7 +4,7 @@
 
 Phase 1 multi-page structure and Phase 2 media/content work were complete before Phase 3. Saved Phase 3 priorities 1–11 include Growth submenu stability, integrated internal heroes, homepage AI emphasis/Selected Work/platform balance, synchronized Experience/MarTech/Data/AI journeys, custom-agent messaging, Products, Work/cases, Ideas/articles and About refinements. The approved identity, film, soundtrack, footer and page family are preserved.
 
-The final continuation completes production SEO/indexing/routing, the Max-Seal canonical alias, factual platform guidance, approved-only legal-page architecture, production validation, Claude Code documentation and two release ZIPs. The additional final feedback then improved AI contrast, expanded the platform directory with supplied/official logos, and assigned independent semantic images to every page/major section. src/config/siteAssets.mjs is the replacement map; the asset register explains same-name updates. See PHASE3_PROGRESS.md and QA_REPORT.md for status and exact verification scope.
+The final continuation completes production SEO/indexing/routing, the legacy case-study redirect aliases, factual platform guidance, approved-only legal-page architecture, production validation, Claude Code documentation and two release ZIPs. The additional final feedback then improved AI contrast, expanded the platform directory with supplied/official logos, and assigned independent semantic images to every page/major section. src/config/siteAssets.mjs is the replacement map; the asset register explains same-name updates. See PHASE3_PROGRESS.md and QA_REPORT.md for status and exact verification scope.
 
 Launch Phase 1 added the approved trademark wordmark, the shared CTA arrow, verified contact details and the OO watermark. The following task migrated Google Analytics from the old site behind a consent gate: see docs/ANALYTICS.md for the identifiers, the production-hostname allowlist, the deferred Tag Manager container and the debug override. Privacy and Terms pages, SEO/GEO work and the Google Sheets integration are not started.
 
@@ -18,7 +18,7 @@ Example future task: “Update MarTech content in src/site.mjs and src/component
 
 - Static rendered HTML, vanilla modules and local media; no hosted-preview runtime.
 - Three exact capabilities under Growth Systems; a separate AI Agents & Automation pillar including custom workflows.
-- LeadRyze AI and IMMA available; roadmap concepts and Max-Seal retain development status.
+- LeadRyze AI and IMMA available; roadmap concepts and the anonymised industrial valve case retain development status.
 - The final owner-approved platform taxonomy has five categories and 22 entries. LeadRyze CRM is first and Built by InnooRyze; its availability/features are unspecified. Homepage shows exactly Zoho, Salesforce, Adobe Experience Platform, Braze, Segment. Existing detail pages describe discovery/scoping, not certifications or client results.
 - Semantic content exists before animation. Motion includes pause/reduced-motion/media fallbacks.
 - Homepage story/hero refinement (15 September 2026, owner-approved): the "Two pillars" story stays pinned and scroll-driven on tablet/mobile wherever an svh-based fit check passes. AI words follow scroll on touch/smaller screens. The hero film opens on digital-connection with a measured grade/shade, and Sound is disabled while motion is reduced or paused. See DESIGN_SYSTEM.md (Motion) and QA_REPORT.md.
@@ -41,18 +41,18 @@ Example future task: “Update MarTech content in src/site.mjs and src/component
   - `--header-h` exposes the live fixed-header height to both JS and CSS `scroll-margin-top`; never hard-code a header offset again.
   - The homepage story drops its connector rail, node dots and repeated row rules at mobile, keeping one hairline between capability rows.
 - Production URLs use https://innooryze.com. Review builds explicitly disable indexing. No catch-all SPA fallback.
-- /work/maxseal is canonical; old /work/max-seal is a permanent alias with static HTML fallback.
+- /work/industrial-valve-digital-experience is canonical; the historical /work/maxseal and /work/max-seal URLs are permanent redirect aliases to it (vercel.json and .htaccess), with a noindex HTML fallback.
 - No fabricated leadership, offices, legal copy, testimonials, metrics or client stack.
 
 ## Launch inputs and QA limits
 
 The owner/provider must configure DNS/SSL/document root and verify .htaccess on the real Apache host. Native Chrome, Safari, Edge, Firefox, actual touchscreen and assistive-technology tests are separate from completed Chromium viewport inspection. No full accessibility certification, Lighthouse score or field Core Web Vitals claim is made.
 
-No enquiry endpoint exists. The release's explicit email-draft flow works; direct delivery needs a service, server validation/spam controls and end-to-end confirmation. Analytics/consent remain unconfigured. Approved legal text/URLs are outstanding. Leadership details/portraits, fuller Treffer proof and any future platform detail content may be supplied later; they are not fabricated placeholders in the release.
+The Contact form is integrated with the Apps Script backend (Google Sheet, Cloudflare Turnstile, Microsoft Graph emails); see docs/CONTACT_INTEGRATION.md. It is tested against simulated services only. It is not confirmed live until the updated Code.gs is deployed and the live end-to-end test there has passed. Analytics/consent remain unconfigured. Approved legal text/URLs are outstanding. Leadership details/portraits, fuller Treffer proof and any future platform detail content may be supplied later; they are not fabricated placeholders in the release.
 
 ## Assets still subject to replacement
 
-Licensed editorial/film stock is illustrative and usable in the current design; commissioned InnooRyze imagery is optional. Product demos intentionally use fictional data. Treffer's optical image remains conceptual until client-approved media is supplied. Max-Seal captures and external development URL need review when it launches. The original accepted soundtrack does not need replacement. See ASSET_REGISTER.md for provenance and restrictions.
+Licensed editorial/film stock is illustrative and usable in the current design; commissioned InnooRyze imagery is optional. Product demos intentionally use fictional data. Treffer's optical image remains conceptual until client-approved media is supplied. The industrial valve case is published anonymously with approved anonymous visuals; never reintroduce client captures, branding or its development URL. The original accepted soundtrack does not need replacement. See ASSET_REGISTER.md for provenance and restrictions.
 
 ## Release maintenance
 

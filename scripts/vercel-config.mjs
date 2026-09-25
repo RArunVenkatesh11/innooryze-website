@@ -12,8 +12,6 @@ import {securityHeaders} from '../src/config/headers.mjs';
 export const CANONICAL_HOST = new URL(site.url).host;   // innooryze.com
 
 export function vercelConfig() {
- const endpointOrigin = site.enquiryEndpoint ? new URL(site.enquiryEndpoint, site.url).origin : '';
-
  // Legacy client URLs. Both slash forms are listed explicitly so each alias resolves in a single hop
  // rather than chaining through trailing-slash normalisation.
  const aliasRedirects = Object.entries(redirects).flatMap(([from, to]) => [
@@ -40,7 +38,7 @@ export function vercelConfig() {
   redirects: [hostRedirect, ...aliasRedirects],
   headers: [{
    source: '/(.*)',
-   headers: securityHeaders(endpointOrigin).map(([key, value]) => ({key, value}))
+   headers: securityHeaders().map(([key, value]) => ({key, value}))
   }]
  };
 }

@@ -1,3 +1,19 @@
+# Phase 3C — structured data, search presentation, SEO polish — 25 September 2026
+
+- **Scope:** schema, breadcrumb names, one SEO title, llms.txt, validation. No visible copy, layout, consent, analytics, legal or Phase 3A change.
+- **Organization:** added legalName, description (mirrors visible positioning) and areaServed (US, UK, APAC, Singapore, Japan, Malaysia, India). Exactly one PostalAddress (Coimbatore, IN); no LocalBusiness or office node anywhere.
+- **Service:** capability services gained a stable @id, canonical url and isRelatedTo the new Growth Systems umbrella service; new /ai-agents Service with serviceType AI agent development, AI automation consulting and business process automation — all visible on the page.
+- **Products:** SoftwareApplication for LeadRyze AI (BusinessApplication; featureList = its five visible capabilities); WebApplication for IMMA. No offers, prices, ratings, reviews, OS or version. /work/imma carries no product schema, so the two IMMA routes stay distinct.
+- **Breadcrumbs:** leaf names are now the page's plain name (e.g. "About", "Qualtura", "US Industrial Valve Manufacturer") instead of the long SEO title. **WebSite** gains publisher and inLanguage.
+- **Industrial valve SEO title:** 65 -> 50 chars, "US Industrial Valve Digital Experience". Visible framing unchanged; anonymous.
+- **FAQPage:** not added — no visible FAQ content exists.
+- **llms.txt:** generated from the same page list as the sitemap; canonical URLs only; no confidential material. Wording uses the visible "Office" label rather than "registered office", which the site does not claim.
+- **Validation:** new scripts/validate-schema.mjs inspects the parsed JSON-LD on all 29 pages. Proven against 7 deliberately broken builds (offers, Service on a non-service page, preview URL, LocalBusiness office, invisible feature, dangling @id, anonymised client name) — all caught.
+- **Metadata:** 28/29 routes fully consistent across title, description, og:*, twitter:*; 0 duplicate titles or descriptions; titles 26-60 chars. The one flag is "Privacy Policy | InnooRyze" (26), a conventional legal title, left as approved.
+- **Confidentiality:** served output contains only the mandated alias routing rules. Internal docs still name the anonymised client (reported, not edited, per instruction) — and several active docs, including CLAUDE.md, still wrongly describe /work/maxseal as canonical.
+- **Regression:** 140 route/viewport samples vs Phase 3B — 0 heading changes, 0 section movement, 0 overflow. Preview noindex 31/31; production 28 index,follow, credits and both aliases noindex, sitemap 28; 3/3 adapters; vercel.json in sync; GTM 0; GSC token exact on 29 pages; consent 43/43; 0 JS errors, 0 failed loads.
+- **Build/test:** build:production 29 routes, npm test 19/19, check:production (incl. structured data), validate --production --http all pass.
+
 # Phase 3B — SEO/GEO semantic refinement + internal discoverability — 25 September 2026
 
 - **Method:** wording refined inside existing copy only; no new sections, card counts or order changes. Baseline text and layout were captured before any edit, then every change was measured against it.

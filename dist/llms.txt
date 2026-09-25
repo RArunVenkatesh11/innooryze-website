@@ -1,0 +1,54 @@
+# InnooRyze
+
+> InnooRyze is a Growth Systems, MarTech and AI consulting and product company that designs and builds customer experiences, connected customer technology, AI agents and digital products.
+
+InnooRyze works with businesses across the US, UK, APAC and India, including Singapore, Japan and Malaysia. Company address: Coimbatore, Tamil Nadu, India. Contact: enquiry@innooryze.com.
+
+## Growth Systems
+
+- [Growth Systems: CX, MarTech & Data Consulting](https://innooryze.com/growth-systems): Customer experience design, CRM and MarTech implementation, and customer data activation, connected in one growth system.
+- [Customer Experience Design & Enablement](https://innooryze.com/growth-systems/experience-design-enablement): Design and build connected customer experiences, websites, portals, business applications and custom SaaS around the people who use them.
+- [MarTech, CRM & Marketing Automation Consulting](https://innooryze.com/growth-systems/martech-consulting-enablement): Assess, architect, implement and integrate the CRM, marketing automation and MarTech platforms behind customer engagement.
+- [Customer Data, CDP & Data Activation Consulting](https://innooryze.com/growth-systems/data-intelligence-activation): Unify, understand and activate customer data through CDP strategy, segmentation, audience activation, analytics and measurement.
+
+## AI Agents & Automation
+
+- [AI Agent Development & Automation Consulting](https://innooryze.com/ai-agents): Custom AI agent development and AI automation consulting: agents for business that connect to your knowledge, CRM, APIs and workflows.
+
+## Products
+
+- [AI Products & Custom SaaS Development](https://innooryze.com/products): LeadRyze AI, IMMA and the custom SaaS, business applications and AI-enabled products InnooRyze designs and builds for clients.
+- [LeadRyze AI — Intelligent AI Lead Desk](https://innooryze.com/products/leadryze-ai): LeadRyze AI answers buyers, qualifies enquiries, captures leads, helps book meetings and connects with CRM.
+- [IMMA — Marketing Maturity Assessment](https://innooryze.com/products/imma): IMMA, the Intelligent Marketing Maturity Assessment, helps decision-makers find gaps across marketing technology, data, customer journeys and capabilities.
+
+## Client work and case studies
+
+- [Client Work & Case Studies](https://innooryze.com/work): Client work and case studies from InnooRyze across customer experience, CRM and MarTech, with clear context and outcomes we can substantiate.
+- [Dynalektric — Industrial Website & RFQ Journey](https://innooryze.com/work/dynalektric): Website strategy, UX, design, development and SEO improvement for an industrial electrical manufacturer, with a product architecture and RFQ enquiry journey.
+- [Qualtura — Website Experience & Zoho Integration](https://innooryze.com/work/qualtura): Website experience, design and responsive development across approximately six pages, with the enquiry journey connected to Zoho.
+- [Treffer Technologies — CRM & MarTech Enablement](https://innooryze.com/work/treffer-technologies): CRM strategy, MarTech strategy and enablement, shaping a connected operating direction for customer engagement.
+- [US Industrial Valve Digital Experience](https://innooryze.com/work/industrial-valve-digital-experience): A clearer, more credible digital experience for a specialist industrial valve portfolio, built around technical buyers and the applications the products serve.
+- [Building IMMA — Marketing Maturity Assessment](https://innooryze.com/work/imma): An intelligent marketing maturity assessment that helps businesses explore the strength of their marketing foundations.
+
+## Ideas Hub
+
+- [Ideas Hub — Experience, MarTech, Data & AI](https://innooryze.com/ideas-hub): Perspectives, articles and guides on customer experience, marketing technology, data intelligence and practical AI.
+- [Choosing the right CDP for your growth stage.](https://innooryze.com/ideas-hub/choosing-the-right-cdp-for-your-growth-stage): Start with the decisions and customer experiences you need to improve. Then choose the data foundation to support them.
+- [Why AI needs human-centered strategy.](https://innooryze.com/ideas-hub/why-ai-needs-human-centered-strategy): Useful AI starts with an understanding of people, their context and the work that needs to get done.
+- [3 common mistakes in MarTech implementation.](https://innooryze.com/ideas-hub/3-common-mistakes-in-martech-implementation): The platform is only part of the work. Alignment, data and adoption determine whether the system becomes useful.
+
+## Platforms
+
+- [Platform Expertise](https://innooryze.com/platforms): Platform-agnostic consulting and implementation across customer experience, MarTech and data ecosystems.
+- [Salesforce — Platform Expertise](https://innooryze.com/platforms/salesforce): Connect Salesforce with the experience, technology and intelligence behind your growth system.
+- [Adobe — Platform Expertise](https://innooryze.com/platforms/adobe): Connect Adobe with the experience, technology and intelligence behind your growth system.
+- [Braze — Platform Expertise](https://innooryze.com/platforms/braze): Connect Braze with the experience, technology and intelligence behind your growth system.
+- [Segment — Platform Expertise](https://innooryze.com/platforms/segment): Connect Segment with the experience, technology and intelligence behind your growth system.
+
+## Company
+
+- [Growth Systems, MarTech & AI Consulting](https://innooryze.com/): InnooRyze connects customer experience, MarTech, CRM and customer data with practical AI agents to build growth systems that perform.
+- [About InnooRyze — Growth Systems, MarTech & AI](https://innooryze.com/about): InnooRyze is a Growth Systems, MarTech and AI consulting and product company working with businesses across the US, UK, APAC and India.
+- [Contact InnooRyze — Start a Conversation](https://innooryze.com/contact): Talk with InnooRyze about customer experience, MarTech and CRM, customer data, AI agents and automation, LeadRyze AI or IMMA.
+- [Privacy Policy](https://innooryze.com/privacy-policy): How InnooRyze collects, uses, stores and safeguards personal data across our website, enquiry forms and the IMMA assessment.
+- [Terms & Conditions](https://innooryze.com/terms-and-conditions): The terms governing use of the InnooRyze website, advisory content and the InnooRyze Marketing Maturity Assessment.

@@ -22,7 +22,7 @@ This is the real production SEO foundation for **https://innooryze.com**, not a 
 | /work | Find relevant delivery evidence | Approved client/project context and capability links |
 | /work/dynalektric | Review the live website project | Industrial digital experience; actual scope and approved material |
 | /work/treffer-technologies | Understand the confirmed engagement without unsupported detail | CRM/MarTech enablement; no invented client stack or outcomes |
-| /work/maxseal | Review the current in-progress build | Website experience; explicit In Progress status |
+| /work/industrial-valve-digital-experience | Review an anonymised in-progress industrial digital experience | Website experience; explicit In Progress status |
 | /work/imma | Understand the owned product example | Marketing maturity assessment and actual product interface |
 | /ideas-hub | Discover relevant original perspectives | Experience, MarTech, data and practical AI; visible filters and descriptive article links |
 | /ideas-hub/choosing-the-right-cdp-for-your-growth-stage | Answer how to approach a CDP choice | Business decisions, use cases and the appropriate customer-data foundation |
@@ -60,13 +60,42 @@ Automation Consulting". Every title/description claim is supported by visible co
 titles live on `services[].metaTitle`; the visible H1 and Service schema name keep the approved capability
 names. "Data Intelligence & Activation" is never renamed.
 
+## Structured data (Phase 3C)
+
+Every page carries one JSON-LD @graph. Schema may only describe what a visitor can see on the same page;
+`scripts/validate-schema.mjs` enforces that on the parsed objects as part of `check:production`.
+
+| Node | Where | Notes |
+|---|---|---|
+| Organization `/#organization` | every page, identical | name, legalName (INNOVATION MULTIVERSE TECHNOLOGY PRIVATE LIMITED), description, logo, email, telephone, one PostalAddress (Coimbatore, IN), ContactPoint, sameAs, **areaServed** |
+| WebSite `/#website` | every page | publisher → Organization, inLanguage en |
+| WebPage `<canonical>` | every page | isPartOf → WebSite |
+| BreadcrumbList | every page except home | leaf name is the page's plain name (`crumb`), not its SEO title |
+| Service `<canonical>#service` | /growth-systems (umbrella), the three capability pages, /ai-agents | description is the page's visible hero text; capability services `isRelatedTo` the Growth Systems umbrella |
+| SoftwareApplication | /products/leadryze-ai | applicationCategory BusinessApplication; featureList = the five visible capabilities |
+| WebApplication | /products/imma | the page launches the live browser assessment; /work/imma carries no product schema |
+| Article | three Ideas Hub routes | author = Organization InnooRyze; published/modified dates; no invented people |
+
+**areaServed** lists United States, United Kingdom, Asia-Pacific (APAC), Singapore, Japan, Malaysia and India,
+from `site.serviceRegions`. It is service coverage: there is exactly one PostalAddress (India) and no
+LocalBusiness, branch or office node anywhere. The validator fails if any region is not stated on /about.
+
+**Never added, by rule:** offers, prices, ratings, reviews, operating system, version, download counts,
+FAQPage (no visible FAQ exists), LocalBusiness/ProfessionalService. The validator rejects each of them, and
+rejects preview/localhost URLs, dangling @id references, features not visible on the page, and any mention
+of the anonymised client. Each rule was proven by deliberately breaking a scratch build.
+
+**llms.txt** is generated at build time from the same page list as the sitemap: site description, the
+visible regional statement, and every canonical indexable page with its published title and description.
+No separate content to maintain.
+
 ## Implemented technical foundation
 
 All meaningful content is static semantic HTML. layout.mjs produces unique metadata, canonical URLs, OG/Twitter cards and Organization, WebSite and WebPage schema. Service pages add Service; articles add Article with actual content dates and organization editorial attribution. Nested BreadcrumbList entries include the parent route. Do not add ratings, reviews, pricing, addresses, certifications or outcomes without evidence.
 
 Production origin: https://innooryze.com. Clean paths have no trailing slash except /. build:production pins that origin and indexing. The release sitemap contains 25 indexable canonical URLs. Credits, 404 and legacy redirects are noindex and excluded. Production robots.txt allows crawling and references the same-origin sitemap. Review builds must explicitly set SITE_INDEXABLE=false.
 
-/work/maxseal is canonical, with /work/max-seal preserved by 301 rules and an HTML redirect fallback. Apache normalizes known index.html/trailing-slash forms. Every nested page has its own HTML, so direct visits and refreshes do not require a client router. Unknown paths return 404, never a successful homepage. See DEPLOYMENT.md.
+/work/industrial-valve-digital-experience is canonical; the historical /work/maxseal and /work/max-seal URLs are preserved as permanent redirects with a noindex HTML fallback. Apache normalizes known index.html/trailing-slash forms. Every nested page has its own HTML, so direct visits and refreshes do not require a client router. Unknown paths return 404, never a successful homepage. See DEPLOYMENT.md.
 
 ## Content and internal linking
 
@@ -78,7 +107,7 @@ Homepage links introduce both pillars. Capabilities link to neighbouring capabil
 
 Articles use one topic-specific H1, informative H2 sections and H3s only when they add hierarchy. Keep the summary, reading time, organizational authorship and real publication/modification dates consistent with the visible article. Use Article schema only for actual articles; its image, headline, dates and canonical URL must match the page. Link to the relevant capability, a useful related article and a contextual enquiry. Avoid invented authors, artificial freshness and bulk thin articles.
 
-Case studies use a unique client/project title and description, a clear status, factual context and substantial approved chapters. Link from Work to each case and from the case to its relevant service/product and next step. The base WebPage/BreadcrumbList schema is sufficient; do not manufacture review ratings, quantified results, testimonials, client stacks or additional structured-data claims. Max-Seal remains In Progress. An absent proof point should be omitted rather than filled with a placeholder or keyword text. CASE_STUDY_GUIDE.md defines the factual content model.
+Case studies use a unique client/project title and description, a clear status, factual context and substantial approved chapters. Link from Work to each case and from the case to its relevant service/product and next step. The base WebPage/BreadcrumbList schema is sufficient; do not manufacture review ratings, quantified results, testimonials, client stacks or additional structured-data claims. The anonymised industrial valve case remains In Progress. An absent proof point should be omitted rather than filled with a placeholder or keyword text. CASE_STUDY_GUIDE.md defines the factual content model.
 
 ## Performance and launch measurement
 

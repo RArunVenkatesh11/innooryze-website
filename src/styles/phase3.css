@@ -418,3 +418,39 @@
 /* Contact: the form introduction is now the page's H2 for the enquiry region. It keeps the paragraph's
    exact type so the structural fix is invisible; only the document outline changes. */
 h2.form-intro{font-family:inherit;font-weight:400;letter-spacing:normal}
+
+/* Contact form: live submission (Phase 4). The form's look is unchanged; these rules cover only what the
+   integration adds. The response iframe is visually hidden but still loads and runs, like .sr-only. */
+.contact-submit-target{position:absolute;width:1px;height:1px;margin:-1px;border:0;padding:0;overflow:hidden;clip-path:inset(50%);opacity:0;pointer-events:none}
+.form-turnstile.is-interactive{margin-top:24px}
+.contact-form[aria-busy=true] .form-submit{cursor:progress}
+.form-feedback p>a{display:inline;margin:0;color:inherit}
+/* Thank-you state: replaces the form inside the same frame. Side by side, the frame keeps the form's height
+   (set from script) so the left column and the section never move, and the message stays in view while
+   the page scrolls, aligned with the sticky introduction opposite. */
+.contact-form-wrap.is-complete{display:flex;flex-direction:column}
+.contact-success{flex:1;outline:none}
+.contact-success-inner{padding:clamp(4px,1vw,14px) 0}
+.contact-success-mark{display:block;width:52px;height:52px;color:#008699}
+.contact-success-mark svg{display:block;width:100%;height:100%}
+.contact-success .eyebrow{margin:34px 0 0;color:#4e7f8d}
+.contact-success h2{margin-top:18px;font-size:clamp(34px,3.6vw,56px);line-height:1.12;letter-spacing:-.05em;color:var(--ink);max-width:560px}
+.contact-success h2 em{color:#008699}
+#contact-success-body{max-width:430px}
+#contact-success-body>p{font-size:17px;line-height:1.6;color:#5b7a88;margin-top:26px}
+#contact-success-body>.contact-success-note{font-size:14px;line-height:1.6;color:#4e7f8d;margin-top:30px;padding-top:20px;border-top:1px solid #c5d9df}
+.contact-success-inner{animation:contact-success-in .7s cubic-bezier(.2,.7,.2,1) both}
+@keyframes contact-success-in{from{opacity:0;transform:translateY(calc(18px * var(--motion-distance,1)))}to{opacity:1;transform:none}}
+.motion-paused .contact-success-inner{animation:none}
+@media(prefers-reduced-motion:reduce){.contact-success-inner{animation:none}}
+@media(min-width:761px){
+ .contact-form-wrap.is-complete{min-height:var(--contact-frame-height,auto)}
+ .contact-success-inner{position:sticky;top:135px}
+}
+@media(max-width:760px){
+ .contact-success{scroll-margin-top:100px}
+ .contact-success-inner{padding:8px 0 14px}
+ .contact-success h2{font-size:clamp(32px,9vw,42px)}
+ .contact-success .eyebrow{margin-top:28px}
+ #contact-success-body>p{font-size:16px}
+}

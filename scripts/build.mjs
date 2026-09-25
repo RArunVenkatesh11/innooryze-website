@@ -6,7 +6,8 @@ import {site,services,articles,work,platforms} from '../src/site.mjs';
 import {analytics,analyticsCsp} from '../src/config/analytics.mjs';
 import {redirects} from '../src/redirects.mjs';
 import {distExclusions,excludedPaths} from '../src/config/distExclusions.mjs';
-import {securityHeaders,contentSecurityPolicy} from '../src/config/headers.mjs';
+import {securityHeaders} from '../src/config/headers.mjs';
+import {browserContactConfig} from '../src/config/contact.mjs';
 import {describeEnvironment} from '../src/config/environment.mjs';
 import {policies,policyPaths} from '../src/content/policies.mjs';
 import {apacheConfig,redirectPage} from './deployment.mjs';
@@ -28,6 +29,7 @@ fs.cpSync(publicRoot,out,{recursive:true,filter:src=>{
  return true;
 }});
 fs.writeFileSync(path.join(out,'media-config.js'),'export const homeFilm = '+JSON.stringify(homeFilm)+';\n');
+fs.writeFileSync(path.join(out,'contact-config.js'),'export const contactConfig = '+JSON.stringify(browserContactConfig())+';'+String.fromCharCode(10));
 fs.writeFileSync(path.join(out,'analytics-config.js'),'export const analyticsConfig = '+JSON.stringify({googleTagId:analytics.googleTagId,measuredHosts:analytics.measuredHosts,consentVersion:analytics.consentVersion,storageKey:analytics.storageKey,debugKey:analytics.debugKey})+';\n');
 let base=fs.readFileSync(path.join(root,'src/styles/base.css'),'utf8');
 for(const [from,to] of Object.entries({'#e1fa42':'#00d4df','#eef1e8':'#edf4f4','#f8f9f4':'#f7f7f3','#151714':'#11191b','#1e211b':'#142326','#2c3126':'#213438','#525b45':'#3f6267','#c9d2c1':'#c4dcdf','#d9ded2':'#d4e2e3','#b8beb2':'#b7c9cb','#434a3b':'#2e494e','#a2ae97':'#91b3b7','#4a4d46':'#415a5d','#464a40':'#38545a','#f9fbf6':'#f7fbfb','#e8eddf':'#e3eef0','#dce1d4':'#d2e2e4','#d2ddc4':'#c0dade','#f5f6eff5':'#f3f8f8f5'}))base=base.split(from).join(to);
@@ -35,20 +37,20 @@ fs.writeFileSync(path.join(out,'style.css'),guardHover(`:root{--home-hero-backdr
 const pages=[];
 const add=(route,title,description,body,options={})=>pages.push({path:route,title:`${title} | InnooRyze`,description,body,...options});
 add('/','Growth Systems, MarTech & AI Consulting','InnooRyze connects customer experience, MarTech, CRM and customer data with practical AI agents to build growth systems that perform.',home(),{theme:'homepage'});
-add('/growth-systems','Growth Systems: CX, MarTech & Data Consulting','Customer experience design, CRM and MarTech implementation, and customer data activation, connected in one growth system.',inner.growthPage());
-for(const s of services)add('/growth-systems/'+s.slug,s.metaTitle||s.name,s.description,inner.servicePage(s),{schema:[{'@type':'Service',name:s.name,description:s.description,provider:{'@id':`${site.url}/#organization`}}]});
-add('/ai-agents','AI Agent Development & Automation Consulting','Custom AI agent development and AI automation consulting: agents for business that connect to your knowledge, CRM, APIs and workflows.',inner.agentsPage());
-add('/products','AI Products & Custom SaaS Development','LeadRyze AI, IMMA and the custom SaaS, business applications and AI-enabled products InnooRyze designs and builds for clients.',inner.productsPage());
-add('/products/leadryze-ai','LeadRyze AI — Intelligent AI Lead Desk','LeadRyze AI answers buyers, qualifies enquiries, captures leads, helps book meetings and connects with CRM.',inner.leadPage());
-add('/products/imma','IMMA — Marketing Maturity Assessment','IMMA, the Intelligent Marketing Maturity Assessment, helps decision-makers find gaps across marketing technology, data, customer journeys and capabilities.',inner.immaPage());
-add('/work','Client Work & Case Studies','Client work and case studies from InnooRyze across customer experience, CRM and MarTech, with clear context and outcomes we can substantiate.',inner.workPage());
-for(const w of work)add('/work/'+(w.route||w.slug),w.metaTitle||w.name+' — '+w.title,w.description,inner.casePage(w));
-add('/ideas-hub','Ideas Hub — Experience, MarTech, Data & AI','Perspectives, articles and guides on customer experience, marketing technology, data intelligence and practical AI.',inner.ideasPage());
-for(const a of articles)add('/ideas-hub/'+a.slug,a.title,a.summary,inner.articlePage(a),{type:'article',schema:[{'@type':'Article',headline:a.title,description:a.summary,datePublished:a.published,dateModified:a.updated,image:new URL(a.image.src||'asset:editorial/'+a.image.name+'-1600.webp',site.url).href,author:{'@type':'Organization',name:site.name},publisher:{'@id':`${site.url}/#organization`},articleSection:a.category,mainEntityOfPage:new URL('/ideas-hub/'+a.slug,site.url).href}]});
-add('/about','About InnooRyze — Growth Systems, MarTech & AI','InnooRyze is a Growth Systems, MarTech and AI consulting and product company working with businesses across the US, UK, APAC and India.',inner.aboutPage());
-add('/contact','Contact InnooRyze — Start a Conversation','Talk with InnooRyze about customer experience, MarTech and CRM, customer data, AI agents and automation, LeadRyze AI or IMMA.',inner.contactPage(),{closingCta:false});
-add('/platforms','Platform Expertise','Platform-agnostic consulting and implementation across customer experience, MarTech and data ecosystems.',inner.platformsPage());
-for(const p of platforms)add('/platforms/'+p.slug,p.name+' — Platform Expertise',`Connect ${p.name} with the experience, technology and intelligence behind your growth system.`,inner.platformsPage(p));
+add('/growth-systems','Growth Systems: CX, MarTech & Data Consulting','Customer experience design, CRM and MarTech implementation, and customer data activation, connected in one growth system.',inner.growthPage(),{crumb:'Growth Systems',schema:[{'@type':'Service','@id':site.url+'/growth-systems#service',name:'Growth Systems',url:site.url+'/growth-systems',description:'Customer experience, MarTech and data intelligence work better together. We design, build, implement, integrate and improve the systems behind customer growth.',provider:{'@id':`${site.url}/#organization`},isRelatedTo:services.map(x=>({'@id':site.url+'/growth-systems/'+x.slug+'#service'}))}]});
+for(const s of services)add('/growth-systems/'+s.slug,s.metaTitle||s.name,s.description,inner.servicePage(s),{crumb:s.name,schema:[{'@type':'Service','@id':site.url+'/growth-systems/'+s.slug+'#service',name:s.name,url:site.url+'/growth-systems/'+s.slug,description:s.description,provider:{'@id':`${site.url}/#organization`},isRelatedTo:{'@id':site.url+'/growth-systems#service'}}]});
+add('/ai-agents','AI Agent Development & Automation Consulting','Custom AI agent development and AI automation consulting: agents for business that connect to your knowledge, CRM, APIs and workflows.',inner.agentsPage(),{crumb:'AI Agents & Automation',schema:[{'@type':'Service','@id':site.url+'/ai-agents#service',name:'AI Agents & Automation',url:site.url+'/ai-agents',description:'Practical AI agents and intelligent applications for business, connected to your knowledge, CRM, APIs and workflows. Built to move real work forward.',serviceType:['AI agent development','AI automation consulting','Business process automation'],provider:{'@id':`${site.url}/#organization`}}]});
+add('/products','AI Products & Custom SaaS Development','LeadRyze AI, IMMA and the custom SaaS, business applications and AI-enabled products InnooRyze designs and builds for clients.',inner.productsPage(),{crumb:'Products'});
+add('/products/leadryze-ai','LeadRyze AI — Intelligent AI Lead Desk','LeadRyze AI answers buyers, qualifies enquiries, captures leads, helps book meetings and connects with CRM.',inner.leadPage(),{crumb:'LeadRyze AI',schema:[{'@type':'SoftwareApplication','@id':site.url+'/products/leadryze-ai#software',name:'LeadRyze AI',url:site.url+'/products/leadryze-ai',description:'LeadRyze AI answers buyers, qualifies enquiries, captures leads, helps book meetings and connects with CRM.',applicationCategory:'BusinessApplication',featureList:['Understand products and business knowledge','Answer buyer questions in context','Qualify enquiries and capture leads','Help buyers book a meeting','Connect with CRM workflows'],publisher:{'@id':`${site.url}/#organization`}}]});
+add('/products/imma','IMMA — Marketing Maturity Assessment','IMMA, the Intelligent Marketing Maturity Assessment, helps decision-makers find gaps across marketing technology, data, customer journeys and capabilities.',inner.immaPage(),{crumb:'IMMA',schema:[{'@type':'WebApplication','@id':site.url+'/products/imma#software',name:'IMMA',alternateName:'Intelligent Marketing Maturity Assessment',url:site.url+'/products/imma',description:'IMMA, the Intelligent Marketing Maturity Assessment, helps decision-makers find gaps across marketing technology, data, customer journeys and capabilities.',applicationCategory:'BusinessApplication',publisher:{'@id':`${site.url}/#organization`}}]});
+add('/work','Client Work & Case Studies','Client work and case studies from InnooRyze across customer experience, CRM and MarTech, with clear context and outcomes we can substantiate.',inner.workPage(),{crumb:'Our Work'});
+for(const w of work)add('/work/'+(w.route||w.slug),w.metaTitle||w.name+' — '+w.title,w.description,inner.casePage(w),{crumb:w.name});
+add('/ideas-hub','Ideas Hub — Experience, MarTech, Data & AI','Perspectives, articles and guides on customer experience, marketing technology, data intelligence and practical AI.',inner.ideasPage(),{crumb:'Ideas Hub'});
+for(const a of articles)add('/ideas-hub/'+a.slug,a.title,a.summary,inner.articlePage(a),{type:'article',crumb:a.title.replace(/\.$/,''),schema:[{'@type':'Article',headline:a.title,description:a.summary,datePublished:a.published,dateModified:a.updated,image:new URL(a.image.src||'asset:editorial/'+a.image.name+'-1600.webp',site.url).href,author:{'@type':'Organization',name:site.name},publisher:{'@id':`${site.url}/#organization`},articleSection:a.category,mainEntityOfPage:new URL('/ideas-hub/'+a.slug,site.url).href}]});
+add('/about','About InnooRyze — Growth Systems, MarTech & AI','InnooRyze is a Growth Systems, MarTech and AI consulting and product company working with businesses across the US, UK, APAC and India.',inner.aboutPage(),{crumb:'About'});
+add('/contact','Contact InnooRyze — Start a Conversation','Talk with InnooRyze about customer experience, MarTech and CRM, customer data, AI agents and automation, LeadRyze AI or IMMA.',inner.contactPage(),{closingCta:false,crumb:'Contact'});
+add('/platforms','Platform Expertise','Platform-agnostic consulting and implementation across customer experience, MarTech and data ecosystems.',inner.platformsPage(),{crumb:'Platform Expertise'});
+for(const p of platforms)add('/platforms/'+p.slug,p.name+' — Platform Expertise',`Connect ${p.name} with the experience, technology and intelligence behind your growth system.`,inner.platformsPage(p),{crumb:p.name});
 add('/credits','Visual Credits','Sources for the original imagery, film, sound and brand assets used by InnooRyze.',inner.creditsPage(),{closingCta:false,indexable:false});
 for(const policy of policies){
  if(!policyPaths[policy.key]||!new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}$').test(policy.approvedOn)||!new RegExp('^[0-9]{4}-[0-9]{2}-[0-9]{2}$').test(policy.effectiveIso)||!policy.sections?.length)throw Error('Policy requires a valid key, both dates and approved sections');
@@ -61,12 +63,20 @@ fs.writeFileSync(path.join(out,'404.html'),layout(scopePageAssets({path:'/404',t
 // written so the artifact keeps the same shape, but nothing points a crawler at it.
 fs.writeFileSync(path.join(out,'robots.txt'),site.indexable?`User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`:'User-agent: *\nDisallow: /\n');
 fs.writeFileSync(path.join(out,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.filter(p=>p.indexable!==false).map(p=>`<url><loc>${new URL(p.path,site.url).href}</loc></url>`).join('')}</urlset>`);
+// llms.txt: a plain-language index for AI assistants, generated from the same pages as the sitemap. Only
+// canonical, indexable routes and their published titles/descriptions; nothing that is not on the site.
+{const NL=String.fromCharCode(10);const idx=pages.filter(p=>p.indexable!==false);
+ const section=(label,test)=>{const list=idx.filter(p=>test(p.path));return list.length?['## '+label,'',...list.map(p=>'- ['+p.title.replace(' | InnooRyze','')+']('+new URL(p.path,site.url).href+'): '+p.description),'']:[];};
+ fs.writeFileSync(path.join(out,'llms.txt'),['# '+site.name,'','> '+site.description,'',
+  'InnooRyze works with businesses across the US, UK, APAC and India, including Singapore, Japan and Malaysia. Company address: '+site.contact.locality+', '+site.contact.region+', '+site.contact.country+'. Contact: '+site.email+'.','',
+  ...section('Growth Systems',p=>p.startsWith('/growth-systems')),...section('AI Agents & Automation',p=>p==='/ai-agents'),
+  ...section('Products',p=>p.startsWith('/products')),...section('Client work and case studies',p=>p.startsWith('/work')),
+  ...section('Ideas Hub',p=>p.startsWith('/ideas-hub')),...section('Platforms',p=>p.startsWith('/platforms')),
+  ...section('Company',p=>['/','/about','/contact','/privacy-policy','/terms-and-conditions'].includes(p))].join(NL));}
 for(const [from,to] of Object.entries(redirects)){const file=path.join(out,from.slice(1),'index.html');fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,redirectPage(from,to,site.url));}
 fs.writeFileSync(path.join(out,'_redirects'),Object.entries(redirects).map(([from,to])=>from+' '+to+' 301!\n'+from+'/ '+to+' 301!').join('\n')+'\n');
-const endpointOrigin=site.enquiryEndpoint?new URL(site.enquiryEndpoint,site.url).origin:'';
-const csp=contentSecurityPolicy(endpointOrigin);
-fs.writeFileSync(path.join(out,'_headers'),'/*'+String.fromCharCode(10)+securityHeaders(endpointOrigin).map(([k,v])=>'  '+k+': '+v).join(String.fromCharCode(10))+String.fromCharCode(10));
-fs.writeFileSync(path.join(out,'.htaccess'),apacheConfig(pages.map(p=>p.path),securityHeaders(endpointOrigin)));
+fs.writeFileSync(path.join(out,'_headers'),'/*'+String.fromCharCode(10)+securityHeaders().map(([k,v])=>'  '+k+': '+v).join(String.fromCharCode(10))+String.fromCharCode(10));
+fs.writeFileSync(path.join(out,'.htaccess'),apacheConfig(pages.map(p=>p.path),securityHeaders()));
 fs.writeFileSync(path.join(root,'scripts/routes.json'),JSON.stringify(pages.map(({path,title})=>({path,title})),null,2));
 // An excluded asset must be genuinely unused. Scan everything the release actually serves — rendered
 // pages, the stylesheet, browser modules, licence records and the routing files — and fail loudly if any
