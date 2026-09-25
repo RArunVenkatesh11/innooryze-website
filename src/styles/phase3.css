@@ -414,3 +414,7 @@
  .case-testimonial blockquote{padding-left:18px}
  .case-testimonial figcaption{padding-left:18px}
 }
+
+/* Contact: the form introduction is now the page's H2 for the enquiry region. It keeps the paragraph's
+   exact type so the structural fix is invisible; only the document outline changes. */
+h2.form-intro{font-family:inherit;font-weight:400;letter-spacing:normal}

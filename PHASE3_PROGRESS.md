@@ -160,3 +160,13 @@ Owner-approved. The work was resumed after an interrupted session; unfinished pa
 - [x] check:production asserts adapter parity and that dist carries no host-specific config
 - [x] Docs state Vercel = temporary preview, final production host = To Be Confirmed
 - [ ] Final hosting platform selection (owner)
+
+## Phase 3B: SEO/GEO semantic refinement
+
+- [x] 41 visible-copy refinements within ±20%, measured against a captured baseline
+- [x] 0 heading re-wraps, 0 new overflow across 140 route/viewport samples
+- [x] 22 metadata fields; titles <= 59, descriptions <= 155, all supported by visible copy
+- [x] +7 contextual internal links inside existing sentences
+- [x] Regional statement on /about (US, UK, APAC, India); no offices implied
+- [x] Contact H2, /work/imma consolidation, /products/imma compact strengthening, Ideas Hub contrast
+- [ ] Phase 3C (not started)

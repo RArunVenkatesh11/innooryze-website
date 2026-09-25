@@ -1,3 +1,18 @@
+# Phase 3B — SEO/GEO semantic refinement + internal discoverability — 25 September 2026
+
+- **Method:** wording refined inside existing copy only; no new sections, card counts or order changes. Baseline text and layout were captured before any edit, then every change was measured against it.
+- **Visible copy:** 41 changed blocks across 13 routes. Every edited paragraph within ±20% of its original rendered length (range -11% to +16%). One draft exceeded the limit (+26%, Experience chapter 01 with three case links) and was tightened to +14% before shipping. Intentional exceptions: /products/imma gains one compact paragraph (the page was genuinely thin at 101 words), /work/imma loses a chapter that only restated "IMMA", and the /contact form introduction moves from <p> to <h2> with identical text.
+- **Layout, 140 route/viewport samples vs baseline:** 0 heading re-wraps, 0 new horizontal overflow. 89 of 120 non-IMMA samples pixel-identical in total height; the rest move by one body line (~25-33px) at some widths, worst +2.23% of page height. The pinned Growth Systems stage keeps fit=1.000 with no panel overflow at 1920/1440/1366/1280 with motion on.
+- **Two regressions caught by measurement and fixed before shipping:** the homepage "Built by us" line wrapped to a second line at every desktop width (shortened, now identical to baseline), and the Growth Systems Data panel gained a line at 1920 inside the pinned stage (one word trimmed, now identical).
+- **Contact:** the page had an H1 and no H2. The form introduction is now the H2 for the enquiry region; computed style verified identical to the previous paragraph (DM Sans 19px/400, same box). A first build rendered it in the heading face; caught and fixed.
+- **Metadata:** 22 title/description fields across 11 routes, all titles <= 59 chars, all descriptions <= 155, each claim supported by visible copy on the same page. Service titles via services[].metaTitle; H1s and Service schema names keep the approved capability names.
+- **Internal links:** +7 contextual links, all inside existing sentences (1431 -> 1438 validated links): Experience -> Dynalektric, Qualtura, industrial valve case; MarTech -> Qualtura, Treffer; /products/imma -> /work/imma; /platforms -> MarTech capability.
+- **GEO:** all 13 answer-readiness questions now resolve to a visible sentence (previously CX/CRM consulting, CRM implementation, CDP consulting, data activation, AI agent development, AI automation consulting and custom SaaS were missing or weak).
+- **Regional:** one statement on /about — US, UK, APAC and India, including Singapore, Japan and Malaysia. Service coverage, no office implied. Correction to the earlier audit: /about already carried a regional sentence ("North America, Singapore and Southeast Asia, India...") that the audit's pattern missed; it has been updated rather than added.
+- **Ideas Hub:** contents rail 3.76:1 -> 4.91:1 (#52707f). No article text changed.
+- **Phase 3A regression:** preview build noindex 31/31 with Disallow and no sitemap line; non-Vercel production build indexable; 3/3 adapters; vercel.json still in sync; GTM 0; asset exclusions intact; consent 43/43.
+- **Build/test:** build:production 29 routes, npm test 19/19, check:production 1438 links/assets, validate --production --http all pass; 29 routes swept with 0 JS errors and 0 failed resource loads.
+
 # Phase 3A addendum — host-agnostic confirmation, Vercel is temporary — 25 September 2026
 
 - **Context:** Vercel is a temporary preview/testing host; the final production platform is To Be Confirmed. Audited Phase 3A for hard Vercel dependencies.

@@ -33,6 +33,33 @@ This is the real production SEO foundation for **https://innooryze.com**, not a 
 
 These topics guide useful prose, not repetitive keyword insertion. The full route inventory and canonical aliases remain in SITE_ARCHITECTURE.md and scripts/routes.json.
 
+## Phase 3B semantic refinement
+
+Search concepts are carried by small wording changes inside existing copy, never by new keyword blocks or
+hidden text. Every visible edit stayed within ±20% of its original length (measured on rendered text), and a
+before/after layout capture across ten viewports showed no heading re-wraps and no new overflow.
+
+Concept → where it lives:
+
+| Concept | Primary route | Carrier |
+|---|---|---|
+| Customer experience / CX consulting | /growth-systems/experience-design-enablement | hero, "CX STRATEGY TO IMPLEMENTATION", chapter 04 |
+| Custom SaaS, business applications, digital products | experience page chapters 02–03; /products hero; /about | existing sentences |
+| CRM consulting / CRM implementation / platform integration | /growth-systems/martech-consulting-enablement | hero, chapters 02–03 |
+| Marketing automation, campaign operations | martech page | hero, chapter 05 |
+| Customer data platform / CDP consulting | /growth-systems/data-intelligence-activation | chapter 01 |
+| Customer data activation, audience activation | data page; /growth-systems panel 003 | hero, chapters 02 and 05 |
+| AI agent development, AI automation consulting, business process automation | /ai-agents | custom-agents section, use-case list |
+| Regions served | /about (single authoritative statement) + /about meta description | "We work with businesses across the US, UK, APAC and India, including Singapore, Japan and Malaysia." |
+
+Regional wording describes **service coverage, never office locations**. The registered address is
+unchanged. Do not add "office" language for any region unless verified.
+
+Titles now carry search specificity the visible headings deliberately do not, e.g. "MarTech, CRM & Marketing
+Automation Consulting". Every title/description claim is supported by visible copy on the same page. Service
+titles live on `services[].metaTitle`; the visible H1 and Service schema name keep the approved capability
+names. "Data Intelligence & Activation" is never renamed.
+
 ## Implemented technical foundation
 
 All meaningful content is static semantic HTML. layout.mjs produces unique metadata, canonical URLs, OG/Twitter cards and Organization, WebSite and WebPage schema. Service pages add Service; articles add Article with actual content dates and organization editorial attribution. Nested BreadcrumbList entries include the parent route. Do not add ratings, reviews, pricing, addresses, certifications or outcomes without evidence.

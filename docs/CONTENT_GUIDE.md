@@ -4,6 +4,17 @@
 
 /privacy-policy and /terms-and-conditions carry approved legal wording transferred verbatim from the live InnooRyze pages. Treat src/content/policies.mjs as a transcript, not copy to edit: never reword, condense, reorder or "tidy" a clause, and never add a compliance statement, jurisdiction, retention period or liability term that is not on the approved source. Change the approved source first, then re-transfer. Only structure is ours — the live pages mark section headings up as `<h5>`, which becomes `<h2>` here, and loose list items become real lists. tests/policies.test.mjs fails if sections, numbering, dates, the registered entity or the contents anchors are lost.
 
+## Search wording (Phase 3B)
+
+Search terms are introduced by refining existing sentences, never by adding keyword lists, hidden text or new
+sections. Keep a replacement within about ±20% of the original length so the approved layout does not move,
+and check display headings (H1/H2) for new wrapping before changing them — the three capability H2s were left
+alone for that reason, and the discipline name went into the eyebrow instead.
+
+Regional positioning: one authoritative statement on /about — "We work with businesses across the US, UK,
+APAC and India, including Singapore, Japan and Malaysia." It describes coverage, not offices. Do not repeat
+geographies across every page.
+
 ## Voice
 
 Write with clear thinking and useful specifics. Explain what InnooRyze designs, builds, connects and improves, for whom and with what next step. Keep headlines direct. Avoid inflated claims, generic transformation language, endless lists and keyword stuffing. Exact pillar/capability names and approved expressions are in CLAUDE.md.
