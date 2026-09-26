@@ -244,7 +244,7 @@
 .consent-dialog-actions>[data-consent="save"]{grid-column:1/-1}
 
 .footer-consent{padding:0;border:0;background:none;color:inherit;font-size:inherit;font-family:inherit;text-align:left;transition:color .3s}
-.footer-consent:hover{color:var(--acid)}
+.footer-legal a:hover,.footer-consent:hover{color:var(--acid)}
 
 @media(max-width:1000px){
  .consent-bar-inner{flex-direction:column;align-items:stretch;gap:14px}
@@ -269,7 +269,7 @@
 }
 @media(prefers-reduced-motion:reduce){
  .consent-bar{transition:none;transform:none}
- .consent-switch-track,.consent-switch-track:after,.consent-action,.consent-dismiss,.footer-consent{transition:none}
+ .consent-switch-track,.consent-switch-track:after,.consent-action,.consent-dismiss,.footer-consent,.footer-legal a{transition:none}
 }
 
 /* Legal pages.
@@ -304,6 +304,16 @@
 /* Footer legal row */
 .footer-legal{display:flex;flex-wrap:wrap;align-items:center;gap:8px 22px}
 .footer-legal a,.footer-legal button{white-space:nowrap;display:inline-flex;align-items:center;min-height:24px}
+.footer-legal a{transition:color .3s}
+/* The tagline sits on the true centre of the row: equal outer columns, each at least as wide as its content,
+   so the legal links never wrap. From 820px the row is wide enough for exact centring; narrower rows keep the
+   original flex layout (the tagline is hidden below 761px). */
+@media(min-width:820px){
+ .footer-bottom{display:grid;grid-template-columns:minmax(max-content,1fr) auto minmax(max-content,1fr);align-items:center}
+ .footer-bottom>span:first-child{justify-self:start}
+ .footer-bottom>span:nth-child(2){justify-self:center;text-align:center}
+ .footer-bottom>.footer-legal{justify-self:end;justify-content:flex-end}
+}
 
 @media(max-width:1280px){
  /* Fifteen numbered anchors ahead of the text is a wall, not a convenience once the rail stops being a
