@@ -31,7 +31,7 @@ Example future task: “Update MarTech content in src/site.mjs and src/component
   - The film selects encodes by screen and follows rotation; Save-Data shows poster motion.
   - The LeadRyze desk was not tilted anywhere (`.lead-desk` CSS targets no element), so no tilt was added.
 - Launch Phase 1, brand and UI consistency (25 September 2026, owner-approved):
-  - `brand-logo.png` is the approved trademark wordmark and the only wordmark in the header and footer; `brand-symbol.png` is the approved OO symbol, used for the favicon/app icon and the watermark. Never redraw or rename either.
+  - `brand-logo.png` is the approved trademark wordmark and the only wordmark in the header and footer; `brand-symbol.png` is the approved OO symbol, used for the favicon/app icon and the watermark. Never redraw or rename either. Pages load display-size derivatives of both (see docs/ASSET_REGISTER.md).
   - All north-east CTA arrows come from `arrowUpRight()` in `src/components/icons.mjs`; the Unicode glyph is banned because iOS renders it as a colour emoji.
   - Verified contact details live in `site.contact` (Coimbatore office, +91 80156 20896, enquiry@innooryze.com) and feed the Contact page, the footer and the Organization schema. There is no second office or phone number.
   - The OO watermark appears only on the Contact page and the Ready to Ryze CTA.

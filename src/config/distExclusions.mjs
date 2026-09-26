@@ -14,6 +14,8 @@
 
 export const distExclusions = [
  // --- owner-supplied source masters; production serves the generated WebP derivatives --------------
+ {path: '/assets/images/home/home-hero-video-poster.jpg', reason: 'source master (2520x1418 JPEG); ships as home-hero-video-poster.webp (1920x1080)'},
+ {path: '/assets/brand/brand-symbol.png', reason: 'approved 4500x4500 master; ships as brand-symbol-192.png (icons) and brand-symbol-1200.webp (watermark)'},
  {path: '/assets/images/work/industrial-valve/industrial-valve-hero.png', reason: 'source master; ships as industrial-valve-hero.webp + -800'},
  {path: '/assets/images/work/industrial-valve/industrial-valve-interface.png', reason: 'source master; ships as industrial-valve-interface.webp + -800'},
  {path: '/assets/images/work/qualtura/qualtura-homepage.png', reason: 'source master; ships as qualtura-homepage.webp + -800'},

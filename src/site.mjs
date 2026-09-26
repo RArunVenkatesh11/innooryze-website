@@ -25,6 +25,10 @@ export const site = {
   logo: '/assets/brand/brand-logo.png',
   logoSize: [3290,719],
   symbol: '/assets/brand/brand-symbol.png',
+  // Rendered derivatives of the same approved artwork, sized for display (the masters above stay unchanged
+  // and remain the Organization/social logo). The wordmark is shown at most 215px wide.
+  logoDisplay: {src:'/assets/brand/brand-logo-494.png', srcset:'/assets/brand/brand-logo-247.png 1x, /assets/brand/brand-logo-494.png 2x, /assets/brand/brand-logo-741.png 3x', size:[494,108]},
+  icon: '/assets/brand/brand-symbol-192.png',
   // Verified public contact details. Nothing here is inferred; there is no second office or phone number.
   contact: {
     street: '11/1, Krishnarayapuram, Thoatta Saalaigal, Chettipalayam',

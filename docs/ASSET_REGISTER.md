@@ -39,7 +39,7 @@ Homepage film paths live in the same configuration and become `dist/media-config
 
 | Asset | Source / use | Status and rule |
 |---|---|---|
-| public/assets/brand/brand-logo.png; public/assets/brand/brand-symbol.png | Approved InnooRyze trademark artwork supplied by the owner (20 September 2026 replacement) | brand-logo.png is the trademark wordmark including the TM (3290x719); brand-symbol.png is the standalone OO symbol (4500x4500), used for the favicon/app icon and the masked OO watermark. Retain without redesign, renaming or recolouring. Superseded copies brand-logo1.png and brand-symbol1.svg remain on disk, unreferenced. |
+| public/assets/brand/brand-logo.png; public/assets/brand/brand-symbol.png | Approved InnooRyze trademark artwork supplied by the owner (20 September 2026 replacement) | brand-logo.png is the trademark wordmark including the TM (3290x719); brand-symbol.png is the standalone OO symbol (4500x4500), used for the favicon/app icon and the masked OO watermark. Retain without redesign, renaming or recolouring. The site serves display-size derivatives of the same artwork (B-2, 26 September 2026): brand-logo-247/494/741.png via srcset for the header and footer wordmark, brand-symbol-192.png for the favicon/app icon and brand-symbol-1200.webp for the watermark. The masters stay unchanged in public/; brand-logo.png remains the Organization/social logo, and brand-symbol.png is withheld from dist because nothing serves it directly. Superseded copies brand-logo1.png and brand-symbol1.svg remain on disk, unreferenced. |
 | public/assets/fonts/dm-sans-*.woff2; manrope-*.woff2 | Manrope / DM Sans, SIL Open Font License | Bundled local typography; licenses in assets/licenses |
 | public/assets/platforms/* | Respective platform marks, used to identify confirmed experience | Trademarks belong to owners; no partnership/certification implied |
 | Page-owned *imma*.png files under assets/images/products and assets/images/work | Actual InnooRyze assessment interface at assessment.innooryze.com | Real product capture; review when product changes |
@@ -54,7 +54,7 @@ Project sources and capture dates are in public/assets/licenses/project-captures
 
 ## Film collection
 
-Each film key has public/assets/video/home-hero-film-KEY.mp4 and home-hero-film-KEY-mobile.mp4. Posters used by pages have separate semantic names under assets/images; the homepage poster is home/home-hero-video-poster.jpg. All are edited, compact, muted website encodes under the Pexels License. Stock footage illustrates people, culture, technology and craft; it is not InnooRyze staff/client documentary footage.
+Each film key has public/assets/video/home-hero-film-KEY.mp4 and home-hero-film-KEY-mobile.mp4. Posters used by pages have separate semantic names under assets/images; the homepage poster is home/home-hero-video-poster.webp (1920x1080, derived 26 September 2026 from the unchanged 2520x1418 home-hero-video-poster.jpg master, which is withheld from dist). All are edited, compact, muted website encodes under the Pexels License. Stock footage illustrates people, culture, technology and craft; it is not InnooRyze staff/client documentary footage.
 
 | Key | Creator / source |
 |---|---|

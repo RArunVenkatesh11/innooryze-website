@@ -162,7 +162,7 @@
 /* OO symbol watermark. Decorative only: masked from the approved artwork, never a second logo download,
    behind content, ignored by assistive technology and incapable of affecting layout. */
 .brand-watermark{position:absolute;z-index:-1;pointer-events:none;user-select:none;-webkit-user-select:none;
- background-image:url(/assets/brand/brand-symbol.png);background-repeat:no-repeat;background-size:contain;background-position:center}
+ background-image:url(/assets/brand/brand-symbol-1200.webp);background-repeat:no-repeat;background-size:contain;background-position:center}
 .contact{position:relative;isolation:isolate}
 .contact .brand-watermark{right:0;bottom:0;width:min(780px,60vw);height:min(780px,60vw);transform:translate(20%,30%);opacity:.10}
 /* clip-path crops the overhang without making the section a scrollport, so the sticky intro keeps working

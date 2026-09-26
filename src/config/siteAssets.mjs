@@ -6,10 +6,10 @@ export const siteAssets = {
         "key": "home-hero-video-poster",
         "source": "asset:film-digital-connection-poster.jpg",
         "occurrence": 1,
-        "src": "/assets/images/home/home-hero-video-poster.jpg",
+        "src": "/assets/images/home/home-hero-video-poster.webp",
         "dimensions": [
-          2520,
-          1418
+          1920,
+          1080
         ]
       },
       {

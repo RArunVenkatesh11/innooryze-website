@@ -2,13 +2,13 @@
   {
     "route": "/",
     "role": "hero-video-poster",
-    "file": "/assets/images/home/home-hero-video-poster.jpg",
+    "file": "/assets/images/home/home-hero-video-poster.webp",
     "originalAsset": "/assets/film-digital-connection-poster.jpg",
     "dimensions": [
-      2520,
-      1418
+      1920,
+      1080
     ],
-    "sha256": "644fab0af7288119292b10da18504478a92ca07a73acda352b0c87b7842ecaf3"
+    "sha256": "c3724304e7384477f47e6d67aa19c52f0d7ef6baa821553bbcc448f5fc8e9335"
   },
   {
     "route": "/",
