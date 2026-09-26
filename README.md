@@ -95,7 +95,7 @@ Assets are organized into `images/`, `platforms/`, `brand/`, `fonts/`, `video/`,
 
 ## Media and motion
 
-The hero film remains muted, opens on the digital-connection scene that matches its poster, preloads only the next scene, and pauses when offscreen or hidden. Sound starts only after a gesture; its preference is remembered for the session, with another gesture required on a new document. The Sound control is disabled while motion is reduced or paused. The soundtrack is original, code-composed music, not a commercial recording. Film and demonstrations respect reduced motion; touch/keyboard controls expose the same content without hover.
+The hero film remains muted, opens on the digital-connection scene that matches its poster, preloads only the next scene, and pauses when offscreen or hidden. Sound starts only after a gesture; its preference is remembered for the session, with another gesture required on a new document. The Sound control is disabled while motion is reduced or paused. The soundtrack is owner-approved replacement audio; its source/licence record is pending (public/assets/licenses/original-score.txt). Film and demonstrations respect reduced motion; touch/keyboard controls expose the same content without hover.
 
 Same experience, responsive execution: desktop, laptop, tablet and mobile keep the same storytelling, animations and interactions, while type, spacing, animation distance and parallax adapt to the available space.
 - **Pinned sections:** the homepage "Two pillars" story and the /growth-systems journey are pinned and scroll-driven everywhere they can fit, one state at a time with counter, progress and 44px step controls. Content scales down to fit short laptop windows.
@@ -105,7 +105,7 @@ Same experience, responsive execution: desktop, laptop, tablet and mobile keep t
 - **When motion is static:** only for reduced motion or the explicit pause control.
 - **Save-Data:** the hero poster drifts slowly instead of loading the film.
 
-`public/assets/licenses/` documents film, photography, original score, project captures and font licenses. Photography illustrates concepts and does not claim to portray InnooRyze staff or client teams. The IMMA and client website captures are actual interfaces approved for portfolio use by the website owner. Original full-resolution research downloads are outside the portable source; optimized usable media and source/licensing records are included.
+`public/assets/licenses/` documents film, photography, homepage audio, project captures and font licenses. Photography illustrates concepts and does not claim to portray InnooRyze staff or client teams. The IMMA and client website captures are actual interfaces approved for portfolio use by the website owner. Original full-resolution research downloads are outside the portable source; optimized usable media and source/licensing records are included.
 
 The optional film encoder accepts a source directory: `node scripts/encode-phase2.mjs /path/to/downloads`. It uses FFmpeg from PATH or the `FFMPEG` environment variable and writes only the named homepage videos under assets/video; it does not overwrite page-owned posters or photographs. The optional Python score-generation script is not part of the build. Regeneration requires NumPy and a standard audio encoder; the finished MP3 is bundled. Film source records include the original download URLs; no remote media request is needed for the production website.
 

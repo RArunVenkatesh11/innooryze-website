@@ -26,7 +26,7 @@ Page photos live under `public/assets/images/<page>/`, mapped in `src/config/sit
 
 ## Motion and interaction
 
-Film uses six local scenes and a muted poster fallback, opening on digital-connection (matching the poster and PEOPLE / POSSIBILITY label) and looping through business, data, human + machine, craft and culture. Only the active/next scene loads. Progress Pulse is the approved original 128 BPM soundtrack, with immediate rhythm; it needs no replacement. Sound starts after a gesture and pauses with motion/visibility controls; the Sound button is disabled while motion is reduced or paused.
+Film uses six local scenes and a muted poster fallback, opening on digital-connection (matching the poster and PEOPLE / POSSIBILITY label) and looping through business, data, human + machine, craft and culture. Only the active/next scene loads. The homepage audio (progress-pulse.mp3) is an owner-approved replacement track, looped. Sound starts after a gesture and pauses with motion/visibility controls; the Sound button is disabled while motion is reduced or paused.
 
 The film and poster share one grade on `.film-media`: `saturate(1.2) contrast(1.08)`, with no brightness lift. The hero shade keeps darkness behind the copy and opens the rest of the frame. On desktop (>1000px) it runs 82% at the left edge to 0% at the right, with a short bottom band protecting the footer controls. At <=1000px the copy spans most of the width, so darkness sits in the copy band and the area above it stays open. Exact stops are in phase1.css. Any retune must be re-measured against the brightest frames of all six scenes at desktop, tablet and mobile; body text needs 4.5:1 and large headline text 3:1.
 

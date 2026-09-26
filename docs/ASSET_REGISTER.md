@@ -18,7 +18,7 @@ All paths below are relative to the source root. Production mirrors public/ into
 | images/platforms | Directory and existing platform detail heroes |
 | images/contact; images/credits; images/system | Independently owned social fallback images |
 | platforms; brand; fonts | Local platform identities, original InnooRyze identity, named font subsets |
-| video; audio | Six homepage scenes with desktop/mobile MP4s; approved Progress Pulse MP3 |
+| video; audio | Six homepage scenes with desktop/mobile MP4s; owner-approved homepage audio MP3 |
 | licenses | Attribution, permissions, font licenses, ownership and logo provenance |
 
 ### Replace an image without editing application code
@@ -47,7 +47,8 @@ Homepage film paths live in the same configuration and become `dist/media-config
 | Page-owned anonymous industrial visuals under assets/images/work/industrial-valve | Approved anonymous industrial valve photography and digital-experience concept | In Progress; replace/update after approved final launch |
 | Treffer project visual | Page-owned Treffer photographs; optical-patterns provenance | Conceptual licensed image; no approved client screenshot/logo supplied |
 | public/assets/images/ideas-hub/ideas-hub-hero.jpg | Maximus Beaumont, Unsplash photo 6lGG-GCm1Z4 | Illustrative light installation; used for Ideas hero |
-| public/assets/audio/progress-pulse.mp3 | Original code-composed Progress Pulse, 128 BPM / 30-second loop | Accepted energetic score; no commercial samples; retain |
+| public/assets/audio/progress-pulse.mp3 | Owner-approved replacement audio (26 September 2026); MP3, 106 seconds, about 256 kbps, 3.39 MB, looped | Source/licence confirmation required before final production launch; see licenses/original-score.txt |
+| Previous progress-pulse.mp3 | Original code-composed Progress Pulse, 128 BPM / 30-second loop | Retired; git history only; regenerable with scripts/compose-score.py |
 | Earlier progress-score.mp3 | Original 96 BPM score | Historical only; excluded from this release |
 
 Project sources and capture dates are in public/assets/licenses/project-captures.md. The owner authorized portfolio use; client-provided material is project-specific, not a general stock license. Confirm rights for any use beyond this website. Real project links: https://dynalektric.com/ and https://qualtura.com/. The anonymised industrial valve case publishes no client link.
