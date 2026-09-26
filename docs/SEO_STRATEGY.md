@@ -14,7 +14,7 @@ This is the real production SEO foundation for **https://innooryze.com**, not a 
 | /growth-systems/martech-consulting-enablement | Evaluate technology consulting and implementation | MarTech Consulting & Enablement; assessment, CRM, architecture, migration, integration and adoption |
 | /growth-systems/data-intelligence-activation | Evaluate data foundations and practical activation | Data Intelligence & Activation; CDP, identity, segmentation, analytics and measurement |
 | /ai-agents | Understand practical and custom agent development | AI Agents & Automation; knowledge, workflows, systems, human review and useful outcomes |
-| /products | Discover available products and clearly distinguished development concepts | InnooRyze products; LeadRyze AI, IMMA and the approved roadmap |
+| /products | Discover available products and clearly distinguished development concepts | InnooRyze products; LeadRyze AI, LeadRyze CRM, IMMA and the approved roadmap |
 | /products/leadryze-ai | Evaluate the available AI lead desk | Enquiry answers, qualification, capture and CRM/sales handoff |
 | /products/imma | Understand the available assessment and enter its live experience | Intelligent Marketing Maturity Assessment; technology, data, journey and capability gaps |
 | /platforms | Review the approved categorized ecosystem | CRM, Marketing Automation, CDP, CMS and Analytics/BI; LeadRyze CRM first |

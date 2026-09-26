@@ -18,7 +18,7 @@ scripts/build.mjs assembles the pages, shared layout and SEO. Five CSS layers co
 | /growth-systems/martech-consulting-enablement | Assessment, architecture, implementation and adoption; servicePage(1) |
 | /growth-systems/data-intelligence-activation | Customer data, CDP, analytics and activation; servicePage(2) |
 | /ai-agents | Practical/custom agents and human control; agentsPage |
-| /products | Available products and development roadmap; productsPage |
+| /products | Available products, the owned LeadRyze CRM (#leadryze-crm, enquiry link only) and development roadmap; productsPage |
 | /products/leadryze-ai | AI lead engagement, capture and CRM/sales handoff; leadPage |
 | /products/imma | Marketing maturity assessment and dimensions; immaPage |
 | /work | Portfolio index/filters; workPage |

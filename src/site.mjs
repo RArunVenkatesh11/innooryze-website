@@ -60,6 +60,8 @@ export const products = [
   {slug:'brand-social-content',name:'Brand & social content',category:'PRODUCT ROADMAP',status:'In development',description:'AI-supported content workflows that connect brand knowledge, creative development and publishing.'},
   {slug:'performance-intelligence',name:'Performance intelligence',category:'PRODUCT ROADMAP',status:'In development',description:'Performance signals and next-best-action insights that help teams decide where to focus.'}
 ];
+// LeadRyze CRM: an owned product with no dedicated route and no approved status, pricing or feature list.
+export const leadryzeCrm = {name:'LeadRyze CRM',label:'Built by InnooRyze',description:'LeadRyze CRM is an InnooRyze-built CRM designed to help growing businesses organise customer and lead information and support structured sales follow-up.',distinction:'It is a separate product from LeadRyze AI, our AI lead desk.',anchor:'/products#leadryze-crm',enquiry:'/contact?interest=LeadRyze%20CRM'};
 export const articles = [
   {slug:'choosing-the-right-cdp-for-your-growth-stage',title:'Choosing the right CDP for your growth stage.',category:'Data & Intelligence',type:'Guide',readTime:'3 min read',summary:'Start with the decisions and customer experiences you need to improve. Then choose the data foundation to support them.',sections:[
     ['Start with a use case, not a platform.','A customer data platform should solve a specific problem. That might be fragmented customer profiles, inconsistent audiences or the difficulty of making a relevant next interaction possible. Write down the first use case before building a requirements list.'],

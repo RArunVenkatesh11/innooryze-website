@@ -31,7 +31,7 @@ Growth Systems connects Experience Design & Enablement, MarTech Consulting & Ena
 | Dynalektric | Live website; strategy, UX/IA, design, development, responsive/enquiry experience | Revenue/conversion uplift or invented stack |
 | Treffer Technologies | Real CRM/MarTech enablement client | Specific stack, deliverables, outcomes, quotes or approved client logo |
 | US Industrial Valve Manufacturer (anonymised) | Website experience build In Progress | Completion, results, or any identifying detail |
-| LeadRyze CRM | Built by InnooRyze; first CRM platform entry; text wordmark approved | Availability, pricing, features or equivalence with LeadRyze AI |
+| LeadRyze CRM | Built by InnooRyze; first CRM platform entry; text wordmark approved; one-sentence description on /products and llms.txt (src/site.mjs leadryzeCrm), stated as separate from LeadRyze AI | Availability, pricing, features or equivalence with LeadRyze AI |
 | Platforms | Five-category owner-approved taxonomy in CLAUDE.md and platform-catalog.mjs | Certification, partnership, client stacks or additional expertise beyond this approval |
 | About | Two pillars, strategy through delivery, product mindset and international relevance | Staff names, headcount, founding dates or offices not supplied |
 

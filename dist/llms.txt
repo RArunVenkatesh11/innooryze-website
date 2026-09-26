@@ -17,9 +17,10 @@ InnooRyze works with businesses across the US, UK, APAC and India, including Sin
 
 ## Products
 
-- [AI Products & Custom SaaS Development](https://innooryze.com/products): LeadRyze AI, IMMA and the custom SaaS, business applications and AI-enabled products InnooRyze designs and builds for clients.
+- [AI Products & Custom SaaS Development](https://innooryze.com/products): LeadRyze AI, LeadRyze CRM, IMMA and the custom SaaS, business applications and AI-enabled products InnooRyze designs and builds for clients.
 - [LeadRyze AI — Intelligent AI Lead Desk](https://innooryze.com/products/leadryze-ai): LeadRyze AI answers buyers, qualifies enquiries, captures leads, helps book meetings and connects with CRM.
 - [IMMA — Marketing Maturity Assessment](https://innooryze.com/products/imma): IMMA, the Intelligent Marketing Maturity Assessment, helps decision-makers find gaps across marketing technology, data, customer journeys and capabilities.
+- [LeadRyze CRM](https://innooryze.com/products#leadryze-crm): Built by InnooRyze. LeadRyze CRM is an InnooRyze-built CRM designed to help growing businesses organise customer and lead information and support structured sales follow-up. It is a separate product from LeadRyze AI, our AI lead desk.
 
 ## Client work and case studies
 
