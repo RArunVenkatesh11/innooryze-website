@@ -3,6 +3,8 @@ export const editorial = {
  experience:{name:'digital-mobile',alt:'A person using a mobile phone on a vivid city street',label:'REAL PEOPLE. CONNECTED EXPERIENCES.'},
  martech:{name:'human-screen-portrait',alt:'A person concentrating on a screen through glass with warm and cyan reflections',label:'MANY MOVING PARTS. ONE EXPERIENCE.'},
  data:{name:'optical-patterns',alt:'Colourful optical patterns across a transparent measuring instrument against black',label:'CUSTOMER SIGNALS. BUSINESS CONTEXT.'},
+ // The Data Intelligence hero slot now holds a different photograph from the shared optical-patterns token.
+ dataHero:{name:'optical-patterns',alt:'Three colleagues studying customer data on an interactive world-map table at night',label:'CUSTOMER SIGNALS. BUSINESS CONTEXT.'},
  agents:{src:'asset:film-human-machine-poster.webp',alt:'Researchers controlling a collaborative robotic arm together',label:'HUMAN INTELLIGENCE. EXTENDED.'},
  products:{name:'product-in-use',alt:'A person using a virtual reality product in an immersive LED installation',label:'IDEAS, ENGINEERED TO WORK.'},
  work:{name:'article-craft',alt:'A designer working with a cutting mat, tools and materials on a workbench',label:'STRATEGY / DESIGN / BUILD'},
@@ -12,7 +14,7 @@ export const editorial = {
  imma:{src:'asset:imma-screen.png',alt:'The live IMMA marketing maturity assessment',label:'YOUR STARTING POINT FOR WHAT COMES NEXT.'},
  platforms:{name:'article-craft',alt:'A craftsperson working carefully with tools and materials',label:'THE RIGHT TOOLS. CONNECTED WITH PURPOSE.'}
 };
-export const heroKeys={'growth-page-hero':'growth','service-0':'experience','service-1':'martech','service-2':'data','agents-page-hero':'agents','products-page-hero':'products','work-page-hero':'work','ideas-page-hero':'ideas','about-page-hero':'about','lead-page-hero':'lead','imma-page-hero':'imma','platforms-page-hero':'platforms'};
+export const heroKeys={'growth-page-hero':'growth','service-0':'experience','service-1':'martech','service-2':'dataHero','agents-page-hero':'agents','products-page-hero':'products','work-page-hero':'work','ideas-page-hero':'ideas','about-page-hero':'about','lead-page-hero':'lead','imma-page-hero':'imma','platforms-page-hero':'platforms'};
 export const heroMedia=className=>editorial[heroKeys[className.split(' ').find(x=>heroKeys[x])]];
 // width/height are placeholders: scripts/page-assets.mjs rewrites them from the page-owned file's real dimensions.
 // `focus` sets the per-image focal point used by object-position.

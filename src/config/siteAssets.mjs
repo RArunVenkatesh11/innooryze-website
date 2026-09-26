@@ -286,10 +286,10 @@ export const siteAssets = {
         "occurrence": 1,
         "src": "/assets/images/data/data-intelligence-hero.webp",
         "dimensions": [
-          1600,
-          758
+          1672,
+          941
         ],
-        "srcset": "/assets/images/data/data-intelligence-hero-800.webp 800w, /assets/images/data/data-intelligence-hero.webp 1600w"
+        "srcset": "/assets/images/data/data-intelligence-hero-800.webp 800w, /assets/images/data/data-intelligence-hero.webp 1672w"
       },
       {
         "key": "data-intelligence-signals",

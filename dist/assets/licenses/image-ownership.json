@@ -443,23 +443,30 @@
     "route": "/growth-systems/data-intelligence-activation",
     "role": "hero",
     "file": "/assets/images/data/data-intelligence-hero.webp",
-    "originalAsset": "/assets/editorial/optical-patterns-1600.webp",
+    "originalAsset": null,
     "dimensions": [
-      1600,
-      758
+      1672,
+      941
     ],
-    "sha256": "6146e1d2a83dea78365f49921c96c651c130d01cd991e7e8438f77cbc61bdfdf"
+    "sha256": "f8fd1a8ea523ee0b09443a9fa7a134b47cdabafd027aac40bd7ea1b3408ee015",
+    "provenance": "AI-generated specifically for InnooRyze using OpenAI image generation in ChatGPT",
+    "generated": "2026-09-26",
+    "usage": "Owner-approved website asset"
   },
   {
     "route": "/growth-systems/data-intelligence-activation",
     "role": "hero 800w",
     "file": "/assets/images/data/data-intelligence-hero-800.webp",
-    "originalAsset": "/assets/editorial/optical-patterns-800.webp",
+    "originalAsset": null,
     "dimensions": [
       800,
-      378
+      450
     ],
-    "sha256": "89acdef389ee29cd88abb71109039c07998ceab578c776fe699e0784aaa02faf"
+    "sha256": "983e3f83770aec59a91bca5b68d29d78f3dc53c352f7d3c883b9c9b3fa7029fc",
+    "provenance": "AI-generated specifically for InnooRyze using OpenAI image generation in ChatGPT",
+    "generated": "2026-09-26",
+    "usage": "Owner-approved website asset",
+    "derivedFrom": "/assets/images/data/data-intelligence-hero.webp"
   },
   {
     "route": "/growth-systems/data-intelligence-activation",
