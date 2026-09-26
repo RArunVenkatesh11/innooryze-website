@@ -58,7 +58,7 @@ for(const policy of policies){
  add(policyPaths[policy.key],policy.title,policy.description,policyPage(policy),{closingCta:false});
 }
 for(const page of pages){const filename=path.join(out,page.path==='/'?'index.html':page.path.slice(1)+'/index.html');fs.mkdirSync(path.dirname(filename),{recursive:true});fs.writeFileSync(filename,layout(scopePageAssets(page,site.url)));}
-fs.writeFileSync(path.join(out,'404.html'),layout(scopePageAssets({path:'/404',title:'Page not found | InnooRyze',description:'Explore the InnooRyze website.',body:inner.notFound(),closingCta:false,indexable:false},site.url)));
+fs.writeFileSync(path.join(out,'404.html'),layout(scopePageAssets({path:'/404',title:'Page not found | InnooRyze',description:'Explore the InnooRyze website.',body:inner.notFound(),closingCta:false,indexable:false,ownUrl:false},site.url)));
 // A preview build disallows everything and deliberately advertises no sitemap; sitemap.xml is still
 // written so the artifact keeps the same shape, but nothing points a crawler at it.
 fs.writeFileSync(path.join(out,'robots.txt'),site.indexable?`User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`:'User-agent: *\nDisallow: /\n');

@@ -60,6 +60,7 @@ const urls=[...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>m[1]);
 assert.equal(urls.length,routes.length-1);assert.equal(urls.length,new Set(urls).size);
 if(production){assert.deepEqual(urls,routes.filter(r=>r.path!=='/credits').map(r=>new URL(r.path,origin).href));assert.equal(read(path.join(dist,'robots.txt')),`User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`);}
 assert.match(read(path.join(dist,'404.html')),/name="robots" content="noindex,(no)?follow"/);
+{const nf=read(path.join(dist,'404.html'));assert.ok(!nf.includes('rel="canonical"'),'404.html must not declare a canonical URL');assert.ok(!nf.includes('property="og:url"'),'404.html must not declare og:url');assert.ok(!nf.includes(origin+'/404'),'404.html must not reference a synthetic /404 URL');const g=JSON.parse(nf.split('<script type="application/ld+json">')[1].split('</script>')[0])['@graph'];assert.ok(!g.some(n=>['WebPage','BreadcrumbList'].includes(n['@type'])),'404.html must not carry WebPage or BreadcrumbList schema');}
 for(const [from,to] of Object.entries(redirects)){const html=read(pageFile(from));assert.ok(/noindex,(no)?follow/.test(html));assert.ok(html.includes(`href="${new URL(to,origin).href}"`));assert.ok(fs.existsSync(pageFile(to)));}
 assert.ok(read(path.join(dist,'.htaccess')).includes('ErrorDocument 404 /404.html'));
 for(const scene of ['global-city','digital-connection','business-collaboration','data-intelligence','human-machine','human-craft'])for(const size of ['','-mobile'])assert.ok(fs.existsSync(localFile(`${homeFilm.base}${scene}${size}.mp4`)));
