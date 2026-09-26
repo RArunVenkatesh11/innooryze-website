@@ -165,6 +165,56 @@ export const policies = [
        "Users remain responsible for business decisions based on such outputs.",
        "We recommend human validation before implementing strategic recommendations."
       ]
+     ],
+     [
+      "h3",
+      "3.1 Information Collected by IMMA"
+     ],
+     [
+      "p",
+      "To run the assessment and prepare your results, IMMA collects:"
+     ],
+     [
+      "ul",
+      [
+       "Your first name, email address and business name",
+       "Your industry, company size and, where you provide it, your country",
+       "Your business type and the assessment categories you select",
+       "Your answers and scores, including any challenges you select, optional notes and optional free-text answers",
+       "The results generated from your answers, including your overall score, maturity level, category-wise results, recommendations and roadmap"
+      ]
+     ],
+     [
+      "h3",
+      "3.2 Email Verification"
+     ],
+     [
+      "p",
+      "Before the assessment begins, we verify your email address by sending a one-time verification code to it. Verification emails and other transactional emails related to your assessment are sent through Microsoft 365 (Microsoft Graph)."
+     ],
+     [
+      "h3",
+      "3.3 Where IMMA Records Are Kept"
+     ],
+     [
+      "p",
+      "IMMA assessment records are processed and stored on infrastructure controlled by InnooRyze."
+     ],
+     [
+      "h3",
+      "3.4 Your Browser During the Assessment"
+     ],
+     [
+      "p",
+      "While you complete the assessment, your browser’s session storage keeps your progress so that it is not lost if the page reloads. This can include the details you entered, the categories you selected, your answers, your results and where you are in the assessment. Session storage is cleared when you close the browser tab or start a new assessment. IMMA also uses local storage to remember your light or dark display preference."
+     ],
+     [
+      "h3",
+      "3.5 Booking a Consultation"
+     ],
+     [
+      "p",
+      "After you receive your results, you can choose to book a consultation with us. This opens our Zoho Bookings page, where you enter your booking details directly. IMMA does not automatically send your assessment answers or results to Zoho Bookings."
      ]
     ]
    },
@@ -201,6 +251,7 @@ export const policies = [
       "ul",
       [
        "Deliver IMMA assessment results",
+       "Verify the email address used for an IMMA assessment",
        "Respond to enquiries",
        "Manage business communications and route enquiries internally",
        "Protect our website forms from spam and automated abuse",
@@ -233,8 +284,9 @@ export const policies = [
        "Google Workspace, including Google Sheets (storage of website enquiry records)",
        "Google Apps Script (processing of website enquiry submissions)",
        "Cloudflare Turnstile (protection of our website forms against spam and automated abuse)",
-       "Microsoft 365, including Microsoft Graph (transactional enquiry emails: an internal notification of each enquiry and an acknowledgement to the person who submitted the form)",
+       "Microsoft 365, including Microsoft Graph (transactional emails: an internal notification of each website enquiry and an acknowledgement to the person who submitted the form, and IMMA email verification codes and assessment-related emails)",
        "Zoho CRM (customer relationship management)",
+       "Zoho Bookings (scheduling consultations that you choose to book with us)",
        "Website hosting providers (global infrastructure)",
        "Advertising platforms and tracking technologies (if enabled)"
       ]
@@ -242,6 +294,10 @@ export const policies = [
      [
       "p",
       "Enquiries submitted through our website contact form are currently recorded in Google Sheets through Google Apps Script, and the related emails are sent through Microsoft 365. Website contact form enquiries are not currently sent to Supabase, Zoho CRM or LeadRyze CRM."
+     ],
+     [
+      "p",
+      "IMMA assessment records are processed and stored on infrastructure controlled by InnooRyze. IMMA assessment answers and results are not automatically sent to Zoho CRM or Zoho Bookings."
      ],
      [
       "p",
@@ -388,7 +444,8 @@ export const policies = [
       "ul",
       [
        "Local storage: records your cookie consent preference so that we can respect it on later visits.",
-       "Session storage: may temporarily hold first-party attribution information, such as the referring website and UTM campaign values of the page you arrived on, so that it can be included with an enquiry you submit during the same browsing session. Session storage is cleared when you close the browser tab."
+       "Session storage: may temporarily hold first-party attribution information, such as the referring website and UTM campaign values of the page you arrived on, so that it can be included with an enquiry you submit during the same browsing session. Session storage is cleared when you close the browser tab.",
+       "The IMMA assessment also uses session storage and local storage, as described in Section 3."
       ]
      ],
      [

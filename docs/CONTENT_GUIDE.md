@@ -26,7 +26,7 @@ Growth Systems connects Experience Design & Enablement, MarTech Consulting & Ena
 | Subject | Safe statement | Do not infer |
 |---|---|---|
 | LeadRyze AI | Available AI lead desk; qualification, capture, CRM and sales handoff | Metrics, guarantees, prices or unconfirmed vendor integrations |
-| IMMA | Available Intelligent Marketing Maturity Assessment; assessment.innooryze.com | Adoption results or invented customer quotes |
+| IMMA | Live Intelligent Marketing Maturity Assessment; assessment.innooryze.com. Owner-confirmed: B2B or B2C starting point, business details, one-time email verification (Microsoft 365 / Graph) before the assessment, selected areas and structured questions; results show an overall score, maturity level, category-wise results, recommendations and a roadmap, with an optional Zoho Bookings consultation. Hosted on InnooRyze-controlled infrastructure with an InnooRyze-controlled PostgreSQL database | Adoption results, invented customer quotes, a downloadable report, AI scoring claims, benchmarks, certifications or integrations |
 | Roadmap | Campaign automation, brand/social content and performance intelligence are In development | Commercial availability or thin detail pages |
 | Dynalektric | Live website; strategy, UX/IA, design, development, responsive/enquiry experience | Revenue/conversion uplift or invented stack |
 | Treffer Technologies | Real CRM/MarTech enablement client | Specific stack, deliverables, outcomes, quotes or approved client logo |

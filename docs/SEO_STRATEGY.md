@@ -97,6 +97,8 @@ Production origin: https://innooryze.com. Clean paths have no trailing slash exc
 
 /work/industrial-valve-digital-experience is canonical; the historical /work/maxseal and /work/max-seal URLs are preserved as permanent redirects with a noindex HTML fallback. Apache normalizes known index.html/trailing-slash forms. Every nested page has its own HTML, so direct visits and refreshes do not require a client router. Unknown paths return 404, never a successful homepage. See DEPLOYMENT.md.
 
+The six published WordPress URLs (/contact-us, /services, /about-us and the three root-level article URLs) are also permanent one-hop redirects to their successors, preserving existing links and search equity at cut-over. After launch, submit the new sitemap in Search Console and retire the old Yoast sitemap_index.xml.
+
 ## Content and internal linking
 
 Use one H1 and a logical H2/H3 hierarchy. Write titles/descriptions for the actual intent, not a keyword list. Use descriptive anchors and image alt text describing the image. The article listing and detail normally use the same visual subject but must retain independent physical page-owned files; do not deduplicate their asset paths. Change dateModified only for substantive content updates, not every build.

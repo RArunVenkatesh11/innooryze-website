@@ -37,6 +37,15 @@ test('the Privacy Policy describes the live website enquiry stack',()=>{
  assert.ok(!/vercel/i.test(flat),'hosting stays provider-neutral');
 });
 
+test('the Privacy Policy describes the live IMMA processing',()=>{
+ const flat=JSON.stringify(byKey('privacy').sections);
+ for(const required of ['one-time verification code','infrastructure controlled by InnooRyze','Zoho Bookings','session storage','local storage','overall score, maturity level, category-wise results, recommendations and roadmap','not automatically send your assessment answers or results to Zoho Bookings'])
+  assert.ok(flat.includes(required),'missing IMMA disclosure: '+required);
+ // Neither is part of the current IMMA architecture, so neither may be named as an IMMA provider.
+ assert.ok(!/replit/i.test(flat),'Replit is not an IMMA provider');
+ assert.ok(!/Supabase(?!, Zoho CRM or LeadRyze CRM)/.test(flat),'Supabase appears only in the contact-form statement');
+});
+
 test('every section survives with a heading and content',()=>{
  assert.equal(byKey('privacy').sections.length,15);
  assert.equal(byKey('terms').sections.length,15);
@@ -83,7 +92,7 @@ test('rendered markup is a usable heading hierarchy with real lists',()=>{
  assert.equal((html.match(/<h2\b/g)||[]).length,15);
  // the live page marks section headings up as h5; nothing below h3 should survive the transfer
  assert.equal((html.match(/<h[456]\b/g)||[]).length,0);
- assert.equal((html.match(/<li\b/g)||[]).length,83);
+ assert.equal((html.match(/<li\b/g)||[]).length,91);
  // every list item sits inside a list
  assert.equal((html.match(/<\/ul>/g)||[]).length,(html.match(/<ul>/g)||[]).length);
  assert.ok(!/<li\b(?![\s\S]*?<\/ul>)/.test(html),'list item outside a list');

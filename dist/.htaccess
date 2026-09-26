@@ -8,6 +8,12 @@ ErrorDocument 404 /404.html
   RewriteOptions AllowNoSlash
   RewriteRule ^work/maxseal(?:/index\.html|/)?$ /work/industrial-valve-digital-experience [R=301,END]
   RewriteRule ^work/max-seal(?:/index\.html|/)?$ /work/industrial-valve-digital-experience [R=301,END]
+  RewriteRule ^contact-us(?:/index\.html|/)?$ /contact [R=301,END]
+  RewriteRule ^services(?:/index\.html|/)?$ /growth-systems [R=301,END]
+  RewriteRule ^about-us(?:/index\.html|/)?$ /about [R=301,END]
+  RewriteRule ^3-common-mistakes-in-martech-implementation(?:/index\.html|/)?$ /ideas-hub/3-common-mistakes-in-martech-implementation [R=301,END]
+  RewriteRule ^choosing-the-right-cdp-for-your-growth-stage(?:/index\.html|/)?$ /ideas-hub/choosing-the-right-cdp-for-your-growth-stage [R=301,END]
+  RewriteRule ^why-ai-needs-human-centered-strategy(?:/index\.html|/)?$ /ideas-hub/why-ai-needs-human-centered-strategy [R=301,END]
   RewriteCond %{THE_REQUEST} "\s/+index\.html(?:[?\s])" [NC]
   RewriteRule ^index\.html$ / [R=301,END]
   RewriteCond %{THE_REQUEST} "\s/+growth-systems(?:/index\.html|/)(?:[?\s])" [NC]

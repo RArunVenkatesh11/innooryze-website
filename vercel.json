@@ -35,6 +35,66 @@
       "source": "/work/max-seal/",
       "destination": "/work/industrial-valve-digital-experience",
       "permanent": true
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us/",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/services",
+      "destination": "/growth-systems",
+      "permanent": true
+    },
+    {
+      "source": "/services/",
+      "destination": "/growth-systems",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/about-us/",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/3-common-mistakes-in-martech-implementation",
+      "destination": "/ideas-hub/3-common-mistakes-in-martech-implementation",
+      "permanent": true
+    },
+    {
+      "source": "/3-common-mistakes-in-martech-implementation/",
+      "destination": "/ideas-hub/3-common-mistakes-in-martech-implementation",
+      "permanent": true
+    },
+    {
+      "source": "/choosing-the-right-cdp-for-your-growth-stage",
+      "destination": "/ideas-hub/choosing-the-right-cdp-for-your-growth-stage",
+      "permanent": true
+    },
+    {
+      "source": "/choosing-the-right-cdp-for-your-growth-stage/",
+      "destination": "/ideas-hub/choosing-the-right-cdp-for-your-growth-stage",
+      "permanent": true
+    },
+    {
+      "source": "/why-ai-needs-human-centered-strategy",
+      "destination": "/ideas-hub/why-ai-needs-human-centered-strategy",
+      "permanent": true
+    },
+    {
+      "source": "/why-ai-needs-human-centered-strategy/",
+      "destination": "/ideas-hub/why-ai-needs-human-centered-strategy",
+      "permanent": true
     }
   ],
   "headers": [
