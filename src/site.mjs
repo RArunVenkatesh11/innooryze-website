@@ -139,10 +139,11 @@ work.forEach(w=>{w.campaign={
  'industrial-valve':{src:'asset:industrial-valve-project.webp',alt:'A precision-machined flanged industrial valve assembly, lit in a studio'}
 }[w.slug]||null;});
 
+// interest: the Contact enquiry area the detail page's CTA preselects (/contact?interest=<exact option label>).
 export const platforms = [
-  {name:'Salesforce',slug:'salesforce',image:'/assets/platforms/salesforce-logo.svg',group:'CRM & customer engagement'},
-  {name:'Adobe',slug:'adobe',image:'/assets/platforms/adobe-logo.png',group:'Digital experience & marketing'},
-  {name:'Braze',slug:'braze',image:'/assets/platforms/braze-logo.svg',group:'Customer engagement'},
-  {name:'Segment',slug:'segment',image:'/assets/platforms/segment-logo.svg',group:'Customer data'}
+  {name:'Salesforce',slug:'salesforce',image:'/assets/platforms/salesforce-logo.svg',group:'CRM & customer engagement',interest:'MarTech Consulting & Enablement'},
+  {name:'Adobe',slug:'adobe',image:'/assets/platforms/adobe-logo.png',group:'Digital experience & marketing',interest:'Growth Systems'},
+  {name:'Braze',slug:'braze',image:'/assets/platforms/braze-logo.svg',group:'Customer engagement',interest:'MarTech Consulting & Enablement'},
+  {name:'Segment',slug:'segment',image:'/assets/platforms/segment-logo.svg',group:'Customer data',interest:'Data Intelligence & Activation'}
 ];
 export const interests = ['Growth Systems','Experience Design & Enablement','MarTech Consulting & Enablement','Data Intelligence & Activation','AI Agents & Automation','LeadRyze AI','LeadRyze CRM','IMMA','Partnership','Other'];

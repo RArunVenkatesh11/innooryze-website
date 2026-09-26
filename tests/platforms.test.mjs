@@ -86,3 +86,22 @@ test('LeadRyze product navigation is unchanged', () => {
  assert.equal(interestFromQuery('?interest=LeadRyze%20AI', options), 'LeadRyze AI');
  assert.equal(interestFromQuery('?interest=LeadRyze%20CRM', options), 'LeadRyze CRM');
 });
+
+// Dedicated platform pages: the "Discuss your platform needs" CTA preselects each platform's own enquiry area.
+test('dedicated platform page CTAs preselect their approved Contact area', async () => {
+ const {platformsPage} = await import('../src/pages/inner.mjs');
+ const {platforms} = await import('../src/site.mjs');
+ const expected = {
+  salesforce: '/contact?interest=MarTech%20Consulting%20%26%20Enablement',
+  braze: '/contact?interest=MarTech%20Consulting%20%26%20Enablement',
+  segment: '/contact?interest=Data%20Intelligence%20%26%20Activation',
+  adobe: '/contact?interest=Growth%20Systems'
+ };
+ for (const p of platforms) {
+  const html = platformsPage(p);
+  const href = html.match(/href="([^"]+)"[^>]*>Discuss your platform needs/)[1];
+  assert.equal(href, expected[p.slug], p.slug);
+  assert.ok(interests.includes(p.interest), p.slug + ' interest must be a Contact option label');
+  assert.equal(interestFromQuery(new URL(href, 'https://innooryze.com').search, options), p.interest, p.slug);
+ }
+});
